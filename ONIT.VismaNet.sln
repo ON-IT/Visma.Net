@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONIT.VismaNet", "ONIT.VismaNet\ONIT.VismaNet.csproj", "{2486A884-F92B-4117-9A37-00F4DF67C451}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{AD4C657F-0497-4C32-81EE-A226E6921373}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2125312D-9F7D-4581-9E51-EB6D046B5029}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CAE6FE30-470C-4B88-97E9-C6510356C4BF}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Xamarin|Any CPU = Xamarin|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2486A884-F92B-4117-9A37-00F4DF67C451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2486A884-F92B-4117-9A37-00F4DF67C451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2486A884-F92B-4117-9A37-00F4DF67C451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2486A884-F92B-4117-9A37-00F4DF67C451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2486A884-F92B-4117-9A37-00F4DF67C451}.Xamarin|Any CPU.ActiveCfg = Xamarin|Any CPU
+		{2486A884-F92B-4117-9A37-00F4DF67C451}.Xamarin|Any CPU.Build.0 = Xamarin|Any CPU
+		{AD4C657F-0497-4C32-81EE-A226E6921373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD4C657F-0497-4C32-81EE-A226E6921373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD4C657F-0497-4C32-81EE-A226E6921373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD4C657F-0497-4C32-81EE-A226E6921373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD4C657F-0497-4C32-81EE-A226E6921373}.Xamarin|Any CPU.ActiveCfg = Xamarin|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
