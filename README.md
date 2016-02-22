@@ -2,4 +2,4 @@
 
 This is an open source Visma.net Integrations API Client for .Net.
 
-See [ Wiki ](wiki) for examples.
+See [ Wiki ](/wiki) for examples.
