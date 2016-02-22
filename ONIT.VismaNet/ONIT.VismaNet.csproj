@@ -174,17 +174,12 @@
     <Compile Include="Models\CompanyContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="nuget-pack.bat" />
-    <None Include="nuget-push.bat" />
+    <None Include="Tools\nuget-pack.bat" />
     <None Include="ONIT.VismaNet.nuspec">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="README.md" />
-    <None Include="Samples\customerDocuments.json" />
-    <None Include="Samples\customers.json" />
-    <None Include="Samples\invoices.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Xamarin|AnyCPU' ">
