@@ -13,10 +13,6 @@ namespace ONIT.VismaNetApi
     [ComVisible(true)]
     public class VismaNet
     {
-        //public readonly QueryableVismaNetCustomerData<Customer> Customers;
-
-        //public readonly QueryableVismaNetInvoiceData<Invoice> Invoices;
-
         public readonly CashSaleData CashSales;
         public readonly CustomerDocumentData CustomerDocuments;
         public readonly CustomerInvoiceData CustomerInvoices;
@@ -34,46 +30,50 @@ namespace ONIT.VismaNetApi
 
         public readonly JournalTransactionData JournalTransactions;
 
-        private readonly VismaNetAuthorization auth;
-
+        private readonly VismaNetAuthorization _auth;
 
         /// <summary>
-        ///     Creates a connection to the Visma.Net API. If token is provided, email and password should not be.
+        /// Create a new connection using e-mail and password
         /// </summary>
-        /// <param name="companyId">company context ID</param>
-        /// <param name="token">the predefined token from Visma.Net. If you don't have this, use email and password.</param>
-        /// <param name="email">Visma.Net e-mail</param>
-        /// <param name="password">Visma.Net password</param>
-        public VismaNet(int companyId, string token = null, string email = null, string password = null)
+        /// <param name="companyId"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        public VismaNet(int companyId, string email, string password) : this(companyId, GetTokenAsyncTask(email, password).GetAwaiter().GetResult())
         {
-            if (string.IsNullOrEmpty(token) && (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)))
-                throw new InvalidArgumentsException("If Token is not provided, email and password must be.");
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+                throw new InvalidArgumentsException("Both email and password must be provided");
+        }
 
-            auth = new VismaNetAuthorization
+        /// <summary>
+        ///     Creates a connection using token.
+        /// </summary>
+        /// <param name="companyId">Company context</param>
+        /// <param name="token">The predefined token from Visma.net</param>
+        public VismaNet(int companyId, string token)
+        {
+            if (string.IsNullOrEmpty(token))
+                throw new InvalidArgumentsException("Token is missing");
+
+            _auth = new VismaNetAuthorization
             {
                 Token = token,
                 CompanyId = companyId
             };
-            if (string.IsNullOrEmpty(token))
-            {
-                auth.Token = Task.Run(async () => await VismaNetApiHelper.GetToken(email, password)).Result;
-            }
-            //Customers = new QueryableVismaNetCustomerData<Customer>(auth);
-            //Invoices = new QueryableVismaNetInvoiceData<Invoice>(auth);
-            Customers = new CustomerData(auth);
-            CustomerInvoices = new CustomerInvoiceData(auth);
-            Suppliers = new SupplierData(auth);
-            SupplierInvoices = new SupplierInvoiceData(auth);
-            CashSales = new CashSaleData(auth);
-            CustomerDocuments = new CustomerDocumentData(auth);
-            Dimensions = new DimensionData(auth);
-            Inventory = new InventoryData(auth);
-            JournalTransactions = new JournalTransactionData(auth);
-            Accounts = new FinAccountData(auth);
-            Employee = new EmployeeData(auth);
-            CreditMemo = new CreditMemoData(auth);
-            Shipments = new ShipmentData(auth);
-            Contacts = new ContactData(auth);
+            
+            Customers = new CustomerData(_auth);
+            CustomerInvoices = new CustomerInvoiceData(_auth);
+            Suppliers = new SupplierData(_auth);
+            SupplierInvoices = new SupplierInvoiceData(_auth);
+            CashSales = new CashSaleData(_auth);
+            CustomerDocuments = new CustomerDocumentData(_auth);
+            Dimensions = new DimensionData(_auth);
+            Inventory = new InventoryData(_auth);
+            JournalTransactions = new JournalTransactionData(_auth);
+            Accounts = new FinAccountData(_auth);
+            Employee = new EmployeeData(_auth);
+            CreditMemo = new CreditMemoData(_auth);
+            Shipments = new ShipmentData(_auth);
+            Contacts = new ContactData(_auth);
         }
 
         public static string Version { get; private set; }
@@ -85,14 +85,14 @@ namespace ONIT.VismaNetApi
 
         public async Task<bool> TestConnectionAsyncTask()
         {
-            return await VismaNetApiHelper.TestConnection(auth);
+            return await VismaNetApiHelper.TestConnection(_auth);
         }
 
         public bool TestConnection()
         {
             try
             {
-                return Task.Run(async () => await VismaNetApiHelper.TestConnection(auth)).Result;
+                return TestConnectionAsyncTask().GetAwaiter().GetResult();
             }
             catch (AggregateException e)
             {
@@ -109,19 +109,6 @@ namespace ONIT.VismaNetApi
         public static async Task<List<CompanyContext>> GetContextsForToken(string token)
         {
             return await VismaNetApiHelper.GetContextsForToken(token);
-        }
-
-        public static string GetToken(string email, string password)
-        {
-            try
-            {
-                return Task.Run(async () => await VismaNetApiHelper.GetToken(email, password)).Result;
-            }
-            catch (AggregateException e)
-            {
-                VismaNetExceptionHandler.HandleException(e);
-                return null;
-            }
         }
     }
 }
