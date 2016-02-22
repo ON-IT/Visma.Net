@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Visma.net</id>
-    <version>1.0.1</version>
+    <version>$version$</version>
     <title>Visma.net Integrations API Client</title>
     <authors>ON IT AS (ole@on-it.no)</authors>
     <owners>ON IT AS</owners>
