@@ -7,7 +7,7 @@
     <authors>ON IT AS (ole@on-it.no)</authors>
     <owners>ON IT AS</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <licenseUrl>https://raw.githubusercontent.com/ON-IT/Visma.Net/master/LICENSE.md</licenseUrl>
+    <licenseUrl>https://github.com/ON-IT/Visma.Net/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/ON-IT/Visma.Net</projectUrl>
     <iconUrl>https://sync-it.no/Images/on-it_logo.png</iconUrl>
     <description>Get started with Visma.net Integrations the easiest way possible.</description>

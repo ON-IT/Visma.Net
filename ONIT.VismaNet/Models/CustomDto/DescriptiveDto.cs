@@ -85,6 +85,11 @@ namespace ONIT.VismaNetApi.Models
         public CreditTerms(string id) : base(id)
         {
         }
+
+        public static implicit operator CreditTerms(string id)
+        {
+            return new CreditTerms(id);
+        }
     }
 
     public class VatCode : DescriptiveDto
