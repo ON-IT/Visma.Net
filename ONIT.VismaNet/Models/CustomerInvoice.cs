@@ -7,7 +7,7 @@ namespace ONIT.VismaNetApi.Models
     {
         public CreditTerms creditTerms
         {
-            get { return Get("creditTermsId", new CreditTerms() { id = "30" }); }
+            get { return Get<CreditTerms>("creditTermsId"); }
             set { Set(value, "creditTermsId"); }
         }
         public DateTime documentDueDate
@@ -23,13 +23,12 @@ namespace ONIT.VismaNetApi.Models
 
         public PaymentMethod paymentMethod
         {
-            get { return Get<PaymentMethod>("paymentMethodId", new PaymentMethod { id = "30" }); }
-            set { Set(value, key: "paymentMethodId"); }
+            get { return Get<PaymentMethod>("paymentMethodId"); }
+            set { Set(value, "paymentMethodId"); }
         }
 
         public CustomerInvoice()
         {
-            DtoFields.Add("creditTermsId", new CreditTerms("30"));
             DtoFields.Add("documentDueDate", new DtoValue(DateTime.Today.AddDays(14)));
             DtoFields.Add("cashDiscountDate", new DtoValue(DateTime.Today));
 
