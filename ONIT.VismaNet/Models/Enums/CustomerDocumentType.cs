@@ -4,7 +4,7 @@
     {
         Invoice = 1,
         DebitMemo,
-        CreditMemo,
+        CreditNote,
         Payment,
         VoidPayment,
         Prepayment,
