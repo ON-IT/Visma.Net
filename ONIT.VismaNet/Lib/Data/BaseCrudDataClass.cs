@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -21,7 +20,9 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <returns>The created entity from Visma.Net</returns>
         public virtual async Task<T> AddAsyncTask(T entity)
         {
-            return await VismaNetApiHelper.Create(entity, ApiControllerUri, Authorization);
+            var rsp = await VismaNetApiHelper.Create(entity, ApiControllerUri, Authorization);
+            rsp.PrepareForUpdate();
+            return rsp;
         }
         
         /// <summary>
@@ -40,7 +41,9 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <returns>T</returns>
         public virtual async Task<T> GetAsyncTask(string entityNumber)
         {
-            return await VismaNetApiHelper.Get<T>(entityNumber, ApiControllerUri, Authorization);
+            var rsp = await VismaNetApiHelper.Get<T>(entityNumber, ApiControllerUri, Authorization);
+            rsp.PrepareForUpdate();
+            return rsp;
         }
         
         /// <summary>
@@ -49,7 +52,9 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <returns>List of all entities</returns>
         public virtual async Task<List<T>> AllAsyncTask()
         {
-            return await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization);
+            var rsp = await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization);
+            rsp.ForEach(x=>x.PrepareForUpdate());
+            return rsp;
         }
 
         /// <summary>
@@ -58,7 +63,9 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <returns>List of all entities</returns>
         public virtual async Task<List<T>> FindAsyncTask(NameValueCollection parameters)
         {
-            return await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization, parameters);
+            var rsp = await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization, parameters);
+            rsp.ForEach(x=>x.PrepareForUpdate());
+            return rsp;
         }
 
         /// <summary>
@@ -71,7 +78,9 @@ namespace ONIT.VismaNetApi.Lib.Data
             parameters.GetType().GetProperties()
                 .ToList()
                 .ForEach(pi => formFields.Add(pi.Name, pi.GetValue(parameters, null).ToString()));
-            return await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization, formFields);
+            var rsp = await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization, formFields);
+            rsp.ForEach(x=>x.PrepareForUpdate());
+            return rsp;
         }
 
 
@@ -91,9 +100,18 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <returns>List of all entities</returns>
         public virtual async Task<List<T>> GetAllModifiedSinceAsyncTask(DateTime dateTime)
         {
-            if(dateTime == DateTime.MinValue)
-                return await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization);
-            return await VismaNetApiHelper.GetAllModifiedSince<T>(ApiControllerUri, dateTime, Authorization);
+            if (dateTime == DateTime.MinValue)
+            {
+                var rsp = await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization);
+                rsp.ForEach(x => x.PrepareForUpdate());
+                return rsp;
+            }
+            else
+            {
+                var rsp = await VismaNetApiHelper.GetAllModifiedSince<T>(ApiControllerUri, dateTime, Authorization);
+                rsp.ForEach(x => x.PrepareForUpdate());
+                return rsp;
+            }
         }
 
         #region Sync methods

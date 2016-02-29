@@ -1,9 +1,19 @@
 ﻿using ONIT.VismaNetApi.Lib;
+using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
     public class ShipmentOrderLine : DtoProviderBase
     {
+        public ShipmentOrderLine()
+        {
+            DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
+        }
+        public ApiOperation operation
+        {
+            get { return Get(defaultValue: new NotDto<ApiOperation>(ApiOperation.Insert)).Value; }
+            set { Set(new NotDto<ApiOperation>(value)); }
+        }
         public string orderType
         {
             get { return Get<string>(); }

@@ -158,5 +158,10 @@ namespace ONIT.VismaNetApi.Lib
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        internal virtual void PrepareForUpdate()
+        {
+            
+        }
     }
 }

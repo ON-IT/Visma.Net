@@ -236,5 +236,21 @@ namespace ONIT.VismaNetApi.Models
                 return 0;
             }
         }
+
+        internal override void PrepareForUpdate()
+        {
+            foreach (var detailLine in shipmentDetailLines)
+            {
+                detailLine.operation = ApiOperation.Update;
+            }
+            foreach (var detailLine in shipmentOrderLines)
+            {
+                detailLine.operation = ApiOperation.Update;
+            }
+            foreach (var detailLine in shipmentPackageLines)
+            {
+                detailLine.operation = ApiOperation.Update;
+            }
+        }
     }
 }

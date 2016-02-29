@@ -330,7 +330,7 @@ namespace ONIT.VismaNetApi.Lib
                 var apiUrl = GetApiUrlForController(apiControllerUri, $"/{number}");
                 try
                 {
-                    await webclient.Put<Customer>(apiUrl, entity.ToDto());
+                    await webclient.Put<T>(apiUrl, entity.ToDto());
                 }
                 catch (AggregateException e)
                 {
@@ -344,7 +344,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             using (var webclient = GetHttpClient(authorization))
             {
-                var apiUrl = GetApiUrlForController(apiControllerUri, string.Format("/{0}", entityNumber));
+                var apiUrl = GetApiUrlForController(apiControllerUri, $"/{entityNumber}");
                 try
                 {
                     return await webclient.Get<T>(apiUrl);
