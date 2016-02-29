@@ -71,7 +71,7 @@
     <Compile Include="Exceptions\InvalidArgumentsException.cs" />
     <Compile Include="Exceptions\VismaNetException.cs" />
     <Compile Include="Lib\Data\BaseDataClass.cs" />
-    <Compile Include="Lib\Data\CreditMemoData.cs" />
+    <Compile Include="Lib\Data\CreditNoteData.cs" />
     <Compile Include="Lib\Data\ContactData.cs" />
     <Compile Include="Lib\Data\EmployeeData.cs" />
     <Compile Include="Lib\Data\CustomerData.cs" />
@@ -86,7 +86,7 @@
     <Compile Include="Models\CarrierDescription.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Enums\ContactMethods.cs" />
-    <Compile Include="Models\CreditMemoData.cs" />
+    <Compile Include="Models\CreditNote.cs" />
     <Compile Include="Models\Enums\EmployeeTitles.cs" />
     <Compile Include="Models\Enums\AccountUsedForPayment.cs" />
     <Compile Include="Models\Enums\ApiOperation.cs" />
