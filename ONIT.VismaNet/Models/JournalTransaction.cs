@@ -200,13 +200,21 @@ namespace ONIT.VismaNetApi.Models
                     journalTransactionLines.Max(x => x.lineNumber) + 1);
             journalTransactionLines.Add(line);
         }
+
+        internal override void PrepareForUpdate()
+        {
+            foreach (var transactionLine in journalTransactionLines)
+            {
+                transactionLine.operation = ApiOperation.Update;
+            }
+        }
     }
 
     public class JournalTransactionLine : DtoProviderBase
     {
         public JournalTransactionLine()
         {
-            DtoFields.Add("operation", new NotDto<int>(1));
+            DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
             DtoFields.Add("lineNumber", new DtoValue(0));
         }
 
