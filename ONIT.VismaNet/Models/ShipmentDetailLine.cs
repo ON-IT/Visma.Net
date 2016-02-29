@@ -1,11 +1,21 @@
 ﻿using System;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
+using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
     public class ShipmentDetailLine : DtoProviderBase
     {
+        public ShipmentDetailLine()
+        {
+            DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
+        }
+        public ApiOperation operation
+        {
+            get { return Get(defaultValue: new NotDto<ApiOperation>(ApiOperation.Insert)).Value; }
+            set { Set(new NotDto<ApiOperation>(value)); }
+        }
         public int lineNumber
         {
             get { return Get<int>(); }
