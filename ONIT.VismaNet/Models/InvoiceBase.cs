@@ -35,10 +35,8 @@ namespace ONIT.VismaNetApi.Models
         {
             get
             {
-                int id = 0;
-                if (int.TryParse(referenceNumber, out id))
-                    return id;
-                return 0;
+                var id = 0;
+                return int.TryParse(referenceNumber, out id) ? id : 0;
             }
         }
 

@@ -12,7 +12,7 @@ namespace ONIT.VismaNetApi.Lib
         public const string Customers = "controller/api/v1/customer";
         public const string Suppliers = "controller/api/v1/supplier";
         public const string CustomerInvoice = "controller/api/v1/customerinvoice";
-        public const string CreditMemo = "controller/api/v1/creditmemo";
+        public const string CreditNote = "controller/api/v1/creditnote";
         public const string CustomerDocument = "controller/api/v1/customerdocument";
         public const string Dimensions = "controller/api/v1/dimension";
         public const string Inventory = "controller/api/v1/inventory";

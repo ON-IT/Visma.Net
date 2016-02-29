@@ -1,5 +1,6 @@
 ﻿using System;
 using ONIT.VismaNetApi.Models.CustomDto;
+using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
@@ -34,6 +35,14 @@ namespace ONIT.VismaNetApi.Models
 
             IgnoreProperties.Add(nameof(this.number));
             IgnoreProperties.Add(nameof(this.referenceNumber));
+        }
+
+        internal override void PrepareForUpdate()
+        {
+            foreach (var customerInvoiceLine in invoiceLines)
+            {
+                customerInvoiceLine.operation = ApiOperation.Update;
+            }
         }
     }
 }

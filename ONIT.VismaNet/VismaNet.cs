@@ -23,7 +23,7 @@ namespace ONIT.VismaNetApi
         public readonly InventoryData Inventory;
         public readonly FinAccountData Accounts;
         public readonly EmployeeData Employee;
-        public readonly CreditMemoData CreditMemo;
+        public readonly CreditNoteData CreditNote;
         public readonly ShipmentData Shipments;
         public readonly ContactData Contacts;
 
@@ -71,7 +71,7 @@ namespace ONIT.VismaNetApi
             JournalTransactions = new JournalTransactionData(_auth);
             Accounts = new FinAccountData(_auth);
             Employee = new EmployeeData(_auth);
-            CreditMemo = new CreditMemoData(_auth);
+            CreditNote = new CreditNoteData(_auth);
             Shipments = new ShipmentData(_auth);
             Contacts = new ContactData(_auth);
         }

@@ -270,6 +270,14 @@ namespace ONIT.VismaNetApi.Models
             });
         }
 
+        internal override void PrepareForUpdate()
+        {
+            foreach (var invoiceLine in invoiceLines)
+            {
+                invoiceLine.operation = ApiOperation.Update;
+            }
+        }
+
         #endregion
     }
 }
