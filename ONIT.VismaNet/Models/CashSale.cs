@@ -230,9 +230,9 @@ namespace ONIT.VismaNetApi.Models
         }
 
         [JsonProperty]
-        public int status
+        public CustomerDocumentStatus? status
         {
-            get { return Get<int>(); }
+            get { return Get<CustomerDocumentStatus?>(); }
             private set { Set(value); }
         }
 
