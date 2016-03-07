@@ -79,7 +79,7 @@
     <Compile Include="Lib\Data\BaseCrudDataClass.cs" />
     <Compile Include="Lib\Data\CashSaleData.cs" />
     <Compile Include="Lib\Data\DimensionData.cs" />
-    <Compile Include="Lib\Data\AccountData.cs" />
+    <Compile Include="Lib\Data\InventoryData.cs" />
     <Compile Include="Lib\Data\JournalTransactionData.cs" />
     <Compile Include="Lib\Data\ShipmentData.cs" />
     <Compile Include="Lib\VismaActionResult.cs" />
