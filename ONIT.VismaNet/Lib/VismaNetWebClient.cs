@@ -41,7 +41,7 @@ namespace ONIT.VismaNetApi.Lib
             httpClient = new HttpClient(handler, true);
             httpClient.Timeout = TimeSpan.FromSeconds(300);
             httpClient.DefaultRequestHeaders.Add("User-Agent",
-                string.Format("OnItAS+VismaNetApi/{0}", VismaNet.Version));
+                string.Format("OnItAS+VismaNet/{0}", VismaNet.Version));
         }
 
         #region IDisposable implementation
@@ -60,7 +60,7 @@ namespace ONIT.VismaNetApi.Lib
             if (authorization != null)
             {
                 message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authorization.Token);
-                message.Headers.Add("ipp-company-id", String.Format("{0}", authorization.CompanyId));
+                message.Headers.Add("ipp-company-id", string.Format("{0}", authorization.CompanyId));
             }
             message.Headers.Add("ipp-application-type", VismaNetApiHelper.ApplicationType);
             message.Headers.Accept.Clear();
@@ -145,6 +145,13 @@ namespace ONIT.VismaNetApi.Lib
                         return absoluteUri.Substring(absoluteUri.LastIndexOf("/") + 1) as T;
                     }
                 }
+
+                var content = await result.Content.ReadAsStringAsync();
+                if (!string.IsNullOrEmpty(content))
+                {
+                    return JsonConvert.DeserializeObject<T>(content);
+                }
+
                 return default(T);
             }
         }

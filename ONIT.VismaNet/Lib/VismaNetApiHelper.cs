@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Resources;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -48,14 +50,22 @@ namespace ONIT.VismaNetApi.Lib
             return new VismaNetHttpClient(auth);
         }
 
-        internal static async Task<string> GetToken(string email, string password)
+        internal static async Task<string> GetToken(string username, string password, string clientId, string secret)
         {
             using (var webclient = GetHttpClient())
             {
                 var url = GetApiUrlForController(VismaNetControllers.Token);
                 try
                 {
-                    var data = await webclient.Post<JObject>(url, new {email, password});
+                    var content = new FormUrlEncodedContent(new[]
+                    {
+                        new KeyValuePair<string, string>("username", username),
+                        new KeyValuePair<string, string>("password", password),
+                        new KeyValuePair<string, string>("client_id", clientId),
+                        new KeyValuePair<string, string>("client_secret", secret),
+                        new KeyValuePair<string, string>("grant_type", "password"),
+                    });
+                    var data = await webclient.PostMessage<JObject>(url, content);
                     return data["token"].Value<string>();
                 }
                 catch (AggregateException exception)
