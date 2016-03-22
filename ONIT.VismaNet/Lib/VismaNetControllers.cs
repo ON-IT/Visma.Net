@@ -4,7 +4,7 @@ namespace ONIT.VismaNetApi.Lib
     {
         // Security
         public const string UserContexts = "security/api/v1/token/usercontexts";
-        public const string Token = "security/api/v1/token";
+        public const string Token = "security/api/v2/token";
 
         // Financials
         public const string SupplierInvoices = "controller/api/v1/supplierinvoice";

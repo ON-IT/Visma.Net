@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Microsoft.SqlServer.Server;
 using ONIT.VismaNetApi.Exceptions;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Lib.Data;
@@ -31,19 +32,7 @@ namespace ONIT.VismaNetApi
         public readonly JournalTransactionData JournalTransactions;
 
         private readonly VismaNetAuthorization _auth;
-
-        /// <summary>
-        /// Create a new connection using e-mail and password
-        /// </summary>
-        /// <param name="companyId"></param>
-        /// <param name="email"></param>
-        /// <param name="password"></param>
-        public VismaNet(int companyId, string email, string password) : this(companyId, GetTokenAsyncTask(email, password).GetAwaiter().GetResult())
-        {
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-                throw new InvalidArgumentsException("Both email and password must be provided");
-        }
-
+        
         /// <summary>
         ///     Creates a connection using token.
         /// </summary>
@@ -100,10 +89,17 @@ namespace ONIT.VismaNetApi
                 return false;
             }
         }
-
-        public static async Task<string> GetTokenAsyncTask(string email, string password)
+        /// <summary>
+        /// Get a new token from Visma.net
+        /// </summary>
+        /// <param name="username">User name</param>
+        /// <param name="password">Password</param>
+        /// <param name="clientId">System Client Id (Provided to you by Visma)</param>
+        /// <param name="secret">System Client Secret (Provided to you by Visma)</param>
+        /// <returns></returns>
+        public static async Task<string> GetTokenAsyncTask(string username, string password, string clientId, string secret)
         {
-            return await VismaNetApiHelper.GetToken(email, password);
+            return await VismaNetApiHelper.GetToken(username, password, clientId, secret);
         }
 
         public static async Task<List<CompanyContext>> GetContextsForToken(string token)
