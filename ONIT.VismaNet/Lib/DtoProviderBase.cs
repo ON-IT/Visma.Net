@@ -92,6 +92,12 @@ namespace ONIT.VismaNetApi.Lib
         {
             try
             {
+                var providesCustomDto = value as IProvideCustomDto;
+                if (providesCustomDto != null)
+                {
+                    return providesCustomDto.ToDto();
+                }
+
                 var providesDto = value as IProvideDto;
                 if (providesDto != null)
                 {
@@ -102,11 +108,7 @@ namespace ONIT.VismaNetApi.Lib
                 {
                     return becomesDto.ToDto();
                 }
-                var providesCustomDto = value as IProvideCustomDto;
-                if (providesCustomDto != null)
-                {
-                    return providesCustomDto.ToDto();
-                }
+                
                 var listOfProvidesDto = value as IEnumerable<IProvideDto>;
                 if (listOfProvidesDto != null)
                 {
