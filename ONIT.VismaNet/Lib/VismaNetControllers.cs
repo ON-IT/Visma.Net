@@ -21,5 +21,6 @@ namespace ONIT.VismaNetApi.Lib
         public const string Employee = "controller/api/v1/employee";
         public const string Shipments = "controller/api/v1/shipment";
         public const string Contacts = "controller/api/v1/contact";
+        public const string Project = "controller/api/v1/project";
     }
 }

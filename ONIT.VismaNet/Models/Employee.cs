@@ -13,7 +13,7 @@ namespace ONIT.VismaNetApi.Models
             public int employeeId { get { return Get<int>(); } set { Set(value); } }
             public string employeeNumber { get { return Get<string>(); } set { Set(value); } }
             public string employeeName { get { return Get<string>(); } set { Set(value); } }
-            public int status { get { return Get<int>(); } set { Set(value); } }
+            public string status { get { return Get<string>(); } set { Set(value); } }
             public ContactInfo contact { get { return Get<ContactInfo>(defaultValue:new ContactInfo()); } set { Set(value); } }
             public Address address { get { return Get<Address>(defaultValue: new Address()); } set { Set(value); } }
 
