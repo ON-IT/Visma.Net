@@ -39,7 +39,7 @@ namespace ONIT.VismaNetApi.Models
         public Visibility visibility { get { return Get(defaultValue:new Visibility()); } set { Set(value); } }
         public DescriptiveDto defSub { get { return Get<DescriptiveDto>(); } set { Set(value); } }
         public string billingPeriod { get { return Get<string>(); } set { Set(value); } }
-        public DescriptiveDto customerLocation { get { return Get<DescriptiveDto>(); } set { Set(value); } }
+        //public DescriptiveDto customerLocation { get { return Get<DescriptiveDto>(); } set { Set(value); } }
         public DescriptiveDto allocationRule { get { return Get<DescriptiveDto>(); } set { Set(value); } }
         public DescriptiveDto billingRule { get { return Get<DescriptiveDto>(); } set { Set(value); } }
         public DescriptiveDto rateTable { get { return Get<DescriptiveDto>(); } set { Set(value); } }
@@ -47,6 +47,7 @@ namespace ONIT.VismaNetApi.Models
         public bool automaticReleaseAr { get { return Get<bool>(); } set { Set(value); } }
         public List<ProjectTask> tasks { get { return Get(defaultValue: new List<ProjectTask>()); } set{Set(value);} }
         //public object[] employees { get; set; }
+        public DateTime lastModifiedDateTime { get; set; }
         internal override void PrepareForUpdate()
         {
             foreach (var projectTask in tasks)
