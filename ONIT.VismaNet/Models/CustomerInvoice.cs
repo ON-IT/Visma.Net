@@ -30,9 +30,6 @@ namespace ONIT.VismaNetApi.Models
 
         public CustomerInvoice()
         {
-            DtoFields.Add("documentDueDate", new DtoValue(DateTime.Today.AddDays(14)));
-            DtoFields.Add("cashDiscountDate", new DtoValue(DateTime.Today));
-
             IgnoreProperties.Add(nameof(this.number));
             IgnoreProperties.Add(nameof(this.referenceNumber));
         }
