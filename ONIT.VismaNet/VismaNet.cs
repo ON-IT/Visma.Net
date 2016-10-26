@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Microsoft.SqlServer.Server;
+using ONIT.VismaNetApi.Dynamic;
 using ONIT.VismaNetApi.Exceptions;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Lib.Data;
@@ -12,7 +12,7 @@ using ONIT.VismaNetApi.Models;
 namespace ONIT.VismaNetApi
 {
     [ComVisible(true)]
-    public class VismaNet
+    public class VismaNet : VismaNetDynamicHandler
     {
         public readonly CashSaleData CashSales;
         public readonly CustomerDocumentData CustomerDocuments;
@@ -32,7 +32,6 @@ namespace ONIT.VismaNetApi
 
         public readonly JournalTransactionData JournalTransactions;
 
-        private readonly VismaNetAuthorization _auth;
         
         /// <summary>
         ///     Creates a connection using token.
@@ -44,27 +43,26 @@ namespace ONIT.VismaNetApi
             if (string.IsNullOrEmpty(token))
                 throw new InvalidArgumentsException("Token is missing");
 
-            _auth = new VismaNetAuthorization
+            Auth = new VismaNetAuthorization
             {
                 Token = token,
                 CompanyId = companyId
             };
-            
-            Customers = new CustomerData(_auth);
-            CustomerInvoices = new CustomerInvoiceData(_auth);
-            Suppliers = new SupplierData(_auth);
-            SupplierInvoices = new SupplierInvoiceData(_auth);
-            CashSales = new CashSaleData(_auth);
-            CustomerDocuments = new CustomerDocumentData(_auth);
-            Dimensions = new DimensionData(_auth);
-            Inventory = new InventoryData(_auth);
-            JournalTransactions = new JournalTransactionData(_auth);
-            Accounts = new FinAccountData(_auth);
-            Employee = new EmployeeData(_auth);
-            CreditNote = new CreditNoteData(_auth);
-            Shipments = new ShipmentData(_auth);
-            Contacts = new ContactData(_auth);
-            Projects = new ProjectData(_auth);
+            Customers = new CustomerData(Auth);
+            CustomerInvoices = new CustomerInvoiceData(Auth);
+            Suppliers = new SupplierData(Auth);
+            SupplierInvoices = new SupplierInvoiceData(Auth);
+            CashSales = new CashSaleData(Auth);
+            CustomerDocuments = new CustomerDocumentData(Auth);
+            Dimensions = new DimensionData(Auth);
+            Inventory = new InventoryData(Auth);
+            JournalTransactions = new JournalTransactionData(Auth);
+            Accounts = new FinAccountData(Auth);
+            Employee = new EmployeeData(Auth);
+            CreditNote = new CreditNoteData(Auth);
+            Shipments = new ShipmentData(Auth);
+            Contacts = new ContactData(Auth);
+            Projects = new ProjectData(Auth);
         }
 
         public static string Version { get; private set; }
@@ -76,7 +74,7 @@ namespace ONIT.VismaNetApi
 
         public async Task<bool> TestConnectionAsyncTask()
         {
-            return await VismaNetApiHelper.TestConnection(_auth);
+            return await VismaNetApiHelper.TestConnection(Auth);
         }
 
         public bool TestConnection()
