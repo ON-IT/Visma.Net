@@ -7,11 +7,10 @@ using ONIT.VismaNetApi.Models.Enums;
 namespace ONIT.VismaNetApi.Models
 {
 
-    public class Project : DtoProviderBase, IHaveNumber, IHaveInternalId
+    public class Project : DtoProviderBase, IProvideIdentificator
     {
         public Project()
         {
-            IgnoreProperties.Add(nameof(this.number));
             IgnoreProperties.Add(nameof(this.projectID));
             IgnoreProperties.Add(nameof(this.internalID));
         }
@@ -46,7 +45,6 @@ namespace ONIT.VismaNetApi.Models
         public bool autoAllocate { get { return Get<bool>(); } set { Set(value); } }
         public bool automaticReleaseAr { get { return Get<bool>(); } set { Set(value); } }
         public List<ProjectTask> tasks { get { return Get(defaultValue: new List<ProjectTask>()); } set{Set(value);} }
-        //public object[] employees { get; set; }
         public DateTime lastModifiedDateTime { get; set; }
         internal override void PrepareForUpdate()
         {
@@ -57,8 +55,12 @@ namespace ONIT.VismaNetApi.Models
             base.PrepareForUpdate();
         }
 
-        public string number => projectID;
+        //public string number => projectID;
 
-        public int internalId => internalID;
+        //public int internalId => internalID;
+        public string GetIdentificator()
+        {
+            return projectID;
+        }
     }
 }

@@ -10,7 +10,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Supplier : DtoProviderBase, IHaveInternalId, IHaveNumber
+    public class Supplier : DtoProviderBase, IProvideIdentificator
     {
         public Supplier() : base()
         {
@@ -191,6 +191,11 @@ namespace ONIT.VismaNetApi.Models
             get { return Get("supplierClassId", defaultValue: new SupplierClass()); }
             private set { Set(value);}
 
+        }
+
+        public string GetIdentificator()
+        {
+            return number;
         }
     }
 }

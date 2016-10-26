@@ -6,7 +6,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Customer : DtoProviderBase, IHaveNumber, IHaveInternalId, IComparable<Customer>, IComparable
+    public class Customer : DtoProviderBase, IProvideIdentificator, IComparable<Customer>, IComparable
     {
 		public Customer ()
 		{
@@ -213,5 +213,9 @@ namespace ONIT.VismaNetApi.Models
             return string.Compare(this.name, otherCustomer.name, StringComparison.Ordinal);
         }
 
+        public string GetIdentificator()
+        {
+            return number;
+        }
     }
 }

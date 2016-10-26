@@ -9,7 +9,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class JournalTransaction : DtoProviderBase, IHaveNumber, IHaveInternalId
+    public class JournalTransaction : DtoProviderBase,  IProvideIdentificator
     {
         [JsonProperty]
         public JournalTransactionModule? module
@@ -177,21 +177,6 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public int internalId
-        {
-            get
-            {
-                int o = 0;
-                int.TryParse(batchNumber, out o);
-                return o;
-            }
-        }
-
-        public string number
-        {
-            get { return batchNumber; }
-        }
-
         public void Add(JournalTransactionLine line)
         {
             line.lineNumber = 1;
@@ -207,6 +192,11 @@ namespace ONIT.VismaNetApi.Models
             {
                 transactionLine.operation = ApiOperation.Update;
             }
+        }
+
+        public string GetIdentificator()
+        {
+            return batchNumber;
         }
     }
 

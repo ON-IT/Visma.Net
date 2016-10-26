@@ -6,7 +6,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Contact : DtoProviderBase, IHaveNumber, IHaveInternalId
+    public class Contact : DtoProviderBase, IProvideIdentificator
     {
         public string displayName
         {
@@ -154,8 +154,14 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
-        public string number => contactId.ToString();
+        //public string number => contactId.ToString();
 
-        public int internalId => contactId;
+        //public int internalId => contactId;
+
+
+        public string GetIdentificator()
+        {
+            return contactId.ToString();
+        }
     }
 }
