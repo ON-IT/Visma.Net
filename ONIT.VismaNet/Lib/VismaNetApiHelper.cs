@@ -387,7 +387,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal static async Task<List<T>> GetAllModifiedSince<T>(string apiControllerUri, DateTime dateTime,
+       internal static async Task<List<T>> GetAllModifiedSince<T>(string apiControllerUri, DateTime dateTime,
             VismaNetAuthorization authorization)
         {
             using (var webclient = GetHttpClient(authorization))

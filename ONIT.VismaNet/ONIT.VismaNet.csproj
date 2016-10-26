@@ -178,6 +178,8 @@
     <Compile Include="Lib\VismaNetWebClient.cs" />
     <Compile Include="Exceptions\VismaNetExceptionHandler.cs" />
     <Compile Include="Models\CompanyContext.cs" />
+    <Compile Include="Dynamic\VismaNetDynamicHandler.cs" />
+    <Compile Include="Dynamic\VismaNetDynamicEndpoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Tools\nuget-pack.bat" />
