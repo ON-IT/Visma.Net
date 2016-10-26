@@ -6,7 +6,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Shipment : DtoProviderBase, IHaveNumber, IHaveInternalId
+    public class Shipment : DtoProviderBase, IProvideIdentificator
     {
         public string shipmentNumber
         {
@@ -224,18 +224,18 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public string number => shipmentNumber;
+        //public string number => shipmentNumber;
 
-        public int internalId
-        {
-            get
-            {
-                int x;
-                if (int.TryParse(shipmentNumber, out x))
-                    return x;
-                return 0;
-            }
-        }
+        //public int internalId
+        //{
+        //    get
+        //    {
+        //        int x;
+        //        if (int.TryParse(shipmentNumber, out x))
+        //            return x;
+        //        return 0;
+        //    }
+        //}
 
         internal override void PrepareForUpdate()
         {
@@ -251,6 +251,11 @@ namespace ONIT.VismaNetApi.Models
             {
                 detailLine.operation = ApiOperation.Update;
             }
+        }
+
+        public string GetIdentificator()
+        {
+            return shipmentNumber;
         }
     }
 }

@@ -8,7 +8,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class InvoiceBase : DtoProviderBase, IHaveNumber, IHaveInternalId
+    public class InvoiceBase : DtoProviderBase, IProvideIdentificator
     {
        
 
@@ -271,5 +271,10 @@ namespace ONIT.VismaNetApi.Models
             });
         }
         #endregion
+
+        public string GetIdentificator()
+        {
+            return referenceNumber;
+        }
     }
 }

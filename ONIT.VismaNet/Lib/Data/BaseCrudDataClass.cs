@@ -7,7 +7,7 @@ using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public abstract class BaseCrudDataClass<T> : BaseDataClass where T : DtoProviderBase, IHaveNumber, IHaveInternalId
+    public abstract class BaseCrudDataClass<T> : BaseDataClass where T : DtoProviderBase, IProvideIdentificator
     {
         internal BaseCrudDataClass(VismaNetAuthorization auth) : base(auth)
         {
@@ -31,7 +31,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <param name="entity">Entity to update</param>
         public virtual async Task UpdateAsyncTask(T entity)
         {
-            await VismaNetApiHelper.Update(entity, entity.number, ApiControllerUri, Authorization);
+            await VismaNetApiHelper.Update(entity, entity.GetIdentificator(), ApiControllerUri, Authorization);
         }
         
         /// <summary>
