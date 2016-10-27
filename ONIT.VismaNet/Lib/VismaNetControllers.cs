@@ -16,11 +16,13 @@ namespace ONIT.VismaNetApi.Lib
         public const string CustomerDocument = "controller/api/v1/customerdocument";
         public const string Dimensions = "controller/api/v1/dimension";
         public const string Inventory = "controller/api/v1/inventory";
+        public const string InventoryAdjustment = "controller/api/v1/inventoryadjustment";
         public const string JournalTransaction = "controller/api/v1/journaltransaction";
         public const string FinAccount = "controller/api/v1/account";
         public const string Employee = "controller/api/v1/employee";
         public const string Shipments = "controller/api/v1/shipment";
         public const string Contacts = "controller/api/v1/contact";
         public const string Project = "controller/api/v1/project";
+        
     }
 }

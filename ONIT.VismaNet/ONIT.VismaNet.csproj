@@ -141,6 +141,7 @@
     <Compile Include="Lib\QueryableVismaNetCustomerInvoiceData.cs" />
     <Compile Include="Lib\QueryableVismaNetCustomerData.cs" />
     <Compile Include="Models\Inventory.cs" />
+    <Compile Include="Models\InventoryAdjustment.cs" />
     <Compile Include="Models\InvoiceBase.cs" />
     <Compile Include="Models\JournalTransaction.cs" />
     <Compile Include="Models\Enums\PaymentBy.cs" />

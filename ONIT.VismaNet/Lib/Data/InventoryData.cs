@@ -11,4 +11,12 @@ namespace ONIT.VismaNetApi.Lib.Data
             ApiControllerUri = VismaNetControllers.Inventory;
         }
     }
+
+    public class InventoryAdjustmentData : BaseCrudDataClass<InventoryAdjustment>
+    {
+        public InventoryAdjustmentData(VismaNetAuthorization auth) : base(auth)
+        {
+            ApiControllerUri = VismaNetControllers.InventoryAdjustment;
+        }
+    }
 }

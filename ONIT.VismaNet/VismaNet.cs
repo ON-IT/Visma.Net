@@ -28,8 +28,7 @@ namespace ONIT.VismaNetApi
         public readonly ShipmentData Shipments;
         public readonly ContactData Contacts;
         public readonly ProjectData Projects;
-
-
+        public readonly InventoryAdjustmentData InventoryAdjustment;
         public readonly JournalTransactionData JournalTransactions;
 
         
@@ -56,6 +55,7 @@ namespace ONIT.VismaNetApi
             CustomerDocuments = new CustomerDocumentData(Auth);
             Dimensions = new DimensionData(Auth);
             Inventory = new InventoryData(Auth);
+            InventoryAdjustment = new InventoryAdjustmentData(Auth);
             JournalTransactions = new JournalTransactionData(Auth);
             Accounts = new FinAccountData(Auth);
             Employee = new EmployeeData(Auth);
