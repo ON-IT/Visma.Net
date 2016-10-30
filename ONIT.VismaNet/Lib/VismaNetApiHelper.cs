@@ -387,6 +387,8 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        public const string VismaNetDateTimeFormat = "yyyy-MM-ddTHH:mm:ss.fff";
+
        internal static async Task<List<T>> GetAllModifiedSince<T>(string apiControllerUri, DateTime dateTime,
             VismaNetAuthorization authorization)
         {
@@ -396,7 +398,7 @@ namespace ONIT.VismaNetApi.Lib
                     var endpoint = GetApiUrlForController(apiControllerUri,
                         parameters: new NameValueCollection
                         {
-                            {"LastModifiedDateTime", dateTime.ToString("yyyy-MM-ddTHH:mm:ss.fff")},
+                            {"LastModifiedDateTime", dateTime.ToString(VismaNetDateTimeFormat)},
                             {"LastModifiedDateTimeCondition", ">"}
                         });
                 
