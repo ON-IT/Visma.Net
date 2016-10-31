@@ -28,10 +28,8 @@ namespace ONIT.VismaNetApi
         public readonly ShipmentData Shipments;
         public readonly ContactData Contacts;
         public readonly ProjectData Projects;
-
-
+        public readonly SalesOrderData SalesOrder;
         public readonly JournalTransactionData JournalTransactions;
-
         
         /// <summary>
         ///     Creates a connection using token.
@@ -63,6 +61,7 @@ namespace ONIT.VismaNetApi
             Shipments = new ShipmentData(Auth);
             Contacts = new ContactData(Auth);
             Projects = new ProjectData(Auth);
+            SalesOrder = new SalesOrderData(Auth);
         }
 
         public static string Version { get; private set; }

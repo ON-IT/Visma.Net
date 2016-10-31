@@ -87,6 +87,7 @@
     <Compile Include="Models\CarrierDescription.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\CustomerSummary.cs" />
+    <Compile Include="Models\CustomerVatZone.cs" />
     <Compile Include="Models\Enums\ContactMethods.cs" />
     <Compile Include="Models\CreditNote.cs" />
     <Compile Include="Models\Enums\EmployeeTitles.cs" />
@@ -145,10 +146,12 @@
     <Compile Include="Models\JournalTransaction.cs" />
     <Compile Include="Models\Enums\PaymentBy.cs" />
     <Compile Include="Models\CustomDto\NumberName.cs" />
+    <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\PackageDetailLine.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectManager.cs" />
     <Compile Include="Models\ProjectTask.cs" />
+    <Compile Include="Models\SalesOrder.cs" />
     <Compile Include="Models\Shipment.cs" />
     <Compile Include="Models\Enums\ShipmentTypes.cs" />
     <Compile Include="Models\Enums\ShipmentStatus.cs" />

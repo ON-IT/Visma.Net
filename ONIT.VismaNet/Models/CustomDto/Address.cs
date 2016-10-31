@@ -5,6 +5,10 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 {
     public class Address : DtoProviderBase
     {
+        public Address()
+        {
+            RequiredFields.Add("county", new DtoValue(null));
+        }
         public int addressId
         {
             get { return Get<int>(); }
@@ -47,6 +51,12 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             set { Set(value, "countryId"); }
         }
 
+        public DescriptiveDto county
+        {
+            get { return Get<DescriptiveDto>(); }
+            set {  Set(value);}
+        }
+
         public State state
         {
             get { return Get("stateId", new State()); }
@@ -56,6 +66,12 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         public bool addressIdSpecified
         {
             get { return addressId > 0; }
+        }
+
+        public bool overrideAddress
+        {
+            get { return Get<bool>(); }
+            set { Set(value); }
         }
 
         public override string ToString()

@@ -209,42 +209,7 @@ namespace ONIT.VismaNetApi.Lib
             }
             return 0;
         }
-        /*
-        internal static async Task<List<CustomerDocument>> FetchAllCustomerDocumentsAsyncTask(
-            VismaNetAuthorization authorization)
-        {
-            using (var webclient = GetHttpClient(authorization))
-            {
-                var endpoint = GetApiUrlForController(VismaNetControllers.CustomerDocument);
-                var alldocuments = new List<CustomerDocument>();
-                var count = 0;
-                do
-                {
-                    try
-                    {
-                        if (alldocuments.Count > 0)
-                        {
-                            var maxId = alldocuments.Max(x => TryParseToInt(x.referenceNumber));
-                            endpoint = GetApiUrlForController(VismaNetControllers.CustomerDocument,
-                                parameters: new NameValueCollection
-                                {
-                                    {"greaterThanValue", $"{maxId}"},
-                                    {"numberToRead", $"{MaxReturnableEntitiesFromVismaNet}"}
-                                });
-                        }
-                        var batch = await webclient.Get<List<CustomerDocument>>(endpoint);
-                        count = batch.Count;
-                        alldocuments.AddRange(batch);
-                    }
-                    catch
-                    {
-                        count = 0;
-                    }
-                } while (count == MaxReturnableEntitiesFromVismaNet);
-                return alldocuments;
-            }
-        }*/
-
+     
         internal static async Task<List<CustomerDocument>> FetchCustomerDocumentsForCustomerCd(string customerNumber,
             VismaNetAuthorization authorization)
         {
