@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using ONIT.VismaNetApi.Interfaces;
 using ONIT.VismaNetApi.Models;
 
@@ -11,8 +10,80 @@ namespace ONIT.VismaNetApi.Lib
 {
     public class DtoProviderBase : IProvideDto, INotifyPropertyChanged
     {
-		HashSet<string> _ignoreProperties;
-		protected HashSet<string> IgnoreProperties => _ignoreProperties ?? (_ignoreProperties = new HashSet<string>());
+        private Dictionary<string, object> _data;
+        private Dictionary<string, object> _dtoFields;
+        private HashSet<string> _ignoreProperties;
+
+        protected DtoProviderBase()
+        {
+            _data = new Dictionary<string, object>();
+        }
+
+        protected HashSet<string> IgnoreProperties => _ignoreProperties ?? (_ignoreProperties = new HashSet<string>());
+
+
+        protected Dictionary<string, object> Data => _data ?? (_data = new Dictionary<string, object>());
+
+        protected Dictionary<string, object> OriginalData { get; } = new Dictionary<string, object>();
+
+
+        public object this[string index]
+        {
+            get
+            {
+                object value;
+                return _data.TryGetValue(index, out value) ? value : null;
+            }
+            set
+            {
+                if (_data[index] != value)
+                {
+                    _data[index] = value;
+                    OnPropertyChanged(index);
+                }
+            }
+        }
+
+        protected Dictionary<string, object> DtoFields => _dtoFields ?? (_dtoFields = new Dictionary<string, object>());
+        protected Dictionary<string, object> RequiredFields { get; } = new Dictionary<string, object>();
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public List<string> GetDeltaFields()
+        {
+            return Data.Where(x => !OriginalData.ContainsKey(x.Key) ||
+                                   !OriginalData[x.Key].Equals(x.Value)).Select(x => x.Key).ToList();
+        }
+
+        public virtual Dictionary<string, object> ToDto(bool delta = false)
+        {
+            var dict = _data.Where(x => _ignoreProperties == null || !_ignoreProperties.Contains(x.Key))
+                .Where(x => x.Value != null)
+                .Where(x=> !delta || GetDeltaFields().Contains(x.Key))
+                .ToDictionary(x => CreateKey(x.Key),
+                    x => CreateDto(x.Value, x.Key));
+
+            foreach (var dtoField in DtoFields.Where(dtoField => !dict.ContainsKey(dtoField.Key)))
+            {
+                if (dtoField.Value == null)
+                    continue;
+                var value = dtoField.Value as DtoValue;
+                if (value != null)
+                {
+                    if(value.Value == null)
+                        continue;
+                    dict[dtoField.Key] = dtoField.Value;
+                }
+                else
+                {
+                    dict[dtoField.Key] = CreateDto(dtoField.Value, dtoField.Key);
+                }
+            }
+            foreach (var required in RequiredFields.Where(x => !dict.ContainsKey(x.Key)))
+            {
+                dict[required.Key] = required.Value;
+            }
+            return dict.Where(x => x.Value != null).ToDictionary(x => x.Key, x => x.Value);
+        }
 
         protected T Get<T>([CallerMemberName] string key = null, T defaultValue = default(T))
         {
@@ -38,13 +109,13 @@ namespace ONIT.VismaNetApi.Lib
 
         protected void Set(object dto, [CallerMemberName] string key = null, bool silent = false)
         {
-            if(string.IsNullOrEmpty(key))
+            if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException(nameof(key));
 
             if (dto == null && _data.ContainsKey(key))
             {
                 _data.Remove(key);
-                if(!silent) OnPropertyChanged(key);
+                if (!silent) OnPropertyChanged(key);
             }
             else
             {
@@ -60,31 +131,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             foreach (var entry in source.Data)
             {
-
-               Set(entry.Value, entry.Key);
-            }
-        }
-
-        private Dictionary<string, object> _data;
-        private Dictionary<string, object> _dtoFields;
-
-
-        protected Dictionary<string, object> Data => _data ?? (_data = new Dictionary<string, object>());
-
-        public object this[string index]
-        {
-            get
-            {
-                object value;
-                return _data.TryGetValue(index, out value) ? value : null;
-            }
-            set
-            {
-                if (_data[index] != value)
-                {
-                    _data[index] = value;
-                    OnPropertyChanged(index);
-                }
+                Set(entry.Value, entry.Key);
             }
         }
 
@@ -108,7 +155,7 @@ namespace ONIT.VismaNetApi.Lib
                 {
                     return becomesDto.ToDto();
                 }
-                
+
                 var listOfProvidesDto = value as IEnumerable<IProvideDto>;
                 if (listOfProvidesDto != null)
                 {
@@ -124,43 +171,22 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        protected Dictionary<string, object> DtoFields => _dtoFields ?? (_dtoFields = new Dictionary<string, object>());
-
-        public virtual Dictionary<string, object> ToDto()
-        {
-			var dict = _data.Where(x => (_ignoreProperties==null || !_ignoreProperties.Contains(x.Key)))
-                            .ToDictionary(x => CreateKey(x.Key), 
-                                          x => CreateDto(x.Value, x.Key));
-
-            foreach (var dtoField in DtoFields.Where(dtoField => !dict.ContainsKey(dtoField.Key)))
-            {
-                if(dtoField.Value == null)
-                    continue;
-                if (dtoField.Value is DtoValue)
-                    dict[dtoField.Key] = dtoField.Value;
-                else
-                    dict[dtoField.Key] = CreateDto(dtoField.Value, dtoField.Key);
-            }
-            return dict;
-        }
-
         private static string CreateKey(string key)
         {
-            return key ?? string.Format("UNKNOWN{0}", Guid.NewGuid());
+            return key ?? $"UNKNOWN{Guid.NewGuid()}";
         }
-
-        protected DtoProviderBase()
-        {
-            _data = new Dictionary<string, object>();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
+        internal void InternalPrepareForUpdate()
+        {
+            OriginalData.Clear();
+            foreach (var line in Data)
+                OriginalData.Add(line.Key, line.Value);
+            PrepareForUpdate();
+        }
         internal virtual void PrepareForUpdate()
         {
             

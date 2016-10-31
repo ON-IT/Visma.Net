@@ -4,6 +4,6 @@ namespace ONIT.VismaNetApi.Interfaces
 {
     public interface IProvideDto
     {
-        Dictionary<string, object> ToDto();
+        Dictionary<string, object> ToDto(bool delta = false);
     }
 }
