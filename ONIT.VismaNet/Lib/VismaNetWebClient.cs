@@ -35,6 +35,7 @@ namespace ONIT.VismaNetApi.Lib
                 handler.AutomaticDecompression = DecompressionMethods.GZip |
                                                  DecompressionMethods.Deflate;
             }
+            handler.UseCookies = false;
             httpClient = new HttpClient(handler, true);
             httpClient.Timeout = TimeSpan.FromSeconds(300);
             httpClient.DefaultRequestHeaders.Add("User-Agent",
