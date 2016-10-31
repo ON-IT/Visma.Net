@@ -142,4 +142,12 @@ namespace ONIT.VismaNetApi.Lib.Data
         #endregion
 
     }
+
+    public class SalesOrderData : BaseCrudDataClass<SalesOrder>
+    {
+        public SalesOrderData(VismaNetAuthorization auth) : base(auth)
+        {
+            ApiControllerUri = VismaNetControllers.SalesOrder;
+        }
+    }
 }
