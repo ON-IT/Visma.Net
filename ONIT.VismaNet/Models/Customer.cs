@@ -12,6 +12,15 @@ namespace ONIT.VismaNetApi.Models
 		{
 			IgnoreProperties.Add (nameof(this.number));
 		}
+
+        /// <summary>
+        /// Create a new customer without autonumbering
+        /// </summary>
+        /// <param name="customerNumber"></param>
+        public Customer(string customerNumber)
+        {
+            number = customerNumber;
+        }
      
         [JsonProperty]
         public string number

@@ -12,10 +12,20 @@ namespace ONIT.VismaNetApi.Models
 {
     public class Supplier : DtoProviderBase, IProvideIdentificator
     {
-        public Supplier() : base()
+        public Supplier()
         {
             IgnoreProperties.Add(nameof(this.number));
         }
+        /// <summary>
+        /// Create a new supplier without autonumbering
+        /// </summary>
+        /// <param name="supplierNumber"></param>
+        public Supplier(string supplierNumber)
+        {
+            number = supplierNumber;
+        }
+
+
         public int internalId
         {
             get { return Get<int>(); }
