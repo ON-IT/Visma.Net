@@ -55,7 +55,7 @@ namespace ONIT.VismaNetApi.Models
             base.PrepareForUpdate();
         }
 
-        //public string number => projectID;
+        public string number => projectID;
 
         //public int internalId => internalID;
         public string GetIdentificator()

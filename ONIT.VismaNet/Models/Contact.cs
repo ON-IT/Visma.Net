@@ -154,7 +154,7 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
-        //public string number => contactId.ToString();
+        public string number => contactId.ToString();
 
         //public int internalId => contactId;
 
