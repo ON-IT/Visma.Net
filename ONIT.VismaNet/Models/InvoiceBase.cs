@@ -27,8 +27,11 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
-        [JsonIgnore]
-        public string number => referenceNumber;
+        public string number
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
 
         [JsonIgnore]
         public int internalId
@@ -39,11 +42,11 @@ namespace ONIT.VismaNetApi.Models
                 return int.TryParse(referenceNumber, out id) ? id : 0;
             }
         }
-
+        [Obsolete("Use number")]
         public string referenceNumber
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get { return Get<string>("number"); }
+            set { Set(value, "number"); }
         }
 
         public string customerNumber
