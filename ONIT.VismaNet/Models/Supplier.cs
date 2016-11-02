@@ -17,7 +17,7 @@ namespace ONIT.VismaNetApi.Models
             IgnoreProperties.Add(nameof(this.number));
         }
         /// <summary>
-        /// Create a new supplier without autonumbering
+        /// Create a new supplier without auto numbering
         /// </summary>
         /// <param name="supplierNumber"></param>
         public Supplier(string supplierNumber)
