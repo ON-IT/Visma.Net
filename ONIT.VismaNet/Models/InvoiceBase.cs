@@ -27,13 +27,12 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
-        public string number
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
+        [Obsolete("Use referenceNumber")]
+        public string number => referenceNumber;
+       
 
         [JsonIgnore]
+        [Obsolete("Use referenceNumber")]
         public int internalId
         {
             get
@@ -42,11 +41,11 @@ namespace ONIT.VismaNetApi.Models
                 return int.TryParse(referenceNumber, out id) ? id : 0;
             }
         }
-        [Obsolete("Use number")]
+        
         public string referenceNumber
         {
-            get { return Get<string>("number"); }
-            set { Set(value, "number"); }
+            get { return Get<string>(); }
+            set { Set(value); }
         }
 
         public string customerNumber
