@@ -36,11 +36,10 @@ namespace ONIT.VismaNetApi.Models
         /// <summary>
         /// Create a new customer invoice without auto numbering
         /// </summary>
-        /// <param name="referenceNumber"></param>
-        public CustomerInvoice(string referenceNumber)
+        /// <param name="number"></param>
+        public CustomerInvoice(string number)
         {
-            IgnoreProperties.Add(nameof(this.number));
-            this.referenceNumber = referenceNumber;
+            this.number = number;
         }
 
         internal override void PrepareForUpdate()
