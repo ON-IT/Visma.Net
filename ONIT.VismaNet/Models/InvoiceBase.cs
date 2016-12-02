@@ -41,6 +41,12 @@ namespace ONIT.VismaNetApi.Models
                 return int.TryParse(referenceNumber, out id) ? id : 0;
             }
         }
+
+        public decimal exchangeRate
+        {
+            get { return Get<decimal>(); }
+            set { Set(value); }
+        }
         
         public string referenceNumber
         {
