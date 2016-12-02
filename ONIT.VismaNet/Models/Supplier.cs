@@ -195,11 +195,10 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
-        [JsonProperty]
         public SupplierClass supplierClass
         {
             get { return Get("supplierClassId", defaultValue: new SupplierClass()); }
-            private set { Set(value);}
+            set { Set(value, "supplierClassId");}
 
         }
 
