@@ -35,6 +35,14 @@ namespace ONIT.VismaNetApi.Models
         {
             IgnoreProperties.Add(nameof(referenceNumber));
         }
+        /// <summary>
+        /// Create a new supplier invoice without auto numbering
+        /// </summary>
+        /// <param name="referenceNumber"></param>
+        public SupplierInvoice(string referenceNumber)
+        {
+            this.referenceNumber = referenceNumber;
+        }
         public string financialPeriod
         {
             get { return Get<string>(); }
