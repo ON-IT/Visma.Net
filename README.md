@@ -13,8 +13,9 @@ Please set VismaNet.ApplicationName before doing any requests. This will allow V
         {
             VismaNet.ApplicationName = "My Awesome Integration";
             var vismaNet = new VismaNet(12345, "1406148a-a9b5-4626-acaf-e485a85b6e0c");
-            doStuff(vismaNet);
-
+            /*
+            ...
+            */
         }
    }
 ```
