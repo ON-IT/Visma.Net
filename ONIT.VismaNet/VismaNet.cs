@@ -65,7 +65,10 @@ namespace ONIT.VismaNetApi
         }
 
         public static string Version { get; private set; }
-
+        /// <summary>
+        /// Provide a name for your application. This will make it easier for Visma to identify your integration in their logs.
+        /// </summary>
+        public static string ApplicationName { get; set; }
         static VismaNet()
         {
             Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();

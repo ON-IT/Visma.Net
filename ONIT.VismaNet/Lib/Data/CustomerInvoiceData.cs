@@ -71,12 +71,12 @@ namespace ONIT.VismaNetApi.Lib.Data
 
 	    public async Task<VismaActionResult> ReleaseInvoice(CustomerInvoice invoice)
 	    {
-	        return await VismaNetApiHelper.InvoiceAction(invoice.number, "release", Authorization);
+	        return await VismaNetApiHelper.InvoiceAction(invoice.GetIdentificator(), "release", Authorization);
 	    }
 
         public async Task<VismaActionResult> ReverseInvoice(CustomerInvoice invoice)
         {
-            return await VismaNetApiHelper.InvoiceAction(invoice.number, "reverse", Authorization);
+            return await VismaNetApiHelper.InvoiceAction(invoice.GetIdentificator(), "reverse", Authorization);
         }
 
 	    public async Task<string> AddAttachmentToInvoice(string invoiceNumber, string content, string fileName)
