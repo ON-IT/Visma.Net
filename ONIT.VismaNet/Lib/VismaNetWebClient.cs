@@ -38,8 +38,8 @@ namespace ONIT.VismaNetApi.Lib
             handler.UseCookies = false;
             httpClient = new HttpClient(handler, true);
             httpClient.Timeout = TimeSpan.FromSeconds(300);
-            httpClient.DefaultRequestHeaders.Add("User-Agent",
-                string.Format("OnItAS+VismaNet/{0}", VismaNet.Version));
+            httpClient.DefaultRequestHeaders.Add("User-Agent", $"Visma.Net/{VismaNet.Version} (+https://github.com/ON-IT/Visma.Net)");
+            httpClient.DefaultRequestHeaders.ExpectContinue = false;
         }
 
         internal VismaNetHttpClient(VismaNetAuthorization auth = null)
@@ -71,7 +71,10 @@ namespace ONIT.VismaNetApi.Lib
             message.Headers.Add("ipp-application-type", VismaNetApiHelper.ApplicationType);
             message.Headers.Accept.Clear();
             message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            message.Headers.ExpectContinue = false;
+            if (!string.IsNullOrEmpty(VismaNet.ApplicationName))
+            {
+                message.Headers.Add("User-Agent", $"Visma.Net/{VismaNet.Version} (+https://github.com/ON-IT/Visma.Net) ({VismaNet.ApplicationName})");
+            }
             return message;
         }
 
