@@ -67,6 +67,10 @@ namespace ONIT.VismaNetApi.Lib
             {
                 message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authorization.Token);
                 message.Headers.Add("ipp-company-id", string.Format("{0}", authorization.CompanyId));
+                if (authorization.BranchId > 0)
+                {
+                    message.Headers.Add("branchid", authorization.BranchId.ToString());
+                }
             }
             message.Headers.Add("ipp-application-type", VismaNetApiHelper.ApplicationType);
             message.Headers.Accept.Clear();
@@ -90,6 +94,10 @@ namespace ONIT.VismaNetApi.Lib
             {
                 message.Headers["Authorization"] = string.Format("Bearer {0}", authorization.Token);
                 message.Headers["ipp-company-id"] = string.Format("{0}", authorization.CompanyId);
+                if (authorization.BranchId > 0)
+                {
+                    message.Headers["branchid"] = authorization.BranchId.ToString();
+                }
             }
 			message.Headers["ipp-application-type"] = VismaNetApiHelper.ApplicationType;
             message.Accept = "application/json";

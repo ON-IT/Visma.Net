@@ -5,5 +5,6 @@
         public string Token { get; set; }
         public int CompanyId { get; set; }
         public bool UseProxy { get; set; }
+        public int BranchId { get; set; }
     }
 }

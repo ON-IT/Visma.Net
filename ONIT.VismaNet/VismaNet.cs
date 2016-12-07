@@ -30,13 +30,14 @@ namespace ONIT.VismaNetApi
         public readonly ProjectData Projects;
         public readonly SalesOrderData SalesOrder;
         public readonly JournalTransactionData JournalTransactions;
-        
+
         /// <summary>
         ///     Creates a connection using token.
         /// </summary>
         /// <param name="companyId">Company context</param>
         /// <param name="token">The predefined token from Visma.net</param>
-        public VismaNet(int companyId, string token)
+        /// <param name="branchId">Branch ID to work with in the Visma.net Company (optional)</param>
+        public VismaNet(int companyId, string token, int branchId = 0)
         {
             if (string.IsNullOrEmpty(token))
                 throw new InvalidArgumentsException("Token is missing");
@@ -44,7 +45,8 @@ namespace ONIT.VismaNetApi
             Auth = new VismaNetAuthorization
             {
                 Token = token,
-                CompanyId = companyId
+                CompanyId = companyId,
+                BranchId = branchId
             };
             Customers = new CustomerData(Auth);
             CustomerInvoices = new CustomerInvoiceData(Auth);
