@@ -57,6 +57,11 @@ namespace ONIT.VismaNetApi.Models
             };
         }
 
+        public override string ToString()
+        {
+            return id;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
