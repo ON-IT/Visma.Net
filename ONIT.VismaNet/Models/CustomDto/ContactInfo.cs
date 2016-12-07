@@ -1,4 +1,5 @@
-﻿using ONIT.VismaNetApi.Lib;
+﻿using System.Text;
+using ONIT.VismaNetApi.Lib;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
 {
@@ -51,7 +52,23 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             get { return Get<string>(); }
             set { Set(value); }
         }
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine(name);
+            if (!string.IsNullOrEmpty(email))
+                builder.AppendLine(email);
+            if (!string.IsNullOrEmpty(web))
+                builder.AppendLine(web);
+            if (!string.IsNullOrEmpty(phone1))
+                builder.AppendLine(phone1);
+            if (!string.IsNullOrEmpty(phone2))
+                builder.AppendLine(phone2);
+            if (!string.IsNullOrEmpty(fax))
+                builder.AppendLine(fax);
 
+            return builder.ToString();
+        }
         public bool contactIdSpecified => contactId > 0;
     }
 }
