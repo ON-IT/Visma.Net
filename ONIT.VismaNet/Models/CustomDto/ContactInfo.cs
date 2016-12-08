@@ -56,18 +56,18 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         {
             var builder = new StringBuilder();
             builder.AppendLine(name);
-            if (!string.IsNullOrEmpty(email))
+            if (!string.IsNullOrWhiteSpace(email))
                 builder.AppendLine(email);
-            if (!string.IsNullOrEmpty(web))
+            if (!string.IsNullOrWhiteSpace(web))
                 builder.AppendLine(web);
-            if (!string.IsNullOrEmpty(phone1))
+            if (!string.IsNullOrWhiteSpace(phone1))
                 builder.AppendLine(phone1);
-            if (!string.IsNullOrEmpty(phone2))
+            if (!string.IsNullOrWhiteSpace(phone2))
                 builder.AppendLine(phone2);
-            if (!string.IsNullOrEmpty(fax))
+            if (!string.IsNullOrWhiteSpace(fax))
                 builder.AppendLine(fax);
 
-            return builder.ToString();
+            return builder.ToString().Trim();
         }
         public bool contactIdSpecified => contactId > 0;
     }
