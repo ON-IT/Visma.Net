@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using ONIT.VismaNetApi.Annotations;
 using ONIT.VismaNetApi.Lib;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
@@ -77,13 +78,24 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         public override string ToString()
         {
             var builder = new StringBuilder();
-            builder.AppendLine(addressLine1);
-            if (!string.IsNullOrEmpty(addressLine2))
+            if(!string.IsNullOrWhiteSpace(addressLine1))
+                builder.AppendLine(addressLine1);
+            if (!string.IsNullOrWhiteSpace(addressLine2))
                 builder.AppendLine(addressLine2);
-            if (!string.IsNullOrEmpty(addressLine3))
+            if (!string.IsNullOrWhiteSpace(addressLine3))
                 builder.AppendLine(addressLine3);
-            builder.AppendLine($"{postalCode} {city}");
-            return builder.ToString();
+            if (!string.IsNullOrWhiteSpace(postalCode) && !string.IsNullOrWhiteSpace(city))
+            {
+                builder.AppendLine($"{postalCode} {city}");
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(postalCode))
+                    builder.AppendLine(postalCode);
+                if (!string.IsNullOrWhiteSpace(city))
+                    builder.AppendLine(city);
+            }
+            return builder.ToString().Trim();
         }
     }
 }
