@@ -108,6 +108,11 @@ namespace ONIT.VismaNetApi.Models
             get { return Get<decimal>(); }
             set { Set(value); }
         }
+        public decimal exchangeRate
+        {
+            get { return Get<decimal>(); }
+            set { Set(value); }
+        }
 
         public decimal vatExemptTotal
         {
