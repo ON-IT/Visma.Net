@@ -12,6 +12,11 @@
             
         }
 
+        public override string ToString()
+        {
+            return string.IsNullOrWhiteSpace(description) ? id : $"{id} {description}";
+        }
+
         public static implicit operator Country(string id)
         {
             return new Country(id);
