@@ -96,7 +96,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
                     builder.AppendLine(city);
             }
             if(!string.IsNullOrEmpty(country?.id))
-                builder.AppendLine(country.id);
+                builder.AppendLine(country.ToString());
 
             return builder.ToString().Trim();
         }
