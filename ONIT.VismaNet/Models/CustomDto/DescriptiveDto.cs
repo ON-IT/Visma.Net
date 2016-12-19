@@ -127,6 +127,14 @@ namespace ONIT.VismaNetApi.Models
             : base(id)
         {
         }
+
+        public static implicit operator Vat(string id)
+        {
+            return new Vat()
+            {
+                id = id
+            };
+        }
     }
 
     public class CustomerClass : DescriptiveDto
@@ -138,6 +146,14 @@ namespace ONIT.VismaNetApi.Models
         public CustomerClass(string id) : base(id)
         {
         }
+
+        public static implicit operator CustomerClass(string id)
+        {
+            return new CustomerClass
+            {
+                id = id
+            };
+        }
     }
 
     public class SupplierClass : DescriptiveDto
@@ -148,6 +164,14 @@ namespace ONIT.VismaNetApi.Models
 
         public SupplierClass(string id) : base(id)
         {
+        }
+
+        public static implicit operator SupplierClass(string id)
+        {
+            return new SupplierClass
+            {
+                id = id
+            };
         }
     }
 
