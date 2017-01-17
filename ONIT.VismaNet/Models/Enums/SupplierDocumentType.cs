@@ -11,5 +11,6 @@ namespace ONIT.VismaNetApi.Models.Enums
         Refund = 70,
         VoidCheck = 80,
         VoidQuickCheck = 90,
+        CreditInvoice = 100 ,
     }
 }

@@ -81,7 +81,7 @@ namespace ONIT.VismaNetApi.Models
         public decimal costInCurrency
         {
             get { return Get<decimal>(); }
-            private set { Set(value); }
+            set { Set(value); }
         }
 
         public Account account

@@ -77,6 +77,11 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
+        public string description
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
         public decimal detailTotal
         {
             get { return Get<decimal>(); }
@@ -180,7 +185,11 @@ namespace ONIT.VismaNetApi.Models
             get { return Get<SupplierInvoiceDocumentStatus>(); }
             private set { Set(value); }
         }
-
+        public string note
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
         public string currencyId
         {
             get { return Get<string>(); }
