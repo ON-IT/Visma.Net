@@ -185,6 +185,7 @@
     <Compile Include="Dynamic\VismaNetDynamicEndpoint.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Tools\1_Build_for_Xamarin.sh" />
     <None Include="Tools\nuget-pack.bat" />
     <None Include="ONIT.VismaNet.nuspec">
       <SubType>Designer</SubType>
