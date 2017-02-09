@@ -101,6 +101,7 @@ namespace ONIT.VismaNetApi.Lib
             }
 			message.Headers["ipp-application-type"] = VismaNetApiHelper.ApplicationType;
             message.Accept = "application/json";
+            message.ContentType = "application/json";
             return message;
         }
 
