@@ -256,7 +256,7 @@ namespace ONIT.VismaNetApi.Models
         public bool printDescriptionOnInvoice { get { return Get<bool>(); } set { Set(value); } }
         public bool printNoteOnExternalDocuments { get { return Get<bool>(); } set { Set(value); } }
         public bool printNoteOnInternalDocuments { get { return Get<bool>(); } set { Set(value); } }
-        public Contact soBillingContact { get { return Get<Contact>(defaultValue:new Contact()); } set { Set(value); } }
+        public ContactInfo soBillingContact { get { return Get<ContactInfo>(defaultValue:new ContactInfo()); } set { Set(value); } }
         public Address soBillingAddress { get { return Get<Address>(defaultValue: new Address()); } set { Set(value); } }
         public NumberName branch { get { return Get<NumberName>(); } set { Set(value); } }
         public NumberName branchNumber { get { return Get<NumberName>(); } set { Set(value); } }
@@ -309,10 +309,10 @@ namespace ONIT.VismaNetApi.Models
         public Location location { get { return Get<Location>(defaultValue: new Location()); } set { Set(value); } }
         public string currency { get { return Get<string>(); } set { Set(value); } }
         public string description { get { return Get<string>(); } set { Set(value); } }
-        public double orderTotal { get { return Get<int>(); } set { Set(value); } }
-        public double vatTaxableTotal { get { return Get<int>(); } set { Set(value); } }
-        public double vatExemptTotal { get { return Get<int>(); } set { Set(value); } }
-        public double taxTotal { get { return Get<int>(); } set { Set(value); } }
+        public double orderTotal { get { return Get<double>(); } set { Set(value); } }
+        public double vatTaxableTotal { get { return Get<double>(); } set { Set(value); } }
+        public double vatExemptTotal { get { return Get<double>(); } set { Set(value); } }
+        public double taxTotal { get { return Get<double>(); } set { Set(value); } }
         [JsonProperty]
         public DateTime lastModifiedDateTime { get; private set; }
 
@@ -496,17 +496,17 @@ namespace ONIT.VismaNetApi.Models
         public NumberName inventory { get { return Get<NumberName>("inventoryId"); } set { Set(value, "inventoryId"); } }
         public DescriptiveDto warehouse { get { return Get<DescriptiveDto>(); } set { Set(value); } }
         public string uom { get { return Get<string>(); } set { Set(value); } }
-        public double quantity { get { return Get<int>(); } set { Set(value); } }
-        public double qtyOnShipments { get { return Get<int>(); } set { Set(value); } }
-        public double openQty { get { return Get<int>(); } set { Set(value); } }
-        public double unitPrice { get { return Get<int>(); } set { Set(value); } }
+        public double quantity { get { return Get<double>(); } set { Set(value); } }
+        public double qtyOnShipments { get { return Get<double>(); } set { Set(value); } }
+        public double openQty { get { return Get<double>(); } set { Set(value); } }
+        public double unitPrice { get { return Get<double>(); } set { Set(value); } }
         public string discountCode { get { return Get<string>(); } set { Set(value); } }
-        public double discountPercent { get { return Get<int>(); } set { Set(value); } }
-        public double discountAmount { get { return Get<int>(); } set { Set(value); } }
+        public double discountPercent { get { return Get<double>(); } set { Set(value); } }
+        public double discountAmount { get { return Get<double>(); } set { Set(value); } }
         public bool manualDiscount { get { return Get<bool>(); } set { Set(value); } }
-        public double discUnitPrice { get { return Get<int>(); } set { Set(value); } }
-        public double extPrice { get { return Get<int>(); } set { Set(value); } }
-        public double unbilledAmount { get { return Get<int>(); } set { Set(value); } }
+        public double discUnitPrice { get { return Get<double>(); } set { Set(value); } }
+        public double extPrice { get { return Get<double>(); } set { Set(value); } }
+        public double unbilledAmount { get { return Get<double>(); } set { Set(value); } }
         public string lineDescription { get { return Get<string>(); } set { Set(value); } }
     }
 }
