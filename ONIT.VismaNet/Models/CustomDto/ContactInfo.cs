@@ -5,6 +5,11 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 {
     public class ContactInfo : DtoProviderBase
     {
+        public bool overrideContact
+        {
+            get { return Get<bool>(); }
+            set { Set(value); }
+        }
         public int contactId
         {
             get { return Get<int>(); }
