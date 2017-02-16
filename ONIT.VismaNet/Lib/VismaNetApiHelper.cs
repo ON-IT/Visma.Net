@@ -372,6 +372,19 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        internal static async Task<VismaActionResult> PaymentAction(string paymentNumber, string action,
+            VismaNetAuthorization authorization)
+        {
+            if (string.IsNullOrEmpty(paymentNumber)) throw new ArgumentException(nameof(paymentNumber));
+            using (var client = GetHttpClient(authorization))
+            {
+                var actionUrl = GetApiUrlForController($"{VismaNetControllers.Payment}/{paymentNumber}/action/{action}");
+                var obj = new ReleasePayment();
+                obj.type = new DtoValue("Payment");
+                return await client.Post<VismaActionResult>(actionUrl, obj);
+            }
+        }
+
         internal static async Task<VismaActionResult> InvoiceAction(string invoiceNumber, string action,
             VismaNetAuthorization authorization)
         {
