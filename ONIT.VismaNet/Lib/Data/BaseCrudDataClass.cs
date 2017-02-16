@@ -7,7 +7,7 @@ using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public abstract class BaseCrudDataClass<T> : BaseDataClass where T : DtoProviderBase, IHaveNumber, IHaveInternalId
+    public abstract class BaseCrudDataClass<T> : BaseDataClass where T : DtoProviderBase, IProvideIdentificator
     {
         internal BaseCrudDataClass(VismaNetAuthorization auth) : base(auth)
         {
@@ -21,7 +21,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         public virtual async Task<T> AddAsyncTask(T entity)
         {
             var rsp = await VismaNetApiHelper.Create(entity, ApiControllerUri, Authorization);
-            rsp.PrepareForUpdate();
+            rsp.InternalPrepareForUpdate();
             return rsp;
         }
         
@@ -31,7 +31,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <param name="entity">Entity to update</param>
         public virtual async Task UpdateAsyncTask(T entity)
         {
-            await VismaNetApiHelper.Update(entity, entity.number, ApiControllerUri, Authorization);
+            await VismaNetApiHelper.Update(entity, entity.GetIdentificator(), ApiControllerUri, Authorization);
         }
         
         /// <summary>
@@ -42,7 +42,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         public virtual async Task<T> GetAsyncTask(string entityNumber)
         {
             var rsp = await VismaNetApiHelper.Get<T>(entityNumber, ApiControllerUri, Authorization);
-            rsp.PrepareForUpdate();
+            rsp.InternalPrepareForUpdate();
             return rsp;
         }
         
@@ -53,7 +53,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         public virtual async Task<List<T>> AllAsyncTask()
         {
             var rsp = await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization);
-            rsp.ForEach(x=>x.PrepareForUpdate());
+            rsp.ForEach(x=>x.InternalPrepareForUpdate());
             return rsp;
         }
 
@@ -64,7 +64,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         public virtual async Task<List<T>> FindAsyncTask(NameValueCollection parameters)
         {
             var rsp = await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization, parameters);
-            rsp.ForEach(x=>x.PrepareForUpdate());
+            rsp.ForEach(x=>x.InternalPrepareForUpdate());
             return rsp;
         }
 
@@ -79,7 +79,7 @@ namespace ONIT.VismaNetApi.Lib.Data
                 .ToList()
                 .ForEach(pi => formFields.Add(pi.Name, pi.GetValue(parameters, null).ToString()));
             var rsp = await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization, formFields);
-            rsp.ForEach(x=>x.PrepareForUpdate());
+            rsp.ForEach(x=>x.InternalPrepareForUpdate());
             return rsp;
         }
 
@@ -141,5 +141,13 @@ namespace ONIT.VismaNetApi.Lib.Data
         }
         #endregion
 
+    }
+
+    public class SalesOrderData : BaseCrudDataClass<SalesOrder>
+    {
+        public SalesOrderData(VismaNetAuthorization auth) : base(auth)
+        {
+            ApiControllerUri = VismaNetControllers.SalesOrder;
+        }
     }
 }

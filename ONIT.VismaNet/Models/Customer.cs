@@ -6,12 +6,21 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Customer : DtoProviderBase, IHaveNumber, IHaveInternalId, IComparable<Customer>, IComparable
+    public class Customer : DtoProviderBase, IProvideIdentificator, IComparable<Customer>, IComparable
     {
 		public Customer ()
 		{
 			IgnoreProperties.Add (nameof(this.number));
 		}
+
+        /// <summary>
+        /// Create a new customer without autonumbering
+        /// </summary>
+        /// <param name="customerNumber"></param>
+        public Customer(string customerNumber)
+        {
+            number = customerNumber;
+        }
      
         [JsonProperty]
         public string number
@@ -213,5 +222,9 @@ namespace ONIT.VismaNetApi.Models
             return string.Compare(this.name, otherCustomer.name, StringComparison.Ordinal);
         }
 
+        public string GetIdentificator()
+        {
+            return number;
+        }
     }
 }

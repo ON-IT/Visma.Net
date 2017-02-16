@@ -25,31 +25,37 @@ namespace ONIT.VismaNetApi.Lib
         };
 
         private readonly VismaNetAuthorization authorization;
-        private readonly HttpClient httpClient;
-        private HttpClientHandler handler;
-
-        internal VismaNetHttpClient(VismaNetAuthorization auth = null)
+        private static readonly HttpClient httpClient;
+        
+        static VismaNetHttpClient()
         {
-            handler = new HttpClientHandler();
+            var handler = new HttpClientHandler();
             if (handler.SupportsAutomaticDecompression)
             {
                 handler.AutomaticDecompression = DecompressionMethods.GZip |
                                                  DecompressionMethods.Deflate;
             }
-
-            authorization = auth;
+            handler.UseCookies = false;
             httpClient = new HttpClient(handler, true);
             httpClient.Timeout = TimeSpan.FromSeconds(300);
-            httpClient.DefaultRequestHeaders.Add("User-Agent",
-                string.Format("OnItAS+VismaNet/{0}", VismaNet.Version));
+            httpClient.DefaultRequestHeaders.Add("User-Agent", $"Visma.Net/{VismaNet.Version} (+https://github.com/ON-IT/Visma.Net)");
+            httpClient.DefaultRequestHeaders.ExpectContinue = false;
         }
 
+        internal VismaNetHttpClient(VismaNetAuthorization auth = null)
+        {
+           authorization = auth;
+        }
+
+        
         #region IDisposable implementation
 
         public void Dispose()
         {
-            if (httpClient != null)
-                httpClient.Dispose();
+            // http://stackoverflow.com/questions/11178220/is-httpclient-safe-to-use-concurrently
+            //if (httpClient != null)
+            //    httpClient.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         #endregion
@@ -61,11 +67,18 @@ namespace ONIT.VismaNetApi.Lib
             {
                 message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authorization.Token);
                 message.Headers.Add("ipp-company-id", string.Format("{0}", authorization.CompanyId));
+                if (authorization.BranchId > 0)
+                {
+                    message.Headers.Add("branchid", authorization.BranchId.ToString());
+                }
             }
             message.Headers.Add("ipp-application-type", VismaNetApiHelper.ApplicationType);
             message.Headers.Accept.Clear();
             message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            message.Headers.ExpectContinue = false;
+            if (!string.IsNullOrEmpty(VismaNet.ApplicationName))
+            {
+                message.Headers.Add("User-Agent", $"Visma.Net/{VismaNet.Version} (+https://github.com/ON-IT/Visma.Net) ({VismaNet.ApplicationName})");
+            }
             return message;
         }
 
@@ -81,9 +94,14 @@ namespace ONIT.VismaNetApi.Lib
             {
                 message.Headers["Authorization"] = string.Format("Bearer {0}", authorization.Token);
                 message.Headers["ipp-company-id"] = string.Format("{0}", authorization.CompanyId);
+                if (authorization.BranchId > 0)
+                {
+                    message.Headers["branchid"] = authorization.BranchId.ToString();
+                }
             }
 			message.Headers["ipp-application-type"] = VismaNetApiHelper.ApplicationType;
             message.Accept = "application/json";
+            message.ContentType = "application/json";
             return message;
         }
 
@@ -121,7 +139,7 @@ namespace ONIT.VismaNetApi.Lib
             {
                 throw new VismaNetException(await Deserialize<VismaNetExceptionDetails>(stringData));
             }
-            if (String.IsNullOrEmpty(stringData))
+            if (string.IsNullOrEmpty(stringData))
                 return default(T);
             
             return await Deserialize<T>(stringData);
@@ -164,7 +182,6 @@ namespace ONIT.VismaNetApi.Lib
 
                 if (result.Headers.Location != null)
                 {
-
                     return await Get<T>(result.Headers.Location.AbsoluteUri);
                 }
                 if (result.StatusCode == HttpStatusCode.NoContent)
@@ -213,7 +230,7 @@ namespace ONIT.VismaNetApi.Lib
                     throw new VismaNetException(await Deserialize<VismaNetExceptionDetails>(stringData));
                 }
 
-                if (String.IsNullOrEmpty(stringData))
+                if (string.IsNullOrEmpty(stringData))
                     return default(T);
                 return await Deserialize<T>(stringData);
             }

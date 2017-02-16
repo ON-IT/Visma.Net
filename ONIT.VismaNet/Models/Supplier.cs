@@ -10,12 +10,22 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Supplier : DtoProviderBase, IHaveInternalId, IHaveNumber
+    public class Supplier : DtoProviderBase, IProvideIdentificator
     {
-        public Supplier() : base()
+        public Supplier()
         {
             IgnoreProperties.Add(nameof(this.number));
         }
+        /// <summary>
+        /// Create a new supplier without auto numbering
+        /// </summary>
+        /// <param name="supplierNumber"></param>
+        public Supplier(string supplierNumber)
+        {
+            number = supplierNumber;
+        }
+
+
         public int internalId
         {
             get { return Get<int>(); }
@@ -185,12 +195,16 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
-        [JsonProperty]
         public SupplierClass supplierClass
         {
             get { return Get("supplierClassId", defaultValue: new SupplierClass()); }
-            private set { Set(value);}
+            set { Set(value, "supplierClassId");}
 
+        }
+
+        public string GetIdentificator()
+        {
+            return number;
         }
     }
 }

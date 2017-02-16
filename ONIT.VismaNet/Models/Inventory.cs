@@ -5,7 +5,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Inventory : DtoProviderBase, IHaveInternalId, IHaveNumber
+    public class Inventory : DtoProviderBase, IProvideIdentificator
     {
         public int? inventoryId
         {
@@ -63,15 +63,11 @@ namespace ONIT.VismaNetApi.Models
 
         public DateTime? lastModifiedDateTime { get; set; }
 
-        [JsonIgnore]
-        public int internalId
+        
+        public string GetIdentificator()
         {
-            get { return inventoryId ?? 0; }
-            private set { inventoryId = value; }
+            return inventoryNumber;
         }
-        [JsonIgnore]
-
-        public string number => inventoryNumber;
     }
 
 }

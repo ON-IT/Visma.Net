@@ -8,7 +8,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class CashSale : DtoProviderBase, IHaveNumber, IHaveInternalId
+    public class CashSale : DtoProviderBase, IProvideIdentificator
     {
         // WRITEABLE
         //public class CashSaleUpdateDto
@@ -311,20 +311,25 @@ namespace ONIT.VismaNetApi.Models
         }
         #endregion
 
-        public string number
-        {
-            get { return referenceNumber; }
-        }
+        //public string number
+        //{
+        //    get { return referenceNumber; }
+        //}
 
-        public int internalId
+        //public int internalId
+        //{
+        //    get
+        //    {
+        //        int o;
+        //        if (int.TryParse(referenceNumber, out o))
+        //            return o;
+        //        return 0;
+        //    }
+        //}
+
+        public string GetIdentificator()
         {
-            get
-            {
-                int o;
-                if (int.TryParse(referenceNumber, out o))
-                    return o;
-                return 0;
-            }
+            return referenceNumber;
         }
     }
 }

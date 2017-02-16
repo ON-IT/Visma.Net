@@ -8,7 +8,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class InvoiceBase : DtoProviderBase, IHaveNumber, IHaveInternalId
+    public class InvoiceBase : DtoProviderBase, IProvideIdentificator
     {
        
 
@@ -27,10 +27,12 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
-        [JsonIgnore]
+        [Obsolete("Use referenceNumber")]
         public string number => referenceNumber;
+       
 
         [JsonIgnore]
+        [Obsolete("Use referenceNumber")]
         public int internalId
         {
             get
@@ -40,6 +42,12 @@ namespace ONIT.VismaNetApi.Models
             }
         }
 
+        public decimal exchangeRate
+        {
+            get { return Get<decimal>(); }
+            set { Set(value); }
+        }
+        
         public string referenceNumber
         {
             get { return Get<string>(); }
@@ -271,5 +279,10 @@ namespace ONIT.VismaNetApi.Models
             });
         }
         #endregion
+
+        public string GetIdentificator()
+        {
+            return referenceNumber;
+        }
     }
 }

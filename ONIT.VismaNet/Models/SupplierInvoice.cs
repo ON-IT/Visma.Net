@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
@@ -28,12 +29,19 @@ namespace ONIT.VismaNetApi.Models
         }
     }
 
-    public class SupplierInvoice : DtoProviderBase, IHaveNumber, IHaveInternalId
+    public class SupplierInvoice : DtoProviderBase, IProvideIdentificator
     {
         public SupplierInvoice()
         {
-            IgnoreProperties.Add(nameof(number));
             IgnoreProperties.Add(nameof(referenceNumber));
+        }
+        /// <summary>
+        /// Create a new supplier invoice without auto numbering
+        /// </summary>
+        /// <param name="referenceNumber"></param>
+        public SupplierInvoice(string referenceNumber)
+        {
+            this.referenceNumber = referenceNumber;
         }
         public string financialPeriod
         {
@@ -96,6 +104,11 @@ namespace ONIT.VismaNetApi.Models
         }
 
         public decimal vatTaxableTotalInCurrency
+        {
+            get { return Get<decimal>(); }
+            set { Set(value); }
+        }
+        public decimal exchangeRate
         {
             get { return Get<decimal>(); }
             set { Set(value); }
@@ -235,21 +248,7 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public int internalId
-        {
-            get
-            {
-                int o;
-                if (int.TryParse(referenceNumber, out o))
-                    return o;
-                return 0;
-            }
-        }
-
-        public string number
-        {
-            get { return referenceNumber; }
-        }
+      
 
         #region Methods
 
@@ -279,5 +278,10 @@ namespace ONIT.VismaNetApi.Models
         }
 
         #endregion
+
+        public string GetIdentificator()
+        {
+            return referenceNumber;
+        }
     }
 }
