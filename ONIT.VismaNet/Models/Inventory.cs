@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using ONIT.VismaNetApi.Lib;
+using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
     public class Inventory : DtoProviderBase, IProvideIdentificator
     {
+        private List<CrossReference> _crossReferences;
+
         public int? inventoryId
         {
             get { return Get<int>(); }
@@ -58,16 +62,21 @@ namespace ONIT.VismaNetApi.Models
         public decimal? defaultPrice
         {
             get { return Get<decimal>(); }
-            set { Set(value);}
+            set { Set(value); }
         }
 
         public DateTime? lastModifiedDateTime { get; set; }
 
-        
+        [JsonProperty]
+        public List<CrossReference> crossReferences
+        {
+            get { return _crossReferences ?? (_crossReferences = new List<CrossReference>()); }
+            private set { _crossReferences = value; }
+        }
+
         public string GetIdentificator()
         {
             return inventoryNumber;
         }
     }
-
 }

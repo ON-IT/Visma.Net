@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ONIT.VismaNet")]
-[assembly: AssemblyCopyright("Copyright © ON IT AS 2014-2016")]
+[assembly: AssemblyCopyright("Copyright © ON IT AS 2014 - 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -22,4 +22,4 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("e1e1467c-3467-4f0d-abb2-3e0379e4d200")]
 
-[assembly: AssemblyVersion("0.98.*")]
+[assembly: AssemblyVersion("2.0.0")]
