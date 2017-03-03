@@ -27,7 +27,13 @@ namespace ONIT.VismaNetApi.Lib.Data
 
         public async Task<List<DimensionSegment>> Get(Dimension dimension)
         {
-            return await VismaNetApiHelper.FetchDimension(string.Format("{0}", dimension), Authorization);
+            var dimensions = await VismaNetApiHelper.FetchDimension($"{dimension}", Authorization);
+            dimensions.ForEach(x=>x.PrepareForUpdate());
+            return dimensions;
+        }
+        public async Task Update(Dimension dimension, DimensionSegment value)
+        {
+            await VismaNetApiHelper.UpdateDimension($"{dimension}", value, Authorization);
         }
     }
 }

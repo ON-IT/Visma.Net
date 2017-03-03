@@ -93,7 +93,7 @@ namespace ONIT.VismaNetApi.Lib
                 _data[key] = defaultValue;
                 return defaultValue;
             }
-
+            
             if (value is long)
             {
                 return (T) (object) Convert.ToInt32((long) value);
