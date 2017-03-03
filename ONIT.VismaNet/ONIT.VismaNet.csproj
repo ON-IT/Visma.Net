@@ -72,6 +72,7 @@
     <Compile Include="Exceptions\InvalidArgumentsException.cs" />
     <Compile Include="Exceptions\VismaNetException.cs" />
     <Compile Include="Lib\Data\BaseDataClass.cs" />
+    <Compile Include="Lib\Data\BranchData.cs" />
     <Compile Include="Lib\Data\CreditNoteData.cs" />
     <Compile Include="Lib\Data\ContactData.cs" />
     <Compile Include="Lib\Data\EmployeeData.cs" />
@@ -90,6 +91,10 @@
     <Compile Include="Models\CarrierDescription.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\CustomDto\CrossReference.cs" />
+    <Compile Include="Models\Branch.cs" />
+    <Compile Include="Models\CarrierDescription.cs" />
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\CustomDto\IdName.cs" />
     <Compile Include="Models\CustomerSummary.cs" />
     <Compile Include="Models\CustomerVatZone.cs" />
     <Compile Include="Models\Enums\ContactMethods.cs" />
