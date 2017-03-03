@@ -93,6 +93,15 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             return VismaNetApiHelper.GetAllEnumerable<T>(ApiControllerUri, Authorization);
         }
+        /// <summary>
+        /// Executes the action on all elements streamed from the API.
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public virtual async Task ForEach(Action<T> action)
+        {
+            await VismaNetApiHelper.ForEach(ApiControllerUri, Authorization, action);
+        }
 
         /// <summary>
         /// Retrieves all entities modified since given datetime from Visma.Net.

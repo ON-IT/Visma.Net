@@ -106,6 +106,20 @@ namespace ONIT.VismaNetApi
             return await VismaNetApiHelper.GetToken(username, password, clientId, secret);
         }
 
+        public static string GetOAuthUrl(string client_id, string callback, string state = null)
+        {
+            if(string.IsNullOrEmpty(client_id))
+                throw new ArgumentException(nameof(client_id));
+            if(string.IsNullOrEmpty(callback))
+                throw new ArgumentException(nameof(callback));
+            return
+                $"{VismaNetApiHelper.BaseApiUrl}{VismaNetControllers.OAuthAuthorize}?response_type=code&client_id={client_id}&scope=financialstasks&redirect_uri={Uri.EscapeDataString(callback)}&state={(state ?? Guid.NewGuid().ToString())}";
+        }
+
+        public static async Task<string> GetTokenUsingOAuth(string client_id, string client_secret, string code, string redirect_uri)
+        {
+            return await VismaNetApiHelper.GetTokenOAuth(client_id, client_secret, code, redirect_uri);
+        }
         public static async Task<List<CompanyContext>> GetContextsForToken(string token)
         {
             return await VismaNetApiHelper.GetContextsForToken(token);
