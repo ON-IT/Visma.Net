@@ -11,7 +11,7 @@ namespace ONIT.VismaNetApi.Lib.Data
             ApiControllerUri = VismaNetControllers.Shipments;
         }
         
-        public override Task<Shipment> AddAsyncTask(Shipment entity)
+        public override Task<Shipment> Add(Shipment entity)
         {
             throw new NotImplementedException();
         }

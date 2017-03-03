@@ -82,6 +82,7 @@
     <Compile Include="Lib\Data\DimensionData.cs" />
     <Compile Include="Lib\Data\InventoryData.cs" />
     <Compile Include="Lib\Data\JournalTransactionData.cs" />
+    <Compile Include="Lib\Data\SalesOrderData.cs" />
     <Compile Include="Lib\Data\ShipmentData.cs" />
     <Compile Include="Lib\VismaActionResult.cs" />
     <Compile Include="Models\CarrierDescription.cs" />
