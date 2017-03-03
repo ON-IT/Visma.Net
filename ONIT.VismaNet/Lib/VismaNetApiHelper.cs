@@ -363,7 +363,7 @@ namespace ONIT.VismaNetApi.Lib
                 foreach (var entity in webclient.GetEnumerable<T>(GetApiUrlForController(apiControllerUri)))
                     yield return entity;
         }
-        public static async Task ForEach<T>(string apiControllerUri, VismaNetAuthorization authorization, Action<T> action, NameValueCollection parameters = null) where T : DtoProviderBase
+        public static async Task ForEach<T>(string apiControllerUri, VismaNetAuthorization authorization, Func<T, Task> action, NameValueCollection parameters = null) where T : DtoProviderBase
         {
             using (var webclient = GetHttpClient(authorization))
             {

@@ -120,17 +120,17 @@ namespace ONIT.VismaNetApi.Lib
         //            yield return element;
         //}
 
-        internal async Task ForEachInStream<T>(string url, Action<T> action) where T: DtoProviderBase
+        internal async Task ForEachInStream<T>(string url, Func<T, Task> action) where T: DtoProviderBase
         {
             using (var result = await httpClient.SendAsync(PrepareMessage(HttpMethod.Get, url),
                 HttpCompletionOption.ResponseHeadersRead))
             using (var stream = await result.Content.ReadAsStreamAsync())
-            using (var reader = new StreamReader(stream, Encoding.Default, true))
+            using (var reader = new StreamReader(stream))
             {
                 foreach (T element in DeserializeSequenceFromJson<T>(reader))
                 {
                     element.PrepareForUpdate();
-                    action(element);
+                    await action(element);
                 }
             }
         }
