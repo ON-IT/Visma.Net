@@ -85,8 +85,10 @@
     <Compile Include="Lib\Data\SalesOrderData.cs" />
     <Compile Include="Lib\Data\ShipmentData.cs" />
     <Compile Include="Lib\VismaActionResult.cs" />
+    <Compile Include="Models\CustomDto\Baccount.cs" />
     <Compile Include="Models\CarrierDescription.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\CustomDto\CrossReference.cs" />
     <Compile Include="Models\CustomerSummary.cs" />
     <Compile Include="Models\CustomerVatZone.cs" />
     <Compile Include="Models\Enums\ContactMethods.cs" />
