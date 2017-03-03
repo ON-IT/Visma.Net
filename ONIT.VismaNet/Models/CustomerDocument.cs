@@ -7,7 +7,7 @@ namespace ONIT.VismaNetApi.Models
     {
         public Account account { get; set; }
         public Subaccount subaccount { get; set; }
-        public Branch branch { get; set; }
+        public CondensedBranch branch { get; set; }
         public DateTime documentDueDate { get; set; }
         public Customer customer { get; set; }
         public string documentType { get; set; }
@@ -33,7 +33,7 @@ namespace ONIT.VismaNetApi.Models
     }
     
    
-    public class Branch
+    public class CondensedBranch
     {
         public string number { get; set; }
         public string name { get; set; }

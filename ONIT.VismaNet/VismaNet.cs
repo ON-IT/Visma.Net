@@ -31,6 +31,7 @@ namespace ONIT.VismaNetApi
         public readonly SalesOrderData SalesOrder;
         public readonly JournalTransactionData JournalTransactions;
         public readonly PaymentData Payments;
+        public readonly BranchData Branches;
 
         /// <summary>
         ///     Creates a connection using token.
@@ -66,6 +67,7 @@ namespace ONIT.VismaNetApi
             Projects = new ProjectData(Auth);
             SalesOrder = new SalesOrderData(Auth);
             Payments = new PaymentData(Auth);
+            Branches = new BranchData(Auth);
         }
 
         public static string Version { get; private set; }
