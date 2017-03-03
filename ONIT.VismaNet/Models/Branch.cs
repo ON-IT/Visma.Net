@@ -14,10 +14,10 @@ namespace ONIT.VismaNetApi.Models
         public ContactInfo deliveryContact { get { return Get<ContactInfo>(); } set { Set(value); } }
         public string corporateId { get { return Get<string>(); } set { Set(value); } }
         public string vatRegistrationId { get { return Get<string>(); } set { Set(value); } }
-        public Country defaultCountry { get { return Get<Country>(); } set { Set(value); } }
+        public IdName defaultCountry { get { return Get<IdName>(); } set { Set(value); } }
         public DescriptiveDto industryCode { get { return Get<DescriptiveDto>(); } set { Set(value); } }
         public DescriptiveDto currency { get { return Get<DescriptiveDto>(); } set { Set(value); } }
-        public VatCode vatZone { get { return Get<VatCode>("vatZoneId", new VatCode("01")); } set { Set(value, "vatZoneId"); } }
+        public VatCode vatZone { get { return Get<VatCode>("vatZoneId", new VatCode()); } set { Set(value, "vatZoneId"); } }
         public DateTime lastModifiedDateTime { get { return Get<DateTime>(); } private set { Set(value); } }
         public string GetIdentificator()
         {
