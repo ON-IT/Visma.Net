@@ -16,12 +16,12 @@ namespace ONIT.VismaNetApi.Lib.Data
             ApiControllerUri = VismaNetControllers.Branch;
         }
 
-        public override Task<Branch> AddAsyncTask(Branch entity)
+        public override Task<Branch> Add(Branch entity)
         {
             throw new NotImplementedException("Not support by /branch");
         }
 
-        public override Task UpdateAsyncTask(Branch entity)
+        public override Task Update(Branch entity)
         {
             throw new NotImplementedException("Not support by /branch");
         }

@@ -92,8 +92,6 @@
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\CustomDto\CrossReference.cs" />
     <Compile Include="Models\Branch.cs" />
-    <Compile Include="Models\CarrierDescription.cs" />
-    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\CustomDto\IdName.cs" />
     <Compile Include="Models\CustomerSummary.cs" />
     <Compile Include="Models\CustomerVatZone.cs" />
