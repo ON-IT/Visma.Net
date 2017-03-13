@@ -20,7 +20,7 @@ namespace ONIT.VismaNetApi.Lib
     {
         private const int MaxReturnableEntitiesFromVismaNet = 1000;
         internal const string ApplicationType = "Visma.net Financials";
-        private const string BaseApiUrl = "https://integration.visma.net/API/";
+        internal const string BaseApiUrl = "https://integration.visma.net/API/";
 
         private static string GetApiUrlForController(string controller, string append = null,
             NameValueCollection parameters = null)
@@ -49,7 +49,31 @@ namespace ONIT.VismaNetApi.Lib
         {
             return new VismaNetHttpClient(auth);
         }
-
+        internal static async Task<string> GetTokenOAuth(string clientId, string secret, string code, string redirect_uri)
+        {
+            using (var webclient = GetHttpClient())
+            {
+                var url = GetApiUrlForController(VismaNetControllers.Token);
+                try
+                {
+                    var content = new FormUrlEncodedContent(new[]
+                    {
+                        new KeyValuePair<string, string>("code", code),
+                        new KeyValuePair<string, string>("client_id", clientId),
+                        new KeyValuePair<string, string>("client_secret", secret),
+                        new KeyValuePair<string, string>("redirect_uri", redirect_uri),
+                        new KeyValuePair<string, string>("grant_type", "authorization_code"),
+                    });
+                    var data = await webclient.PostMessage<JObject>(url, content);
+                    return data["token"].Value<string>();
+                }
+                catch (AggregateException exception)
+                {
+                    VismaNetExceptionHandler.HandleException(exception);
+                    return null;
+                }
+            }
+        }
         internal static async Task<string> GetToken(string username, string password, string clientId, string secret)
         {
             using (var webclient = GetHttpClient())
@@ -339,7 +363,14 @@ namespace ONIT.VismaNetApi.Lib
                 foreach (var entity in webclient.GetEnumerable<T>(GetApiUrlForController(apiControllerUri)))
                     yield return entity;
         }
-
+        public static async Task ForEach<T>(string apiControllerUri, VismaNetAuthorization authorization, Func<T, Task> action, NameValueCollection parameters = null) where T : DtoProviderBase
+        {
+            using (var webclient = GetHttpClient(authorization))
+            {
+                var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
+                await webclient.ForEachInStream(endpoint, action);
+            }
+        }
         internal static async Task<List<T>> GetAll<T>(string apiControllerUri, VismaNetAuthorization authorization, NameValueCollection parameters = null)
         {
             var listOfEntities = new List<T>();
@@ -369,6 +400,19 @@ namespace ONIT.VismaNetApi.Lib
                 
                 return await webclient.Get<List<T>>(endpoint);
                 
+            }
+        }
+
+        internal static async Task<VismaActionResult> PaymentAction(string paymentNumber, string action,
+            VismaNetAuthorization authorization)
+        {
+            if (string.IsNullOrEmpty(paymentNumber)) throw new ArgumentException(nameof(paymentNumber));
+            using (var client = GetHttpClient(authorization))
+            {
+                var actionUrl = GetApiUrlForController($"{VismaNetControllers.Payment}/{paymentNumber}/action/{action}");
+                var obj = new ReleasePayment();
+                obj.type = new DtoValue("Payment");
+                return await client.Post<VismaActionResult>(actionUrl, obj);
             }
         }
 

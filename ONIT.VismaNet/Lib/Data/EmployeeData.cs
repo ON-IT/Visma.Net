@@ -12,12 +12,12 @@ namespace ONIT.VismaNetApi.Lib.Data
 		    ApiControllerUri = VismaNetControllers.Employee;
 		}
 
-        public override Task<Employee> AddAsyncTask(Employee entity)
+        public override Task<Employee> Add(Employee entity)
         {
             throw new NotImplementedException();
         }
 
-        public override Task UpdateAsyncTask(Employee entity)
+        public override Task Update(Employee entity)
         {
             throw new NotImplementedException();
         }

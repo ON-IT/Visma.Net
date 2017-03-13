@@ -72,6 +72,7 @@
     <Compile Include="Exceptions\InvalidArgumentsException.cs" />
     <Compile Include="Exceptions\VismaNetException.cs" />
     <Compile Include="Lib\Data\BaseDataClass.cs" />
+    <Compile Include="Lib\Data\BranchData.cs" />
     <Compile Include="Lib\Data\CreditNoteData.cs" />
     <Compile Include="Lib\Data\ContactData.cs" />
     <Compile Include="Lib\Data\EmployeeData.cs" />
@@ -82,10 +83,16 @@
     <Compile Include="Lib\Data\DimensionData.cs" />
     <Compile Include="Lib\Data\InventoryData.cs" />
     <Compile Include="Lib\Data\JournalTransactionData.cs" />
+    <Compile Include="Lib\Data\SalesOrderData.cs" />
+    <Compile Include="Lib\Data\PaymentData.cs" />
     <Compile Include="Lib\Data\ShipmentData.cs" />
     <Compile Include="Lib\VismaActionResult.cs" />
+    <Compile Include="Models\CustomDto\Baccount.cs" />
     <Compile Include="Models\CarrierDescription.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\CustomDto\CrossReference.cs" />
+    <Compile Include="Models\Branch.cs" />
+    <Compile Include="Models\CustomDto\IdName.cs" />
     <Compile Include="Models\CustomerSummary.cs" />
     <Compile Include="Models\CustomerVatZone.cs" />
     <Compile Include="Models\Enums\ContactMethods.cs" />
@@ -148,9 +155,12 @@
     <Compile Include="Models\CustomDto\NumberName.cs" />
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\PackageDetailLine.cs" />
+    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\PaymentLine.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectManager.cs" />
     <Compile Include="Models\ProjectTask.cs" />
+    <Compile Include="Models\ReleasePayment.cs" />
     <Compile Include="Models\SalesOrder.cs" />
     <Compile Include="Models\Shipment.cs" />
     <Compile Include="Models\Enums\ShipmentTypes.cs" />

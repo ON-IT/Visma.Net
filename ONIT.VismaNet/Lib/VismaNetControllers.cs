@@ -23,6 +23,9 @@ namespace ONIT.VismaNetApi.Lib
         public const string Contacts = "controller/api/v1/contact";
         public const string Project = "controller/api/v1/project";
         public const string SalesOrder = "controller/api/v1/salesorder";
+        public const string Payment = "controller/api/v1/payment";
+        public const string Branch = "controller/api/v1/branch";
 
+        public const string OAuthAuthorize = "resources/oauth/authorize";
     }
 }

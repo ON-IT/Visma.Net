@@ -101,22 +101,38 @@ namespace ONIT.VismaNetApi.Lib
             }
 			message.Headers["ipp-application-type"] = VismaNetApiHelper.ApplicationType;
             message.Accept = "application/json";
+            message.ContentType = "application/json";
             return message;
         }
 
 
-        internal IEnumerable<T> GetEnumerable2<T>(string url)
-        {
-            HttpResponseMessage result = Task.Run(async () => await httpClient.SendAsync(PrepareMessage(HttpMethod.Get, url), HttpCompletionOption.ResponseHeadersRead)).Result;
-            Stream stream = Task.Run(async () => await result.Content.ReadAsStreamAsync()).Result;
-            if (result.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Could not read from Visma.net");
-            }
+        //internal IEnumerable<T> GetEnumerable2<T>(string url)
+        //{
+        //    HttpResponseMessage result = Task.Run(async () => await httpClient.SendAsync(PrepareMessage(HttpMethod.Get, url), HttpCompletionOption.ResponseHeadersRead)).Result;
+        //    Stream stream = Task.Run(async () => await result.Content.ReadAsStreamAsync()).Result;
+        //    if (result.StatusCode != HttpStatusCode.OK)
+        //    {
+        //        throw new Exception("Could not read from Visma.net");
+        //    }
 
-            using (var reader = new StreamReader(stream, Encoding.Default, true))
+        //    using (var reader = new StreamReader(stream, Encoding.Default, true))
+        //        foreach (T element in DeserializeSequenceFromJson<T>(reader))
+        //            yield return element;
+        //}
+
+        internal async Task ForEachInStream<T>(string url, Func<T, Task> action) where T: DtoProviderBase
+        {
+            using (var result = await httpClient.SendAsync(PrepareMessage(HttpMethod.Get, url),
+                HttpCompletionOption.ResponseHeadersRead))
+            using (var stream = await result.Content.ReadAsStreamAsync())
+            using (var reader = new StreamReader(stream))
+            {
                 foreach (T element in DeserializeSequenceFromJson<T>(reader))
-                    yield return element;
+                {
+                    element.PrepareForUpdate();
+                    await action(element);
+                }
+            }
         }
 
         internal IEnumerable<T> GetEnumerable<T>(string url)

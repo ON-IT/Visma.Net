@@ -14,22 +14,24 @@ namespace ONIT.VismaNetApi
     [ComVisible(true)]
     public class VismaNet : VismaNetDynamicHandler
     {
-        public readonly CashSaleData CashSales;
-        public readonly CustomerDocumentData CustomerDocuments;
-        public readonly CustomerInvoiceData CustomerInvoices;
-        public readonly CustomerData Customers;
-        public readonly DimensionData Dimensions;
-        public readonly SupplierInvoiceData SupplierInvoices;
-        public readonly SupplierData Suppliers;
+        public readonly CashSaleData CashSale;
+        public readonly CustomerDocumentData CustomerDocument;
+        public readonly CustomerInvoiceData CustomerInvoice;
+        public readonly CustomerData Customer;
+        public readonly DimensionData Dimension;
+        public readonly SupplierInvoiceData SupplierInvoice;
+        public readonly SupplierData Supplier;
         public readonly InventoryData Inventory;
-        public readonly FinAccountData Accounts;
+        public readonly FinAccountData Account;
         public readonly EmployeeData Employee;
         public readonly CreditNoteData CreditNote;
-        public readonly ShipmentData Shipments;
-        public readonly ContactData Contacts;
-        public readonly ProjectData Projects;
+        public readonly ShipmentData Shipment;
+        public readonly ContactData Contact;
+        public readonly ProjectData Project;
         public readonly SalesOrderData SalesOrder;
-        public readonly JournalTransactionData JournalTransactions;
+        public readonly JournalTransactionData JournalTransaction;
+        public readonly PaymentData Payment;
+        public readonly BranchData Branch;
 
         /// <summary>
         ///     Creates a connection using token.
@@ -48,22 +50,24 @@ namespace ONIT.VismaNetApi
                 CompanyId = companyId,
                 BranchId = branchId
             };
-            Customers = new CustomerData(Auth);
-            CustomerInvoices = new CustomerInvoiceData(Auth);
-            Suppliers = new SupplierData(Auth);
-            SupplierInvoices = new SupplierInvoiceData(Auth);
-            CashSales = new CashSaleData(Auth);
-            CustomerDocuments = new CustomerDocumentData(Auth);
-            Dimensions = new DimensionData(Auth);
+            Customer = new CustomerData(Auth);
+            CustomerInvoice = new CustomerInvoiceData(Auth);
+            Supplier = new SupplierData(Auth);
+            SupplierInvoice = new SupplierInvoiceData(Auth);
+            CashSale = new CashSaleData(Auth);
+            CustomerDocument = new CustomerDocumentData(Auth);
+            Dimension = new DimensionData(Auth);
             Inventory = new InventoryData(Auth);
-            JournalTransactions = new JournalTransactionData(Auth);
-            Accounts = new FinAccountData(Auth);
+            JournalTransaction = new JournalTransactionData(Auth);
+            Account = new FinAccountData(Auth);
             Employee = new EmployeeData(Auth);
             CreditNote = new CreditNoteData(Auth);
-            Shipments = new ShipmentData(Auth);
-            Contacts = new ContactData(Auth);
-            Projects = new ProjectData(Auth);
+            Shipment = new ShipmentData(Auth);
+            Contact = new ContactData(Auth);
+            Project = new ProjectData(Auth);
             SalesOrder = new SalesOrderData(Auth);
+            Payment = new PaymentData(Auth);
+            Branch = new BranchData(Auth);
         }
 
         public static string Version { get; private set; }
@@ -106,6 +110,20 @@ namespace ONIT.VismaNetApi
             return await VismaNetApiHelper.GetToken(username, password, clientId, secret);
         }
 
+        public static string GetOAuthUrl(string client_id, string callback, string state = null)
+        {
+            if(string.IsNullOrEmpty(client_id))
+                throw new ArgumentException(nameof(client_id));
+            if(string.IsNullOrEmpty(callback))
+                throw new ArgumentException(nameof(callback));
+            return
+                $"{VismaNetApiHelper.BaseApiUrl}{VismaNetControllers.OAuthAuthorize}?response_type=code&client_id={client_id}&scope=financialstasks&redirect_uri={Uri.EscapeDataString(callback)}&state={(state ?? Guid.NewGuid().ToString())}";
+        }
+
+        public static async Task<string> GetTokenUsingOAuth(string client_id, string client_secret, string code, string redirect_uri)
+        {
+            return await VismaNetApiHelper.GetTokenOAuth(client_id, client_secret, code, redirect_uri);
+        }
         public static async Task<List<CompanyContext>> GetContextsForToken(string token)
         {
             return await VismaNetApiHelper.GetContextsForToken(token);

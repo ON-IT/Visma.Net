@@ -256,7 +256,7 @@ namespace ONIT.VismaNetApi.Models
         public bool printDescriptionOnInvoice { get { return Get<bool>(); } set { Set(value); } }
         public bool printNoteOnExternalDocuments { get { return Get<bool>(); } set { Set(value); } }
         public bool printNoteOnInternalDocuments { get { return Get<bool>(); } set { Set(value); } }
-        public Contact soBillingContact { get { return Get<Contact>(defaultValue:new Contact()); } set { Set(value); } }
+        public ContactInfo soBillingContact { get { return Get<ContactInfo>(defaultValue:new ContactInfo()); } set { Set(value); } }
         public Address soBillingAddress { get { return Get<Address>(defaultValue: new Address()); } set { Set(value); } }
         public NumberName branch { get { return Get<NumberName>(); } set { Set(value); } }
         public NumberName branchNumber { get { return Get<NumberName>(); } set { Set(value); } }
@@ -268,8 +268,8 @@ namespace ONIT.VismaNetApi.Models
         public DateTime dueDate { get { return Get<DateTime>(); } set { Set(value); } }
         public DateTime cashDiscountDate { get { return Get<DateTime>(); } set { Set(value); } }
         public string postPeriod { get { return Get<string>(); } set { Set(value); } }
-        public DescriptiveDto salesPerson { get { return Get<DescriptiveDto>(); } set { Set(value); } }
-        public Owner owner { get { return Get<Owner>(); } set { Set(value); } }
+        public DescriptiveDto salesPerson { get { return Get<DescriptiveDto>(defaultValue:new DescriptiveDto()); } set { Set(value); } }
+        public Owner owner { get { return Get<Owner>(defaultValue:new Owner()); } set { Set(value); } }
         public string origOrderType { get { return Get<string>(); } set { Set(value); } }
         public string origOrderNbr { get { return Get<string>(); } set { Set(value); } }
         public ContactInfo soShippingContact { get { return Get<ContactInfo>(defaultValue:new ContactInfo()); } set { Set(value); } }
@@ -283,12 +283,12 @@ namespace ONIT.VismaNetApi.Models
         public DescriptiveDto shipVia { get { return Get<DescriptiveDto>(); } set { Set(value); } }
         public DescriptiveDto fobPoint { get { return Get<DescriptiveDto>(); } set { Set(value); } }
         public int priority { get { return Get<int>(); } set { Set(value); } }
-        public DescriptiveDto shippingTerms { get { return Get<DescriptiveDto>(); } set { Set(value); } }
-        public DescriptiveDto shippingZone { get { return Get<DescriptiveDto>(); } set { Set(value); } }
+        public DescriptiveDto shippingTerms { get { return Get<DescriptiveDto>(defaultValue:new DescriptiveDto()); } set { Set(value); } }
+        public DescriptiveDto shippingZone { get { return Get<DescriptiveDto>(defaultValue: new DescriptiveDto()); } set { Set(value); } }
         public bool residentialDelivery { get { return Get<bool>(); } set { Set(value); } }
         public bool saturdayDelivery { get { return Get<bool>(); } set { Set(value); } }
         public bool insurance { get { return Get<bool>(); } set { Set(value); } }
-        public DescriptiveDto transactionType { get { return Get<DescriptiveDto>(); } set { Set(value); } }
+        public DescriptiveDto transactionType { get { return Get<DescriptiveDto>(defaultValue: new DescriptiveDto()); } set { Set(value); } }
 
         [JsonProperty]
         public List<SalesOrderLine> lines
@@ -306,13 +306,13 @@ namespace ONIT.VismaNetApi.Models
         public string customerOrder { get { return Get<string>(); } set { Set(value); } }
         public string customerRefNo { get { return Get<string>(); } set { Set(value); } }
         public CustomerSummary customer { get { return Get<CustomerSummary>(); } set { Set(value); } }
-        public Location location { get { return Get<Location>(); } set { Set(value); } }
+        public Location location { get { return Get<Location>(defaultValue: new Location()); } set { Set(value); } }
         public string currency { get { return Get<string>(); } set { Set(value); } }
         public string description { get { return Get<string>(); } set { Set(value); } }
-        public double orderTotal { get { return Get<int>(); } set { Set(value); } }
-        public double vatTaxableTotal { get { return Get<int>(); } set { Set(value); } }
-        public double vatExemptTotal { get { return Get<int>(); } set { Set(value); } }
-        public double taxTotal { get { return Get<int>(); } set { Set(value); } }
+        public double orderTotal { get { return Get<double>(); } set { Set(value); } }
+        public double vatTaxableTotal { get { return Get<double>(); } set { Set(value); } }
+        public double vatExemptTotal { get { return Get<double>(); } set { Set(value); } }
+        public double taxTotal { get { return Get<double>(); } set { Set(value); } }
         [JsonProperty]
         public DateTime lastModifiedDateTime { get; private set; }
 
@@ -479,8 +479,8 @@ namespace ONIT.VismaNetApi.Models
         public DateTime requestedOn { get { return Get<DateTime>(); } set { Set(value); } }
         public DateTime shipOn { get { return Get<DateTime>(); } set { Set(value); } }
         public string shipComplete { get { return Get<string>(); } set { Set(value); } }
-        public double undershipThreshold { get { return Get<int>(); } set { Set(value); } }
-        public double overshipThreshold { get { return Get<int>(); } set { Set(value); } }
+        public double undershipThreshold { get { return Get<double>(); } set { Set(value); } }
+        public double overshipThreshold { get { return Get<double>(); } set { Set(value); } }
         public bool completed { get { return Get<bool>(); } set { Set(value); } }
         public bool markForPO { get { return Get<bool>(); } set { Set(value); } }
         public string poSource { get { return Get<string>(); } set { Set(value); } }
@@ -496,17 +496,17 @@ namespace ONIT.VismaNetApi.Models
         public NumberName inventory { get { return Get<NumberName>("inventoryId"); } set { Set(value, "inventoryId"); } }
         public DescriptiveDto warehouse { get { return Get<DescriptiveDto>(); } set { Set(value); } }
         public string uom { get { return Get<string>(); } set { Set(value); } }
-        public double quantity { get { return Get<int>(); } set { Set(value); } }
-        public double qtyOnShipments { get { return Get<int>(); } set { Set(value); } }
-        public double openQty { get { return Get<int>(); } set { Set(value); } }
-        public double unitPrice { get { return Get<int>(); } set { Set(value); } }
+        public double quantity { get { return Get<double>(); } set { Set(value); } }
+        public double qtyOnShipments { get { return Get<double>(); } set { Set(value); } }
+        public double openQty { get { return Get<double>(); } set { Set(value); } }
+        public double unitPrice { get { return Get<double>(); } set { Set(value); } }
         public string discountCode { get { return Get<string>(); } set { Set(value); } }
-        public double discountPercent { get { return Get<int>(); } set { Set(value); } }
-        public double discountAmount { get { return Get<int>(); } set { Set(value); } }
+        public double discountPercent { get { return Get<double>(); } set { Set(value); } }
+        public double discountAmount { get { return Get<double>(); } set { Set(value); } }
         public bool manualDiscount { get { return Get<bool>(); } set { Set(value); } }
-        public double discUnitPrice { get { return Get<int>(); } set { Set(value); } }
-        public double extPrice { get { return Get<int>(); } set { Set(value); } }
-        public double unbilledAmount { get { return Get<int>(); } set { Set(value); } }
+        public double discUnitPrice { get { return Get<double>(); } set { Set(value); } }
+        public double extPrice { get { return Get<double>(); } set { Set(value); } }
+        public double unbilledAmount { get { return Get<double>(); } set { Set(value); } }
         public string lineDescription { get { return Get<string>(); } set { Set(value); } }
     }
 }
