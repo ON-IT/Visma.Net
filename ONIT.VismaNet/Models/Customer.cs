@@ -155,7 +155,7 @@ namespace ONIT.VismaNetApi.Models
 
         public VatCode vatZone
         {
-            get { return Get<VatCode>("vatZoneId", new VatCode("01")); }
+            get { return Get<VatCode>("vatZoneId"); }
             set { Set(value, "vatZoneId"); }
         }
 
