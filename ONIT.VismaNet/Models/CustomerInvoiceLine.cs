@@ -72,7 +72,7 @@ namespace ONIT.VismaNetApi.Models
 
         public VatCode vatCode
         {
-            get { return Get("vatCodeId", new VatCode("01")); }
+            get { return Get<VatCode>("vatCodeId"); }
             set { Set(value, "vatCodeId"); }
         }
 
