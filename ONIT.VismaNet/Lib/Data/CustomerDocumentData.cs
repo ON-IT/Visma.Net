@@ -28,47 +28,29 @@ namespace ONIT.VismaNetApi.Lib
         /// Retrieves all documents
         /// </summary>
         /// <returns></returns>
-	    public async Task<List<CustomerDocument>> AllAsyncTask()
+	    public async Task<List<CustomerDocument>> All()
         {
             return await VismaNetApiHelper.GetAll<CustomerDocument>(VismaNetControllers.CustomerDocument, _authorization).ConfigureAwait(false);
         }
-
+        
         /// <summary>
         /// Retrieves all documents
         /// </summary>
         /// <returns></returns>
-	    public List<CustomerDocument> AllModifiedSince(DateTime date)
-        {
-            return AllModifiedSinceAsyncTask(date).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
-        /// Retrieves all documents
-        /// </summary>
-        /// <returns></returns>
-	    public async Task<List<CustomerDocument>> AllModifiedSinceAsyncTask(DateTime date)
+	    public async Task<List<CustomerDocument>> AllModifiedSince(DateTime date)
         {
             return
                 await
                     VismaNetApiHelper.GetAllModifiedSince<CustomerDocument>(VismaNetControllers.CustomerDocument, date,
                         _authorization).ConfigureAwait(false);
         }
-
-        /// <summary>
-        /// Retrieves all documents
-        /// </summary>
-        /// <returns></returns>
-	    public List<CustomerDocument> All()
-        {
-            return AllAsyncTask().GetAwaiter().GetResult();
-        }
-
+        
         /// <summary>
         /// Retrieves all documents for a customer
         /// </summary>
         /// <param name="customerNumber"></param>
         /// <returns>List of CustomerDocument</returns>
-	    public async Task<List<CustomerDocument>> ForCustomerAsyncTask(string customerNumber)
+	    public async Task<List<CustomerDocument>> ForCustomer(string customerNumber)
 	    {
             if(string.IsNullOrEmpty(customerNumber))
                 throw new ArgumentNullException(nameof(customerNumber));
@@ -80,24 +62,11 @@ namespace ONIT.VismaNetApi.Lib
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
-        public async Task<List<CustomerDocument>> ForCustomerAsyncTask(Customer customer)
+        public async Task<List<CustomerDocument>> ForCustomer(Customer customer)
         {
             if(customer==null)
                 throw new ArgumentNullException(nameof(customer));
-            return await ForCustomerAsyncTask(customer.number);
+            return await ForCustomer(customer.number);
         }
-
-        // The sync stuff
-	    public List<CustomerDocument> ForCustomer(string customerNumber)
-	    {
-	        return Task.Run(async () => await ForCustomerAsyncTask(customerNumber)).Result;
-	    }
-
-        public List<CustomerDocument> ForCustomer(Customer customer)
-        {
-            if(customer == null)
-                throw new ArgumentNullException(nameof(customer));
-            return ForCustomer(customer.number);
-        } 
 	}
 }

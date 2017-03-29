@@ -28,7 +28,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// </summary>
         /// <param name="customerNumber">customerCd</param>
         /// <returns></returns>
-        public async Task<List<CustomerInvoice>> ForCustomerAsyncTask(string customerNumber)
+        public async Task<List<CustomerInvoice>> ForCustomer(string customerNumber)
         {
             return await VismaNetApiHelper.FetchInvoicesForCustomerCd(customerNumber, Authorization);
         }
@@ -38,37 +38,11 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// </summary>
         /// <param name="customer">An instance of Customer</param>
         /// <returns></returns>
-        public async Task<List<CustomerInvoice>> ForCustomerAsyncTask(Customer customer)
+        public async Task<List<CustomerInvoice>> ForCustomer(Customer customer)
         {
-            return await ForCustomerAsyncTask(customer.number);
+            return await ForCustomer(customer.number);
         }
-
-        public List<CustomerInvoice> ForCustomer(string customerNumber)
-        {
-            try
-            {
-                return Task.Run(async () => await ForCustomerAsyncTask(customerNumber)).Result;
-            }
-            catch (AggregateException e)
-            {
-                VismaNetExceptionHandler.HandleException(e);
-                return null;
-            }
-        }
-
-	    public List<CustomerInvoice> ForCustomer(Customer customer)
-        {
-            try
-            {
-                return Task.Run(async () => await ForCustomerAsyncTask(customer)).Result;
-            }
-            catch (AggregateException e)
-            {
-                VismaNetExceptionHandler.HandleException(e);
-                return null;
-            }
-        }
-
+        
 	    public async Task<VismaActionResult> ReleaseInvoice(CustomerInvoice invoice)
 	    {
 	        return await VismaNetApiHelper.InvoiceAction(invoice.GetIdentificator(), "release", Authorization);
