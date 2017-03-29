@@ -224,6 +224,26 @@ namespace ONIT.VismaNetApi.Lib
             return null;
         }
 
+        public static async Task UpdateDimension(string dimension, DimensionSegment value, VismaNetAuthorization authorization)
+        {
+            using (var webclient = GetHttpClient(authorization))
+            {
+                var apiUrl = GetApiUrlForController(VismaNetControllers.Dimensions, $"/{dimension.TrimStart('/')}/{value.GetIdentificator()}");
+                try
+                {
+                    await webclient.Put<DimensionSegment>(apiUrl, value);
+                }
+                catch (AggregateException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                catch (WebException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+            }
+        }
+
         private static int TryParseToInt(string value)
         {
             var val = 0;
@@ -508,5 +528,7 @@ namespace ONIT.VismaNetApi.Lib
                 return null;
             }
         }
+
+       
     }
 }

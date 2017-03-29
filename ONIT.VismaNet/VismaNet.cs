@@ -80,23 +80,11 @@ namespace ONIT.VismaNetApi
             Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
-        public async Task<bool> TestConnectionAsyncTask()
+        public async Task<bool> TestConnection()
         {
             return await VismaNetApiHelper.TestConnection(Auth);
         }
-
-        public bool TestConnection()
-        {
-            try
-            {
-                return TestConnectionAsyncTask().GetAwaiter().GetResult();
-            }
-            catch (AggregateException e)
-            {
-                VismaNetExceptionHandler.HandleException(e);
-                return false;
-            }
-        }
+        
         /// <summary>
         /// Get a new token from Visma.net
         /// </summary>
@@ -105,7 +93,7 @@ namespace ONIT.VismaNetApi
         /// <param name="clientId">System Client Id (Provided to you by Visma)</param>
         /// <param name="secret">System Client Secret (Provided to you by Visma)</param>
         /// <returns></returns>
-        public static async Task<string> GetTokenAsyncTask(string username, string password, string clientId, string secret)
+        public static async Task<string> GetToken(string username, string password, string clientId, string secret)
         {
             return await VismaNetApiHelper.GetToken(username, password, clientId, secret);
         }
