@@ -209,9 +209,10 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
+        
         public DescriptiveDto priceClass {
             get { return Get<DescriptiveDto>("priceClassId"); }
-            set { Set(value); }
+            set { Set(value, "priceClassId"); }
         }
 
         public int CompareTo(Customer other)
