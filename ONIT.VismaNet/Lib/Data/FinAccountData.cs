@@ -22,7 +22,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// Retrieves all products from Visma.Net. WARNING: Slow.
         /// </summary>
         /// <returns>List of all entities</returns>
-        public async Task<List<FinAccount>> AllAsyncTask()
+        public async Task<List<FinAccount>> All()
         {
             return await VismaNetApiHelper.GetAll<FinAccount>(ApiControllerUri, Authorization);
         }

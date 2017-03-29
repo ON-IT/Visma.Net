@@ -21,7 +21,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// </summary>
         /// <param name="customerNumber">Customer Number</param>
         /// <returns></returns>
-        public async Task<List<Contact>> ForCustomerAsyncTask(string customerNumber)
+        public async Task<List<Contact>> ForCustomer(string customerNumber)
         {
             return await VismaNetApiHelper.FetchContactsForCustomer(customerNumber, Authorization);
         }
@@ -31,7 +31,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// </summary>
         /// <param name="supplierNumber">Supplier Number</param>
         /// <returns></returns>
-        public async Task<List<Contact>> ForSupplierAsyncTask(string supplierNumber)
+        public async Task<List<Contact>> ForSupplier(string supplierNumber)
         {
             return await VismaNetApiHelper.FetchContactsForSupplier(supplierNumber, Authorization);
         }
