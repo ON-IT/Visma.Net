@@ -81,7 +81,7 @@ namespace ONIT.VismaNetApi.Models
         public decimal costInCurrency
         {
             get { return Get<decimal>(); }
-            private set { Set(value); }
+            set { Set(value); }
         }
 
         public Account account
@@ -102,11 +102,12 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value, "vatCodeId"); }
         }
 
-        public string branchNumber
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
+        public NumberName branchNumber { get { return Get<NumberName>(); } set { Set(value); } }
+        //public string branchNumber
+        //{
+        //    get { return Get<string>(); }
+        //    set { Set(value); }
+        //}
 
         public int? deferralSchedule
         {

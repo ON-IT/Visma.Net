@@ -114,6 +114,16 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
+        public string note
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
+        public string description
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
         public decimal vatExemptTotal
         {
             get { return Get<decimal>(); }
