@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
@@ -35,14 +34,16 @@ namespace ONIT.VismaNetApi.Models
         {
             IgnoreProperties.Add(nameof(referenceNumber));
         }
+
         /// <summary>
-        /// Create a new supplier invoice without auto numbering
+        ///     Create a new supplier invoice without auto numbering
         /// </summary>
         /// <param name="referenceNumber"></param>
         public SupplierInvoice(string referenceNumber)
         {
             this.referenceNumber = referenceNumber;
         }
+
         public string financialPeriod
         {
             get { return Get<string>(); }
@@ -108,6 +109,7 @@ namespace ONIT.VismaNetApi.Models
             get { return Get<decimal>(); }
             set { Set(value); }
         }
+
         public decimal exchangeRate
         {
             get { return Get<decimal>(); }
@@ -236,6 +238,18 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
+        public string note
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
+
+        public string description
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
+
         public string createdDateTime
         {
             get { return Get<string>(); }
@@ -248,7 +262,10 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-      
+        public string GetIdentificator()
+        {
+            return referenceNumber;
+        }
 
         #region Methods
 
@@ -272,16 +289,9 @@ namespace ONIT.VismaNetApi.Models
         internal override void PrepareForUpdate()
         {
             foreach (var invoiceLine in invoiceLines)
-            {
                 invoiceLine.operation = ApiOperation.Update;
-            }
         }
 
         #endregion
-
-        public string GetIdentificator()
-        {
-            return referenceNumber;
-        }
     }
 }
