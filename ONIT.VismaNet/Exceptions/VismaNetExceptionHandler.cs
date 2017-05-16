@@ -2,34 +2,58 @@
 using System.IO;
 using System.Net;
 using Newtonsoft.Json;
+using ONIT.VismaNetApi.Exceptions;
 using ONIT.VismaNetApi.Lib;
 
 namespace ONIT.VismaNetApi
 {
-    public static class VismaNetExceptionHandler
+    internal static class VismaNetExceptionHandler
     {
-        public static void HandleException(AggregateException exception)
+        internal static void HandleException(AggregateException exception)
         {
             var webException = exception.InnerException as WebException;
             if (webException == null)
                 throw exception.InnerException;
             HandleException(webException);
-
         }
 
-        public static void HandleException(WebException exception)
+        internal static void HandleException(VismaNetException e)
+        {
+            throw e;
+        }
+
+        internal static void HandleException(WebException exception)
         {
             if (exception.Response != null)
             {
-                WebResponse response = exception.Response;
-                Stream stream = response.GetResponseStream();
-                if (stream != null)
+                var response = exception.Response;
+                using (var stream = response.GetResponseStream())
                 {
-                    string data = new StreamReader(stream).ReadToEnd();
-                    var details = JsonConvert.DeserializeObject<VismaNetExceptionDetails>(data);
-                    throw new VismaNetException(details);
+                    if (stream != null)
+                        HandleException(stream, exception);
                 }
             }
+        }
+
+        internal static void HandleException(Stream stream, Exception e = null)
+        {
+            HandleException(new StreamReader(stream).ReadToEnd(), e);
+        }
+
+        internal static void HandleException(string data, Exception e = null)
+        {
+            ThrowException(data, e);
+        }
+
+        private static void ThrowException(string data, Exception ex = null)
+        {
+            var details = JsonConvert.DeserializeObject<VismaNetExceptionDetails>(data);
+
+            if (details.ExceptionMessage.IndexOf("companyincontext", StringComparison.OrdinalIgnoreCase) > -1 ||
+                details.ExceptionMessage.IndexOf("token", StringComparison.OrdinalIgnoreCase) > -1)
+                throw new InvalidTokenException(details, ex);
+
+            throw new VismaNetException(details, ex);
         }
     }
 }

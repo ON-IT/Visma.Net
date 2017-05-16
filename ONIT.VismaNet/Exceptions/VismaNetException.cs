@@ -1,6 +1,7 @@
 ﻿using System;
+using ONIT.VismaNetApi.Lib;
 
-namespace ONIT.VismaNetApi.Lib
+namespace ONIT.VismaNetApi.Exceptions
 {
     public class VismaNetException : Exception
     {

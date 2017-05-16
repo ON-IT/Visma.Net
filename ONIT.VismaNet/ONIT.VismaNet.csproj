@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\InvalidTokenException.cs" />
     <Compile Include="Exceptions\VismaNetExceptionDetails.cs" />
     <Compile Include="Helpers\Evaluator.cs" />
     <Compile Include="Helpers\ExpressionTreeHelpers.cs" />
