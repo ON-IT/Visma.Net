@@ -1,6 +1,6 @@
 namespace ONIT.VismaNetApi.Lib
 {
-    public enum VismaNetConnectionTestStatus
+    public enum TestConnectionResponse
     {
         Unknown,
         Success,
