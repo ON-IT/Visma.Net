@@ -10,9 +10,9 @@
     <licenseUrl>https://github.com/ON-IT/Visma.Net/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/ON-IT/Visma.Net</projectUrl>
     <iconUrl>https://sync-it.no/Images/on-it_logo.png</iconUrl>
-    <description>Get started with Visma.net Integrations the easiest way possible.</description>
-    <copyright>Copyright ON IT AS 2014 - 2016</copyright>
+    <description>Get started with Visma.net Integrations.</description>
+    <copyright>Copyright ON IT AS 2014 - 2017</copyright>
     <tags>Visma.net API, Visma.net Integrations, REST</tags>
-    <releaseNotes>Added priceClass to Customer. Removed all sync methods and renamed all methods containing AsyncTask.</releaseNotes>
+    <releaseNotes>The API will now throw InvalidTokenException instead of VismaNetException if the token is invalid.</releaseNotes>
   </metadata>
 </package>

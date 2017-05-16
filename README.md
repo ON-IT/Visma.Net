@@ -6,7 +6,7 @@ This is an open source Visma.net Integrations API Client for .Net.
 
 Please set VismaNet.ApplicationName before doing any requests. This will allow Visma to identify your application in the requests and let them contact you if anything is off on their side.
 
-## NOTE: Version 2.0 has alot of breaking changes
+## NOTE: Version 2 has alot of breaking changes
  * "AsyncTask" is removed from the method names, so ie. GetAsyncTask is now named Get etc.
  * All sync methods are now completely removed. If you need them to run in sync, try the AsyncContext package from https://github.com/StephenCleary/AsyncEx
  * Many endpoints has been renamed to be equal to the API endpoint name (mostly removed plurals)
