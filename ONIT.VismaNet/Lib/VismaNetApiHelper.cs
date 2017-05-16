@@ -6,8 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Resources;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -21,6 +19,8 @@ namespace ONIT.VismaNetApi.Lib
         private const int MaxReturnableEntitiesFromVismaNet = 1000;
         internal const string ApplicationType = "Visma.net Financials";
         internal const string BaseApiUrl = "https://integration.visma.net/API/";
+
+        public const string VismaNetDateTimeFormat = "yyyy-MM-ddTHH:mm:ss.fff";
 
         private static string GetApiUrlForController(string controller, string append = null,
             NameValueCollection parameters = null)
@@ -49,7 +49,9 @@ namespace ONIT.VismaNetApi.Lib
         {
             return new VismaNetHttpClient(auth);
         }
-        internal static async Task<string> GetTokenOAuth(string clientId, string secret, string code, string redirect_uri)
+
+        internal static async Task<string> GetTokenOAuth(string clientId, string secret, string code,
+            string redirect_uri)
         {
             using (var webclient = GetHttpClient())
             {
@@ -62,7 +64,7 @@ namespace ONIT.VismaNetApi.Lib
                         new KeyValuePair<string, string>("client_id", clientId),
                         new KeyValuePair<string, string>("client_secret", secret),
                         new KeyValuePair<string, string>("redirect_uri", redirect_uri),
-                        new KeyValuePair<string, string>("grant_type", "authorization_code"),
+                        new KeyValuePair<string, string>("grant_type", "authorization_code")
                     });
                     var data = await webclient.PostMessage<JObject>(url, content);
                     return data["token"].Value<string>();
@@ -74,6 +76,7 @@ namespace ONIT.VismaNetApi.Lib
                 }
             }
         }
+
         internal static async Task<string> GetToken(string username, string password, string clientId, string secret)
         {
             using (var webclient = GetHttpClient())
@@ -87,7 +90,7 @@ namespace ONIT.VismaNetApi.Lib
                         new KeyValuePair<string, string>("password", password),
                         new KeyValuePair<string, string>("client_id", clientId),
                         new KeyValuePair<string, string>("client_secret", secret),
-                        new KeyValuePair<string, string>("grant_type", "password"),
+                        new KeyValuePair<string, string>("grant_type", "password")
                     });
                     var data = await webclient.PostMessage<JObject>(url, content);
                     return data["token"].Value<string>();
@@ -224,11 +227,13 @@ namespace ONIT.VismaNetApi.Lib
             return null;
         }
 
-        public static async Task UpdateDimension(string dimension, DimensionSegment value, VismaNetAuthorization authorization)
+        public static async Task UpdateDimension(string dimension, DimensionSegment value,
+            VismaNetAuthorization authorization)
         {
             using (var webclient = GetHttpClient(authorization))
             {
-                var apiUrl = GetApiUrlForController(VismaNetControllers.Dimensions, $"/{dimension.TrimStart('/')}/{value.GetIdentificator()}");
+                var apiUrl = GetApiUrlForController(VismaNetControllers.Dimensions,
+                    $"/{dimension.TrimStart('/')}/{value.GetIdentificator()}");
                 try
                 {
                     await webclient.Put<DimensionSegment>(apiUrl, value);
@@ -248,12 +253,10 @@ namespace ONIT.VismaNetApi.Lib
         {
             var val = 0;
             if (int.TryParse(value, out val))
-            {
                 return val;
-            }
             return 0;
         }
-     
+
         internal static async Task<List<CustomerDocument>> FetchCustomerDocumentsForCustomerCd(string customerNumber,
             VismaNetAuthorization authorization)
         {
@@ -310,9 +313,7 @@ namespace ONIT.VismaNetApi.Lib
                 {
                     var response = await webclient.Get<List<string>>(endpoint);
                     if (response != null && response.Count > 0)
-                    {
                         return true;
-                    }
                     return false;
                 }
                 catch (Exception)
@@ -347,14 +348,7 @@ namespace ONIT.VismaNetApi.Lib
             using (var webclient = GetHttpClient(authorization))
             {
                 var apiUrl = GetApiUrlForController(apiControllerUri, $"/{number}");
-                try
-                {
-                    await webclient.Put<T>(apiUrl, entity.ToDto());
-                }
-                catch (AggregateException e)
-                {
-                    VismaNetExceptionHandler.HandleException(e);
-                }
+                await webclient.Put<T>(apiUrl, entity.ToDto());
             }
         }
 
@@ -364,26 +358,22 @@ namespace ONIT.VismaNetApi.Lib
             using (var webclient = GetHttpClient(authorization))
             {
                 var apiUrl = GetApiUrlForController(apiControllerUri, $"/{entityNumber}");
-                try
-                {
-                    return await webclient.Get<T>(apiUrl);
-                }
-                catch (AggregateException e)
-                {
-                    VismaNetExceptionHandler.HandleException(e);
-                    return default(T);
-                }
+                return await webclient.Get<T>(apiUrl);
             }
         }
 
         internal static IEnumerable<T> GetAllEnumerable<T>(string apiControllerUri, VismaNetAuthorization authorization)
-            
+
         {
             using (var webclient = GetHttpClient(authorization))
+            {
                 foreach (var entity in webclient.GetEnumerable<T>(GetApiUrlForController(apiControllerUri)))
                     yield return entity;
+            }
         }
-        public static async Task ForEach<T>(string apiControllerUri, VismaNetAuthorization authorization, Func<T, Task> action, NameValueCollection parameters = null) where T : DtoProviderBase
+
+        public static async Task ForEach<T>(string apiControllerUri, VismaNetAuthorization authorization,
+            Func<T, Task> action, NameValueCollection parameters = null) where T : DtoProviderBase
         {
             using (var webclient = GetHttpClient(authorization))
             {
@@ -391,7 +381,9 @@ namespace ONIT.VismaNetApi.Lib
                 await webclient.ForEachInStream(endpoint, action);
             }
         }
-        internal static async Task<List<T>> GetAll<T>(string apiControllerUri, VismaNetAuthorization authorization, NameValueCollection parameters = null)
+
+        internal static async Task<List<T>> GetAll<T>(string apiControllerUri, VismaNetAuthorization authorization,
+            NameValueCollection parameters = null)
         {
             var listOfEntities = new List<T>();
             using (var webclient = GetHttpClient(authorization))
@@ -403,23 +395,19 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        public const string VismaNetDateTimeFormat = "yyyy-MM-ddTHH:mm:ss.fff";
-
-       internal static async Task<List<T>> GetAllModifiedSince<T>(string apiControllerUri, DateTime dateTime,
+        internal static async Task<List<T>> GetAllModifiedSince<T>(string apiControllerUri, DateTime dateTime,
             VismaNetAuthorization authorization)
         {
             using (var webclient = GetHttpClient(authorization))
             {
-                
-                    var endpoint = GetApiUrlForController(apiControllerUri,
-                        parameters: new NameValueCollection
-                        {
-                            {"LastModifiedDateTime", dateTime.ToString(VismaNetDateTimeFormat)},
-                            {"LastModifiedDateTimeCondition", ">"}
-                        });
-                
+                var endpoint = GetApiUrlForController(apiControllerUri,
+                    parameters: new NameValueCollection
+                    {
+                        {"LastModifiedDateTime", dateTime.ToString(VismaNetDateTimeFormat)},
+                        {"LastModifiedDateTimeCondition", ">"}
+                    });
+
                 return await webclient.Get<List<T>>(endpoint);
-                
             }
         }
 
@@ -427,6 +415,7 @@ namespace ONIT.VismaNetApi.Lib
             VismaNetAuthorization authorization)
         {
             if (string.IsNullOrEmpty(paymentNumber)) throw new ArgumentException(nameof(paymentNumber));
+
             using (var client = GetHttpClient(authorization))
             {
                 var actionUrl = GetApiUrlForController($"{VismaNetControllers.Payment}/{paymentNumber}/action/{action}");
@@ -440,6 +429,7 @@ namespace ONIT.VismaNetApi.Lib
             VismaNetAuthorization authorization)
         {
             if (string.IsNullOrEmpty(invoiceNumber)) throw new ArgumentException(nameof(invoiceNumber));
+
             using (var client = GetHttpClient(authorization))
             {
                 var actionUrl =
@@ -456,13 +446,14 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal static async Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number, Stream stream,
+        internal static async Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
+            Stream stream,
             string fileName)
         {
             var url = GetApiUrlForController(VismaNetControllers.CustomerInvoice, $"/{number}/attachment");
             return await AddAttachmentToController<string>(auth, url, stream, fileName);
         }
-        
+
         private static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, Stream stream,
             string fileName) where T : class
         {
@@ -479,13 +470,8 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        private class DimensionContainer
-        {
-            [JsonProperty]
-            internal List<DimensionSegment> segments { get; set; }
-        }
-
-        public static async Task<List<Contact>> FetchContactsForSupplier(string supplierNumber, VismaNetAuthorization authorization)
+        public static async Task<List<Contact>> FetchContactsForSupplier(string supplierNumber,
+            VismaNetAuthorization authorization)
         {
             using (var webclient = GetHttpClient(authorization))
             {
@@ -507,7 +493,8 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        public static async Task<List<Contact>> FetchContactsForCustomer(string customerNumber, VismaNetAuthorization authorization)
+        public static async Task<List<Contact>> FetchContactsForCustomer(string customerNumber,
+            VismaNetAuthorization authorization)
         {
             using (var webclient = GetHttpClient(authorization))
             {
@@ -529,6 +516,10 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-       
+        private class DimensionContainer
+        {
+            [JsonProperty]
+            internal List<DimensionSegment> segments { get; set; }
+        }
     }
 }

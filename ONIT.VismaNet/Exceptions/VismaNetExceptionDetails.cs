@@ -11,7 +11,7 @@ namespace ONIT.VismaNetApi.Lib
 
         public string DetailsMessage
         {
-            get { return message ?? string.Format("{0} {1}", ExceptionMessage, ExceptionDetails); }
+            get { return message ?? string.Format("{0} {1}", ExceptionMessage, ExceptionDetails).Trim(); }
         }
     }
 }
