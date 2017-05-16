@@ -9,12 +9,13 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ONIT.VismaNetApi.Exceptions;
 using ONIT.VismaNetApi.Models;
 using ONIT.VismaNetApi.Models.Dimensions;
 
 namespace ONIT.VismaNetApi.Lib
 {
-    internal static class VismaNetApiHelper
+    public static class VismaNetApiHelper
     {
         private const int MaxReturnableEntitiesFromVismaNet = 1000;
         internal const string ApplicationType = "Visma.net Financials";
@@ -303,7 +304,9 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal static async Task<bool> TestConnection(VismaNetAuthorization auth)
+       
+
+        internal static async Task<VismaNetConnectionTestStatus> TestConnection(VismaNetAuthorization auth)
         {
             using (var webclient = GetHttpClient(auth))
             {
@@ -313,12 +316,16 @@ namespace ONIT.VismaNetApi.Lib
                 {
                     var response = await webclient.Get<List<string>>(endpoint);
                     if (response != null && response.Count > 0)
-                        return true;
-                    return false;
+                        return VismaNetConnectionTestStatus.Success;
+                    return VismaNetConnectionTestStatus.Unknown;
+                }
+                catch (InvalidTokenException)
+                {
+                    return VismaNetConnectionTestStatus.InvalidToken;
                 }
                 catch (Exception)
                 {
-                    return false;
+                    return VismaNetConnectionTestStatus.Unknown;
                 }
             }
         }
