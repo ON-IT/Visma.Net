@@ -10,7 +10,7 @@ namespace ONIT.VismaNetApi.Models
     {
 		public Customer ()
 		{
-			IgnoreProperties.Add (nameof(this.number));
+			//IgnoreProperties.Add (nameof(this.number));
 		}
 
         /// <summary>
