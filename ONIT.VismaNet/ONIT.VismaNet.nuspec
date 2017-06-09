@@ -13,6 +13,6 @@
     <description>Get started with Visma.net Integrations.</description>
     <copyright>Copyright ON IT AS 2014 - 2017</copyright>
     <tags>Visma.net API, Visma.net Integrations, REST</tags>
-    <releaseNotes>The API will now throw InvalidTokenException instead of VismaNetException if the token is invalid.</releaseNotes>
+    <releaseNotes>Fixed issue with new exception handling.</releaseNotes>
   </metadata>
 </package>
