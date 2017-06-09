@@ -49,10 +49,12 @@ namespace ONIT.VismaNetApi
         {
             var details = JsonConvert.DeserializeObject<VismaNetExceptionDetails>(data);
 
-            if (details.ExceptionMessage.IndexOf("companyincontext", StringComparison.OrdinalIgnoreCase) > -1 ||
-                details.ExceptionMessage.IndexOf("token", StringComparison.OrdinalIgnoreCase) > -1)
-                throw new InvalidTokenException(details, ex);
-
+            if (details.ExceptionMessage != null)
+			{
+                if (details.ExceptionMessage.IndexOf("companyincontext", StringComparison.OrdinalIgnoreCase) > -1 ||
+                    details.ExceptionMessage.IndexOf("token", StringComparison.OrdinalIgnoreCase) > -1)
+                    throw new InvalidTokenException(details, ex);
+            }
             throw new VismaNetException(details, ex);
         }
     }
