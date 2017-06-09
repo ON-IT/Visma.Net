@@ -80,7 +80,7 @@ namespace ONIT.VismaNetApi
             Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
-        public async Task<bool> TestConnection()
+        public async Task<TestConnectionResponse> TestConnection()
         {
             return await VismaNetApiHelper.TestConnection(Auth);
         }

@@ -9,12 +9,13 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ONIT.VismaNetApi.Exceptions;
 using ONIT.VismaNetApi.Models;
 using ONIT.VismaNetApi.Models.Dimensions;
 
 namespace ONIT.VismaNetApi.Lib
 {
-    internal static class VismaNetApiHelper
+    public static class VismaNetApiHelper
     {
         private const int MaxReturnableEntitiesFromVismaNet = 1000;
         internal const string ApplicationType = "Visma.net Financials";
@@ -56,24 +57,16 @@ namespace ONIT.VismaNetApi.Lib
             using (var webclient = GetHttpClient())
             {
                 var url = GetApiUrlForController(VismaNetControllers.Token);
-                try
+                var content = new FormUrlEncodedContent(new[]
                 {
-                    var content = new FormUrlEncodedContent(new[]
-                    {
-                        new KeyValuePair<string, string>("code", code),
-                        new KeyValuePair<string, string>("client_id", clientId),
-                        new KeyValuePair<string, string>("client_secret", secret),
-                        new KeyValuePair<string, string>("redirect_uri", redirect_uri),
-                        new KeyValuePair<string, string>("grant_type", "authorization_code")
-                    });
-                    var data = await webclient.PostMessage<JObject>(url, content);
-                    return data["token"].Value<string>();
-                }
-                catch (AggregateException exception)
-                {
-                    VismaNetExceptionHandler.HandleException(exception);
-                    return null;
-                }
+                    new KeyValuePair<string, string>("code", code),
+                    new KeyValuePair<string, string>("client_id", clientId),
+                    new KeyValuePair<string, string>("client_secret", secret),
+                    new KeyValuePair<string, string>("redirect_uri", redirect_uri),
+                    new KeyValuePair<string, string>("grant_type", "authorization_code")
+                });
+                var data = await webclient.PostMessage<JObject>(url, content);
+                return data["token"].Value<string>();
             }
         }
 
@@ -82,24 +75,16 @@ namespace ONIT.VismaNetApi.Lib
             using (var webclient = GetHttpClient())
             {
                 var url = GetApiUrlForController(VismaNetControllers.Token);
-                try
+                var content = new FormUrlEncodedContent(new[]
                 {
-                    var content = new FormUrlEncodedContent(new[]
-                    {
-                        new KeyValuePair<string, string>("username", username),
-                        new KeyValuePair<string, string>("password", password),
-                        new KeyValuePair<string, string>("client_id", clientId),
-                        new KeyValuePair<string, string>("client_secret", secret),
-                        new KeyValuePair<string, string>("grant_type", "password")
-                    });
-                    var data = await webclient.PostMessage<JObject>(url, content);
-                    return data["token"].Value<string>();
-                }
-                catch (AggregateException exception)
-                {
-                    VismaNetExceptionHandler.HandleException(exception);
-                    return null;
-                }
+                    new KeyValuePair<string, string>("username", username),
+                    new KeyValuePair<string, string>("password", password),
+                    new KeyValuePair<string, string>("client_id", clientId),
+                    new KeyValuePair<string, string>("client_secret", secret),
+                    new KeyValuePair<string, string>("grant_type", "password")
+                });
+                var data = await webclient.PostMessage<JObject>(url, content);
+                return data["token"].Value<string>();
             }
         }
 
@@ -108,15 +93,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             using (var webClient = GetHttpClient(auth))
             {
-                try
-                {
-                    return await webClient.Get<List<Customer>>(url);
-                }
-                catch (AggregateException e)
-                {
-                    VismaNetExceptionHandler.HandleException(e);
-                    return null;
-                }
+                return await webClient.Get<List<Customer>>(url);
             }
         }
 
@@ -186,20 +163,8 @@ namespace ONIT.VismaNetApi.Lib
             using (var webclient = GetHttpClient(authorization))
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.Customers);
-                try
-                {
-                    var fullUrl = $"{apiUrl}/{customerCd}/invoice";
-                    return await webclient.Get<List<CustomerInvoice>>(fullUrl);
-                }
-                catch (AggregateException e)
-                {
-                    VismaNetExceptionHandler.HandleException(e);
-                }
-                catch (WebException e)
-                {
-                    VismaNetExceptionHandler.HandleException(e);
-                }
-                return null;
+                var fullUrl = $"{apiUrl}/{customerCd}/invoice";
+                return await webclient.Get<List<CustomerInvoice>>(fullUrl);
             }
         }
 
@@ -210,21 +175,9 @@ namespace ONIT.VismaNetApi.Lib
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.Dimensions,
                     string.Format("/{0}", dimension.TrimStart('/')));
-                try
-                {
-                    var container = await webclient.Get<DimensionContainer>(apiUrl);
-                    return container.segments;
-                }
-                catch (AggregateException e)
-                {
-                    VismaNetExceptionHandler.HandleException(e);
-                }
-                catch (WebException e)
-                {
-                    VismaNetExceptionHandler.HandleException(e);
-                }
+                var container = await webclient.Get<DimensionContainer>(apiUrl);
+                return container.segments;
             }
-            return null;
         }
 
         public static async Task UpdateDimension(string dimension, DimensionSegment value,
@@ -234,18 +187,7 @@ namespace ONIT.VismaNetApi.Lib
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.Dimensions,
                     $"/{dimension.TrimStart('/')}/{value.GetIdentificator()}");
-                try
-                {
-                    await webclient.Put<DimensionSegment>(apiUrl, value);
-                }
-                catch (AggregateException e)
-                {
-                    VismaNetExceptionHandler.HandleException(e);
-                }
-                catch (WebException e)
-                {
-                    VismaNetExceptionHandler.HandleException(e);
-                }
+                await webclient.Put<DimensionSegment>(apiUrl, value);
             }
         }
 
@@ -303,7 +245,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal static async Task<bool> TestConnection(VismaNetAuthorization auth)
+        internal static async Task<TestConnectionResponse> TestConnection(VismaNetAuthorization auth)
         {
             using (var webclient = GetHttpClient(auth))
             {
@@ -313,12 +255,16 @@ namespace ONIT.VismaNetApi.Lib
                 {
                     var response = await webclient.Get<List<string>>(endpoint);
                     if (response != null && response.Count > 0)
-                        return true;
-                    return false;
+                        return TestConnectionResponse.Success;
+                    return TestConnectionResponse.Unknown;
+                }
+                catch (InvalidTokenException)
+                {
+                    return TestConnectionResponse.InvalidToken;
                 }
                 catch (Exception)
                 {
-                    return false;
+                    return TestConnectionResponse.Unknown;
                 }
             }
         }

@@ -5,7 +5,7 @@
   branches:
     only:
     - dev
-  configuration: Debug
+  configuration: Release
   assembly_info:
     patch: true
     file: '**\AssemblyInfo.*'
