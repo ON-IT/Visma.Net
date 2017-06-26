@@ -152,15 +152,7 @@ namespace ONIT.VismaNetApi.Lib
             if (string.IsNullOrEmpty(stringData))
                 return default(T);
 
-			if (typeof(T) == typeof(string))
-			{
-				return (T)Convert.ChangeType(stringData, typeof(T)); // Retrun raw string if T= string
-			}
-			else
-			{
-				return await Deserialize<T>(stringData);
-			}
-			
+			return await Deserialize<T>(stringData);
         }
 
 		internal async Task<Stream> GetStream(string url)
