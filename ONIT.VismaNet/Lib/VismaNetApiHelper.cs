@@ -392,6 +392,15 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+		internal static async Task<Stream> GetAttachment(VismaNetAuthorization auth, string attachmentid)
+		{
+			using (var client = GetHttpClient(auth))
+			{
+				var url = GetApiUrlForController(VismaNetControllers.Attachment, $"/{attachmentid}");
+				return await client.GetStream(url);
+			}
+		}
+
         internal static async Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
             Stream stream,
             string fileName)

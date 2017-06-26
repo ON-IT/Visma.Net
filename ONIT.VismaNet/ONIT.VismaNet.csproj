@@ -89,6 +89,7 @@
     <Compile Include="Lib\Data\ShipmentData.cs" />
     <Compile Include="Lib\VismaActionResult.cs" />
     <Compile Include="Lib\TestConnectionResponse.cs" />
+    <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\CustomDto\Baccount.cs" />
     <Compile Include="Models\CarrierDescription.cs" />
     <Compile Include="Models\Contact.cs" />

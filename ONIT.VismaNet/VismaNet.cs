@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -116,5 +117,11 @@ namespace ONIT.VismaNetApi
         {
             return await VismaNetApiHelper.GetContextsForToken(token);
         }
+
+		public async Task<Stream> GetAttchment(string attachmentId)
+		{
+			return await VismaNetApiHelper.GetAttachment(Auth, attachmentId);
+
+		}
     }
 }
