@@ -34,9 +34,9 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public int inventoryId
+        public string inventoryNumber
         {
-            get { return Get<int>(); }
+            get { return Get<string>(); }
             set { Set(value); }
         }
 
