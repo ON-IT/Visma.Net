@@ -87,9 +87,12 @@
     <Compile Include="Lib\Data\SalesOrderData.cs" />
     <Compile Include="Lib\Data\PaymentData.cs" />
     <Compile Include="Lib\Data\ShipmentData.cs" />
+    <Compile Include="Lib\Data\WarehouseData.cs" />
     <Compile Include="Lib\VismaActionResult.cs" />
     <Compile Include="Lib\TestConnectionResponse.cs" />
+    <Compile Include="Models\Allocations.cs" />
     <Compile Include="Models\Attachment.cs" />
+    <Compile Include="Models\CustomDto\Attributes.cs" />
     <Compile Include="Models\CustomDto\Baccount.cs" />
     <Compile Include="Models\CarrierDescription.cs" />
     <Compile Include="Models\Contact.cs" />
@@ -206,6 +209,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Warehouse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Xamarin|AnyCPU' ">

@@ -2,6 +2,7 @@
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
+using System.Collections.Generic;
 
 namespace ONIT.VismaNetApi.Models
 {
@@ -46,9 +47,9 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public Warehouse warehouse
+        public ONIT.VismaNetApi.Models.CustomDto.Warehouse warehouse
         {
-            get { return Get<Warehouse>(); }
+            get { return Get<ONIT.VismaNetApi.Models.CustomDto.Warehouse>(); }
             set { Set(value); }
         }
 
@@ -103,6 +104,12 @@ namespace ONIT.VismaNetApi.Models
         public string description
         {
             get { return Get<string>(); }
+            set { Set(value); }
+        }
+
+        public List<Allocations> allocations
+        {
+            get { return Get(defaultValue: new List<Allocations>()); }
             set { Set(value); }
         }
     }
