@@ -9,7 +9,7 @@ using ONIT.VismaNetApi.Models.Enums;
 namespace ONIT.VismaNetApi.Models
 {
 
-    /*
+	/*
      {
   "project": {
     "value": 0
@@ -241,10 +241,17 @@ namespace ONIT.VismaNetApi.Models
   "description": {
     "value": "string"
   },
-  "recalculateShipment": true
+  "recalculateShipment": true,
+  "attachments": [
+        {
+            "name": "arbetsbeskrivning.txt",
+            "id": "fff491cd-244a-4957-899c-d15f13483a62",
+            "revision": 1
+        }
+    ]
 }
      * */
-    public class SalesOrder : DtoProviderBase, IProvideIdentificator
+	public class SalesOrder : DtoProviderBase, IProvideIdentificator
     {
         public SalesOrder()
         {
@@ -315,9 +322,14 @@ namespace ONIT.VismaNetApi.Models
         public double taxTotal { get { return Get<double>(); } set { Set(value); } }
         [JsonProperty]
         public DateTime lastModifiedDateTime { get; private set; }
+		[JsonProperty]
+		public List<Attachment> attachments
+		{
+			get { return Get(defaultValue: new List<Attachment>()); }
+		}
 
-        #region Methods
-        public void Add(SalesOrderLine line)
+		#region Methods
+		public void Add(SalesOrderLine line)
         {
             line.lineNbr = 1;
             if (lines.Count > 0)

@@ -152,10 +152,23 @@ namespace ONIT.VismaNetApi.Lib
             if (string.IsNullOrEmpty(stringData))
                 return default(T);
 
-            return await Deserialize<T>(stringData);
+			return await Deserialize<T>(stringData);
         }
 
-        internal async Task<T> PostMessage<T>(string url, HttpContent httpContent) where T : class
+		internal async Task<Stream> GetStream(string url)
+		{
+			url = url.Replace("http://", "https://"); // force https
+			var result = await httpClient.SendAsync(PrepareMessage(HttpMethod.Get, url));
+			var streamData = await result.Content.ReadAsStreamAsync();
+			if (result.StatusCode != HttpStatusCode.OK)
+			{
+				throw new Exception("Error downloading stream");
+			}
+			return streamData;
+
+		}
+
+		internal async Task<T> PostMessage<T>(string url, HttpContent httpContent) where T : class
         {
             var message = PrepareMessage(HttpMethod.Post, url);
             using (message.Content = httpContent)

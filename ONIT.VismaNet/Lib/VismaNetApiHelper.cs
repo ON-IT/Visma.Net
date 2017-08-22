@@ -384,6 +384,32 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        internal static async Task<VismaActionResult> ShipmentAction(string shipmentNumber, string action,
+            VismaNetAuthorization authorization)
+        {
+            if (string.IsNullOrEmpty(shipmentNumber)) throw new ArgumentException(nameof(shipmentNumber));
+
+            using (var client = GetHttpClient(authorization))
+            {
+                var actionUrl =
+                    GetApiUrlForController($"{VismaNetControllers.Shipments}/{shipmentNumber}/action/{action}");
+                return await client.Post<VismaActionResult>(actionUrl, new object());
+            }
+        }
+
+        internal static async Task<Stream> ShipmentPrint(string shipmentNumber, string printName,
+            VismaNetAuthorization authorization)
+        {
+            if (string.IsNullOrEmpty(shipmentNumber)) throw new ArgumentException(nameof(shipmentNumber));
+
+            using (var client = GetHttpClient(authorization))
+            {
+                var printUrl =
+                    GetApiUrlForController($"{VismaNetControllers.Shipments}/{shipmentNumber}/{printName}");
+                return await client.GetStream(printUrl);
+            }
+        }
+
         internal static async Task<List<CompanyContext>> GetContextsForToken(string token)
         {
             using (var client = GetHttpClient(new VismaNetAuthorization {CompanyId = 0, Token = token}))
@@ -391,6 +417,15 @@ namespace ONIT.VismaNetApi.Lib
                 return await client.Get<List<CompanyContext>>(GetApiUrlForController(VismaNetControllers.UserContexts));
             }
         }
+
+		internal static async Task<Stream> GetAttachment(VismaNetAuthorization auth, string attachmentid)
+		{
+			using (var client = GetHttpClient(auth))
+			{
+				var url = GetApiUrlForController(VismaNetControllers.Attachment, $"/{attachmentid}");
+				return await client.GetStream(url);
+			}
+		}
 
         internal static async Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
             Stream stream,

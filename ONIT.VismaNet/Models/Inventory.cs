@@ -10,6 +10,7 @@ namespace ONIT.VismaNetApi.Models
     public class Inventory : DtoProviderBase, IProvideIdentificator
     {
         private List<CrossReference> _crossReferences;
+        private List<Attributes> _attributes;
 
         public int? inventoryId
         {
@@ -66,6 +67,13 @@ namespace ONIT.VismaNetApi.Models
         }
 
         public DateTime? lastModifiedDateTime { get; set; }
+
+        [JsonProperty]
+        public List<Attributes> attributes
+        {
+            get { return _attributes ?? (_attributes = new List<Attributes>()); }
+            private set { _attributes = value; }
+        }
 
         [JsonProperty]
         public List<CrossReference> crossReferences
