@@ -11,6 +11,7 @@ namespace ONIT.VismaNetApi.Models
     {
         private List<CrossReference> _crossReferences;
         private List<Attributes> _attributes;
+        private List<Attachment> _attachments;
 
         public int? inventoryId
         {
@@ -80,6 +81,12 @@ namespace ONIT.VismaNetApi.Models
         {
             get { return _crossReferences ?? (_crossReferences = new List<CrossReference>()); }
             private set { _crossReferences = value; }
+        }
+        [JsonProperty]
+        public List<Attachment> attachments
+        {
+            get { return _attachments ?? (_attachments = new List<Attachment>()); }
+            private set { _attachments = value; }
         }
 
         public string GetIdentificator()

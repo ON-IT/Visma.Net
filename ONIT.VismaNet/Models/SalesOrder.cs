@@ -296,6 +296,7 @@ namespace ONIT.VismaNetApi.Models
         public bool saturdayDelivery { get { return Get<bool>(); } set { Set(value); } }
         public bool insurance { get { return Get<bool>(); } set { Set(value); } }
         public DescriptiveDto transactionType { get { return Get<DescriptiveDto>(defaultValue: new DescriptiveDto()); } set { Set(value); } }
+        public string note { get { return Get<string>(); } set { Set(value); } }
 
         [JsonProperty]
         public List<SalesOrderLine> lines

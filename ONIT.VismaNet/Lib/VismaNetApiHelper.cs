@@ -288,13 +288,21 @@ namespace ONIT.VismaNetApi.Lib
         }
 
         internal static async Task Update<T>(T entity, string number, string apiControllerUri,
-            VismaNetAuthorization authorization)
+            VismaNetAuthorization authorization, string numberToGet = null)
             where T : DtoProviderBase
         {
             using (var webclient = GetHttpClient(authorization))
             {
                 var apiUrl = GetApiUrlForController(apiControllerUri, $"/{number}");
-                await webclient.Put<T>(apiUrl, entity.ToDto());
+                if (numberToGet == null)
+                {
+                    await webclient.Put<T>(apiUrl, entity.ToDto());
+                }
+                else
+                {
+                    var apiUrlToGet = GetApiUrlForController(apiControllerUri, $"/{numberToGet}");
+                    await webclient.Put<T>(apiUrl, entity.ToDto(),apiUrlToGet);
+                }
             }
         }
 

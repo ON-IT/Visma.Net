@@ -224,7 +224,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal async Task<T> Put<T>(string url, object data)
+        internal async Task<T> Put<T>(string url, object data, string urlToGet=null)
         {
             var message = PrepareMessage(HttpMethod.Put, url);
             using (var content = new StringContent(await Serialize(data), Encoding.UTF8, "application/json"))
@@ -234,7 +234,10 @@ namespace ONIT.VismaNetApi.Lib
                 if (result.Headers.Location != null)
                     return await Get<T>(result.Headers.Location.AbsoluteUri);
                 if (result.StatusCode == HttpStatusCode.NoContent)
-                    return await Get<T>(url);
+                    if (urlToGet != null) 
+                        return await Get<T>(urlToGet);
+                    else
+                        return await Get<T>(url);
                 var stringData = await result.Content.ReadAsStringAsync();
                 if (result.StatusCode != HttpStatusCode.OK)
                 {
