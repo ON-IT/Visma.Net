@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Linq;
+using System.Text;
 using ONIT.VismaNetApi.Annotations;
 using ONIT.VismaNetApi.Lib;
 
@@ -18,8 +20,25 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 
         public string addressLine1
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get
+            {
+                return Get<string>();
+            }
+            set
+            {
+                if (value?.Contains(Environment.NewLine) == true)
+                {
+                    var split = value.Split(new [] {Environment.NewLine}, StringSplitOptions.None);
+                    Set(split[0]);
+                    addressLine2 = split[1];
+                    if(split.Length>2)
+                        addressLine3 = string.Join(" ", split.Skip(2));
+                }
+                else
+                {
+                    Set(value);
+                }
+            }
         }
 
         public string addressLine2
