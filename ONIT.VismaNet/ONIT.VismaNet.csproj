@@ -20,7 +20,4 @@
       <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
       <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     </ItemGroup>
-    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-      <Exec Command="nuget restore ONIT.VismaNet.sln" />
-    </Target>
 </Project>
