@@ -9,12 +9,12 @@
     only:
     - dev
   configuration: Release
-  assembly_info:
+  dotnet_csproj:
     patch: true
-    file: '**\AssemblyInfo.*'
-    assembly_version: '{version}'
-    assembly_file_version: '{version}'
-    assembly_informational_version: '{version}-pre'
+    file: '**\*.csproj'
+    version: '{version}'
+    package_version: '{version}'
+  
   build:
     publish_nuget: true
     verbosity: minimal
