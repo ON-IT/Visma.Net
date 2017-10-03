@@ -153,6 +153,12 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
+        public string note
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
+
         public VatCode vatZone
         {
             get { return Get<VatCode>("vatZoneId"); }
