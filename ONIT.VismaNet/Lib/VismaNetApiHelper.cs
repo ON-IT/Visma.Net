@@ -275,7 +275,11 @@ namespace ONIT.VismaNetApi.Lib
             using (var webclient = GetHttpClient(authorization))
             {
                 var apiUrl = GetApiUrlForController(apiControllerUri);
-                var apiGetUrl = GetApiUrlForController(apiUriToGetFrom);
+                string apiGetUrl = null;
+                if (apiUriToGetFrom != null)
+                {
+                    apiGetUrl = GetApiUrlForController(apiUriToGetFrom);
+                }
                 try
                 {
                     return await webclient.Post<T>(apiUrl, entity.ToDto(), apiGetUrl);

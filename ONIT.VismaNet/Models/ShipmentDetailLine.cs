@@ -10,11 +10,11 @@ namespace ONIT.VismaNetApi.Models
     {
         public ShipmentDetailLine()
         {
-            DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Update));
+            DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
         }
         public ApiOperation operation
         {
-            get { return Get(defaultValue: new NotDto<ApiOperation>(ApiOperation.Update)).Value; }
+            get { return Get(defaultValue: new NotDto<ApiOperation>(ApiOperation.Insert)).Value; }
             set { Set(new NotDto<ApiOperation>(value)); }
         }
         public int lineNumber
