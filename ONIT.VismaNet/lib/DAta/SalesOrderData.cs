@@ -21,5 +21,20 @@ namespace ONIT.VismaNetApi.Lib.Data
                 await VismaNetApiHelper.Update(entity, entity.GetIdentificator(), ApiControllerUri, Authorization);
             }
         }
+
+        public override async Task<SalesOrder> Add(SalesOrder entity)
+        {
+            SalesOrder rsp;
+            if (entity.orderType != "SO")
+            {
+                 rsp = await VismaNetApiHelper.Create(entity, ApiControllerUri, Authorization, $"{ApiControllerUri}/{entity.orderType}");
+            }
+            else
+            {
+                rsp = await VismaNetApiHelper.Create(entity, ApiControllerUri, Authorization);
+            }
+            rsp.InternalPrepareForUpdate();
+            return rsp;
+        }
     }
 }

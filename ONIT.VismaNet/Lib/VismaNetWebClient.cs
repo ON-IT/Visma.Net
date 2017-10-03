@@ -191,7 +191,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal async Task<T> Post<T>(string url, object data)
+        internal async Task<T> Post<T>(string url, object data,string urlToGet=null)
         {
             var message = PrepareMessage(HttpMethod.Post, url);
             using (message.Content = new StringContent(await Serialize(data), Encoding.UTF8, "application/json"))
@@ -199,7 +199,21 @@ namespace ONIT.VismaNetApi.Lib
                 var result = await httpClient.SendAsync(message);
 
                 if (result.Headers.Location != null)
-                    return await Get<T>(result.Headers.Location.AbsoluteUri);
+                {
+                    // Fix for Visma not returning correct URL when createing salesorders of not SO type
+                    if (urlToGet == null)
+                    {
+                        return await Get<T>(result.Headers.Location.AbsoluteUri);
+                    }
+                    else
+                    {
+                        string pattern = @".(.*)\/(\d+)";
+                        string substitution = @"$2";
+                        var regex = new System.Text.RegularExpressions.Regex(pattern);
+                        var id = regex.Replace(result.Headers.Location.AbsoluteUri, substitution);
+                        return await Get<T>($"{urlToGet}/{id}");
+                    }
+                }
                 if (result.StatusCode == HttpStatusCode.NoContent)
                     return await Get<T>(url);
 

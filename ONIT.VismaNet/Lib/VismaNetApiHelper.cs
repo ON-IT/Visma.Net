@@ -269,15 +269,16 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal static async Task<T> Create<T>(T entity, string apiControllerUri, VismaNetAuthorization authorization)
+        internal static async Task<T> Create<T>(T entity, string apiControllerUri, VismaNetAuthorization authorization, string apiUriToGetFrom=null)
             where T : DtoProviderBase
         {
             using (var webclient = GetHttpClient(authorization))
             {
                 var apiUrl = GetApiUrlForController(apiControllerUri);
+                var apiGetUrl = GetApiUrlForController(apiUriToGetFrom);
                 try
                 {
-                    return await webclient.Post<T>(apiUrl, entity.ToDto());
+                    return await webclient.Post<T>(apiUrl, entity.ToDto(), apiGetUrl);
                 }
                 catch (AggregateException e)
                 {
