@@ -21,6 +21,6 @@
       <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     </ItemGroup>
     <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-      <Exec Command="nuget restore" />
+      <Exec Command="nuget restore -verbosity detailed" />
     </Target>
 </Project>
