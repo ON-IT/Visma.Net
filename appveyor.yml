@@ -14,7 +14,8 @@
     file: '**\*.csproj'
     version: '{version}'
     package_version: '{version}'
-  
+  before_build:
+    - nuget restore
   build:
     publish_nuget: true
     verbosity: minimal
