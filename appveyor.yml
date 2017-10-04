@@ -17,14 +17,15 @@
   before_build:
     - nuget restore
   build:
-    publish_nuget: true
+    publish_nuget: false
     verbosity: minimal
-  deploy:
-    provider: NuGet
+  environment:
     api_key:
       secure: 9+5MJ4M65M1G/0Kqcy6KQ1huc/kc23m/GVDcvflLKYC2dtfWdQ2DiDSoO7hd6Tnm
-    skip_symbols: false
-    artifact: /.*\.nupkg/
+  deploy_script:
+    - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe  
+    - ps: ($artifacts.values | Where-Object {($_.path -like '*.nupkg') -and  !($_.path -like '*.symbols.nupkg')}) | foreach-object {nuget.exe push $_.path -Source https://www.nuget.org/api/v2/package -ApiKey $env:api_key; if ($lastexitcode -ne 0) {throw}}
+
 -
   pull_requests:
     do_not_increment_build_number: true
