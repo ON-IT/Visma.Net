@@ -22,7 +22,7 @@
   deploy:
     provider: NuGet
     api_key:
-      secure: u+bbUrM+dTHZcbRS57mKf79gPQP11USR96edhLf1JxUf84kjiYez1qzAtuvSvsQ5
+      secure: 9+5MJ4M65M1G/0Kqcy6KQ1huc/kc23m/GVDcvflLKYC2dtfWdQ2DiDSoO7hd6Tnm
     skip_symbols: false
     artifact: /.*\.nupkg/
 -
@@ -40,6 +40,6 @@
   deploy:
     provider: NuGet
     api_key:
-      secure: u+bbUrM+dTHZcbRS57mKf79gPQP11USR96edhLf1JxUf84kjiYez1qzAtuvSvsQ5
+      secure: 9+5MJ4M65M1G/0Kqcy6KQ1huc/kc23m/GVDcvflLKYC2dtfWdQ2DiDSoO7hd6Tnm
     skip_symbols: false
     artifact: /.*\.nupkg/
