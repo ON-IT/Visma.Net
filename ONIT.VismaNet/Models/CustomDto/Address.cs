@@ -26,17 +26,17 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             }
             set
             {
-                if (value?.Contains(Environment.NewLine) == true)
+                var split = value.Split(new[] { "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
+                if (split.Length>1)
                 {
-                    var split = value.Split(new [] {Environment.NewLine}, StringSplitOptions.None);
-                    Set(split[0]);
+                    Set(split[0]?.Trim());
                     addressLine2 = split[1];
                     if(split.Length>2)
-                        addressLine3 = string.Join(" ", split.Skip(2));
+                        addressLine3 = string.Join(" ", split.Skip(2)).Trim();
                 }
                 else
                 {
-                    Set(value);
+                    Set(value?.Trim());
                 }
             }
         }
@@ -44,25 +44,25 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         public string addressLine2
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string addressLine3
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string postalCode
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string city
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public Country country

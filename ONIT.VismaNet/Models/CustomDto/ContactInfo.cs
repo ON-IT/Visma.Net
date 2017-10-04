@@ -19,43 +19,43 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         public string name
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string attention
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string email
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string web
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string phone1
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string phone2
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string fax
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
         public override string ToString()
         {
