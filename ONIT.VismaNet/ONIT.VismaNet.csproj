@@ -1,17 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-		<Title>ONIT.VismaNet</Title>
+		<Title>Visma.net</Title>
         <Version>2.2.1</Version>
         <Copyright>Copyright © ON IT AS 2014 - 2017</Copyright>
-        <Description>.</Description>
-        <Authors></Authors>
-        <Company></Company>
-        <PackageLicenseUrl></PackageLicenseUrl>
-        <PackageProjectUrl></PackageProjectUrl>
-        <RepositoryUrl></RepositoryUrl>
-        <PackageTags></PackageTags>
-        <PackageReleaseNotes></PackageReleaseNotes>
+        <Description>Get started with Visma.net Integrations.</Description>
+        <Authors>ON IT AS</Authors>
+        <Company>ON IT AS</Company>
+        <PackageLicenseUrl><https://github.com/ON-IT/Visma.Net/blob/master/LICENSE.md/PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/ON-IT/Visma.Net</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/ON-IT/Visma.Net</RepositoryUrl>
+        <PackageTags>Visma.net API, Visma.net Integrations, REST</PackageTags>
+        <PackageReleaseNotes>Added support for Net Standard 2.0 + other fixes</PackageReleaseNotes>
         <AssemblyVersion>2.2.1</AssemblyVersion>
         <FileVersion>2.2.1.0</FileVersion>
     </PropertyGroup>
