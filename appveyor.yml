@@ -22,13 +22,16 @@
     - ps: ($artifacts.values | Where-Object {($_.path -like '*.nupkg') -and  !($_.path -like '*.symbols.nupkg')}) | foreach-object { write-host $_.path; dotnet nuget push $_.path -s https://www.nuget.org/api/v2/package -k $env:api_key; if ($lastexitcode -ne 0) {throw}}
 
 -
+  image: Visual Studio 2017
   pull_requests:
     do_not_increment_build_number: true
   branches:
     only:
     - master
   configuration: Release
-  assembly_info:
+  before_build:
+    - dotnet restore
+  dotnet_csproj:
     patch: false
   build:
     publish_nuget: true
