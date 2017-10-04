@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
 		<Title>Visma.net</Title>
-        <Version>2.3.0</Version>
+        <Version>3.0.0</Version>
         <Copyright>Copyright © ON IT AS 2014 - 2017</Copyright>
         <Description>Get started with Visma.net Integrations.</Description>
         <Authors>ON IT AS</Authors>
@@ -11,7 +11,7 @@
         <PackageProjectUrl>https://github.com/ON-IT/Visma.Net</PackageProjectUrl>
         <RepositoryUrl>https://github.com/ON-IT/Visma.Net.git</RepositoryUrl>
         <PackageTags>Visma.net API, Visma.net Integrations, REST</PackageTags>
-        <PackageReleaseNotes>Added support for Net Standard 2.0 + other fixes</PackageReleaseNotes>
+        <PackageReleaseNotes>Added support for Net Standard 2.0. The binary is renamed Visma.net, and this might break your build!</PackageReleaseNotes>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
