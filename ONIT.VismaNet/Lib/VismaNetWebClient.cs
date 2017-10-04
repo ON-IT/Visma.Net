@@ -152,10 +152,23 @@ namespace ONIT.VismaNetApi.Lib
             if (string.IsNullOrEmpty(stringData))
                 return default(T);
 
-            return await Deserialize<T>(stringData);
+			return await Deserialize<T>(stringData);
         }
 
-        internal async Task<T> PostMessage<T>(string url, HttpContent httpContent) where T : class
+		internal async Task<Stream> GetStream(string url)
+		{
+			url = url.Replace("http://", "https://"); // force https
+			var result = await httpClient.SendAsync(PrepareMessage(HttpMethod.Get, url));
+			var streamData = await result.Content.ReadAsStreamAsync();
+			if (result.StatusCode != HttpStatusCode.OK)
+			{
+				throw new Exception("Error downloading stream");
+			}
+			return streamData;
+
+		}
+
+		internal async Task<T> PostMessage<T>(string url, HttpContent httpContent) where T : class
         {
             var message = PrepareMessage(HttpMethod.Post, url);
             using (message.Content = httpContent)
@@ -178,7 +191,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal async Task<T> Post<T>(string url, object data)
+        internal async Task<T> Post<T>(string url, object data,string urlToGet=null)
         {
             var message = PrepareMessage(HttpMethod.Post, url);
             using (message.Content = new StringContent(await Serialize(data), Encoding.UTF8, "application/json"))
@@ -186,7 +199,21 @@ namespace ONIT.VismaNetApi.Lib
                 var result = await httpClient.SendAsync(message);
 
                 if (result.Headers.Location != null)
-                    return await Get<T>(result.Headers.Location.AbsoluteUri);
+                {
+                    // Fix for Visma not returning correct URL when createing salesorders of not SO type
+                    if (urlToGet == null)
+                    {
+                        return await Get<T>(result.Headers.Location.AbsoluteUri);
+                    }
+                    else
+                    {
+                        string pattern = @".(.*)\/(\d+)";
+                        string substitution = @"$2";
+                        var regex = new System.Text.RegularExpressions.Regex(pattern);
+                        var id = regex.Replace(result.Headers.Location.AbsoluteUri, substitution);
+                        return await Get<T>($"{urlToGet}/{id}");
+                    }
+                }
                 if (result.StatusCode == HttpStatusCode.NoContent)
                     return await Get<T>(url);
 
@@ -211,7 +238,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal async Task<T> Put<T>(string url, object data)
+        internal async Task<T> Put<T>(string url, object data, string urlToGet=null)
         {
             var message = PrepareMessage(HttpMethod.Put, url);
             using (var content = new StringContent(await Serialize(data), Encoding.UTF8, "application/json"))
@@ -221,7 +248,10 @@ namespace ONIT.VismaNetApi.Lib
                 if (result.Headers.Location != null)
                     return await Get<T>(result.Headers.Location.AbsoluteUri);
                 if (result.StatusCode == HttpStatusCode.NoContent)
-                    return await Get<T>(url);
+                    if (urlToGet != null) 
+                        return await Get<T>(urlToGet);
+                    else
+                        return await Get<T>(url);
                 var stringData = await result.Content.ReadAsStringAsync();
                 if (result.StatusCode != HttpStatusCode.OK)
                 {

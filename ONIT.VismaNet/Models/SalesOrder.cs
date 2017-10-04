@@ -8,7 +8,6 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-
     public class SalesOrder : DtoProviderBase, IProvideIdentificator
     {
         public SalesOrder()
@@ -54,6 +53,7 @@ namespace ONIT.VismaNetApi.Models
         public bool saturdayDelivery { get { return Get<bool>(); } set { Set(value); } }
         public bool insurance { get { return Get<bool>(); } set { Set(value); } }
         public DescriptiveDto transactionType { get { return Get<DescriptiveDto>(defaultValue: new DescriptiveDto()); } set { Set(value); } }
+        public string note { get { return Get<string>(); } set { Set(value); } }
 
         [JsonProperty]
         public List<SalesOrderLine> lines
@@ -80,9 +80,14 @@ namespace ONIT.VismaNetApi.Models
         public double taxTotal { get { return Get<double>(); } set { Set(value); } }
         [JsonProperty]
         public DateTime lastModifiedDateTime { get; private set; }
+		[JsonProperty]
+		public List<Attachment> attachments
+		{
+			get { return Get(defaultValue: new List<Attachment>()); }
+		}
 
-        #region Methods
-        public void Add(SalesOrderLine line)
+		#region Methods
+		public void Add(SalesOrderLine line)
         {
             line.lineNbr = 1;
             if (lines.Count > 0)

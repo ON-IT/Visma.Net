@@ -56,15 +56,15 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public Warehouse fromWarehouse
+        public ONIT.VismaNetApi.Models.CustomDto.Warehouse fromWarehouse
         {
-            get { return Get<Warehouse>(); }
+            get { return Get<ONIT.VismaNetApi.Models.CustomDto.Warehouse>(); }
             set { Set(value); }
         }
 
-        public Warehouse toWarehouse
+        public ONIT.VismaNetApi.Models.CustomDto.Warehouse toWarehouse
         {
-            get { return Get<Warehouse>(); }
+            get { return Get<ONIT.VismaNetApi.Models.CustomDto.Warehouse>(); }
             set { Set(value); }
         }
 

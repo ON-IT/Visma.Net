@@ -17,7 +17,11 @@ namespace ONIT.VismaNetApi.Models
             get { return Get<string>(); }
             set { Set(value); }
         }
-        
+        public string cashAccount
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
         public NumberName customer
         {
             get { return Get<NumberName>(); }

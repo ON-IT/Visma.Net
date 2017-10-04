@@ -269,15 +269,20 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal static async Task<T> Create<T>(T entity, string apiControllerUri, VismaNetAuthorization authorization)
+        internal static async Task<T> Create<T>(T entity, string apiControllerUri, VismaNetAuthorization authorization, string apiUriToGetFrom=null)
             where T : DtoProviderBase
         {
             using (var webclient = GetHttpClient(authorization))
             {
                 var apiUrl = GetApiUrlForController(apiControllerUri);
+                string apiGetUrl = null;
+                if (apiUriToGetFrom != null)
+                {
+                    apiGetUrl = GetApiUrlForController(apiUriToGetFrom);
+                }
                 try
                 {
-                    return await webclient.Post<T>(apiUrl, entity.ToDto());
+                    return await webclient.Post<T>(apiUrl, entity.ToDto(), apiGetUrl);
                 }
                 catch (AggregateException e)
                 {
@@ -288,13 +293,21 @@ namespace ONIT.VismaNetApi.Lib
         }
 
         internal static async Task Update<T>(T entity, string number, string apiControllerUri,
-            VismaNetAuthorization authorization)
+            VismaNetAuthorization authorization, string numberToGet = null)
             where T : DtoProviderBase
         {
             using (var webclient = GetHttpClient(authorization))
             {
                 var apiUrl = GetApiUrlForController(apiControllerUri, $"/{number}");
-                await webclient.Put<T>(apiUrl, entity.ToDto());
+                if (numberToGet == null)
+                {
+                    await webclient.Put<T>(apiUrl, entity.ToDto());
+                }
+                else
+                {
+                    var apiUrlToGet = GetApiUrlForController(apiControllerUri, $"/{numberToGet}");
+                    await webclient.Put<T>(apiUrl, entity.ToDto(),apiUrlToGet);
+                }
             }
         }
 
@@ -384,6 +397,32 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        internal static async Task<VismaActionResult> ShipmentAction(string shipmentNumber, string action,
+            VismaNetAuthorization authorization)
+        {
+            if (string.IsNullOrEmpty(shipmentNumber)) throw new ArgumentException(nameof(shipmentNumber));
+
+            using (var client = GetHttpClient(authorization))
+            {
+                var actionUrl =
+                    GetApiUrlForController($"{VismaNetControllers.Shipments}/{shipmentNumber}/action/{action}");
+                return await client.Post<VismaActionResult>(actionUrl, new object());
+            }
+        }
+
+        internal static async Task<Stream> ShipmentPrint(string shipmentNumber, string printName,
+            VismaNetAuthorization authorization)
+        {
+            if (string.IsNullOrEmpty(shipmentNumber)) throw new ArgumentException(nameof(shipmentNumber));
+
+            using (var client = GetHttpClient(authorization))
+            {
+                var printUrl =
+                    GetApiUrlForController($"{VismaNetControllers.Shipments}/{shipmentNumber}/{printName}");
+                return await client.GetStream(printUrl);
+            }
+        }
+
         internal static async Task<List<CompanyContext>> GetContextsForToken(string token)
         {
             using (var client = GetHttpClient(new VismaNetAuthorization {CompanyId = 0, Token = token}))
@@ -391,6 +430,15 @@ namespace ONIT.VismaNetApi.Lib
                 return await client.Get<List<CompanyContext>>(GetApiUrlForController(VismaNetControllers.UserContexts));
             }
         }
+
+		internal static async Task<Stream> GetAttachment(VismaNetAuthorization auth, string attachmentid)
+		{
+			using (var client = GetHttpClient(auth))
+			{
+				var url = GetApiUrlForController(VismaNetControllers.Attachment, $"/{attachmentid}");
+				return await client.GetStream(url);
+			}
+		}
 
         internal static async Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
             Stream stream,

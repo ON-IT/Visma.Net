@@ -16,6 +16,12 @@ namespace ONIT.VismaNetApi.Models
             get { return Get<DateTime>(); }
             set { Set(value); }
         }
+
+        public string paymentReference
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
         public DateTime cashDiscountDate
         {
             get { return Get<DateTime>(); }
@@ -31,6 +37,7 @@ namespace ONIT.VismaNetApi.Models
         public CustomerInvoice()
         {
             IgnoreProperties.Add(nameof(this.referenceNumber));
+            IgnoreProperties.Add(nameof(this.exchangeRate));
         }
         /// <summary>
         /// Create a new customer invoice without auto numbering

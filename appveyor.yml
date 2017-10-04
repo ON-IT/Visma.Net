@@ -1,17 +1,21 @@
 -
   version: 2.2.1.{build}
+  
+  image: Visual Studio 2017
+  
   pull_requests:
     do_not_increment_build_number: true
   branches:
     only:
     - dev
   configuration: Release
-  assembly_info:
+  dotnet_csproj:
     patch: true
-    file: '**\AssemblyInfo.*'
-    assembly_version: '{version}'
-    assembly_file_version: '{version}'
-    assembly_informational_version: '{version}-pre'
+    file: '**\*.csproj'
+    version: '{version}'
+    package_version: '{version}'
+  before_build:
+    - nuget restore
   build:
     publish_nuget: true
     verbosity: minimal
