@@ -10,12 +10,10 @@
     - dev
   configuration: Release
   dotnet_csproj:
-    patch: true
-    file: '**\*.csproj'
-    version: '{version}'
-    package_version: '{version}-pre'
+    patch: false
   before_build:
     - nuget restore
+    - ps: appveyor.ps1
   build:
     publish_nuget: true
     verbosity: minimal

@@ -9,11 +9,13 @@
         <Company>ON IT AS</Company>
         <PackageLicenseUrl>https://github.com/ON-IT/Visma.Net/blob/master/LICENSE.md</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/ON-IT/Visma.Net</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/ON-IT/Visma.Net</RepositoryUrl>
+        <RepositoryUrl>https://github.com/ON-IT/Visma.Net.git</RepositoryUrl>
         <PackageTags>Visma.net API, Visma.net Integrations, REST</PackageTags>
         <PackageReleaseNotes>Added support for Net Standard 2.0 + other fixes</PackageReleaseNotes>
-        <AssemblyVersion>2.3.0</AssemblyVersion>
-        <FileVersion>2.3.0.0</FileVersion>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <RepositoryType>git</RepositoryType>
+        <RootNamespace>ONIT.VismaNetApi</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
