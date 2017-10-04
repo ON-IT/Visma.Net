@@ -13,7 +13,7 @@
     patch: false
   before_build:
     - nuget restore
-    - ps: appveyor.ps1
+    - ps: ./appveyor.ps1
   build:
     publish_nuget: true
     verbosity: minimal
