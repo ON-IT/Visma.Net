@@ -7,7 +7,7 @@
         <Description>Get started with Visma.net Integrations.</Description>
         <Authors>ON IT AS</Authors>
         <Company>ON IT AS</Company>
-        <PackageLicenseUrl><https://github.com/ON-IT/Visma.Net/blob/master/LICENSE.md/PackageLicenseUrl>
+        <PackageLicenseUrl>https://github.com/ON-IT/Visma.Net/blob/master/LICENSE.md</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/ON-IT/Visma.Net</PackageProjectUrl>
         <RepositoryUrl>https://github.com/ON-IT/Visma.Net</RepositoryUrl>
         <PackageTags>Visma.net API, Visma.net Integrations, REST</PackageTags>
