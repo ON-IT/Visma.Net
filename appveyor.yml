@@ -1,5 +1,5 @@
 -
-  version: 2.2.1.{build}
+  version: 2.3.0.{build}
   
   image: Visual Studio 2017
   
@@ -13,7 +13,7 @@
     patch: true
     file: '**\*.csproj'
     version: '{version}'
-    package_version: '{version}'
+    package_version: '{version}-pre'
   before_build:
     - nuget restore
   build:
