@@ -17,7 +17,7 @@
   before_build:
     - nuget restore
   build:
-    publish_nuget: false
+    publish_nuget: true
     verbosity: minimal
   environment:
     api_key:
