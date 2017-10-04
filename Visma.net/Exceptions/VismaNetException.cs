@@ -18,5 +18,7 @@ namespace ONIT.VismaNetApi.Exceptions
         }
 
         public VismaNetExceptionDetails Details { get; private set; }
+        public string Payload { get; set; }
+        public string Endpoint { get; set; }
     }
 }

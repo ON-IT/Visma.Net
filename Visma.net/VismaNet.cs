@@ -123,7 +123,6 @@ namespace ONIT.VismaNetApi
 		public async Task<Stream> GetAttchment(string attachmentId)
 		{
 			return await VismaNetApiHelper.GetAttachment(Auth, attachmentId);
-
 		}
     }
 }

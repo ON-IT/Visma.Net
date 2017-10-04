@@ -77,41 +77,6 @@ namespace ONIT.VismaNetApi.Lib
             return message;
         }
 
-        internal WebRequest prepareWebRequest(HttpMethod method, string resource)
-        {
-            var message = (HttpWebRequest) WebRequest.Create(resource);
-            message.Method = method.Method;
-
-            message.AutomaticDecompression = DecompressionMethods.GZip |
-                                             DecompressionMethods.Deflate;
-
-            if (authorization != null)
-            {
-                message.Headers["Authorization"] = string.Format("Bearer {0}", authorization.Token);
-                message.Headers["ipp-company-id"] = string.Format("{0}", authorization.CompanyId);
-                if (authorization.BranchId > 0)
-                    message.Headers["branchid"] = authorization.BranchId.ToString();
-            }
-            message.Headers["ipp-application-type"] = VismaNetApiHelper.ApplicationType;
-            message.Accept = "application/json";
-            message.ContentType = "application/json";
-            return message;
-        }
-
-
-        //internal IEnumerable<T> GetEnumerable2<T>(string url)
-        //{
-        //    HttpResponseMessage result = Task.Run(async () => await httpClient.SendAsync(PrepareMessage(HttpMethod.Get, url), HttpCompletionOption.ResponseHeadersRead)).Result;
-        //    Stream stream = Task.Run(async () => await result.Content.ReadAsStreamAsync()).Result;
-        //    if (result.StatusCode != HttpStatusCode.OK)
-        //    {
-        //        throw new Exception("Could not read from Visma.net");
-        //    }
-
-        //    using (var reader = new StreamReader(stream, Encoding.Default, true))
-        //        foreach (T element in DeserializeSequenceFromJson<T>(reader))
-        //            yield return element;
-        //}
 
         internal async Task ForEachInStream<T>(string url, Func<T, Task> action) where T : DtoProviderBase
         {
@@ -128,17 +93,6 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal IEnumerable<T> GetEnumerable<T>(string url)
-        {
-            var request = prepareWebRequest(HttpMethod.Get, url);
-            using (var response = request.GetResponse())
-            using (var reader = new StreamReader(response.GetResponseStream(), Encoding.Default, true))
-            {
-                foreach (var element in DeserializeSequenceFromJson<T>(reader))
-                    yield return element;
-            }
-        }
-
         internal async Task<T> Get<T>(string url)
         {
             url = url.Replace("http://", "https://"); // force https
@@ -146,7 +100,7 @@ namespace ONIT.VismaNetApi.Lib
             var stringData = await result.Content.ReadAsStringAsync();
             if (result.StatusCode != HttpStatusCode.OK)
             {
-                VismaNetExceptionHandler.HandleException(stringData);
+                VismaNetExceptionHandler.HandleException(stringData, null, null, url);
                 return default(T);
             }
             if (string.IsNullOrEmpty(stringData))
@@ -162,7 +116,7 @@ namespace ONIT.VismaNetApi.Lib
 			var streamData = await result.Content.ReadAsStreamAsync();
 			if (result.StatusCode != HttpStatusCode.OK)
 			{
-				throw new Exception("Error downloading stream");
+                VismaNetExceptionHandler.HandleException("Error downloading stream from Visma.net", null, null, url);
 			}
 			return streamData;
 
@@ -175,7 +129,7 @@ namespace ONIT.VismaNetApi.Lib
             {
                 var result = await httpClient.SendAsync(message);
                 if (!result.IsSuccessStatusCode)
-                    VismaNetExceptionHandler.HandleException(await result.Content.ReadAsStringAsync());
+                    VismaNetExceptionHandler.HandleException(await result.Content.ReadAsStringAsync(), null, await httpContent.ReadAsStringAsync(), url);
                 if (result.Headers.Location != null)
                     if (typeof(T) == typeof(string))
                     {
@@ -191,10 +145,11 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal async Task<T> Post<T>(string url, object data,string urlToGet=null)
+        internal async Task<T> Post<T>(string url, object data, string urlToGet=null)
         {
             var message = PrepareMessage(HttpMethod.Post, url);
-            using (message.Content = new StringContent(await Serialize(data), Encoding.UTF8, "application/json"))
+            var serialized = await Serialize(data);
+            using (message.Content = new StringContent(serialized, Encoding.UTF8, "application/json"))
             {
                 var result = await httpClient.SendAsync(message);
 
@@ -221,7 +176,7 @@ namespace ONIT.VismaNetApi.Lib
 
                 if (result.StatusCode != HttpStatusCode.OK)
                 {
-                    VismaNetExceptionHandler.HandleException(stringData);
+                    VismaNetExceptionHandler.HandleException(stringData, null, serialized);
                     return default(T);
                 }
                 if (string.IsNullOrEmpty(stringData))
@@ -241,7 +196,8 @@ namespace ONIT.VismaNetApi.Lib
         internal async Task<T> Put<T>(string url, object data, string urlToGet=null)
         {
             var message = PrepareMessage(HttpMethod.Put, url);
-            using (var content = new StringContent(await Serialize(data), Encoding.UTF8, "application/json"))
+            var serialized = await Serialize(data);
+            using (var content = new StringContent(serialized, Encoding.UTF8, "application/json"))
             {
                 message.Content = content;
                 var result = await httpClient.SendAsync(message);
@@ -255,7 +211,7 @@ namespace ONIT.VismaNetApi.Lib
                 var stringData = await result.Content.ReadAsStringAsync();
                 if (result.StatusCode != HttpStatusCode.OK)
                 {
-                    VismaNetExceptionHandler.HandleException(stringData);
+                    VismaNetExceptionHandler.HandleException(stringData, null, serialized, url);
                     return default(T);
                 }
 
@@ -269,7 +225,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             return
                 await
-                    Task.Factory.StartNew(() => JsonConvert.SerializeObject(obj, Formatting.None, _serializerSettings));
+                    Task.Factory.StartNew(() => JsonConvert.SerializeObject(obj, Formatting.Indented, _serializerSettings));
         }
 
         private async Task<T> Deserialize<T>(string str)
