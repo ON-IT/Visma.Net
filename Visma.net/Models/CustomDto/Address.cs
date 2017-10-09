@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using ONIT.VismaNetApi.Annotations;
 using ONIT.VismaNetApi.Lib;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
@@ -12,6 +11,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         {
             RequiredFields.Add("county", new DtoValue(null));
         }
+
         public int addressId
         {
             get { return Get<int>(); }
@@ -20,18 +20,21 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 
         public string addressLine1
         {
-            get
-            {
-                return Get<string>();
-            }
+            get { return Get<string>(); }
             set
             {
-                var split = value.Split(new[] { "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
-                if (split.Length>1)
+                if (string.IsNullOrEmpty(value))
+                {
+                    Set(value);
+                    return;
+                }
+
+                var split = value.Split(new[] {"\n", "\r"}, StringSplitOptions.RemoveEmptyEntries);
+                if (split.Length > 1)
                 {
                     Set(split[0]?.Trim());
                     addressLine2 = split[1];
-                    if(split.Length>2)
+                    if (split.Length > 2)
                         addressLine3 = string.Join(" ", split.Skip(2)).Trim();
                 }
                 else
@@ -74,7 +77,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         public DescriptiveDto county
         {
             get { return Get<DescriptiveDto>(); }
-            set {  Set(value);}
+            set { Set(value); }
         }
 
         public State state
@@ -97,7 +100,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         public override string ToString()
         {
             var builder = new StringBuilder();
-            if(!string.IsNullOrWhiteSpace(addressLine1))
+            if (!string.IsNullOrWhiteSpace(addressLine1))
                 builder.AppendLine(addressLine1);
             if (!string.IsNullOrWhiteSpace(addressLine2))
                 builder.AppendLine(addressLine2);
@@ -114,7 +117,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
                 if (!string.IsNullOrWhiteSpace(city))
                     builder.AppendLine(city);
             }
-            if(!string.IsNullOrEmpty(country?.id))
+            if (!string.IsNullOrEmpty(country?.id))
                 builder.AppendLine(country.ToString());
 
             return builder.ToString().Trim();
