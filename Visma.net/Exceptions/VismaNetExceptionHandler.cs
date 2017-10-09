@@ -9,12 +9,12 @@ namespace ONIT.VismaNetApi
 {
     internal static class VismaNetExceptionHandler
     {
-        internal static void HandleException(AggregateException exception)
+        internal static void HandleException(AggregateException exception, string request = null, string endpoint = null)
         {
             var webException = exception.InnerException as WebException;
             if (webException == null)
                 throw exception.InnerException;
-            HandleException(webException);
+            HandleException(webException, request, endpoint);
         }
 
         internal static void HandleException(VismaNetException e)
@@ -22,7 +22,7 @@ namespace ONIT.VismaNetApi
             throw e;
         }
 
-        internal static void HandleException(WebException exception)
+        internal static void HandleException(WebException exception, string request = null, string endpoint = null)
         {
             if (exception.Response != null)
             {
@@ -30,22 +30,22 @@ namespace ONIT.VismaNetApi
                 using (var stream = response.GetResponseStream())
                 {
                     if (stream != null)
-                        HandleException(stream, exception);
+                        HandleException(stream, exception, request, endpoint);
                 }
             }
         }
 
-        internal static void HandleException(Stream stream, Exception e = null)
+        internal static void HandleException(Stream stream, Exception e = null, string request = null, string endpoint = null)
         {
-            HandleException(new StreamReader(stream).ReadToEnd(), e);
+            HandleException(new StreamReader(stream).ReadToEnd(), e, request,endpoint);
         }
 
-        internal static void HandleException(string data, Exception e = null)
+        internal static void HandleException(string data, Exception e = null, string request = null, string endpoint = null)
         {
-            ThrowException(data, e);
+            ThrowException(data, e, request);
         }
 
-        private static void ThrowException(string data, Exception ex = null)
+        private static void ThrowException(string data, Exception ex = null, string request = null, string endpoint = null)
         {
             var details = JsonConvert.DeserializeObject<VismaNetExceptionDetails>(data);
 
@@ -55,7 +55,11 @@ namespace ONIT.VismaNetApi
                     details.ExceptionMessage.IndexOf("token", StringComparison.OrdinalIgnoreCase) > -1)
                     throw new InvalidTokenException(details, ex);
             }
-            throw new VismaNetException(details, ex);
+            throw new VismaNetException(details, ex)
+            {
+                Payload = request,
+                Endpoint = endpoint
+            };
         }
     }
 }
