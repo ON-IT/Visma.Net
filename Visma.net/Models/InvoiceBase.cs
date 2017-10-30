@@ -97,13 +97,13 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value, key: "locationId"); }
         }
 
-        public Currency currency
+        public string currencyId
         {
-            get { return Get("currencyId", new Currency()); }
-            set { Set(value, key: "currencyId"); }
+            get { return Get<string>(); }
+            set { Set(value); }
         }
 
-        
+
         public int? salesPersonID
         {
             get { return Get<int?>(); }
