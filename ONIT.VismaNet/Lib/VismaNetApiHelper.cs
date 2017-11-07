@@ -510,6 +510,29 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        public static async Task<List<InventorySummary>> FetchInventorySummaryForItem(string itemNo,
+           VismaNetAuthorization authorization)
+        {
+            using (var webclient = GetHttpClient(authorization))
+            {
+                var apiUrl = GetApiUrlForController(VismaNetControllers.InventorySummary);
+                try
+                {
+                    var fullUrl = $"{apiUrl}/{itemNo}";
+                    return await webclient.Get<List<InventorySummary>>(fullUrl);
+                }
+                catch (AggregateException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                catch (WebException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                return null;
+            }
+        }
+
         private class DimensionContainer
         {
             [JsonProperty]

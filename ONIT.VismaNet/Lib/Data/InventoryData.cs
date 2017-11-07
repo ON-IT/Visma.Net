@@ -10,5 +10,10 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             ApiControllerUri = VismaNetControllers.Inventory;
         }
+
+        public async Task<List<InventorySummary>> InventorySummary(string entityNumber)
+        {
+            return await VismaNetApiHelper.FetchInventorySummaryForItem(entityNumber, Authorization);
+        }
     }
 }

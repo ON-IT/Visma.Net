@@ -12,6 +12,7 @@ namespace ONIT.VismaNetApi.Models
         private List<CrossReference> _crossReferences;
         private List<Attributes> _attributes;
         private List<Attachment> _attachments;
+        private List<WarehouseDetails> _warehouseDetails;
 
         public int? inventoryId
         {
@@ -69,6 +70,10 @@ namespace ONIT.VismaNetApi.Models
 
         public DateTime? lastModifiedDateTime { get; set; }
 
+        public string baseUnit { get; set; }
+        public string salesUnit { get; set; }
+        public string purchaseUnit { get; set; }
+  
         [JsonProperty]
         public List<Attributes> attributes
         {
@@ -89,9 +94,17 @@ namespace ONIT.VismaNetApi.Models
             private set { _attachments = value; }
         }
 
+        [JsonProperty]
+        public List<WarehouseDetails> warehouseDetails
+        {
+            get { return _warehouseDetails ?? (_warehouseDetails = new List<WarehouseDetails>()); }
+            private set { _warehouseDetails = value; }
+        }
+
         public string GetIdentificator()
         {
             return inventoryNumber;
         }
+
     }
 }
