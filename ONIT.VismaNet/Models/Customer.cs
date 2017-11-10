@@ -3,15 +3,18 @@ using Newtonsoft.Json;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
+using System.Collections.Generic;
 
 namespace ONIT.VismaNetApi.Models
 {
     public class Customer : DtoProviderBase, IProvideIdentificator, IComparable<Customer>, IComparable
     {
-		public Customer ()
+        //private List<CustomerAttributes> _attributeLines;
+        public Customer ()
 		{
 			IgnoreProperties.Add (nameof(this.number));
-		}
+            IgnoreProperties.Add(nameof(this.attributes));
+        }
 
         /// <summary>
         /// Create a new customer without autonumbering
@@ -219,6 +222,19 @@ namespace ONIT.VismaNetApi.Models
         public DescriptiveDto priceClass {
             get { return Get<DescriptiveDto>("priceClassId"); }
             set { Set(value, "priceClassId"); }
+        }
+
+        [JsonProperty]
+        public List<CustomerAttributes> attributeLines
+        {
+            get { return Get(defaultValue: new List<CustomerAttributes>()); }
+            private set { Set(value); }
+        }
+        [JsonProperty]
+        public List<IdValue> attributes
+        {
+            get { return Get(defaultValue: new List<IdValue>()); }
+            private set { Set(value); }
         }
 
         public int CompareTo(Customer other)
