@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
 		<Title>ONIT.VismaNet</Title>
-        <Version>2.2.1</Version>
+        <Version>2.2.1.1</Version>
         <Copyright>Copyright © ON IT AS 2014 - 2017</Copyright>
         <Description>.</Description>
         <Authors></Authors>
@@ -12,8 +12,8 @@
         <RepositoryUrl></RepositoryUrl>
         <PackageTags></PackageTags>
         <PackageReleaseNotes></PackageReleaseNotes>
-        <AssemblyVersion>2.2.1</AssemblyVersion>
-        <FileVersion>2.2.1.0</FileVersion>
+        <AssemblyVersion>2.2.1.2</AssemblyVersion>
+        <FileVersion>2.2.1.2</FileVersion>
         <AssemblyName>Visma.net</AssemblyName>
     </PropertyGroup>
     <ItemGroup>
