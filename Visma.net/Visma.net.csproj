@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
 		<Title>Visma.net</Title>
-        <Version>3.0.1</Version>
+        <Version>3.0.2</Version>
         <Copyright>Copyright © ON IT AS 2014 - 2017</Copyright>
         <Description>Get started with Visma.net Integrations.</Description>
         <Authors>ON IT AS</Authors>
