@@ -6,41 +6,32 @@ using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class LocationData : BaseCrudDataClass<Location>
+    public class LocationData : BaseDataClass 
     {
         internal LocationData(VismaNetAuthorization auth) : base(auth)
         {
             ApiControllerUri = VismaNetControllers.Location;
         }
 
-        public override Task<Location> Get(string entityNumber)
+        /// <summary>
+        ///     Creates a new entity
+        /// </summary>
+        /// <param name="entity">Entity to create</param>
+        /// <returns>The created entity from Visma.Net</returns>
+        public virtual async Task<Location> Add(Location entity)
         {
-            throw new NotImplementedException();
+            var rsp = await VismaNetApiHelper.Create(entity, ApiControllerUri, Authorization);
+            rsp.InternalPrepareForUpdate();
+            return rsp;
         }
 
-        public override Task<List<Location>> All()
+        /// <summary>
+        ///     Updates an entity
+        /// </summary>
+        /// <param name="entity">Entity to update</param>
+        public virtual async Task Update(Location entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Task<List<Location>> Find(NameValueCollection parameters)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task ForEach(Action<Location> action)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task ForEach(Func<Location, Task> action)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<List<Location>> GetAllModifiedSince(DateTime dateTime)
-        {
-            throw new NotImplementedException();
+            await VismaNetApiHelper.Update(entity, entity.GetIdentificator(), ApiControllerUri, Authorization);
         }
 
         /// <summary>
