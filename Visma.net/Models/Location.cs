@@ -51,9 +51,9 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public string vatZone
+        public VatZone vatZone
         {
-            get { return Get<string>(); }
+            get { return Get<VatZone>("vatZoneId"); }
             set { Set(value); }
         }
 
