@@ -312,12 +312,21 @@ namespace ONIT.VismaNetApi.Lib
         }
 
         internal static async Task<T> Get<T>(string entityNumber, string apiControllerUri,
-            VismaNetAuthorization authorization)
+            VismaNetAuthorization authorization, string numberToGet = null)
         {
             using (var webclient = GetHttpClient(authorization))
             {
-                var apiUrl = GetApiUrlForController(apiControllerUri, $"/{entityNumber}");
-                return await webclient.Get<T>(apiUrl);
+                if (numberToGet == null)
+                {
+                    var apiUrl = GetApiUrlForController(apiControllerUri, $"/{entityNumber}");
+                    return await webclient.Get<T>(apiUrl);
+                }
+                else
+                {
+                    var apiUrl = GetApiUrlForController(apiControllerUri, $"/{numberToGet}");
+                    return await webclient.Get<T>(apiUrl);
+                }
+                
             }
         }
 
@@ -419,6 +428,18 @@ namespace ONIT.VismaNetApi.Lib
             {
                 var printUrl =
                     GetApiUrlForController($"{VismaNetControllers.Shipments}/{shipmentNumber}/{printName}");
+                return await client.GetStream(printUrl);
+            }
+        }
+
+        internal static async Task<Stream> InvoicePrint(string RefNr, VismaNetAuthorization authorization)
+        {
+            if (string.IsNullOrEmpty(RefNr)) throw new ArgumentException(nameof(RefNr));
+
+            using (var client = GetHttpClient(authorization))
+            {
+                var printUrl =
+                    GetApiUrlForController($"{VismaNetControllers.CustomerInvoice}/{RefNr}/print");
                 return await client.GetStream(printUrl);
             }
         }

@@ -36,5 +36,20 @@ namespace ONIT.VismaNetApi.Lib.Data
             rsp.InternalPrepareForUpdate();
             return rsp;
         }
+
+        public async Task<SalesOrder> Get(string entityNumber, string orderType = "")
+        {
+            SalesOrder rsp;
+            if (orderType != "SO" || orderType == "") // SO ordertypes are special.
+            {
+                rsp = await VismaNetApiHelper.Get<SalesOrder>(entityNumber, ApiControllerUri, Authorization);
+            }
+            else
+            {
+                rsp = await VismaNetApiHelper.Get<SalesOrder>(entityNumber, ApiControllerUri, Authorization, $"{orderType}/{entityNumber}");
+            }
+            rsp.InternalPrepareForUpdate();
+            return rsp;
+        }
     }
 }

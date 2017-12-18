@@ -68,6 +68,11 @@ namespace ONIT.VismaNetApi.Lib.Data
                 throw new ArgumentNullException(nameof(fileName), "File name must be provided and have an extention");
 	        return await VismaNetApiHelper.AddAttachmentToInvoice(Authorization, invoiceNumber, stream, fileName);
 	    }
+
+        public async Task<Stream> PrintInvoice(CustomerInvoice invoice)
+        {
+            return await VismaNetApiHelper.InvoicePrint(invoice.GetIdentificator(), Authorization);
+        }
     }
 }
 
