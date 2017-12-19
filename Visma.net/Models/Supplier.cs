@@ -10,7 +10,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Supplier : DtoProviderBase, IProvideIdentificator
+    public class Supplier : DtoProviderBase, IProvideIdentificator, IComparable<Supplier>, IComparable
     {
         public Supplier()
         {
@@ -200,6 +200,19 @@ namespace ONIT.VismaNetApi.Models
             get { return Get("supplierClassId", defaultValue: new SupplierClass()); }
             set { Set(value, "supplierClassId");}
 
+        }
+
+        public int CompareTo(Supplier other)
+        {
+            return string.Compare(name, other.name, StringComparison.Ordinal);
+        }
+
+        public int CompareTo(object obj)
+        {
+            var othersupplier = (Supplier)obj;
+            if (othersupplier == null)
+                return 0;
+            return string.Compare(this.name, othersupplier.name, StringComparison.Ordinal);
         }
 
         public string GetIdentificator()

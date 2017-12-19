@@ -21,6 +21,13 @@ namespace ONIT.VismaNetApi.Models
             return new NumberName(number);
         }
 
+        public override string ToString()
+        {
+            if(!string.IsNullOrEmpty(name))
+                return $"{number} [{name}]";
+            return number;
+        }
+
         public DtoValue ToDto()
         {
             return new DtoValue(number);

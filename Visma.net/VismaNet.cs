@@ -34,6 +34,7 @@ namespace ONIT.VismaNetApi
         public readonly PaymentData Payment;
         public readonly BranchData Branch;
         public readonly WarehouseData Warehouse;
+        public readonly LocationData Location;
 
         /// <summary>
         ///     Creates a connection using token.
@@ -71,6 +72,7 @@ namespace ONIT.VismaNetApi
             Payment = new PaymentData(Auth);
             Branch = new BranchData(Auth);
             Warehouse = new WarehouseData(Auth);
+            Location = new LocationData(Auth);
         }
 
         public static string Version { get; private set; }
@@ -123,7 +125,6 @@ namespace ONIT.VismaNetApi
 		public async Task<Stream> GetAttchment(string attachmentId)
 		{
 			return await VismaNetApiHelper.GetAttachment(Auth, attachmentId);
-
 		}
     }
 }

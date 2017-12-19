@@ -111,7 +111,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException(nameof(key));
-
+         
             if (dto == null && _data.ContainsKey(key))
             {
                 _data.Remove(key);

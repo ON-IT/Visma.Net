@@ -220,7 +220,7 @@ namespace ONIT.VismaNetApi.Models
 
         
         public DescriptiveDto priceClass {
-            get { return Get<DescriptiveDto>("priceClassId"); }
+            get { return Get<DescriptiveDto>("priceClassId", new DescriptiveDto()); }
             set { Set(value, "priceClassId"); }
         }
 

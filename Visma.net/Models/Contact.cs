@@ -11,7 +11,7 @@ namespace ONIT.VismaNetApi.Models
         public string displayName
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public bool active
@@ -29,25 +29,25 @@ namespace ONIT.VismaNetApi.Models
         public string firstName
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string lastName
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string position
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public string businessAccount
         {
             get { return Get<string>(); }
-            set { Set(value); }
+            set { Set(value?.Trim()); }
         }
 
         public bool sameAsAccount
