@@ -27,4 +27,30 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             return new DtoValue(id);
         }
     }
+
+    public class IdValue : IBecomeDto
+    {
+        public IdValue()
+        {
+
+        }
+
+        public IdValue(string id)
+        {
+            this.id = id;
+        }
+
+        public string id { get; set; }
+        public string value { get; set; }
+
+        public static implicit operator IdValue(string id)
+        {
+            return new IdValue(id);
+        }
+
+        public DtoValue ToDto()
+        {
+            return new DtoValue(id);
+        }
+    }
 }

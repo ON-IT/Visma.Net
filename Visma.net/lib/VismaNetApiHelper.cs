@@ -312,12 +312,21 @@ namespace ONIT.VismaNetApi.Lib
         }
 
         internal static async Task<T> Get<T>(string entityNumber, string apiControllerUri,
-            VismaNetAuthorization authorization)
+            VismaNetAuthorization authorization, string numberToGet = null)
         {
             using (var webclient = GetHttpClient(authorization))
             {
-                var apiUrl = GetApiUrlForController(apiControllerUri, $"/{entityNumber}");
-                return await webclient.Get<T>(apiUrl);
+                if (numberToGet == null)
+                {
+                    var apiUrl = GetApiUrlForController(apiControllerUri, $"/{entityNumber}");
+                    return await webclient.Get<T>(apiUrl);
+                }
+                else
+                {
+                    var apiUrl = GetApiUrlForController(apiControllerUri, $"/{numberToGet}");
+                    return await webclient.Get<T>(apiUrl);
+                }
+                
             }
         }
 
@@ -413,6 +422,18 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        internal static async Task<Stream> InvoicePrint(string RefNr, VismaNetAuthorization authorization)
+        {
+            if (string.IsNullOrEmpty(RefNr)) throw new ArgumentException(nameof(RefNr));
+
+            using (var client = GetHttpClient(authorization))
+            {
+                var printUrl =
+                    GetApiUrlForController($"{VismaNetControllers.CustomerInvoice}/{RefNr}/print");
+                return await client.GetStream(printUrl);
+            }
+        }
+
         internal static async Task<List<CompanyContext>> GetContextsForToken(string token)
         {
             using (var client = GetHttpClient(new VismaNetAuthorization {CompanyId = 0, Token = token}))
@@ -487,6 +508,29 @@ namespace ONIT.VismaNetApi.Lib
                 {
                     var fullUrl = $"{apiUrl}/{customerNumber}/contact";
                     return await webclient.Get<List<Contact>>(fullUrl);
+                }
+                catch (AggregateException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                catch (WebException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                return null;
+            }
+        }
+
+        public static async Task<List<InventorySummary>> FetchInventorySummaryForItem(string itemNo,
+           VismaNetAuthorization authorization)
+        {
+            using (var webclient = GetHttpClient(authorization))
+            {
+                var apiUrl = GetApiUrlForController(VismaNetControllers.InventorySummary);
+                try
+                {
+                    var fullUrl = $"{apiUrl}/{itemNo}";
+                    return await webclient.Get<List<InventorySummary>>(fullUrl);
                 }
                 catch (AggregateException e)
                 {
