@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class InventorySummary : DtoProviderBase, IProvideIdentificator
+    public class InventorySummary : DtoProviderBase
     {
         public NumberName inventory {get; set;}
         public IdName location { get; set; }
@@ -42,9 +42,5 @@ namespace ONIT.VismaNetApi.Models
         public decimal estimatedTotalCost { get; set; }
 
         public string baseUnit { get; set; }
-        public string GetIdentificator()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
