@@ -61,6 +61,8 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         {
             var builder = new StringBuilder();
             builder.AppendLine(name);
+            if (!string.IsNullOrWhiteSpace(attention))
+                builder.AppendLine(attention);
             if (!string.IsNullOrWhiteSpace(email))
                 builder.AppendLine(email);
             if (!string.IsNullOrWhiteSpace(web))

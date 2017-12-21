@@ -97,12 +97,20 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value, key: "locationId"); }
         }
 
+        [Obsolete("Use currencyId instead")]
         public Currency currency
         {
-            get { return Get("currencyId", new Currency()); }
-            set { Set(value, key: "currencyId"); }
+            get => new Currency
+            {
+                id = currencyId
+            };
+            set => Set(value?.id, "currencyId");
         }
 
+        public string currencyId {
+            get => Get<string>();
+            set => Set(value);
+        }
         
         public int? salesPersonID
         {

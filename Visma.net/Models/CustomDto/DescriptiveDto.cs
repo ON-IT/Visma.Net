@@ -137,6 +137,27 @@ namespace ONIT.VismaNetApi.Models
         }
     }
 
+    public class VatZone : DescriptiveDto
+    {
+        public VatZone()
+        {
+        }
+
+        public VatZone(string id)
+            : base(id)
+        {
+            
+        }
+
+        public static implicit operator VatZone(string id)
+        {
+            return new VatZone()
+            {
+                id = id
+            };
+        }
+    }
+
     public class CustomerClass : DescriptiveDto
     {
         public CustomerClass()
