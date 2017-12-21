@@ -278,13 +278,13 @@ namespace ONIT.VismaNetApi.Models
         public VatCode vatCode
         {
             get { return Get<VatCode>("vatCodeId"); }
-            set { Set(value); }
+            set { Set(value, "vatCodeId"); }
         }
 
         public Vat vat
         {
             get { return Get<Vat>("vatId"); }
-            set { Set(value); }
+            set { Set(value, "vatId"); }
         }
     }
 
