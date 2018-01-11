@@ -72,7 +72,7 @@ namespace ONIT.VismaNetApi.Models
 
         public VatCode vatCode
         {
-            get { return Get<VatCode>("vatCodeId"); }
+            get { return Get<VatCode>(defaultValue: new VatCode(), key: "vatCodeId"); }
             set { Set(value, "vatCodeId"); }
         }
 
@@ -100,9 +100,9 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public Subaccount subaccount
+        public ONIT.VismaNetApi.Models.CustomDto.Subaccount subaccount
         {
-            get { return Get(defaultValue: new Subaccount()); }
+            get { return Get(defaultValue: new ONIT.VismaNetApi.Models.CustomDto.Subaccount()); }
             set { Set(value); }
         }
 
