@@ -187,7 +187,7 @@ namespace ONIT.VismaNetApi.Lib
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.Dimensions,
                     $"/{dimension.TrimStart('/')}/{value.GetIdentificator()}");
-                await webclient.Put<DimensionSegment>(apiUrl, value);
+                await webclient.Put<DimensionSegment>(apiUrl, value.ToDto());
             }
         }
 

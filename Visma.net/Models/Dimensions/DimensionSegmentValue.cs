@@ -19,12 +19,12 @@ namespace ONIT.VismaNetApi.Models.Dimensions
 
         public string value
         {
-            get { return valueId; }
-            set { valueId = value; }
+            get { return Get<NotDto<string>>(defaultValue: new NotDto<string>(string.Empty)).Value; }
+            set { Set(new NotDto<string>(value)); }
         }
 
         [JsonProperty]
-        private string valueId { get; set; }
+        private string valueId { get { return value; } set { if (this.value.Length == 0) this.value = value; } }
 
         public string description
         {
