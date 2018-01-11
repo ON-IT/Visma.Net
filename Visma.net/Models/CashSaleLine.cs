@@ -121,9 +121,9 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public Subaccount subaccount
+        public ONIT.VismaNetApi.Models.CustomDto.Subaccount subaccount
         {
-            get { return Get<Subaccount>(); }
+            get { return Get<ONIT.VismaNetApi.Models.CustomDto.Subaccount>(); }
             set { Set(value); }
         }
 

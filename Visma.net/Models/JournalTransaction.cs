@@ -233,9 +233,9 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
-        public Subaccount subaccount
+        public ONIT.VismaNetApi.Models.CustomDto.Subaccount subaccount
         {
-            get { return Get(defaultValue: new Subaccount()); }
+            get { return Get(defaultValue: new ONIT.VismaNetApi.Models.CustomDto.Subaccount()); }
             set { Set(value); }
         }
 

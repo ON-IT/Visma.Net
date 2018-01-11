@@ -6,7 +6,7 @@ namespace ONIT.VismaNetApi.Models
    public class CustomerDocument
     {
         public Account account { get; set; }
-        public Subaccount subaccount { get; set; }
+        public ONIT.VismaNetApi.Models.CustomDto.Subaccount subaccount { get; set; }
         public CondensedBranch branch { get; set; }
         public DateTime documentDueDate { get; set; }
         public Customer customer { get; set; }
