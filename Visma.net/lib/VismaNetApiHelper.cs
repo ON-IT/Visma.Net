@@ -207,31 +207,8 @@ namespace ONIT.VismaNetApi.Lib
                 var endpoint = GetApiUrlForController(VismaNetControllers.Customers);
                 try
                 {
-                    endpoint = $"{endpoint}/{customerNumber}/documents";
-                    var alldocuments = new List<CustomerDocument>();
-                    int count;
-                    do
-                    {
-                        try
-                        {
-                            var url = endpoint;
-                            if (alldocuments.Count > 0)
-                            {
-                                var maxId = alldocuments.Max(x => TryParseToInt(x.referenceNumber));
-                                url = AppendToQuery(endpoint, "greaterThanValue", maxId);
-                            }
-                            var batch = await webclient.Get<List<CustomerDocument>>(url);
-                            count = batch.Count;
-                            if (count == 0)
-                                break;
-                            alldocuments.AddRange(batch);
-                        }
-                        catch (Exception)
-                        {
-                            return alldocuments;
-                        }
-                    } while (count == MaxReturnableEntitiesFromVismaNet);
-                    return alldocuments;
+                    endpoint = $"{endpoint}/{customerNumber}/document";
+                    return await webclient.Get<List<CustomerDocument>>(url);
                 }
                 catch (AggregateException e)
                 {
