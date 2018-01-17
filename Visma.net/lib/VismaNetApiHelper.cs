@@ -207,8 +207,8 @@ namespace ONIT.VismaNetApi.Lib
                 var endpoint = GetApiUrlForController(VismaNetControllers.Customers);
                 try
                 {
-                    endpoint = $"{endpoint}/{customerNumber}/document";
-                    return await webclient.Get<List<CustomerDocument>>(url);
+                    var url = $"{endpoint}/{customerNumber}/document";
+                    await webclient.Get<List<CustomerDocument>>(url);
                 }
                 catch (AggregateException e)
                 {
