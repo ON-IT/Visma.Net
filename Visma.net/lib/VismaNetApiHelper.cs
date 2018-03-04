@@ -246,7 +246,8 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal static async Task<T> Create<T>(T entity, string apiControllerUri, VismaNetAuthorization authorization, string apiUriToGetFrom=null)
+        internal static async Task<T> Create<T>(T entity, string apiControllerUri, VismaNetAuthorization authorization,
+            string apiUriToGetFrom = null)
             where T : DtoProviderBase
         {
             using (var webclient = GetHttpClient(authorization))
@@ -254,9 +255,7 @@ namespace ONIT.VismaNetApi.Lib
                 var apiUrl = GetApiUrlForController(apiControllerUri);
                 string apiGetUrl = null;
                 if (apiUriToGetFrom != null)
-                {
                     apiGetUrl = GetApiUrlForController(apiUriToGetFrom);
-                }
                 try
                 {
                     return await webclient.Post<T>(apiUrl, entity.ToDto(), apiGetUrl);
@@ -283,7 +282,7 @@ namespace ONIT.VismaNetApi.Lib
                 else
                 {
                     var apiUrlToGet = GetApiUrlForController(apiControllerUri, $"/{numberToGet}");
-                    await webclient.Put<T>(apiUrl, entity.ToDto(),apiUrlToGet);
+                    await webclient.Put<T>(apiUrl, entity.ToDto(), apiUrlToGet);
                 }
             }
         }
@@ -303,7 +302,6 @@ namespace ONIT.VismaNetApi.Lib
                     var apiUrl = GetApiUrlForController(apiControllerUri, $"/{numberToGet}");
                     return await webclient.Get<T>(apiUrl);
                 }
-                
             }
         }
 
@@ -353,7 +351,8 @@ namespace ONIT.VismaNetApi.Lib
 
             using (var client = GetHttpClient(authorization))
             {
-                var actionUrl = GetApiUrlForController($"{VismaNetControllers.Payment}/{paymentNumber}/action/{action}");
+                var actionUrl =
+                    GetApiUrlForController($"{VismaNetControllers.Payment}/{paymentNumber}/action/{action}");
                 var obj = new ReleasePayment();
                 obj.type = new DtoValue("Payment");
                 return await client.Post<VismaActionResult>(actionUrl, obj);
@@ -419,14 +418,14 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-		internal static async Task<Stream> GetAttachment(VismaNetAuthorization auth, string attachmentid)
-		{
-			using (var client = GetHttpClient(auth))
-			{
-				var url = GetApiUrlForController(VismaNetControllers.Attachment, $"/{attachmentid}");
-				return await client.GetStream(url);
-			}
-		}
+        internal static async Task<Stream> GetAttachment(VismaNetAuthorization auth, string attachmentid)
+        {
+            using (var client = GetHttpClient(auth))
+            {
+                var url = GetApiUrlForController(VismaNetControllers.Attachment, $"/{attachmentid}");
+                return await client.GetStream(url);
+            }
+        }
 
         internal static async Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
             Stream stream,
@@ -499,7 +498,7 @@ namespace ONIT.VismaNetApi.Lib
         }
 
         public static async Task<List<InventorySummary>> FetchInventorySummaryForItem(string itemNo,
-           VismaNetAuthorization authorization)
+            VismaNetAuthorization authorization)
         {
             using (var webclient = GetHttpClient(authorization))
             {
@@ -521,17 +520,18 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        public static Task<bool> DeleteInvoice(string invoiceNumber, VismaNetAuthorization auth)
+        {
+            var url = GetApiUrlForController(VismaNetControllers.CustomerInvoice, $"/{invoiceNumber}");
+            ;
+            return GetHttpClient(auth)
+                .Delete(url);
+        }
+
         private class DimensionContainer
         {
             [JsonProperty]
             internal List<DimensionSegment> segments { get; set; }
-        }
-
-        public static Task<bool> DeleteInvoice(string invoiceNumber, VismaNetAuthorization auth)
-        {
-            var url = $"{VismaNetControllers.CustomerInvoice}/{invoiceNumber}";
-            var client = GetHttpClient(auth);
-            return client.Delete(url);
         }
     }
 }
