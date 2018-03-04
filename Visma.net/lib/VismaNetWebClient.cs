@@ -250,5 +250,12 @@ namespace ONIT.VismaNetApi.Lib
                 }
             }
         }
+
+        public async Task<bool> Delete(string url)
+        {
+            var message = PrepareMessage(HttpMethod.Delete, url);
+            var result = await httpClient.SendAsync(message);
+            return result.StatusCode == HttpStatusCode.NoContent;
+        }
     }
 }

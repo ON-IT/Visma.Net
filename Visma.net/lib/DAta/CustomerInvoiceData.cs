@@ -73,6 +73,11 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             return await VismaNetApiHelper.InvoicePrint(invoice.GetIdentificator(), Authorization);
         }
+
+	    public async Task<bool> Delete(string invoiceNumber)
+	    {
+	        return await VismaNetApiHelper.DeleteInvoice(invoiceNumber, Authorization);
+	    }
     }
 }
 

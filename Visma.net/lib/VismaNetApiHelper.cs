@@ -526,5 +526,12 @@ namespace ONIT.VismaNetApi.Lib
             [JsonProperty]
             internal List<DimensionSegment> segments { get; set; }
         }
+
+        public static Task<bool> DeleteInvoice(string invoiceNumber, VismaNetAuthorization auth)
+        {
+            var url = $"{VismaNetControllers.CustomerInvoice}/{invoiceNumber}";
+            var client = GetHttpClient(auth);
+            return client.Delete(url);
+        }
     }
 }
