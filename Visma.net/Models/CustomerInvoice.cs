@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
 
@@ -33,6 +34,8 @@ namespace ONIT.VismaNetApi.Models
             get { return Get<PaymentMethod>("paymentMethodId"); }
             set { Set(value, "paymentMethodId"); }
         }
+
+        public List<TaxDetail> TaxDetails { get; set; }
 
         public CustomerInvoice()
         {
