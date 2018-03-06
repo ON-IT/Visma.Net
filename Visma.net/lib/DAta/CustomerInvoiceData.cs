@@ -55,10 +55,8 @@ namespace ONIT.VismaNetApi.Lib.Data
 
 	    public async Task<string> AddAttachmentToInvoice(string invoiceNumber, string content, string fileName)
 	    {
-	        using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(content)))
-	        {
-	            return await AddAttachmentToInvoice(invoiceNumber, memoryStream, fileName);
-	        }
+	        var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(content));
+	        return await AddAttachmentToInvoice(invoiceNumber, memoryStream, fileName);
 	    }
         public async Task<string> AddAttachmentToInvoice(string invoiceNumber, Stream stream, string fileName)
 	    {
