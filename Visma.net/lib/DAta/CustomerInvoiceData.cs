@@ -55,16 +55,30 @@ namespace ONIT.VismaNetApi.Lib.Data
 
 	    public async Task<string> AddAttachmentToInvoice(string invoiceNumber, string content, string fileName)
 	    {
-	        var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(content));
-	        return await AddAttachmentToInvoice(invoiceNumber, memoryStream, fileName);
+	        return await AddAttachmentToInvoice(invoiceNumber, Encoding.UTF8.GetBytes(content), fileName);
 	    }
-        public async Task<string> AddAttachmentToInvoice(string invoiceNumber, Stream stream, string fileName)
+        public async Task<string> AddAttachmentToInvoice(string invoiceNumber, byte[] byteArray, string fileName)
 	    {
-            if(stream == default(Stream))
-                throw new ArgumentNullException(nameof(stream), "Stream is missing");
+            if(byteArray == default(byte[]))
+                throw new ArgumentNullException(nameof(byteArray), "ByteArray is missing");
             if(string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(Path.GetExtension(fileName)))
                 throw new ArgumentNullException(nameof(fileName), "File name must be provided and have an extention");
-	        return await VismaNetApiHelper.AddAttachmentToInvoice(Authorization, invoiceNumber, stream, fileName);
+	        return await VismaNetApiHelper.AddAttachmentToInvoice(Authorization, invoiceNumber, byteArray, fileName);
+	    }
+
+	    public async Task<string> AddAttachmentToInvoice(string invoiceNumber, Stream stream, string fileName)
+	    {
+	        if(stream == default(Stream))
+	            throw new ArgumentNullException(nameof(stream), "Stream is missing");
+	        if(string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(Path.GetExtension(fileName)))
+	            throw new ArgumentNullException(nameof(fileName), "File name must be provided and have an extention");
+
+	        using (var memoryStream = new MemoryStream())
+	        {
+	            stream.CopyTo(memoryStream);
+	            return await VismaNetApiHelper.AddAttachmentToInvoice(Authorization, invoiceNumber, memoryStream.ToArray(), fileName);
+	        }
+	        
 	    }
 
         public async Task<Stream> PrintInvoice(CustomerInvoice invoice)
