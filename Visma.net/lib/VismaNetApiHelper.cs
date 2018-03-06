@@ -439,7 +439,7 @@ namespace ONIT.VismaNetApi.Lib
             string fileName) where T : class
         {
             var request = new MultipartContent();
-            using (var streamContent = new StreamContent(stream))
+            var streamContent = new StreamContent(stream);
             using (var client = GetHttpClient(auth))
             {
                 streamContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
