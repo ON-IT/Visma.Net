@@ -438,7 +438,7 @@ namespace ONIT.VismaNetApi.Lib
         private static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, byte[] bytes,
             string fileName) where T : class
         {
-            var request = new MultipartFormDataContent();
+            var request = new MultipartContent("application/octet-stream");
             var byteArrayContent = new ByteArrayContent(bytes);
             var client = GetHttpClient(auth);
             {
