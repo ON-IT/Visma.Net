@@ -126,12 +126,13 @@ namespace ONIT.VismaNetApi.Lib
 
 		internal async Task<T> PostMessage<T>(string url, HttpContent httpContent) where T : class
         {
-            var message = PrepareMessage(HttpMethod.Post, url);
-            using (message.Content = httpContent)
+            using (var message = PrepareMessage(HttpMethod.Post, url))
             {
+                message.Content = httpContent;
                 var result = await HttpClient.SendAsync(message);
                 if (!result.IsSuccessStatusCode)
-                    VismaNetExceptionHandler.HandleException(await result.Content.ReadAsStringAsync(), null, await httpContent.ReadAsStringAsync(), url);
+                    VismaNetExceptionHandler.HandleException(await result.Content.ReadAsStringAsync(), null,
+                        await httpContent.ReadAsStringAsync(), url);
                 if (result.Headers.Location != null)
                     if (typeof(T) == typeof(string))
                     {
@@ -149,77 +150,78 @@ namespace ONIT.VismaNetApi.Lib
 
         internal async Task<T> Post<T>(string url, object data, string urlToGet=null)
         {
-            var message = PrepareMessage(HttpMethod.Post, url);
-            var serialized = await Serialize(data);
-            using (message.Content = new StringContent(serialized, Encoding.UTF8, "application/json"))
+            using (var message = PrepareMessage(HttpMethod.Post, url))
             {
-                var result = await HttpClient.SendAsync(message);
+                var serialized = await Serialize(data);
+                message.Content = new StringContent(serialized, Encoding.UTF8, "application/json");
+                
+                    var result = await HttpClient.SendAsync(message);
 
-                if (result.Headers.Location != null)
-                {
-                    // Fix for Visma not returning correct URL when createing salesorders of not SO type
-                    if (urlToGet == null)
+                    if (result.Headers.Location != null)
                     {
-                        return await Get<T>(result.Headers.Location.AbsoluteUri);
+                        // Fix for Visma not returning correct URL when createing salesorders of not SO type
+                        if (urlToGet == null)
+                        {
+                            return await Get<T>(result.Headers.Location.AbsoluteUri);
+                        }
+                        else
+                        {
+                            string pattern = @".(.*)\/(\d+)";
+                            string substitution = @"$2";
+                            var regex = new System.Text.RegularExpressions.Regex(pattern);
+                            var id = regex.Replace(result.Headers.Location.AbsoluteUri, substitution);
+                            return await Get<T>($"{urlToGet}/{id}");
+                        }
                     }
-                    else
+                    if (result.StatusCode == HttpStatusCode.NoContent)
+                        return await Get<T>(url);
+
+                    var stringData = await result.Content.ReadAsStringAsync();
+
+                    if (result.StatusCode != HttpStatusCode.OK)
                     {
-                        string pattern = @".(.*)\/(\d+)";
-                        string substitution = @"$2";
-                        var regex = new System.Text.RegularExpressions.Regex(pattern);
-                        var id = regex.Replace(result.Headers.Location.AbsoluteUri, substitution);
-                        return await Get<T>($"{urlToGet}/{id}");
+                        VismaNetExceptionHandler.HandleException(stringData, null, serialized);
+                        return default(T);
                     }
-                }
-                if (result.StatusCode == HttpStatusCode.NoContent)
-                    return await Get<T>(url);
-
-                var stringData = await result.Content.ReadAsStringAsync();
-
-                if (result.StatusCode != HttpStatusCode.OK)
-                {
-                    VismaNetExceptionHandler.HandleException(stringData, null, serialized);
-                    return default(T);
-                }
-                if (string.IsNullOrEmpty(stringData))
-                    return default(T);
-                try
-                {
-                    return await Deserialize<T>(stringData);
-                }
-                catch (Exception)
-                {
-                    throw new Exception("Could not serialize:" + Environment.NewLine + Environment.NewLine +
-                                        stringData);
-                }
+                    if (string.IsNullOrEmpty(stringData))
+                        return default(T);
+                    try
+                    {
+                        return await Deserialize<T>(stringData);
+                    }
+                    catch (Exception)
+                    {
+                        throw new Exception("Could not serialize:" + Environment.NewLine + Environment.NewLine +
+                                            stringData);
+                    }
             }
         }
 
         internal async Task<T> Put<T>(string url, object data, string urlToGet=null)
         {
-            var message = PrepareMessage(HttpMethod.Put, url);
-            var serialized = await Serialize(data);
-            using (var content = new StringContent(serialized, Encoding.UTF8, "application/json"))
+            using (var message = PrepareMessage(HttpMethod.Put, url))
             {
-                message.Content = content;
-                var result = await HttpClient.SendAsync(message);
-                if (result.Headers.Location != null)
-                    return await Get<T>(result.Headers.Location.AbsoluteUri);
-                if (result.StatusCode == HttpStatusCode.NoContent)
-                    if (urlToGet != null) 
-                        return await Get<T>(urlToGet);
-                    else
-                        return await Get<T>(url);
-                var stringData = await result.Content.ReadAsStringAsync();
-                if (result.StatusCode != HttpStatusCode.OK)
-                {
-                    VismaNetExceptionHandler.HandleException(stringData, null, serialized, url);
-                    return default(T);
-                }
+                var serialized = await Serialize(data);
+                message.Content = new StringContent(serialized, Encoding.UTF8, "application/json");
+               
+                    var result = await HttpClient.SendAsync(message);
+                    if (result.Headers.Location != null)
+                        return await Get<T>(result.Headers.Location.AbsoluteUri);
+                    if (result.StatusCode == HttpStatusCode.NoContent)
+                        if (urlToGet != null)
+                            return await Get<T>(urlToGet);
+                        else
+                            return await Get<T>(url);
+                    var stringData = await result.Content.ReadAsStringAsync();
+                    if (result.StatusCode != HttpStatusCode.OK)
+                    {
+                        VismaNetExceptionHandler.HandleException(stringData, null, serialized, url);
+                        return default(T);
+                    }
 
-                if (string.IsNullOrEmpty(stringData))
-                    return default(T);
-                return await Deserialize<T>(stringData);
+                    if (string.IsNullOrEmpty(stringData))
+                        return default(T);
+                    return await Deserialize<T>(stringData);
             }
         }
 
