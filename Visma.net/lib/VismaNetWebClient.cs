@@ -21,7 +21,8 @@ namespace ONIT.VismaNetApi.Lib
             Converters =
             {
                 new StringEnumConverter()
-            }
+            },
+            NullValueHandling = NullValueHandling.Ignore
         };
 
         private static readonly HttpClient HttpClient;
@@ -48,18 +49,6 @@ namespace ONIT.VismaNetApi.Lib
         {
             _authorization = auth;
         }
-
-        #region IDisposable implementation
-
-        public void Dispose()
-        {
-            // http://stackoverflow.com/questions/11178220/is-httpclient-safe-to-use-concurrently
-            //if (httpClient != null)
-            //    httpClient.Dispose();
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
 
         internal HttpRequestMessage PrepareMessage(HttpMethod method, string resource)
         {
