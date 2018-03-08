@@ -427,28 +427,29 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal static async Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
+        internal static Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
             byte[] bytes,
             string fileName)
         {
             var url = GetApiUrlForController(VismaNetControllers.CustomerInvoice, $"/{number}/attachment");
-            return await AddAttachmentToController<string>(auth, url, bytes, fileName);
+            return AddAttachmentToController<string>(auth, url, bytes, fileName);
         }
 
-        private static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, byte[] bytes,
+        private static Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, byte[] bytes,
             string fileName) where T : class
         {
-            var request = new MultipartContent();
-            var byteArrayContent = new ByteArrayContent(bytes);
             var client = GetHttpClient(auth);
+            var byteArrayContent = new ByteArrayContent(bytes);
+            byteArrayContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                byteArrayContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = fileName
-                };
-                request.Add(byteArrayContent);
-                return await client.PostMessage<T>(url, request);
-            }
+                FileName = fileName
+            };
+            var request = new MultipartContent
+            {
+                byteArrayContent
+            };
+            return client.PostMessage<T>(url, request);
+            
         }
 
         public static async Task<List<Contact>> FetchContactsForSupplier(string supplierNumber,
