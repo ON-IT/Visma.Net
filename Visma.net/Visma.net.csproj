@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
 		<Title>Visma.net</Title>
-        <Version>3.0.3</Version>
+        <Version>3.1.0</Version>
         <Copyright>Copyright © ON IT AS 2014 - 2017</Copyright>
         <Description>Get started with Visma.net Integrations.</Description>
         <Authors>ON IT AS</Authors>
@@ -11,14 +11,14 @@
         <PackageProjectUrl>https://github.com/ON-IT/Visma.Net</PackageProjectUrl>
         <RepositoryUrl>https://github.com/ON-IT/Visma.Net.git</RepositoryUrl>
         <PackageTags>Visma.net API, Visma.net Integrations, REST</PackageTags>
-        <PackageReleaseNotes>Fixed an issue with setting addressLine1 to null on Address.</PackageReleaseNotes>
+        <PackageReleaseNotes>Implemented print invoice, location, and customer attributes. Other minor bugfixes.</PackageReleaseNotes>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
         <RootNamespace>ONIT.VismaNetApi</RootNamespace>
         <PackageIconUrl>https://sync-it.no/Images/on-it_logo.png</PackageIconUrl>
-        <AssemblyVersion>3.0.3.0</AssemblyVersion>
-        <FileVersion>3.0.3.0</FileVersion>
+        <AssemblyVersion>3.1.0.0</AssemblyVersion>
+        <FileVersion>3.1.0.0</FileVersion>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
