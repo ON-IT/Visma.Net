@@ -229,7 +229,7 @@ namespace ONIT.VismaNetApi.Models
         public decimal amountInCurrency
         {
             get { return Get<decimal>(); }
-            private set { Set(value); }
+            set { Set(value); }
         }
 
         [JsonProperty]

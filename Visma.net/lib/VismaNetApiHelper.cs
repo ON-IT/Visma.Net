@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Exceptions;
 using ONIT.VismaNetApi.Models;
 using ONIT.VismaNetApi.Models.Dimensions;
+using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Lib
 {
@@ -453,9 +454,10 @@ namespace ONIT.VismaNetApi.Lib
 
         internal static async Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
             Stream stream,
-            string fileName)
+            string fileName,
+            string controller)
         {
-            var url = GetApiUrlForController(VismaNetControllers.CustomerInvoice, $"/{number}/attachment");
+            var url = GetApiUrlForController(controller, $"/{number}/attachment");
             return await AddAttachmentToController<string>(auth, url, stream, fileName);
         }
 
@@ -531,6 +533,37 @@ namespace ONIT.VismaNetApi.Lib
                 {
                     var fullUrl = $"{apiUrl}/{itemNo}";
                     return await webclient.Get<List<InventorySummary>>(fullUrl);
+                }
+                catch (AggregateException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                catch (WebException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                return null;
+            }
+        }
+
+        public static async Task<List<CustomerSalesPrice>> FetchCustomerSalesPricesForItem(string itemNo,
+           VismaNetAuthorization authorization, PriceType priceType  = PriceType.Undefined)
+        {
+            using (var webclient = GetHttpClient(authorization))
+            {
+                var apiUrl = GetApiUrlForController(VismaNetControllers.CustomerSalesPrices);
+                try
+                {
+                    string fullUrl = string.Empty;
+                    if (priceType == PriceType.Undefined)
+                    {
+                        fullUrl = $"{apiUrl}?inventoryId={itemNo}";
+                    }
+                    else
+                    {
+                        fullUrl = $"{apiUrl}?priceType={priceType.ToString()}&inventoryId={itemNo}";
+                    }
+                    return await webclient.Get<List<CustomerSalesPrice>>(fullUrl);
                 }
                 catch (AggregateException e)
                 {

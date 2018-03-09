@@ -66,7 +66,7 @@ namespace ONIT.VismaNetApi.Lib.Data
                 throw new ArgumentNullException(nameof(stream), "Stream is missing");
             if(string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(Path.GetExtension(fileName)))
                 throw new ArgumentNullException(nameof(fileName), "File name must be provided and have an extention");
-	        return await VismaNetApiHelper.AddAttachmentToInvoice(Authorization, invoiceNumber, stream, fileName);
+	        return await VismaNetApiHelper.AddAttachmentToInvoice(Authorization, invoiceNumber, stream, fileName, VismaNetControllers.CustomerInvoice);
 	    }
 
         public async Task<Stream> PrintInvoice(CustomerInvoice invoice)

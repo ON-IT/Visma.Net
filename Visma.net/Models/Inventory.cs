@@ -13,6 +13,7 @@ namespace ONIT.VismaNetApi.Models
         private List<Attributes> _attributes;
         private List<Attachment> _attachments;
         private List<WarehouseDetails> _warehouseDetails;
+        private costPriceStatistics _costPriceStatistics;
 
         public int? inventoryId
         {
@@ -101,10 +102,24 @@ namespace ONIT.VismaNetApi.Models
             private set { _warehouseDetails = value; }
         }
 
+        public costPriceStatistics costPriceStatistics
+        {
+            get { return _costPriceStatistics ?? (_costPriceStatistics = new costPriceStatistics()); }
+            private set { _costPriceStatistics = value; } 
+        }
+
         public string GetIdentificator()
         {
             return inventoryNumber;
         }
 
+    }
+
+    public class costPriceStatistics
+    {
+        public decimal lastCost { get; set; }
+        public decimal averageCost { get; set; }
+        public decimal minCost { get; set; }
+        public decimal maxCost { get; set; }
     }
 }
