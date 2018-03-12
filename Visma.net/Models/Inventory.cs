@@ -52,8 +52,8 @@ namespace ONIT.VismaNetApi.Models
 
         public PostingClass postingClass
         {
-            get { return Get<PostingClass>(key:"postClassId"); }
-            set { Set(value,key:"postClassId"); }
+            get { return Get<PostingClass>(); }
+            set { Set(value); }
         }
 
         public VatCode vatCode

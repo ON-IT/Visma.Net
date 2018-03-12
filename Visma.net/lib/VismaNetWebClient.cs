@@ -117,8 +117,7 @@ namespace ONIT.VismaNetApi.Lib
             message.Content = httpContent;
             var result = await HttpClient.SendAsync(message);
             if (!result.IsSuccessStatusCode)
-                VismaNetExceptionHandler.HandleException(await result.Content.ReadAsStringAsync(), null,
-                    await httpContent.ReadAsStringAsync(), url);
+                VismaNetExceptionHandler.HandleException(await result.Content.ReadAsStringAsync(), null, null, url);
             if (result.Headers.Location != null)
                 if (typeof(T) == typeof(string))
                 {
