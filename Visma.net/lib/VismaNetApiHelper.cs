@@ -12,7 +12,6 @@ using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Exceptions;
 using ONIT.VismaNetApi.Models;
 using ONIT.VismaNetApi.Models.Dimensions;
-using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Lib
 {
@@ -55,7 +54,7 @@ namespace ONIT.VismaNetApi.Lib
         internal static async Task<string> GetTokenOAuth(string clientId, string secret, string code,
             string redirect_uri)
         {
-            using (var webclient = GetHttpClient())
+            var webclient = GetHttpClient();
             {
                 var url = GetApiUrlForController(VismaNetControllers.Token);
                 var content = new FormUrlEncodedContent(new[]
@@ -73,7 +72,7 @@ namespace ONIT.VismaNetApi.Lib
 
         internal static async Task<string> GetToken(string username, string password, string clientId, string secret)
         {
-            using (var webclient = GetHttpClient())
+            var webclient = GetHttpClient();
             {
                 var url = GetApiUrlForController(VismaNetControllers.Token);
                 var content = new FormUrlEncodedContent(new[]
@@ -92,7 +91,7 @@ namespace ONIT.VismaNetApi.Lib
         private static async Task<List<Customer>> GetCustomerDataTaskAsync(string url, List<Customer> listOfCustomer,
             VismaNetAuthorization auth)
         {
-            using (var webClient = GetHttpClient(auth))
+            var webClient = GetHttpClient(auth);
             {
                 return await webClient.Get<List<Customer>>(url);
             }
@@ -151,7 +150,7 @@ namespace ONIT.VismaNetApi.Lib
 
         internal static async Task<T> FetchVismaNetTypeFromUrl<T>(string url, VismaNetAuthorization authorization)
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 url = url.Replace("http://", "https://"); // force https.
                 return await webclient.Get<T>(url);
@@ -161,7 +160,7 @@ namespace ONIT.VismaNetApi.Lib
         internal static async Task<List<CustomerInvoice>> FetchInvoicesForCustomerCd(string customerCd,
             VismaNetAuthorization authorization)
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.Customers);
                 var fullUrl = $"{apiUrl}/{customerCd}/invoice";
@@ -172,11 +171,11 @@ namespace ONIT.VismaNetApi.Lib
         internal static async Task<List<DimensionSegment>> FetchDimension(string dimension,
             VismaNetAuthorization auth)
         {
-            using (var webclient = GetHttpClient(auth))
+            var webClient = GetHttpClient(auth);
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.Dimensions,
                     string.Format("/{0}", dimension.TrimStart('/')));
-                var container = await webclient.Get<DimensionContainer>(apiUrl);
+                var container = await webClient.Get<DimensionContainer>(apiUrl);
                 return container.segments;
             }
         }
@@ -184,7 +183,7 @@ namespace ONIT.VismaNetApi.Lib
         public static async Task UpdateDimension(string dimension, DimensionSegment value,
             VismaNetAuthorization authorization)
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.Dimensions,
                     $"/{dimension.TrimStart('/')}/{value.GetIdentificator()}");
@@ -203,36 +202,13 @@ namespace ONIT.VismaNetApi.Lib
         internal static async Task<List<CustomerDocument>> FetchCustomerDocumentsForCustomerCd(string customerNumber,
             VismaNetAuthorization authorization)
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 var endpoint = GetApiUrlForController(VismaNetControllers.Customers);
                 try
                 {
-                    endpoint = $"{endpoint}/{customerNumber}/documents";
-                    var alldocuments = new List<CustomerDocument>();
-                    int count;
-                    do
-                    {
-                        try
-                        {
-                            var url = endpoint;
-                            if (alldocuments.Count > 0)
-                            {
-                                var maxId = alldocuments.Max(x => TryParseToInt(x.referenceNumber));
-                                url = AppendToQuery(endpoint, "greaterThanValue", maxId);
-                            }
-                            var batch = await webclient.Get<List<CustomerDocument>>(url);
-                            count = batch.Count;
-                            if (count == 0)
-                                break;
-                            alldocuments.AddRange(batch);
-                        }
-                        catch (Exception)
-                        {
-                            return alldocuments;
-                        }
-                    } while (count == MaxReturnableEntitiesFromVismaNet);
-                    return alldocuments;
+                    var url = $"{endpoint}/{customerNumber}/document";
+                    await webclient.Get<List<CustomerDocument>>(url);
                 }
                 catch (AggregateException e)
                 {
@@ -248,13 +224,13 @@ namespace ONIT.VismaNetApi.Lib
 
         internal static async Task<TestConnectionResponse> TestConnection(VismaNetAuthorization auth)
         {
-            using (var webclient = GetHttpClient(auth))
+            var webClient = GetHttpClient(auth);
             {
                 // Just fetch endpoint to check if we are good. This is the smalles one we know.
                 var endpoint = GetApiUrlForController(VismaNetControllers.Dimensions);
                 try
                 {
-                    var response = await webclient.Get<List<string>>(endpoint);
+                    var response = await webClient.Get<List<string>>(endpoint);
                     if (response != null && response.Count > 0)
                         return TestConnectionResponse.Success;
                     return TestConnectionResponse.Unknown;
@@ -270,17 +246,16 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal static async Task<T> Create<T>(T entity, string apiControllerUri, VismaNetAuthorization authorization, string apiUriToGetFrom=null)
+        internal static async Task<T> Create<T>(T entity, string apiControllerUri, VismaNetAuthorization authorization,
+            string apiUriToGetFrom = null)
             where T : DtoProviderBase
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 var apiUrl = GetApiUrlForController(apiControllerUri);
                 string apiGetUrl = null;
                 if (apiUriToGetFrom != null)
-                {
                     apiGetUrl = GetApiUrlForController(apiUriToGetFrom);
-                }
                 try
                 {
                     return await webclient.Post<T>(apiUrl, entity.ToDto(), apiGetUrl);
@@ -297,7 +272,7 @@ namespace ONIT.VismaNetApi.Lib
             VismaNetAuthorization authorization, string numberToGet = null)
             where T : DtoProviderBase
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 var apiUrl = GetApiUrlForController(apiControllerUri, $"/{number}");
                 if (numberToGet == null)
@@ -307,7 +282,7 @@ namespace ONIT.VismaNetApi.Lib
                 else
                 {
                     var apiUrlToGet = GetApiUrlForController(apiControllerUri, $"/{numberToGet}");
-                    await webclient.Put<T>(apiUrl, entity.ToDto(),apiUrlToGet);
+                    await webclient.Put<T>(apiUrl, entity.ToDto(), apiUrlToGet);
                 }
             }
         }
@@ -315,7 +290,7 @@ namespace ONIT.VismaNetApi.Lib
         internal static async Task<T> Get<T>(string entityNumber, string apiControllerUri,
             VismaNetAuthorization authorization, string numberToGet = null)
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 if (numberToGet == null)
                 {
@@ -327,14 +302,13 @@ namespace ONIT.VismaNetApi.Lib
                     var apiUrl = GetApiUrlForController(apiControllerUri, $"/{numberToGet}");
                     return await webclient.Get<T>(apiUrl);
                 }
-                
             }
         }
 
         public static async Task ForEach<T>(string apiControllerUri, VismaNetAuthorization authorization,
             Func<T, Task> action, NameValueCollection parameters = null) where T : DtoProviderBase
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
                 await webclient.ForEachInStream(endpoint, action);
@@ -345,7 +319,7 @@ namespace ONIT.VismaNetApi.Lib
             NameValueCollection parameters = null)
         {
             var listOfEntities = new List<T>();
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
                 var entities = await webclient.Get<List<T>>(endpoint);
@@ -357,7 +331,7 @@ namespace ONIT.VismaNetApi.Lib
         internal static async Task<List<T>> GetAllModifiedSince<T>(string apiControllerUri, DateTime dateTime,
             VismaNetAuthorization authorization)
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 var endpoint = GetApiUrlForController(apiControllerUri,
                     parameters: new NameValueCollection
@@ -375,9 +349,10 @@ namespace ONIT.VismaNetApi.Lib
         {
             if (string.IsNullOrEmpty(paymentNumber)) throw new ArgumentException(nameof(paymentNumber));
 
-            using (var client = GetHttpClient(authorization))
+            var client = GetHttpClient(authorization);
             {
-                var actionUrl = GetApiUrlForController($"{VismaNetControllers.Payment}/{paymentNumber}/action/{action}");
+                var actionUrl =
+                    GetApiUrlForController($"{VismaNetControllers.Payment}/{paymentNumber}/action/{action}");
                 var obj = new ReleasePayment();
                 obj.type = new DtoValue("Payment");
                 return await client.Post<VismaActionResult>(actionUrl, obj);
@@ -389,7 +364,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             if (string.IsNullOrEmpty(invoiceNumber)) throw new ArgumentException(nameof(invoiceNumber));
 
-            using (var client = GetHttpClient(authorization))
+            var client = GetHttpClient(authorization);
             {
                 var actionUrl =
                     GetApiUrlForController($"{VismaNetControllers.CustomerInvoice}/{invoiceNumber}/action/{action}");
@@ -402,7 +377,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             if (string.IsNullOrEmpty(shipmentNumber)) throw new ArgumentException(nameof(shipmentNumber));
 
-            using (var client = GetHttpClient(authorization))
+            var client = GetHttpClient(authorization);
             {
                 var actionUrl =
                     GetApiUrlForController($"{VismaNetControllers.Shipments}/{shipmentNumber}/action/{action}");
@@ -415,7 +390,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             if (string.IsNullOrEmpty(shipmentNumber)) throw new ArgumentException(nameof(shipmentNumber));
 
-            using (var client = GetHttpClient(authorization))
+            var client = GetHttpClient(authorization);
             {
                 var printUrl =
                     GetApiUrlForController($"{VismaNetControllers.Shipments}/{shipmentNumber}/{printName}");
@@ -427,7 +402,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             if (string.IsNullOrEmpty(RefNr)) throw new ArgumentException(nameof(RefNr));
 
-            using (var client = GetHttpClient(authorization))
+            var client = GetHttpClient(authorization);
             {
                 var printUrl =
                     GetApiUrlForController($"{VismaNetControllers.CustomerInvoice}/{RefNr}/print");
@@ -437,50 +412,50 @@ namespace ONIT.VismaNetApi.Lib
 
         internal static async Task<List<CompanyContext>> GetContextsForToken(string token)
         {
-            using (var client = GetHttpClient(new VismaNetAuthorization {CompanyId = 0, Token = token}))
+            var client = GetHttpClient(new VismaNetAuthorization {CompanyId = 0, Token = token});
             {
                 return await client.Get<List<CompanyContext>>(GetApiUrlForController(VismaNetControllers.UserContexts));
             }
         }
 
-		internal static async Task<Stream> GetAttachment(VismaNetAuthorization auth, string attachmentid)
-		{
-			using (var client = GetHttpClient(auth))
-			{
-				var url = GetApiUrlForController(VismaNetControllers.Attachment, $"/{attachmentid}");
-				return await client.GetStream(url);
-			}
-		}
-
-        internal static async Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
-            Stream stream,
-            string fileName,
-            string controller)
+        internal static async Task<Stream> GetAttachment(VismaNetAuthorization auth, string attachmentid)
         {
-            var url = GetApiUrlForController(controller, $"/{number}/attachment");
-            return await AddAttachmentToController<string>(auth, url, stream, fileName);
+            var client = GetHttpClient(auth);
+            {
+                var url = GetApiUrlForController(VismaNetControllers.Attachment, $"/{attachmentid}");
+                return await client.GetStream(url);
+            }
         }
 
-        private static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, Stream stream,
+        internal static Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
+            byte[] bytes,
+            string fileName)
+        {
+            var url = GetApiUrlForController(VismaNetControllers.CustomerInvoice, $"/{number}/attachment");
+            return AddAttachmentToController<string>(auth, url, bytes, fileName);
+        }
+
+        private static Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, byte[] bytes,
             string fileName) where T : class
         {
-            using (var request = new MultipartContent())
-            using (var streamContent = new StreamContent(stream))
-            using (var client = GetHttpClient(auth))
+            var client = GetHttpClient(auth);
+            var byteArrayContent = new ByteArrayContent(bytes);
+            byteArrayContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                streamContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = fileName
-                };
-                request.Add(streamContent);
-                return await client.PostMessage<T>(url, request);
-            }
+                FileName = fileName
+            };
+            var request = new MultipartContent
+            {
+                byteArrayContent
+            };
+            return client.PostMessage<T>(url, request);
+            
         }
 
         public static async Task<List<Contact>> FetchContactsForSupplier(string supplierNumber,
             VismaNetAuthorization authorization)
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.Suppliers);
                 try
@@ -503,7 +478,7 @@ namespace ONIT.VismaNetApi.Lib
         public static async Task<List<Contact>> FetchContactsForCustomer(string customerNumber,
             VismaNetAuthorization authorization)
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.Customers);
                 try
@@ -524,9 +499,9 @@ namespace ONIT.VismaNetApi.Lib
         }
 
         public static async Task<List<InventorySummary>> FetchInventorySummaryForItem(string itemNo,
-           VismaNetAuthorization authorization)
+            VismaNetAuthorization authorization)
         {
-            using (var webclient = GetHttpClient(authorization))
+            var webclient = GetHttpClient(authorization);
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.InventorySummary);
                 try
@@ -546,35 +521,12 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        public static async Task<List<CustomerSalesPrice>> FetchCustomerSalesPricesForItem(string itemNo,
-           VismaNetAuthorization authorization, PriceType priceType  = PriceType.Undefined)
+        public static Task<bool> DeleteInvoice(string invoiceNumber, VismaNetAuthorization auth)
         {
-            using (var webclient = GetHttpClient(authorization))
-            {
-                var apiUrl = GetApiUrlForController(VismaNetControllers.CustomerSalesPrices);
-                try
-                {
-                    string fullUrl = string.Empty;
-                    if (priceType == PriceType.Undefined)
-                    {
-                        fullUrl = $"{apiUrl}?inventoryId={itemNo}";
-                    }
-                    else
-                    {
-                        fullUrl = $"{apiUrl}?priceType={priceType.ToString()}&inventoryId={itemNo}";
-                    }
-                    return await webclient.Get<List<CustomerSalesPrice>>(fullUrl);
-                }
-                catch (AggregateException e)
-                {
-                    VismaNetExceptionHandler.HandleException(e);
-                }
-                catch (WebException e)
-                {
-                    VismaNetExceptionHandler.HandleException(e);
-                }
-                return null;
-            }
+            var url = GetApiUrlForController(VismaNetControllers.CustomerInvoice, $"/{invoiceNumber}");
+            ;
+            return GetHttpClient(auth)
+                .Delete(url);
         }
 
         private class DimensionContainer

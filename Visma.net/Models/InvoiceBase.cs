@@ -91,9 +91,9 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public Location location
+        public LocationSummary location
         {
-            get { return Get("locationId", new Location()); }
+            get { return Get("locationId", new LocationSummary()); }
             set { Set(value, key: "locationId"); }
         }
 

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -12,20 +13,21 @@ using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib
 {
-    internal class VismaNetHttpClient : IDisposable
+    internal class VismaNetHttpClient
     {
-        private static readonly JsonSerializerSettings _serializerSettings = new JsonSerializerSettings
+        private static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
         {
             DateFormatString = "yyyy-MM-dd HH:mm:ss",
             Converters =
             {
                 new StringEnumConverter()
-            }
+            },
+            NullValueHandling = NullValueHandling.Ignore
         };
 
-        private static readonly HttpClient httpClient;
+        private static readonly HttpClient HttpClient;
 
-        private readonly VismaNetAuthorization authorization;
+        private readonly VismaNetAuthorization _authorization;
 
         static VismaNetHttpClient()
         {
@@ -34,39 +36,29 @@ namespace ONIT.VismaNetApi.Lib
                 handler.AutomaticDecompression = DecompressionMethods.GZip |
                                                  DecompressionMethods.Deflate;
             handler.UseCookies = false;
-            httpClient = new HttpClient(handler, true);
-            httpClient.Timeout = TimeSpan.FromSeconds(300);
-            httpClient.DefaultRequestHeaders.Add("User-Agent",
+            HttpClient = new HttpClient(handler, false)
+            {
+                Timeout = TimeSpan.FromSeconds(600)
+            };
+            HttpClient.DefaultRequestHeaders.Add("User-Agent",
                 $"Visma.Net/{VismaNet.Version} (+https://github.com/ON-IT/Visma.Net)");
-            httpClient.DefaultRequestHeaders.ExpectContinue = false;
+            HttpClient.DefaultRequestHeaders.ExpectContinue = false;
         }
 
         internal VismaNetHttpClient(VismaNetAuthorization auth = null)
         {
-            authorization = auth;
+            _authorization = auth;
         }
-
-        #region IDisposable implementation
-
-        public void Dispose()
-        {
-            // http://stackoverflow.com/questions/11178220/is-httpclient-safe-to-use-concurrently
-            //if (httpClient != null)
-            //    httpClient.Dispose();
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
 
         internal HttpRequestMessage PrepareMessage(HttpMethod method, string resource)
         {
             var message = new HttpRequestMessage(method, resource);
-            if (authorization != null)
+            if (_authorization != null)
             {
-                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authorization.Token);
-                message.Headers.Add("ipp-company-id", string.Format("{0}", authorization.CompanyId));
-                if (authorization.BranchId > 0)
-                    message.Headers.Add("branchid", authorization.BranchId.ToString());
+                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _authorization.Token);
+                message.Headers.Add("ipp-company-id", string.Format("{0}", _authorization.CompanyId));
+                if (_authorization.BranchId > 0)
+                    message.Headers.Add("branchid", _authorization.BranchId.ToString());
             }
             message.Headers.Add("ipp-application-type", VismaNetApiHelper.ApplicationType);
             message.Headers.Accept.Clear();
@@ -80,7 +72,7 @@ namespace ONIT.VismaNetApi.Lib
 
         internal async Task ForEachInStream<T>(string url, Func<T, Task> action) where T : DtoProviderBase
         {
-            using (var result = await httpClient.SendAsync(PrepareMessage(HttpMethod.Get, url),
+            using (var result = await HttpClient.SendAsync(PrepareMessage(HttpMethod.Get, url),
                 HttpCompletionOption.ResponseHeadersRead))
             using (var stream = await result.Content.ReadAsStreamAsync())
             using (var reader = new StreamReader(stream))
@@ -96,7 +88,7 @@ namespace ONIT.VismaNetApi.Lib
         internal async Task<T> Get<T>(string url)
         {
             url = url.Replace("http://", "https://"); // force https
-            var result = await httpClient.SendAsync(PrepareMessage(HttpMethod.Get, url));
+            var result = await HttpClient.SendAsync(PrepareMessage(HttpMethod.Get, url));
             var stringData = await result.Content.ReadAsStringAsync();
             if (result.StatusCode != HttpStatusCode.OK)
             {
@@ -106,69 +98,63 @@ namespace ONIT.VismaNetApi.Lib
             if (string.IsNullOrEmpty(stringData))
                 return default(T);
 
-			return await Deserialize<T>(stringData);
+            return await Deserialize<T>(stringData);
         }
 
-		internal async Task<Stream> GetStream(string url)
-		{
-			url = url.Replace("http://", "https://"); // force https
-			var result = await httpClient.SendAsync(PrepareMessage(HttpMethod.Get, url));
-			var streamData = await result.Content.ReadAsStreamAsync();
-			if (result.StatusCode != HttpStatusCode.OK)
-			{
+        internal async Task<Stream> GetStream(string url)
+        {
+            url = url.Replace("http://", "https://"); // force https
+            var result = await HttpClient.SendAsync(PrepareMessage(HttpMethod.Get, url));
+            var streamData = await result.Content.ReadAsStreamAsync();
+            if (result.StatusCode != HttpStatusCode.OK)
                 VismaNetExceptionHandler.HandleException("Error downloading stream from Visma.net", null, null, url);
-			}
-			return streamData;
-
-		}
-
-		internal async Task<T> PostMessage<T>(string url, HttpContent httpContent) where T : class
-        {
-            var message = PrepareMessage(HttpMethod.Post, url);
-            using (message.Content = httpContent)
-            {
-                var result = await httpClient.SendAsync(message);
-                if (!result.IsSuccessStatusCode)
-                    VismaNetExceptionHandler.HandleException(await result.Content.ReadAsStringAsync(), null, await httpContent.ReadAsStringAsync(), url);
-                if (result.Headers.Location != null)
-                    if (typeof(T) == typeof(string))
-                    {
-                        var absoluteUri = result.Headers.Location.AbsoluteUri;
-                        return absoluteUri.Substring(absoluteUri.LastIndexOf("/") + 1) as T;
-                    }
-
-                var content = await result.Content.ReadAsStringAsync();
-                if (!string.IsNullOrEmpty(content))
-                    return JsonConvert.DeserializeObject<T>(content);
-
-                return default(T);
-            }
+            return streamData;
         }
 
-        internal async Task<T> Post<T>(string url, object data, string urlToGet=null)
+        internal async Task<T> PostMessage<T>(string url, HttpContent httpContent) where T : class
         {
             var message = PrepareMessage(HttpMethod.Post, url);
-            var serialized = await Serialize(data);
-            using (message.Content = new StringContent(serialized, Encoding.UTF8, "application/json"))
+            message.Content = httpContent;
+            var result = await HttpClient.SendAsync(message);
+            if (!result.IsSuccessStatusCode)
+                VismaNetExceptionHandler.HandleException(await result.Content.ReadAsStringAsync(), null,
+                    await httpContent.ReadAsStringAsync(), url);
+            if (result.Headers.Location != null)
+                if (typeof(T) == typeof(string))
+                {
+                    var absoluteUri = result.Headers.Location.AbsoluteUri;
+                    return absoluteUri.Substring(absoluteUri.LastIndexOf("/", StringComparison.Ordinal) + 1) as T;
+                }
+
+            var content = await result.Content.ReadAsStringAsync();
+            if (!string.IsNullOrEmpty(content))
+                return JsonConvert.DeserializeObject<T>(content);
+
+            return default(T);
+        }
+
+        internal async Task<T> Post<T>(string url, object data, string urlToGet = null)
+        {
+            using (var message = PrepareMessage(HttpMethod.Post, url))
             {
-                var result = await httpClient.SendAsync(message);
+                var serialized = await Serialize(data);
+                message.Content = new StringContent(serialized, Encoding.UTF8, "application/json");
+
+                var result = await HttpClient.SendAsync(message);
 
                 if (result.Headers.Location != null)
-                {
-                    // Fix for Visma not returning correct URL when createing salesorders of not SO type
                     if (urlToGet == null)
                     {
                         return await Get<T>(result.Headers.Location.AbsoluteUri);
                     }
                     else
                     {
-                        string pattern = @".(.*)\/(\d+)";
-                        string substitution = @"$2";
-                        var regex = new System.Text.RegularExpressions.Regex(pattern);
+                        var pattern = @".(.*)\/(\d+)";
+                        var substitution = @"$2";
+                        var regex = new Regex(pattern);
                         var id = regex.Replace(result.Headers.Location.AbsoluteUri, substitution);
                         return await Get<T>($"{urlToGet}/{id}");
                     }
-                }
                 if (result.StatusCode == HttpStatusCode.NoContent)
                     return await Get<T>(url);
 
@@ -193,18 +179,18 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal async Task<T> Put<T>(string url, object data, string urlToGet=null)
+        internal async Task<T> Put<T>(string url, object data, string urlToGet = null)
         {
-            var message = PrepareMessage(HttpMethod.Put, url);
-            var serialized = await Serialize(data);
-            using (var content = new StringContent(serialized, Encoding.UTF8, "application/json"))
+            using (var message = PrepareMessage(HttpMethod.Put, url))
             {
-                message.Content = content;
-                var result = await httpClient.SendAsync(message);
+                var serialized = await Serialize(data);
+                message.Content = new StringContent(serialized, Encoding.UTF8, "application/json");
+
+                var result = await HttpClient.SendAsync(message);
                 if (result.Headers.Location != null)
                     return await Get<T>(result.Headers.Location.AbsoluteUri);
                 if (result.StatusCode == HttpStatusCode.NoContent)
-                    if (urlToGet != null) 
+                    if (urlToGet != null)
                         return await Get<T>(urlToGet);
                     else
                         return await Get<T>(url);
@@ -225,7 +211,8 @@ namespace ONIT.VismaNetApi.Lib
         {
             return
                 await
-                    Task.Factory.StartNew(() => JsonConvert.SerializeObject(obj, Formatting.Indented, _serializerSettings));
+                    Task.Factory.StartNew(() =>
+                        JsonConvert.SerializeObject(obj, Formatting.Indented, SerializerSettings));
         }
 
         private async Task<T> Deserialize<T>(string str)
@@ -249,6 +236,13 @@ namespace ONIT.VismaNetApi.Lib
                     yield return item;
                 }
             }
+        }
+
+        public async Task<bool> Delete(string url)
+        {
+            var message = PrepareMessage(HttpMethod.Delete, url);
+            var result = await HttpClient.SendAsync(message);
+            return result.StatusCode == HttpStatusCode.NoContent;
         }
     }
 }
