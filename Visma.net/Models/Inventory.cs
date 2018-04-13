@@ -68,6 +68,9 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
+        [JsonProperty]
+        public CostPriceStatistics costPriceStatistics { get; }
+
         public DateTime? lastModifiedDateTime { get; set; }
 
         public string baseUnit { get; set; }
