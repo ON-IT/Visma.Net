@@ -1,4 +1,7 @@
-﻿namespace ONIT.VismaNetApi.Models.CustomDto
+﻿using System;
+using Newtonsoft.Json;
+
+namespace ONIT.VismaNetApi.Models.CustomDto
 {
     public class WarehouseDetails
     {
@@ -7,5 +10,8 @@
         public decimal quantityOnHand { get; set; }
         public decimal available { get; set; }
         public decimal availableForShipment { get; set; }
+
+        [JsonProperty]
+        public DateTime lastModifiedDateTime { get; private set; }
     }
 }

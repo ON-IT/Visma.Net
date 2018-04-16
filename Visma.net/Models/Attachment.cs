@@ -16,7 +16,7 @@ namespace ONIT.VismaNetApi.Models
         }
 		*/		
 		public string name { get; set; }
-		public Guid id { get; set; }
+		public string id { get; set; }
 		public int revision { get; set; }
 	}
 }

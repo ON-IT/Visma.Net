@@ -15,9 +15,10 @@ namespace ONIT.VismaNetApi.Lib
 {
     internal class VismaNetHttpClient
     {
-        private static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
+        public static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
         {
-            DateFormatString = "yyyy-MM-dd HH:mm:ss",
+            DateFormatString = "yyyy-MM-ddTHH:mm:ss.fffZ",
+            DateParseHandling = DateParseHandling.DateTime,
             Converters =
             {
                 new StringEnumConverter()

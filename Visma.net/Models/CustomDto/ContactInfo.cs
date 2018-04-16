@@ -1,19 +1,22 @@
 ﻿using System.Text;
+using Newtonsoft.Json;
 using ONIT.VismaNetApi.Lib;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
 {
     public class ContactInfo : DtoProviderBase
     {
-        public bool overrideContact
+       /* public bool overrideContact
         {
             get { return Get<bool>(); }
             set { Set(value); }
         }
+*/
+        [JsonProperty]
         public int contactId
         {
-            get { return Get<int>(); }
-            set { Set(value); }
+            get;
+            private set;
         }
 
         public string name
@@ -76,6 +79,6 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 
             return builder.ToString().Trim();
         }
-        public bool contactIdSpecified => contactId > 0;
+        /*public bool contactIdSpecified => contactId > 0;*/
     }
 }

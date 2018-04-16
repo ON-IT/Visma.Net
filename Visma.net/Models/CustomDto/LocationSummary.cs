@@ -1,6 +1,6 @@
 ﻿namespace ONIT.VismaNetApi.Models.CustomDto
 {
-    public class LocationSummary : DescriptiveDto
+    public class LocationSummary : IdName
     {
         public string countryId { get; set; }
     }
