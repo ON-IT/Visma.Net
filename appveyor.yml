@@ -10,7 +10,7 @@
   dotnet_csproj:
     patch: false
   before_build:
-    - dotnet restore
+    - nuget restore
     - ps: ./appveyor.ps1
   build:
     publish_nuget: true
