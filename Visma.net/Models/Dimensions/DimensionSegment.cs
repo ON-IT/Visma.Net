@@ -9,6 +9,11 @@ namespace ONIT.VismaNetApi.Models.Dimensions
 {
     public class DimensionSegment : DtoProviderBase, IProvideIdentificator
     {
+        public string dimensionId
+        {
+            get { return Get<NotDto<string>>(defaultValue: new NotDto<string>(string.Empty)).Value; }
+            set { Set(new NotDto<string>(value)); }
+        }
         public int segmentId { get; set; }
 
         public string description

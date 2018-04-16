@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using ONIT.VismaNetApi.Lib;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
@@ -12,10 +13,11 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             RequiredFields.Add("county", new DtoValue(null));
         }
 
+        [JsonProperty]
         public int addressId
         {
-            get { return Get<int>(); }
-            set { Set(value); }
+            get;
+            private set;
         }
 
         public string addressLine1
@@ -68,34 +70,36 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             set { Set(value?.Trim()); }
         }
 
-        public Country country
+        public IdName country
         {
-            get { return Get("countryId", new Country()); }
+            get { return Get("countryId", new IdName()); }
             set { Set(value, "countryId"); }
         }
 
-        public DescriptiveDto county
+        public IdName county
         {
-            get { return Get<DescriptiveDto>(); }
+            get { return Get<IdName>(); }
             set { Set(value); }
         }
-
+/*
         public State state
         {
             get { return Get("stateId", new State()); }
             set { Set(value, "stateId"); }
-        }
+        }*/
 
-        public bool addressIdSpecified
+            
+       /* public bool addressIdSpecified
         {
             get { return addressId > 0; }
+            private set{}
         }
 
         public bool overrideAddress
         {
             get { return Get<bool>(); }
             set { Set(value); }
-        }
+        }*/
 
         public override string ToString()
         {

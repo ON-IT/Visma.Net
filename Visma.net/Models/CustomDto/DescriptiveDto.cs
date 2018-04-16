@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
@@ -6,7 +7,7 @@ using ONIT.VismaNetApi.Interfaces;
 
 namespace ONIT.VismaNetApi.Models
 {
-    
+
     public class DescriptiveDto : IBecomeDto, INotifyPropertyChanged
     {
         private string _id;
@@ -36,7 +37,7 @@ namespace ONIT.VismaNetApi.Models
 
         public DtoValue ToDto()
         {
-            if(!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(id))
                 return new DtoValue(id);
             return null;
         }
@@ -111,6 +112,9 @@ namespace ONIT.VismaNetApi.Models
             };
         }
 
+        [JsonProperty]
+        public string defaultVatCategory { get; private set; }
+
         public VatCode(string id)
             : base(id)
         {
@@ -146,7 +150,7 @@ namespace ONIT.VismaNetApi.Models
         public VatZone(string id)
             : base(id)
         {
-            
+
         }
 
         public static implicit operator VatZone(string id)
@@ -198,6 +202,8 @@ namespace ONIT.VismaNetApi.Models
 
     public class ItemClass : DescriptiveDto
     {
+        public string type { get; set; }
+        public List<AttributeDefinition> attributes { get; set; }
         public ItemClass()
         {
         }
@@ -211,6 +217,24 @@ namespace ONIT.VismaNetApi.Models
             return new ItemClass(id);
         }
     }
+
+    public class AttributeDefinition
+    {
+        public string attributeid { get; set; }
+        public string description { get; set; }
+        public int sortorder { get; set; }
+        public bool required { get; set; }
+        public string attributetype { get; set; }
+        public string defaultvalue { get; set; }
+        public List<AttributeDefinitionDetail> details { get; set; }
+    }
+
+    public class AttributeDefinitionDetail
+    {
+        public string id { get; set; }
+        public string description { get; set; }
+    }
+    
 
     public class PostingClass : DescriptiveDto
     {
