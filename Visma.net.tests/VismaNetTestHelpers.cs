@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using JsonDiffPatchDotNet;
 using Newtonsoft.Json;
@@ -30,8 +31,8 @@ namespace Visma.net.tests
             var jdp = new JsonDiffPatch();
             var patch = jdp.Diff(updateToken, controlToken);
             var log = $"{patch}" + Environment.NewLine + Environment.NewLine + $"{updateToken}" + Environment.NewLine +
-                      Environment.NewLine + $"{controlToken}";
-            File.WriteAllText(@"C:\temp\vismanetdiffpatch-" + typeof(T).Name.ToLower() + ".json", log);
+                                Environment.NewLine + $"{controlToken}";
+            Debug.WriteLineIf(patch != null, log);
             return patch;
         }
     }

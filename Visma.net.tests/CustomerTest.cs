@@ -1,4 +1,5 @@
 ﻿using ONIT.VismaNetApi.Models;
+using Xunit.Abstractions;
 
 namespace Visma.net.tests
 {
@@ -423,9 +424,9 @@ namespace Visma.net.tests
     }
   ]
 }";
-        public CustomerTest() : base (dto, update)
+        public CustomerTest(ITestOutputHelper output) : base (dto, update)
         {
-            
+            this.output = output;
         }
     }
 }

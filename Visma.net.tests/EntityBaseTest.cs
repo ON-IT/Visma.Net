@@ -5,11 +5,14 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Visma.net.tests
 {
     public abstract class EntityBaseTest<T> where T : DtoProviderBase
     {
+        protected ITestOutputHelper output;
+
         protected EntityBaseTest(string dto, string update)
         {
             _dto = dto;
@@ -30,6 +33,8 @@ namespace Visma.net.tests
         public void CanSerializeToUpdateDto()
         {
             var patch = VismaNetTestHelpers.CreateDtoDiff<T>(_dto, _update);
+            if(patch != null)
+                output?.WriteLine(patch.ToString(Formatting.Indented));
             Assert.Null(patch);
         }
 
@@ -42,9 +47,8 @@ namespace Visma.net.tests
             var token2 = JToken.Parse(_dto.ToLower());
             var jdp = new JsonDiffPatch();
             var patch = jdp.Diff(token1, token2);
-            var log = $"{patch}" + Environment.NewLine + Environment.NewLine + $"{token1}" + Environment.NewLine +
-                      Environment.NewLine + $"{token2}";
-            File.WriteAllText(@"C:\temp\vismanetdiffpatch-" + typeof(T).Name + "-all-props.json", log);
+            if(patch != null)
+                output?.WriteLine(patch.ToString(Formatting.Indented));
             Assert.Null(patch);
         }
     }
