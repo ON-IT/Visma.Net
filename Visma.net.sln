@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Visma.net", "Visma.net\Visma.net.csproj", "{2486A884-F92B-4117-9A37-00F4DF67C451}"
 EndProject
@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CAE6FE
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visma.net.tests", "Visma.net.tests\Visma.net.tests.csproj", "{E5789D3C-D7C3-4ADA-B7E0-45645DC29C4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{2486A884-F92B-4117-9A37-00F4DF67C451}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2486A884-F92B-4117-9A37-00F4DF67C451}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2486A884-F92B-4117-9A37-00F4DF67C451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5789D3C-D7C3-4ADA-B7E0-45645DC29C4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5789D3C-D7C3-4ADA-B7E0-45645DC29C4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5789D3C-D7C3-4ADA-B7E0-45645DC29C4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5789D3C-D7C3-4ADA-B7E0-45645DC29C4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

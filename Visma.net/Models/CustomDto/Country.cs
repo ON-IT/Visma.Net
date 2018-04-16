@@ -1,6 +1,6 @@
 ﻿namespace ONIT.VismaNetApi.Models.CustomDto
 {
-    public class Country : DescriptiveDto
+    public class Country : IdName
     {
         public Country(string countryId) : base(countryId)
         {
@@ -14,7 +14,7 @@
 
         public override string ToString()
         {
-            return string.IsNullOrWhiteSpace(description) ? id : $"{id} - {description}";
+            return string.IsNullOrWhiteSpace(name) ? id : $"{id} - {name}";
         }
 
         public static implicit operator Country(string id)
