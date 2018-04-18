@@ -173,8 +173,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             var webClient = GetHttpClient(auth);
             {
-                var apiUrl = GetApiUrlForController(VismaNetControllers.Dimensions,
-                    string.Format("/{0}", dimension.TrimStart('/')));
+                var apiUrl = GetApiUrlForController(VismaNetControllers.Dimensions, $"/{dimension.TrimStart('/')}");
                 var container = await webClient.Get<DimensionContainer>(apiUrl);
                 return container.segments;
             }
@@ -193,8 +192,7 @@ namespace ONIT.VismaNetApi.Lib
 
         private static int TryParseToInt(string value)
         {
-            var val = 0;
-            if (int.TryParse(value, out val))
+            if (int.TryParse(value, out var val))
                 return val;
             return 0;
         }

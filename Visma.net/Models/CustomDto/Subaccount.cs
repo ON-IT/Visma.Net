@@ -1,18 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
 {
     public class Subaccount : IProvideCustomDto
     {
-        public string description { get; set; }
-        public int id { get; set; }
-        public string lastModifiedDateTime { get; set; }
-        public List<Segment> segments { get; set; }
+        private List<Segment> _segments;
 
-        public bool HasSegments
+        [JsonProperty]
+        public string description { get; private set; }
+        [JsonProperty]
+        public int id { get; private set; }
+        [JsonProperty]
+        public int subaccountId { get; private set; }
+        [JsonProperty]
+        public string lastModifiedDateTime { get; private set; }
+
+        [JsonProperty]
+        public List<Segment> segments
         {
-            get { return segments != null && segments.Count > 0; }
+            get => _segments ?? (_segments = new List<Segment>());
+            private set => _segments = value;
         }
 
         /// <summary>
@@ -33,8 +42,6 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             }
             set
             {
-                if (segments == null)
-                    segments = new List<Segment>();
                 var firstOrDefault = segments.FirstOrDefault(x => x.segmentId == segmentId);
                 if (firstOrDefault != null)
                 {
@@ -42,7 +49,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
                 }
                 else
                 {
-                    segments.Add(new Segment() {segmentId = segmentId, segmentValue = value});
+                    segments.Add(new Segment {segmentId = segmentId, segmentValue = value});
                 }
             }
         }
