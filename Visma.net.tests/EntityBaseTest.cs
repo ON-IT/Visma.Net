@@ -32,6 +32,7 @@ namespace Visma.net.tests
         [Fact]
         public void CanSerializeToUpdateDto()
         {
+            if (_update == null) return;
             var patch = VismaNetTestHelpers.CreateDtoDiff<T>(_dto, _update);
             if(patch != null)
                 output?.WriteLine(patch.ToString(Formatting.Indented));

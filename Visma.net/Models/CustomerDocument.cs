@@ -1,42 +1,109 @@
 ﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 
 namespace ONIT.VismaNetApi.Models
 {
-   public class CustomerDocument
+    public class CustomerDocument : DtoProviderBase
     {
-        public Account account { get; set; }
-        public ONIT.VismaNetApi.Models.CustomDto.Subaccount subaccount { get; set; }
-        public CondensedBranch branch { get; set; }
-        public DateTime documentDueDate { get; set; }
-        public Customer customer { get; set; }
-        public string documentType { get; set; }
-        public string referenceNumber { get; set; }
-        public string postPeriod { get; set; }
-        public string financialPeriod { get; set; }
-        public DateTime documentDate { get; set; }
-        public string status { get; set; }
-        public string currencyId { get; set; }
-        public decimal amount { get; set; }
-        public decimal amountInCurrency { get; set; }
-        public decimal balance { get; set; }
-        public decimal balanceInCurrency { get; set; }
-        public decimal cashDiscount { get; set; }
-        public decimal cashDiscountInCurrency { get; set; }
-        public string invoiceText { get; set; }
-        public DateTime lastModifiedDateTime { get; set; }
-        public DateTime createdDateTime { get; set; }
-        public string note { get; set; }
-        public decimal vatTotal { get; set; }
-        public decimal vatTotalInCurrency { get; set; }
-        public Location location { get; set; }
+        [JsonProperty]
+        public Account account { get; private set; }
+
+        [JsonProperty]
+        public CustomDto.Subaccount subaccount { get; private set; }
+
+        [JsonProperty]
+        public NumberName branch { get; private set; }
+
+        [JsonProperty]
+        public NumberName branchNumber { get; private set; }
+
+        [JsonProperty]
+        public DateTime documentDueDate { get; private set; }
+
+        [JsonProperty]
+        public CustomerSummary customer { get; private set; }
+
+        [JsonProperty]
+        public string documentType { get; private set; }
+
+        [JsonProperty]
+        public string referenceNumber { get; private set; }
+
+        [JsonProperty]
+        public string postPeriod { get; private set; }
+
+        [JsonProperty]
+        public string closedFinancialPeriod { get; private set; }
+        
+        [JsonProperty]
+        public string customerRefNumber { get; private set; }
+
+        [JsonProperty]
+        public DescriptionId project { get; private set; }
+
+        [JsonProperty]
+        public string cashAccount { get; private set; }
+
+        [JsonProperty]
+        public string financialPeriod { get; private set; }
+
+        [JsonProperty]
+        public DateTime documentDate { get; private set; }
+        [JsonProperty]
+        public PaymentMethod paymentMethod { get; private set; }
+        [JsonProperty]
+        public string status { get; private set; }
+
+        [JsonProperty]
+        public string currencyId { get; private set; }
+
+        [JsonProperty]
+        public decimal amount { get; private set; }
+
+        [JsonProperty]
+        public decimal amountInCurrency { get; private set; }
+
+        [JsonProperty]
+        public decimal balance { get; private set; }
+
+        [JsonProperty]
+        public decimal balanceInCurrency { get; private set; }
+
+        [JsonProperty]
+        public decimal cashDiscount { get; private set; }
+
+        [JsonProperty]
+        public decimal cashDiscountInCurrency { get; private set; }
+
+        [JsonProperty]
+        public string invoiceText { get; private set; }
+
+        [JsonProperty]
+        public DateTime lastModifiedDateTime { get; private set; }
+
+        [JsonProperty]
+        public DateTime createdDateTime { get; private set; }
+
+        [JsonProperty]
+        public string note { get; private set; }
+
+        [JsonProperty]
+        public decimal vatTotal { get; private set; }
+
+        [JsonProperty]
+        public decimal vatTotalInCurrency { get; private set; }
+
+        [JsonProperty]
+        public LocationSummary location { get; private set; }
+
+        [JsonProperty]
+        public JObject extras { get; private set; }
+
+        [JsonProperty]
+        public string errorInfo { get; set; }
+
     }
-    
-   
-    public class CondensedBranch
-    {
-        public string number { get; set; }
-        public string name { get; set; }
-    }
-    
 }
