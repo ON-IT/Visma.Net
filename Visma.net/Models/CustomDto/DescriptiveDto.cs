@@ -111,10 +111,7 @@ namespace ONIT.VismaNetApi.Models
                 id = id
             };
         }
-
-        [JsonProperty]
-        public string defaultVatCategory { get; private set; }
-
+        
         public VatCode(string id)
             : base(id)
         {
@@ -152,6 +149,10 @@ namespace ONIT.VismaNetApi.Models
         {
 
         }
+
+        
+        [JsonProperty]
+        public string defaultVatCategory { get; private set; }
 
         public static implicit operator VatZone(string id)
         {

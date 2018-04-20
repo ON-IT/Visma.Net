@@ -54,11 +54,11 @@ namespace ONIT.VismaNetApi.Models
             private set => _segments = value;
         }
 
-        public string subaccountCd
+       /* public string subaccountCd
         {
             get => Get<string>();
             set => Set(value);
-        }
+        }*/
 
         public int subaccountId
         {

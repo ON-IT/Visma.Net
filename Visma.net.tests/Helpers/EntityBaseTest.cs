@@ -47,7 +47,8 @@ namespace Visma.net.tests
         {
             var inventory = JsonConvert.DeserializeObject<T>(PrepareDtoForSerializer(_dto), new JsonSerializerSettings()
             {
-                MissingMemberHandling = MissingMemberHandling.Error
+                MissingMemberHandling = MissingMemberHandling.Error,
+                NullValueHandling = NullValueHandling.Include
             });
             Assert.IsType<T>(inventory);
         }
@@ -65,7 +66,10 @@ namespace Visma.net.tests
         [Fact]
         public void ContainsAllProperties()
         {
-            var entity = JsonConvert.DeserializeObject<T>(PrepareDtoForSerializer(_dto), VismaNetTestHelpers.SerializerSettings);
+            var settings = VismaNetTestHelpers.SerializerSettings;
+            settings.NullValueHandling = NullValueHandling.Include;
+            settings.MissingMemberHandling = MissingMemberHandling.Error;
+            var entity = JsonConvert.DeserializeObject<T>(PrepareDtoForSerializer(_dto), settings);
             var src = JsonConvert.SerializeObject(entity, VismaNetTestHelpers.SerializerSettings);
             var token1 = JToken.Parse(src.ToLower());
             var token2 = JToken.Parse(PrepareDtoForSerializer(_dto).ToLower());

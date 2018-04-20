@@ -288,7 +288,7 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-       /* public RotRutDetails rotRutDetails
+        /* public RotRutDetails rotRutDetails
         {
             get => Get(defaultValue: new RotRutDetails());
             set => Set(value);
@@ -323,11 +323,11 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value, "taxDetailsLines");
         }
 
-        public VatCode vatCode
+       /* public VatCode vatCode
         {
             get => Get<VatCode>();
             set => Set(value);
-        }
+        }*/
 
         [JsonProperty]
         public decimal vatExemptTotal
