@@ -29,18 +29,12 @@ namespace ONIT.VismaNetApi.Lib
 
         public object this[string index]
         {
-            get
-            {
-                object value;
-                return _data.TryGetValue(index, out value) ? value : null;
-            }
+            get => _data.TryGetValue(index, out var value) ? value : null;
             set
             {
-                if (_data[index] != value)
-                {
-                    _data[index] = value;
-                    OnPropertyChanged(index);
-                }
+                if (_data[index] == value) return;
+                _data[index] = value;
+                OnPropertyChanged(index);
             }
         }
 
@@ -66,8 +60,7 @@ namespace ONIT.VismaNetApi.Lib
             {
                 if (dtoField.Value == null)
                     continue;
-                var value = dtoField.Value as DtoValue;
-                if (value != null)
+                if (dtoField.Value is DtoValue value)
                 {
                     if(value.Value == null)
                         continue;
@@ -139,25 +132,21 @@ namespace ONIT.VismaNetApi.Lib
         {
             try
             {
-                var providesCustomDto = value as IProvideCustomDto;
-                if (providesCustomDto != null)
+                if (value is IProvideCustomDto providesCustomDto)
                 {
                     return providesCustomDto.ToDto();
                 }
 
-                var providesDto = value as IProvideDto;
-                if (providesDto != null)
+                if (value is IProvideDto providesDto)
                 {
                     return new DtoValue(providesDto.ToDto());
                 }
-                var becomesDto = value as IBecomeDto;
-                if (becomesDto != null)
+                if (value is IBecomeDto becomesDto)
                 {
                     return becomesDto.ToDto();
                 }
 
-                var listOfProvidesDto = value as IEnumerable<IProvideDto>;
-                if (listOfProvidesDto != null)
+                if (value is IEnumerable<IProvideDto> listOfProvidesDto)
                 {
                     return listOfProvidesDto.Select(x => x.ToDto()).ToList();
                 }

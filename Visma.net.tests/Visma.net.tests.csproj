@@ -62,12 +62,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerDocumentTests.cs" />
-    <Compile Include="CustomerTest.cs" />
-    <Compile Include="EntityBaseTest.cs" />
-    <Compile Include="InventoryTests.cs" />
+    <Compile Include="Tests\CustomerDocumentTests.cs" />
+    <Compile Include="Tests\CustomerInvoiceTests.cs" />
+    <Compile Include="Tests\CustomerTest.cs" />
+    <Compile Include="Helpers\EntityBaseTest.cs" />
+    <Compile Include="Tests\InventoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VismaNetTestHelpers.cs" />
+    <Compile Include="Helpers\VismaNetTestHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
