@@ -103,8 +103,7 @@ namespace ONIT.VismaNetApi.Models
         }
 
 
-        [JsonProperty]
-        public string closedFinancialPeriod { get; private set; }
+        [JsonProperty] public string closedFinancialPeriod { get; private set; }
 
         [JsonProperty]
         public ContactSummary contact
@@ -182,14 +181,11 @@ namespace ONIT.VismaNetApi.Models
             private set; // { Set(value); }
         }
 
-        [JsonProperty]
-        public DateTime dunningLetterDate { get; private set; }
+        [JsonProperty] public DateTime dunningLetterDate { get; private set; }
 
-        [JsonProperty]
-        public int dunningLetterLevel { get; private set; }
+        [JsonProperty] public int dunningLetterLevel { get; private set; }
 
-        [JsonProperty]
-        public string errorInfo { get; private set; }
+        [JsonProperty] public string errorInfo { get; private set; }
 
         public decimal exchangeRate
         {
@@ -203,8 +199,7 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        [JsonProperty]
-        public JObject extras { get; private set; }
+        [JsonProperty] public JObject extras { get; private set; }
 
         public string financialPeriod
         {
@@ -288,6 +283,13 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        [JsonProperty]
+        public DescriptiveDto salesPerson
+        {
+            get => Get<DescriptiveDto>();
+            set => Set(value);
+        }
+
         /* public RotRutDetails rotRutDetails
         {
             get => Get(defaultValue: new RotRutDetails());
@@ -314,8 +316,7 @@ namespace ONIT.VismaNetApi.Models
             private set; // { Set(value); }
         }
 
-        [JsonProperty]
-        public Subaccount subaccount { get; private set; }
+        [JsonProperty] public Subaccount subaccount { get; private set; }
 
         public List<TaxDetail> TaxDetails
         {
@@ -323,7 +324,7 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value, "taxDetailsLines");
         }
 
-       /* public VatCode vatCode
+        /* public VatCode vatCode
         {
             get => Get<VatCode>();
             set => Set(value);
@@ -339,8 +340,8 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty]
         public decimal vatExemptTotalInCurrency
         {
-            get; // { return Get<decimal>(); }
-            private set; // { Set(value); }
+            get => Get<NotDto<decimal>>()?.Value ?? 0; // { return Get<decimal>(); }
+            set => Set(new NotDto<decimal>(value)); // { Set(value); }
         }
 
         [JsonProperty]
@@ -404,8 +405,7 @@ namespace ONIT.VismaNetApi.Models
     {
         public int id { get; set; }
 
-        [JsonProperty]
-        public string name { get; private set; }
+        [JsonProperty] public string name { get; private set; }
 
         public DtoValue ToDto()
         {

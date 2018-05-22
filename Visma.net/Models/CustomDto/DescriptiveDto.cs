@@ -26,7 +26,7 @@ namespace ONIT.VismaNetApi.Models
 
         public string id
         {
-            get { return _id; }
+            get => _id;
             set
             {
                 if (value == _id) return;

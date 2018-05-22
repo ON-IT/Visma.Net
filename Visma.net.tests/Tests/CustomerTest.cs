@@ -1,4 +1,6 @@
-﻿using ONIT.VismaNetApi.Models;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
 
 namespace Visma.net.tests
@@ -7,8 +9,8 @@ namespace Visma.net.tests
     {
         private static readonly  string dto = @"{
   ""internalId"": 0,
-  ""name"": ""string"",
   ""number"": ""string"",
+  ""name"": ""string"",
   ""status"": ""Active"",
   ""mainAddress"": {
     ""addressId"": 0,
@@ -131,35 +133,65 @@ namespace Visma.net.tests
       ""description"": ""string""
     }
   ],
-  ""lastModifiedDateTime"": ""2018-04-13T10:44:45.538Z"",
-  ""createdDateTime"": ""2018-04-13T10:44:45.538Z"",
+  ""lastModifiedDateTime"": ""2018-05-22T07:27:27.816Z"",
+  ""createdDateTime"": ""2018-05-22T07:27:27.816Z"",
   ""directDebitLines"": [
     {
+      ""operation"": ""Insert"",
       ""id"": ""string"",
-      ""operation"": ""insert"",
       ""mandateId"": ""string"",
       ""mandateDescription"": ""string"",
-      ""dateOfSignature"": ""2018-04-13T10:44:45.000Z"",
+      ""dateOfSignature"": ""2018-05-22T07:27:27.816Z"",
       ""isDefault"": true,
       ""oneTime"": true,
       ""bic"": ""string"",
       ""iban"": ""string"",
-      ""lastCollectionDate"": ""2018-04-13T10:44:45.000Z"",
+      ""lastCollectionDate"": ""2018-05-22T07:27:27.816Z"",
       ""maxAmount"": 0.0,
-      ""expirationDate"": ""2018-04-13T10:44:45.000Z""
+      ""expirationDate"": ""2018-05-22T07:27:27.816Z""
     }
   ],
   ""priceClass"": {
     ""id"": ""string"",
     ""description"": ""string""
   },
+  ""glAccounts"": {
+    ""salesAccount"": {
+      ""type"": ""string"",
+      ""number"": ""string"",
+      ""description"": ""string""
+    },
+    ""salesNonTaxableAccount"": {
+      ""type"": ""string"",
+      ""number"": ""string"",
+      ""description"": ""string""
+    },
+    ""salesEuAccount"": {
+      ""type"": ""string"",
+      ""number"": ""string"",
+      ""description"": ""string""
+    },
+    ""salesExportAccount"": {
+      ""type"": ""string"",
+      ""number"": ""string"",
+      ""description"": ""string""
+    },
+    ""salesSubaccount"": {
+      ""id"": ""string"",
+      ""description"": ""string""
+    }
+  },
+  ""overrideWithClassValues"": true,
+  ""invoiceToDefaultLocation"": true,
   ""extras"": {},
   ""errorInfo"": ""string"",
-  ""overrideWithClassValues"": true,
   ""note"": ""string""
 }";
 
         private static readonly string update = @"{
+ /* ""number"": {
+    ""value"": ""string""
+  },*/
   ""name"": {
     ""value"": ""string""
   },
@@ -204,6 +236,9 @@ namespace Visma.net.tests
     ""value"": true
   },
   ""printMultiCurrencyStatements"": {
+    ""value"": true
+  },
+  ""invoiceToDefaultLocation"": {
     ""value"": true
   },
   ""vatRegistrationId"": {
@@ -388,7 +423,7 @@ namespace Visma.net.tests
         ""value"": ""string""
       },
       ""dateOfSignature"": {
-        ""value"": ""2018-04-13T10:44:45.000Z""
+        ""value"": ""2018-05-22T07:27:27.816Z""
       },
       ""isDefault"": {
         ""value"": true
@@ -403,13 +438,13 @@ namespace Visma.net.tests
         ""value"": ""string""
       },
       ""lastCollectionDate"": {
-        ""value"": ""2018-04-13T10:44:45.000Z""
+        ""value"": ""2018-05-22T07:27:27.816Z""
       },
       ""maxAmount"": {
         ""value"": 0.0
       },
       ""expirationDate"": {
-        ""value"": ""2018-04-13T10:44:45.000Z""
+        ""value"": ""2018-05-22T07:27:27.816Z""
       }
     }
   ],
@@ -424,6 +459,15 @@ namespace Visma.net.tests
     }
   ]
 }";
+
+        public override string PrepareDtoForUpdate(string src)
+        {
+           
+            var jtoken = JToken.Parse(src);
+            // rutRotType is wrong in dto vs. update
+            return jtoken.ToString(Formatting.Indented);
+        }
+
         public CustomerTest(ITestOutputHelper output) : base (dto, update)
         {
             this.output = output;

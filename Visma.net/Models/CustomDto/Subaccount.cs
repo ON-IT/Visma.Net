@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
 {
@@ -23,6 +25,11 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             get => _segments ?? (_segments = new List<Segment>());
             private set => _segments = value;
         }
+        [JsonProperty]
+        public string errorInfo { get; private set; }
+
+        [JsonProperty] 
+        public JObject extras { get; private set; }
 
         /// <summary>
         /// Sets a segment (department, project) for an invoice line. Remember that you have to set ALL segments for a line.

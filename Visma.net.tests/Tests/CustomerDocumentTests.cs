@@ -10,8 +10,8 @@ namespace Visma.net.tests
 {
     public class CustomerDocumentTests : EntityBaseTest<CustomerDocument>
     {
-        private static string dto = @" {
-    ""documentDueDate"": ""2018-04-17T15:35:56.874Z"",
+        private static string dto = @"{
+    ""documentDueDate"": ""2018-05-22T07:27:28.158Z"",
     ""branch"": {
       ""number"": ""string"",
       ""name"": ""string""
@@ -25,7 +25,7 @@ namespace Visma.net.tests
     ""postPeriod"": ""string"",
     ""financialPeriod"": ""string"",
     ""closedFinancialPeriod"": ""string"",
-    ""documentDate"": ""2018-04-17T15:35:56.874Z"",
+    ""documentDate"": ""2018-05-22T07:27:28.158Z"",
     ""status"": ""Hold"",
     ""currencyId"": ""string"",
     ""amount"": 0.0,
@@ -40,8 +40,8 @@ namespace Visma.net.tests
     },
     ""customerRefNumber"": ""string"",
     ""invoiceText"": ""string"",
-    ""lastModifiedDateTime"": ""2018-04-17T15:35:56.874Z"",
-    ""createdDateTime"": ""2018-04-17T15:35:56.874Z"",
+    ""lastModifiedDateTime"": ""2018-05-22T07:27:28.158Z"",
+    ""createdDateTime"": ""2018-05-22T07:27:28.158Z"",
     ""note"": ""string"",
     ""vatTotal"": 0.0,
     ""vatTotalInCurrency"": 0.0,
@@ -70,7 +70,7 @@ namespace Visma.net.tests
       ""subaccountId"": 0,
       ""description"": ""string"",
       ""id"": 0,
-      ""lastModifiedDateTime"": ""2018-04-17T15:35:56.874Z"",
+      ""lastModifiedDateTime"": ""2018-05-22T07:27:28.158Z"",
       ""segments"": [
         {
           ""segmentId"": 0,
@@ -78,7 +78,9 @@ namespace Visma.net.tests
           ""segmentValue"": ""string"",
           ""segmentValueDescription"": ""string""
         }
-      ]
+      ],
+      ""extras"": {},
+      ""errorInfo"": ""string""
     },
     ""extras"": {},
     ""errorInfo"": ""string""

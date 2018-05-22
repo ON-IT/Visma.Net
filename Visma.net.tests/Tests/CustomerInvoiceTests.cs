@@ -17,12 +17,12 @@ namespace Visma.net.tests.Tests
     ""id"": ""string"",
     ""description"": ""string""
   },
-  ""documentDueDate"": ""2018-04-17T15:35:57.044Z"",
-  ""cashDiscountDate"": ""2018-04-17T15:35:57.044Z"",
+  ""documentDueDate"": ""2018-05-22T07:27:28.176Z"",
+  ""cashDiscountDate"": ""2018-05-22T07:27:28.176Z"",
   ""externalReference"": ""string"",
   ""isRotRutDeductible"": true,
   ""exchangeRate"": 0.0,
-  ""dunningLetterDate"": ""2018-04-17T15:35:57.044Z"",
+  ""dunningLetterDate"": ""2018-05-22T07:27:28.176Z"",
   ""dunningLetterLevel"": 0,
   ""contact"": {
     ""id"": 0,
@@ -50,8 +50,8 @@ namespace Visma.net.tests.Tests
   ],
   ""invoiceLines"": [
     {
-      ""termStartDate"": ""2018-04-17T15:35:57.044Z"",
-      ""termEndDate"": ""2018-04-17T15:35:57.044Z"",
+      ""termStartDate"": ""2018-05-22T07:27:28.176Z"",
+      ""termEndDate"": ""2018-05-22T07:27:28.176Z"",
       ""isRotRutDeductible"": true,
       ""itemType"": ""Service"",
       ""typeOfWork"": {
@@ -101,7 +101,7 @@ namespace Visma.net.tests.Tests
         ""subaccountId"": 0,
         ""description"": ""string"",
         ""id"": 0,
-        ""lastModifiedDateTime"": ""2018-04-17T15:35:57.044Z"",
+        ""lastModifiedDateTime"": ""2018-05-22T07:27:28.176Z"",
         ""segments"": [
           {
             ""segmentId"": 0,
@@ -109,9 +109,15 @@ namespace Visma.net.tests.Tests
             ""segmentValue"": ""string"",
             ""segmentValueDescription"": ""string""
           }
-        ]
+        ],
+        ""extras"": {},
+        ""errorInfo"": ""string""
       },
       ""salesperson"": ""string"",
+      ""seller"": {
+        ""id"": ""string"",
+        ""description"": ""string""
+      },
       ""deferralSchedule"": 0,
       ""deferralCode"": ""string"",
       ""discountCode"": ""string"",
@@ -131,6 +137,10 @@ namespace Visma.net.tests.Tests
   ""vatExemptTotalInCurrency"": 0.0,
   ""salesPersonID"": 0,
   ""salesPersonDescr"": ""string"",
+  ""salesPerson"": {
+    ""id"": ""string"",
+    ""description"": ""string""
+  },
   ""paymentReference"": ""string"",
   ""customer"": {
     ""number"": ""string"",
@@ -141,7 +151,7 @@ namespace Visma.net.tests.Tests
   ""postPeriod"": ""string"",
   ""financialPeriod"": ""string"",
   ""closedFinancialPeriod"": ""string"",
-  ""documentDate"": ""2018-04-17T15:35:57.044Z"",
+  ""documentDate"": ""2018-05-22T07:27:28.176Z"",
   ""status"": ""Hold"",
   ""currencyId"": ""string"",
   ""amount"": 0.0,
@@ -156,8 +166,8 @@ namespace Visma.net.tests.Tests
   },
   ""customerRefNumber"": ""string"",
   ""invoiceText"": ""string"",
-  ""lastModifiedDateTime"": ""2018-04-17T15:35:57.044Z"",
-  ""createdDateTime"": ""2018-04-17T15:35:57.044Z"",
+  ""lastModifiedDateTime"": ""2018-05-22T07:27:28.176Z"",
+  ""createdDateTime"": ""2018-05-22T07:27:28.176Z"",
   ""note"": ""string"",
   ""vatTotal"": 0.0,
   ""vatTotalInCurrency"": 0.0,
@@ -186,7 +196,7 @@ namespace Visma.net.tests.Tests
     ""subaccountId"": 0,
     ""description"": ""string"",
     ""id"": 0,
-    ""lastModifiedDateTime"": ""2018-04-17T15:35:57.044Z"",
+    ""lastModifiedDateTime"": ""2018-05-22T07:27:28.177Z"",
     ""segments"": [
       {
         ""segmentId"": 0,
@@ -194,7 +204,9 @@ namespace Visma.net.tests.Tests
         ""segmentValue"": ""string"",
         ""segmentValueDescription"": ""string""
       }
-    ]
+    ],
+    ""extras"": {},
+    ""errorInfo"": ""string""
   },
   ""extras"": {},
   ""errorInfo"": ""string""
@@ -214,10 +226,10 @@ namespace Visma.net.tests.Tests
     ""value"": ""string""
   },
   ""cashDiscountDate"": {
-    ""value"": ""2018-04-17T15:35:57.044Z""
+    ""value"": ""2018-05-22T07:27:28.176Z""
   },
   ""documentDueDate"": {
-    ""value"": ""2018-04-17T15:35:57.044Z""
+    ""value"": ""2018-05-22T07:27:28.176Z""
   },
   ""externalReference"": {
     ""value"": ""string""
@@ -228,40 +240,42 @@ namespace Visma.net.tests.Tests
   ""domesticServicesDeductibleDocument"": {
     ""value"": true
   },
-//  ""rotRutDetails"": {
-//    ""distributedAutomaticaly"": {
-//      ""value"": true
-//    },
-//    ""type"": {
-//      ""value"": ""Rut""
-//    },
-//    ""appartment"": {
-//      ""value"": ""string""
-//    },
-//    ""estate"": {
-//      ""value"": ""string""
-//    },
-//    ""organizationNbr"": {
-//      ""value"": ""string""
-//    },
-//    ""distribution"": [
-//      {
-//        ""operation"": ""Insert"",
-//        ""lineNbr"": {
-//          ""value"": 0
-//        },
-//        ""personalId"": {
-//          ""value"": ""string""
-//        },
-//        ""amount"": {
-//          ""value"": 0.0
-//        },
-//        ""extra"": {
-//          ""value"": true
-//        }
-//      }
-//    ]
-//  },
+/*
+  ""rotRutDetails"": {
+    ""distributedAutomaticaly"": {
+      ""value"": true
+    },
+    ""type"": {
+      ""value"": ""Rut""
+    },
+    ""appartment"": {
+      ""value"": ""string""
+    },
+    ""estate"": {
+      ""value"": ""string""
+    },
+    ""organizationNbr"": {
+      ""value"": ""string""
+    },
+    ""distribution"": [
+      {
+        ""operation"": ""Insert"",
+        ""lineNbr"": {
+          ""value"": 0
+        },
+        ""personalId"": {
+          ""value"": ""string""
+        },
+        ""amount"": {
+          ""value"": 0.0
+        },
+        ""extra"": {
+          ""value"": true
+        }
+      }
+    ]
+  },
+*/
   ""paymentReference"": {
     ""value"": ""string""
   },
@@ -296,8 +310,8 @@ namespace Visma.net.tests.Tests
         ""value"": ""Service""
       },
       ""typeOfWork"": {
-         ""value"": ""string""
-     },
+        ""value"": ""string""
+      },
       ""taskId"": {
         ""value"": ""string""
       },
@@ -354,10 +368,10 @@ namespace Visma.net.tests.Tests
         ""value"": ""string""
       },
       ""termStartDate"": {
-        ""value"": ""2018-04-17T15:35:57.044Z""
+        ""value"": ""2018-05-22T07:27:28.176Z""
       },
       ""termEndDate"": {
-        ""value"": ""2018-04-17T15:35:57.044Z""
+        ""value"": ""2018-05-22T07:27:28.176Z""
       },
       ""note"": {
         ""value"": ""string""
@@ -371,7 +385,7 @@ namespace Visma.net.tests.Tests
     ""value"": ""string""
   },
   ""documentDate"": {
-    ""value"": ""2018-04-17T15:35:57.044Z""
+    ""value"": ""2018-05-22T07:27:28.176Z""
   },
   ""hold"": {
     ""value"": true
@@ -388,8 +402,12 @@ namespace Visma.net.tests.Tests
   ""locationId"": {
     ""value"": ""string""
   },
+  ""vatExemptTotalInCurrency"": 0.0,
   ""salesPersonID"": {
     ""value"": 0
+  },
+  ""salesperson"": {
+    ""value"": ""string""
   },
   ""note"": {
     ""value"": ""string""

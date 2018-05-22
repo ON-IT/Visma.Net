@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 
@@ -18,6 +19,13 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty]
         public int id { get; private set; }
+
+        [JsonProperty]
+
+        public JObject extras { get; private set; }
+
+        [JsonProperty]
+        public string errorInfo { get; private set; }
 
         public string this[int segmentId]
         {

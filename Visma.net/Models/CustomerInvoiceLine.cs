@@ -56,8 +56,7 @@ namespace ONIT.VismaNetApi.Models
         }
 
 
-        [JsonProperty]
-        public decimal deductableAmount { get; private set; }
+        [JsonProperty] public decimal deductableAmount { get; private set; }
 
         public string deferralCode
         {
@@ -168,12 +167,6 @@ namespace ONIT.VismaNetApi.Models
             set => Set(new NotDto<ApiOperation>(value));
         }
 
-        public TypeOfWork typeOfWork
-        {
-            get => Get<TypeOfWork>();
-            set => Set(value);
-        }
-
         public DescriptiveDto projectTask
         {
             get => Get<DescriptiveDto>("taskId");
@@ -195,6 +188,8 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        [JsonProperty] public DescriptiveDto seller { get; private set; }
+
         public CustomDto.Subaccount subaccount
         {
             get => Get(defaultValue: new CustomDto.Subaccount());
@@ -210,6 +205,12 @@ namespace ONIT.VismaNetApi.Models
         public DateTime? termStartDate
         {
             get => Get<DateTime?>();
+            set => Set(value);
+        }
+
+        public TypeOfWork typeOfWork
+        {
+            get => Get<TypeOfWork>();
             set => Set(value);
         }
 
