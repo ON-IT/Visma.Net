@@ -625,42 +625,9 @@ namespace ONIT.VismaNetApi.Models
             get => Get<DescriptiveDto>();
             set => Set(value);
         }
-        public int branch { get { return Get<int>(); } set { Set(value); } }
-        public NumberName branchNumber { get { return Get<NumberName>(); } set { Set(value); } }
-        public string invoiceNbr { get { return Get<string>(); } set { Set(value); } }
-        public bool freeItem { get { return Get<bool>(); } set { Set(value); } }
-        public DateTime requestedOn { get { return Get<DateTime>(); } set { Set(value); } }
-        public DateTime shipOn { get { return Get<DateTime>(); } set { Set(value); } }
-        public string shipComplete { get { return Get<string>(); } set { Set(value); } }
-        public double undershipThreshold { get { return Get<double>(); } set { Set(value); } }
-        public double overshipThreshold { get { return Get<double>(); } set { Set(value); } }
-        public bool completed { get { return Get<bool>(); } set { Set(value); } }
-        public bool markForPO { get { return Get<bool>(); } set { Set(value); } }
-        public string poSource { get { return Get<string>(); } set { Set(value); } }
-        public string lotSerialNbr { get { return Get<string>(); } set { Set(value); } }
-        public DateTime expirationDate { get { return Get<DateTime>(); } set { Set(value); } }
-        public string reasonCode { get { return Get<string>(); } set { Set(value); } }
-        public DescriptiveDto salesPerson { get { return Get<DescriptiveDto>(); } set { Set(value); } }
-        public string taxCategory { get { return Get<string>(); } set { Set(value); } }
-        public bool commissionable { get { return Get<bool>(); } set { Set(value); } }
-        public string alternateID { get { return Get<string>(); } set { Set(value); } }
-        public int projectTask { get { return Get<int>(); } set { Set(value); } }
-        public int lineNbr { get { return Get<int>(); } set { Set(value); } }
-        public NumberName inventory { get { return Get<NumberName>("inventoryId"); } set { Set(value, "inventoryId"); } }
-        public DescriptiveDto warehouse { get { return Get<DescriptiveDto>(); } set { Set(value); } }
-        public string uom { get { return Get<string>(); } set { Set(value); } }
-        public double quantity { get { return Get<double>(); } set { Set(value); } }
-        public double qtyOnShipments { get { return Get<double>(); } set { Set(value); } }
-        public double openQty { get { return Get<double>(); } set { Set(value); } }
-        public double unitPrice { get { return Get<double>(); } set { Set(value); } }
-        public string discountCode { get { return Get<string>(); } set { Set(value); } }
-        public double discountPercent { get { return Get<double>(); } set { Set(value); } }
-        public double discountAmount { get { return Get<double>(); } set { Set(value); } }
-        public bool manualDiscount { get { return Get<bool>(); } set { Set(value); } }
-        public double discUnitPrice { get { return Get<double>(); } set { Set(value); } }
-        public double extPrice { get { return Get<double>(); } set { Set(value); } }
-        public double unbilledAmount { get { return Get<double>(); } set { Set(value); } }
-        public string lineDescription { get { return Get<string>(); } set { Set(value); } }
-        public string note { get { return Get<string>(); } set { Set(value); } }
+        public string note {
+            get => Get<string>();
+            set => Set(value);
+        }
     }
 }
