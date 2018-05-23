@@ -174,5 +174,6 @@ namespace ONIT.VismaNetApi.Models
         public double extPrice { get { return Get<double>(); } set { Set(value); } }
         public double unbilledAmount { get { return Get<double>(); } set { Set(value); } }
         public string lineDescription { get { return Get<string>(); } set { Set(value); } }
+        public string note { get { return Get<string>(); } set { Set(value); } }
     }
 }
