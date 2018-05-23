@@ -80,8 +80,7 @@ namespace ONIT.VismaNetApi.Lib
 
         protected T Get<T>([CallerMemberName] string key = null, T defaultValue = default(T))
         {
-            object value;
-            if (!_data.TryGetValue(key, out value))
+            if (!_data.TryGetValue(key ?? throw new ArgumentNullException(nameof(key)), out var value))
             {
                 _data[key] = defaultValue;
                 return defaultValue;

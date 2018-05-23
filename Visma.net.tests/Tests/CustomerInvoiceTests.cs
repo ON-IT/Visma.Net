@@ -402,7 +402,7 @@ namespace Visma.net.tests.Tests
   ""locationId"": {
     ""value"": ""string""
   },
-  ""vatExemptTotalInCurrency"": 0.0,
+  //""vatExemptTotalInCurrency"": 0.0,
   ""salesPersonID"": {
     ""value"": 0
   },

@@ -102,7 +102,7 @@ namespace ONIT.VismaNetApi.Lib
             var divider = "?";
             if (query.IndexOf('?') > -1)
                 divider = "&";
-            return string.Format("{0}{1}{2}={3}", query, divider, key, value);
+            return $"{query}{divider}{key}={value}";
         }
 
         internal static IEnumerable<Customer> FindCustomers(IEnumerable<string> urlParams,
@@ -115,7 +115,7 @@ namespace ONIT.VismaNetApi.Lib
             if (!string.IsNullOrEmpty(orderBy))
                 parameters.Add("OrderBy", orderBy);
             if (numberToRead > 0)
-                parameters.Add("NumberToRead", string.Format("{0}", numberToRead));
+                parameters.Add("NumberToRead", $"{numberToRead}");
 
             if (urlParams == null)
             {
@@ -136,11 +136,9 @@ namespace ONIT.VismaNetApi.Lib
             }
             catch (AggregateException e)
             {
-                var webException = e.InnerException as WebException;
-                if (webException != null)
+                if (e.InnerException is WebException webException)
                 {
-                    var response = webException.Response as HttpWebResponse;
-                    if (response != null && response.StatusCode == HttpStatusCode.NotFound)
+                    if (webException.Response is HttpWebResponse response && response.StatusCode == HttpStatusCode.NotFound)
                         return new List<Customer>();
                     VismaNetExceptionHandler.HandleException(webException);
                 }
@@ -164,7 +162,7 @@ namespace ONIT.VismaNetApi.Lib
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.Customers);
                 var fullUrl = $"{apiUrl}/{customerCd}/invoice";
-                return await webclient.Get<List<CustomerInvoice>>(fullUrl);
+                return await webclient.Get<List<CustomerInvoice>>(fullUrl) ?? new List<CustomerInvoice>();
             }
         }
 

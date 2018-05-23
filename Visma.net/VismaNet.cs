@@ -124,7 +124,7 @@ namespace ONIT.VismaNetApi
             return await VismaNetApiHelper.GetContextsForToken(token);
         }
 
-		public async Task<Stream> GetAttchment(string attachmentId)
+		public async Task<Stream> GetAttachment(string attachmentId)
 		{
 			return await VismaNetApiHelper.GetAttachment(Auth, attachmentId);
 		}

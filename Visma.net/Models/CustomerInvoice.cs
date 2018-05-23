@@ -131,11 +131,7 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        /// <summary>
-        ///     This will just contain the name and number.
-        /// </summary>
-        [JsonProperty]
-        public CustomerSummary customer
+       public CustomerSummary customer
         {
             get => Get<CustomerSummary>("customerNumber");
             set => Set(value, "customerNumber");
@@ -190,7 +186,14 @@ namespace ONIT.VismaNetApi.Models
         public decimal exchangeRate
         {
             get => Get<decimal>();
-            set => Set(value);
+            set
+            {
+                if (value == 1)
+                    IgnoreProperties.Add(nameof(exchangeRate));
+                else if (IgnoreProperties.Contains(nameof(exchangeRate)))
+                    IgnoreProperties.Remove(nameof(exchangeRate));
+                Set(value);
+            }
         }
 
         public string externalReference
@@ -324,31 +327,25 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value, "taxDetailsLines");
         }
 
-        /* public VatCode vatCode
-        {
-            get => Get<VatCode>();
-            set => Set(value);
-        }*/
-
         [JsonProperty]
         public decimal vatExemptTotal
         {
-            get; // { return Get<decimal>(); }
-            private set; // { Set(value); }
+            get; 
+            private set;
         }
 
         [JsonProperty]
         public decimal vatExemptTotalInCurrency
         {
-            get => Get<NotDto<decimal>>()?.Value ?? 0; // { return Get<decimal>(); }
-            set => Set(new NotDto<decimal>(value)); // { Set(value); }
+            get;
+            private set;
         }
 
         [JsonProperty]
         public decimal vatTaxableTotal
         {
-            get; // { return Get<decimal>(); }
-            private set; // { Set(value); }
+            get; 
+            private set; 
         }
 
         [JsonProperty]
