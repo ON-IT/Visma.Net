@@ -3,7 +3,6 @@ namespace ONIT.VismaNetApi.Lib
     internal static class VismaNetControllers
     {
         // Security
-        public const string UserContexts = "security/api/v1/token/usercontexts";
         public const string Token = "security/api/v2/token";
 
         // Financials
@@ -31,6 +30,8 @@ namespace ONIT.VismaNetApi.Lib
         public const string Warehouse = "controller/api/v1/warehouse";
         public const string Location = "controller/api/v1/location";
 
+        // Resources
         public const string OAuthAuthorize = "resources/oauth/authorize";
+        public const string UserContext = "resources/v1/context";
     }
 }

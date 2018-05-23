@@ -410,7 +410,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             var client = GetHttpClient(new VismaNetAuthorization {CompanyId = 0, Token = token});
             {
-                return await client.Get<List<CompanyContext>>(GetApiUrlForController(VismaNetControllers.UserContexts));
+                return await client.Get<List<CompanyContext>>(GetApiUrlForController(VismaNetControllers.UserContext));
             }
         }
 
