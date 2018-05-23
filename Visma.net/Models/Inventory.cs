@@ -13,14 +13,93 @@ namespace ONIT.VismaNetApi.Models
         private List<Attachment> _attachments;
         private List<CrossReference> _crossReferences;
         private List<WarehouseDetails> _warehouseDetails;
-        private costPriceStatistics _costPriceStatistics;
 
         [JsonProperty]
-        public int inventoryId { get; }
+        public List<Attachment> attachments
+        {
+            get => _attachments ?? (_attachments = new List<Attachment>());
+            private set => _attachments = value;
+        }
+
+        [JsonProperty]
+        public List<Attributes> attributes
+        {
+            get => Get("attributeLines", new NotDto<List<Attributes>>(new List<Attributes>())?.Value);
+            set => Set(new NotDto<List<Attributes>>(value), "attributeLines");
+        }
+
+        public string baseUnit
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        [JsonProperty] public CostPriceStatistics costPriceStatistics { get; private set; }
+
+        [JsonProperty]
+        public List<CrossReference> crossReferences
+        {
+            get => _crossReferences ?? (_crossReferences = new List<CrossReference>());
+            private set => _crossReferences = value;
+        }
+
+        [JsonProperty] public decimal? currentCost { get; private set; }
+
+        public decimal? defaultPrice
+        {
+            get => Get<decimal>();
+            set => Set(value);
+        }
+
+        public string description
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        [JsonProperty] public DateTime effectiveDate { get; private set; }
+
+        [JsonProperty] public string errorInfo { get; private set; }
+
+        [JsonProperty] public JObject extras { get; private set; }
+
+        [JsonProperty] public int inventoryId { get; }
 
         public string inventoryNumber
         {
             get => Get<string>() != null ? Get<string>().Trim() : null;
+            set => Set(value);
+        }
+
+        public ItemClass itemClass
+        {
+            get => Get<ItemClass>();
+            set => Set(value);
+        }
+
+        [JsonProperty] public decimal? lastCost { get; private set; }
+
+        public DateTime? lastModifiedDateTime { get; set; }
+
+        [JsonProperty] public decimal? pendingCost { get; private set; }
+
+        [JsonProperty] public DateTime pendingCostDate { get; private set; }
+
+        public PostingClass postingClass
+        {
+            get => Get<PostingClass>();
+            set => Set(value);
+        }
+
+        public string purchaseUnit
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string salesUnit
+        {
+            get => Get<string>();
             set => Set(value);
         }
 
@@ -36,93 +115,10 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public string description
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public ItemClass itemClass
-        {
-            get => Get<ItemClass>();
-            set => Set(value);
-        }
-
-        public PostingClass postingClass
-        {
-            get => Get<PostingClass>();
-            set => Set(value);
-        }
-
         public VatCode vatCode
         {
             get => Get<VatCode>();
             set => Set(value);
-        }
-
-        public decimal? defaultPrice
-        {
-            get => Get<decimal>();
-            set => Set(value);
-        }
-
-        [JsonProperty]
-        public decimal? pendingCost { get; private set;  }
-
-        [JsonProperty]
-        public DateTime pendingCostDate { get; private set; }
-
-        [JsonProperty]
-        public decimal? currentCost { get; private set; }
-
-        [JsonProperty]
-        public DateTime effectiveDate { get; private set;  }
-
-        [JsonProperty]
-        public decimal? lastCost { get;private set;  }
-
-        [JsonProperty]
-        public CostPriceStatistics costPriceStatistics { get; private set; }
-
-        public DateTime? lastModifiedDateTime { get; set; }
-
-        public string baseUnit
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string salesUnit
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string purchaseUnit
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        [JsonProperty]
-        public List<Attributes> attributes
-        {
-            get => Get("attributeLines", new NotDto<List<Attributes>>(new List<Attributes>())?.Value);
-            set => Set(new NotDto<List<Attributes>>(value), "attributeLines");
-        }
-
-        [JsonProperty]
-        public List<CrossReference> crossReferences
-        {
-            get => _crossReferences ?? (_crossReferences = new List<CrossReference>());
-            private set => _crossReferences = value;
-        }
-
-        [JsonProperty]
-        public List<Attachment> attachments
-        {
-            get => _attachments ?? (_attachments = new List<Attachment>());
-            private set => _attachments = value;
         }
 
         [JsonProperty]
@@ -132,12 +128,6 @@ namespace ONIT.VismaNetApi.Models
             private set => _warehouseDetails = value;
         }
 
-        [JsonProperty]
-        public string errorInfo { get; private set; }
-
-        [JsonProperty]
-        public JObject extras { get; private set; }
-
         public string GetIdentificator()
         {
             return inventoryNumber;
@@ -146,9 +136,9 @@ namespace ONIT.VismaNetApi.Models
 
     public class costPriceStatistics
     {
-        public decimal lastCost { get; set; }
         public decimal averageCost { get; set; }
-        public decimal minCost { get; set; }
+        public decimal lastCost { get; set; }
         public decimal maxCost { get; set; }
+        public decimal minCost { get; set; }
     }
 }
