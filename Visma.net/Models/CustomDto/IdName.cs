@@ -1,4 +1,5 @@
-﻿using ONIT.VismaNetApi.Interfaces;
+﻿using Newtonsoft.Json;
+using ONIT.VismaNetApi.Interfaces;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
 {
@@ -15,7 +16,9 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         }
 
         public string id { get; set; }
-        public string name { get; set; }
+
+        [JsonProperty]
+        public string name { get; private set; }
 
         public static implicit operator IdName(string id)
         {

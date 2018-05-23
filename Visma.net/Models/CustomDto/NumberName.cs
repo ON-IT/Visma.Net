@@ -1,4 +1,5 @@
-﻿using ONIT.VismaNetApi.Interfaces;
+﻿using Newtonsoft.Json;
+using ONIT.VismaNetApi.Interfaces;
 
 namespace ONIT.VismaNetApi.Models
 {
@@ -46,7 +47,9 @@ namespace ONIT.VismaNetApi.Models
             this.number = number;
         }
         public string number { get; set; }
-        public string description { get; set; }
+        
+        [JsonProperty]
+        public string description { get; private set; }
 
         public static implicit operator NumberDescription(string number)
         {

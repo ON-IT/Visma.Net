@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
@@ -9,110 +10,138 @@ namespace ONIT.VismaNetApi.Models
 {
     public class Inventory : DtoProviderBase, IProvideIdentificator
     {
-        private List<CrossReference> _crossReferences;
-        private List<Attributes> _attributes;
         private List<Attachment> _attachments;
+        private List<CrossReference> _crossReferences;
         private List<WarehouseDetails> _warehouseDetails;
         private costPriceStatistics _costPriceStatistics;
 
-        public int? inventoryId
-        {
-            get { return Get<int>(); }
-            set { Set(value); }
-        }
+        [JsonProperty]
+        public int inventoryId { get; }
 
         public string inventoryNumber
         {
-            get { return Get<string>() != null ? Get<string>().Trim() : null; }
-            set { Set(value); }
+            get => Get<string>() != null ? Get<string>().Trim() : null;
+            set => Set(value);
         }
 
         public InventoryStatus status
         {
-            get { return Get<InventoryStatus>(); }
-            set { Set(value); }
+            get => Get<InventoryStatus>();
+            set => Set(value);
         }
 
         public InventoryType type
         {
-            get { return Get<InventoryType>(); }
-            set { Set(value); }
+            get => Get<InventoryType>();
+            set => Set(value);
         }
 
         public string description
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
         public ItemClass itemClass
         {
-            get { return Get<ItemClass>(); }
-            set { Set(value); }
+            get => Get<ItemClass>();
+            set => Set(value);
         }
 
         public PostingClass postingClass
         {
-            get { return Get<PostingClass>(key:"postClassId"); }
-            set { Set(value,key:"postClassId"); }
+            get => Get<PostingClass>();
+            set => Set(value);
         }
 
         public VatCode vatCode
         {
-            get { return Get<VatCode>(); }
-            set { Set(value); }
+            get => Get<VatCode>();
+            set => Set(value);
         }
 
         public decimal? defaultPrice
         {
-            get { return Get<decimal>(); }
-            set { Set(value); }
+            get => Get<decimal>();
+            set => Set(value);
         }
+
+        [JsonProperty]
+        public decimal? pendingCost { get; private set;  }
+
+        [JsonProperty]
+        public DateTime pendingCostDate { get; private set; }
+
+        [JsonProperty]
+        public decimal? currentCost { get; private set; }
+
+        [JsonProperty]
+        public DateTime effectiveDate { get; private set;  }
+
+        [JsonProperty]
+        public decimal? lastCost { get;private set;  }
+
+        [JsonProperty]
+        public CostPriceStatistics costPriceStatistics { get; private set; }
 
         public DateTime? lastModifiedDateTime { get; set; }
 
-        public string baseUnit { get; set; }
-        public string salesUnit { get; set; }
-        public string purchaseUnit { get; set; }
-  
+        public string baseUnit
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string salesUnit
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string purchaseUnit
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
         [JsonProperty]
         public List<Attributes> attributes
         {
-            get { return _attributes ?? (_attributes = new List<Attributes>()); }
-            private set { _attributes = value; }
+            get => Get("attributeLines", new NotDto<List<Attributes>>(new List<Attributes>())?.Value);
+            set => Set(new NotDto<List<Attributes>>(value), "attributeLines");
         }
 
         [JsonProperty]
         public List<CrossReference> crossReferences
         {
-            get { return _crossReferences ?? (_crossReferences = new List<CrossReference>()); }
-            private set { _crossReferences = value; }
+            get => _crossReferences ?? (_crossReferences = new List<CrossReference>());
+            private set => _crossReferences = value;
         }
+
         [JsonProperty]
         public List<Attachment> attachments
         {
-            get { return _attachments ?? (_attachments = new List<Attachment>()); }
-            private set { _attachments = value; }
+            get => _attachments ?? (_attachments = new List<Attachment>());
+            private set => _attachments = value;
         }
 
         [JsonProperty]
         public List<WarehouseDetails> warehouseDetails
         {
-            get { return _warehouseDetails ?? (_warehouseDetails = new List<WarehouseDetails>()); }
-            private set { _warehouseDetails = value; }
+            get => _warehouseDetails ?? (_warehouseDetails = new List<WarehouseDetails>());
+            private set => _warehouseDetails = value;
         }
 
-        public costPriceStatistics costPriceStatistics
-        {
-            get { return _costPriceStatistics ?? (_costPriceStatistics = new costPriceStatistics()); }
-            private set { _costPriceStatistics = value; } 
-        }
+        [JsonProperty]
+        public string errorInfo { get; private set; }
+
+        [JsonProperty]
+        public JObject extras { get; private set; }
 
         public string GetIdentificator()
         {
             return inventoryNumber;
         }
-
     }
 
     public class costPriceStatistics

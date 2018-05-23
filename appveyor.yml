@@ -1,5 +1,5 @@
 -
-  version: 3.2.0-pre-{build}
+  version: 3.4.0-pre-{build}
   image: Visual Studio 2017  
   pull_requests:
     do_not_increment_build_number: true
@@ -10,7 +10,7 @@
   dotnet_csproj:
     patch: false
   before_build:
-    - dotnet restore
+    - nuget restore
     - ps: ./appveyor.ps1
   build:
     publish_nuget: true
@@ -30,7 +30,7 @@
     - master
   configuration: Release
   before_build:
-    - dotnet restore
+    - nuget restore
   dotnet_csproj:
     patch: false
   build:

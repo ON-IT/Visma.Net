@@ -13,6 +13,6 @@
     <description>Get started with Visma.net Integrations.</description>
     <copyright>Copyright ON IT AS 2014 - 2017</copyright>
     <tags>Visma.net API, Visma.net Integrations, REST</tags>
-    <releaseNotes>Fixed issue with new exception handling.</releaseNotes>
+    <releaseNotes>Implemented changes for Visma.net ERP 7.0.</releaseNotes>
   </metadata>
 </package>

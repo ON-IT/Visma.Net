@@ -26,5 +26,12 @@ namespace ONIT.VismaNetApi.Models
         {
             return new CustomerSummary(number);
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(name))
+                return number;
+            return $"{number} [{name}]";
+        }
     }
 }

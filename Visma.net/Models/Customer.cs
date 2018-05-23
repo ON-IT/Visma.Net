@@ -1,245 +1,246 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
-using System.Collections.Generic;
 
 namespace ONIT.VismaNetApi.Models
 {
     public class Customer : DtoProviderBase, IProvideIdentificator, IComparable<Customer>, IComparable
     {
         //private List<CustomerAttributes> _attributeLines;
-        public Customer ()
-		{
-			IgnoreProperties.Add (nameof(this.number));
-            IgnoreProperties.Add(nameof(this.attributes));
+        public Customer()
+        {
+            IgnoreProperties.Add(nameof(number));
         }
 
         /// <summary>
-        /// Create a new customer without autonumbering
+        ///     Create a new customer without autonumbering
         /// </summary>
         /// <param name="customerNumber"></param>
         public Customer(string customerNumber)
         {
             number = customerNumber;
         }
-     
-        [JsonProperty]
-        public string number
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        [JsonProperty]
-        public int internalId
-        {
-            get { return Get<int>(); }
-            private set { Set(value); }
-        }
-
-        [JsonProperty]
-        public DateTime lastModifiedDateTime
-        {
-            get { return Get<DateTime>(); }
-            private set { Set(value); }
-        }
-        
-        public string name
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public CustomerStatus status
-        {
-            get { return Get<CustomerStatus>(); }
-            set { Set(value); }
-        }
-
-
-        public string accountReference
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public string parentRecordNumber
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public string currencyId
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public decimal creditLimit
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public int creditDaysPastDue
-        {
-            get { return Get<int>(); }
-            set { Set(value); }
-        }
-
-        public bool overrideWithClassValues
-        {
-            get { return Get<NotDto<bool>>(defaultValue:new NotDto<bool>(false)).Value; }
-            set { Set(new NotDto<bool>(value)); }
-        }
-
-        public CustomerClass customerClass
-        {
-            get { return Get("customerClassId", new CustomerClass()); }
-            set { Set(value, "customerClassId"); }
-        }
-
-        public CreditTerms creditTerms
-        {
-            get { return Get("creditTermsId", new CreditTerms()); }
-            set { Set(value); }
-        }
-
-        public bool printInvoices
-        {
-            get { return Get<bool>(); }
-            set { Set(value); }
-        }
 
         public bool acceptAutoInvoices
         {
-            get { return Get<bool>(); }
-            set { Set(value); }
+            get => Get<bool>();
+            set => Set(value);
         }
 
-        public bool sendInvoicesByEmail
+        public string accountReference
         {
-            get { return Get<bool>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
-        public bool printStatements
+        [JsonProperty]
+        public List<Attributes> attributes
         {
-            get { return Get<bool>(); }
-            set { Set(value); }
-        }
-
-        public bool sendStatementsByEmail
-        {
-            get { return Get<bool>(); }
-            set { Set(value); }
-        }
-
-        public bool printMultiCurrencyStatements
-        {
-            get { return Get<bool>(); }
-            set { Set(value); }
-        }
-
-
-        public string vatRegistrationId
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get("attributeLines", new NotDto<List<Attributes>>(new List<Attributes>())?.Value);
+            set => Set(new NotDto<List<Attributes>>(value), "attributeLines");
         }
 
         public string corporateId
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
-        public string note
+        [JsonProperty] public DateTime createdDateTime { get; private set; }
+
+        public int creditDaysPastDue
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<int>();
+            set => Set(value);
         }
 
-        public VatCode vatZone
+        public decimal creditLimit
         {
-            get { return Get<VatCode>("vatZoneId"); }
-            set { Set(value, "vatZoneId"); }
+            get => Get<decimal>();
+            set => Set(value);
         }
 
-        public Address mainAddress
+        public CreditTerms creditTerms
         {
-			get { return Get<Address>(defaultValue:new Address()); }
-            set { Set(value); }
-        }
-
-        public ContactInfo mainContact
-        {
-			get { return Get<ContactInfo>(defaultValue:new ContactInfo()); }
-            set { Set(value); }
+            get => Get("creditTermsId", new CreditTerms());
+            set => Set(value);
         }
 
 
         public CreditRule creditVerification
         {
-            get { return Get<CreditRule>(); }
-            set { Set(value); }
+            get => Get<CreditRule>();
+            set => Set(value);
         }
 
-
-        public Address invoiceAddress
+        public string currencyId
         {
-			get { return Get<Address>(defaultValue: new Address()); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
-        public ContactInfo invoiceContact
+        public CustomerClass customerClass
         {
-			get { return Get(defaultValue:new ContactInfo()); }
-            set { Set(value); }
-        }
-
-        public StatementTypes statementType
-        {
-            get { return Get<StatementTypes>(); }
-            set { Set(value); }
+            get => Get("customerClassId", new CustomerClass());
+            set => Set(value, "customerClassId");
         }
 
         public Address deliveryAddress
         {
-            get { return Get<Address>(defaultValue:new Address()); }
-            set { Set(value); }
+            get => Get(defaultValue: new Address());
+            set => Set(value);
         }
 
         public ContactInfo deliveryContact
         {
-            get { return Get<ContactInfo>(defaultValue:new ContactInfo()); }
-            set { Set(value); }
-        }
-
-        
-        public DescriptiveDto priceClass {
-            get { return Get<DescriptiveDto>("priceClassId", new DescriptiveDto()); }
-            set { Set(value, "priceClassId"); }
+            get => Get(defaultValue: new ContactInfo());
+            set => Set(value);
         }
 
         [JsonProperty]
-        public List<CustomerAttributes> attributeLines
+        public List<DirectDebitLine> directDebitLines
         {
-            get { return Get(defaultValue: new List<CustomerAttributes>()); }
-            private set { Set(value); }
-        }
-        [JsonProperty]
-        public List<IdValue> attributes
-        {
-            get { return Get(defaultValue: new List<IdValue>()); }
-            private set { Set(value); }
+            get => Get(defaultValue: new List<DirectDebitLine>());
+            set => Set(value);
         }
 
-        public int CompareTo(Customer other)
+        [JsonProperty] public string errorInfo { get; private set; }
+
+        [JsonProperty] public JObject extras { get; private set; }
+
+        [JsonProperty] public GLAccountDto glAccounts { get; private set; }
+
+        [JsonProperty] public int internalId { get; private set; }
+
+
+        public Address invoiceAddress
         {
-            return string.Compare(name, other.name, StringComparison.Ordinal);
+            get => Get(defaultValue: new Address());
+            set => Set(value);
+        }
+
+        public ContactInfo invoiceContact
+        {
+            get => Get(defaultValue: new ContactInfo());
+            set => Set(value);
+        }
+
+        public bool invoiceToDefaultLocation
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        [JsonProperty] public DateTime lastModifiedDateTime { get; private set; }
+
+        [JsonProperty] public LocationSummary location { get; private set; }
+
+        public Address mainAddress
+        {
+            get => Get(defaultValue: new Address());
+            set => Set(value);
+        }
+
+        public ContactInfo mainContact
+        {
+            get => Get(defaultValue: new ContactInfo());
+            set => Set(value);
+        }
+
+        public string name
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string note
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        [JsonProperty]
+        public string number
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public bool overrideWithClassValues
+        {
+            get => Get(defaultValue: new NotDto<bool>(false)).Value;
+            set => Set(new NotDto<bool>(value));
+        }
+
+        public NumberName parentRecord
+        {
+            get => Get<NumberName>("parentRecordNumber");
+            set => Set(value, "parentRecordNumber");
+        }
+
+        public DescriptiveDto priceClass
+        {
+            get => Get("priceClassId", new DescriptiveDto());
+            set => Set(value, "priceClassId");
+        }
+
+        public bool printInvoices
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool printMultiCurrencyStatements
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool printStatements
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool sendInvoicesByEmail
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool sendStatementsByEmail
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public StatementTypes statementType
+        {
+            get => Get<StatementTypes>();
+            set => Set(value);
+        }
+
+        public CustomerStatus status
+        {
+            get => Get<CustomerStatus>();
+            set => Set(value);
+        }
+
+
+        public string vatRegistrationId
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public VatZone vatZone
+        {
+            get => Get<VatZone>("vatZoneId");
+            set => Set(value, "vatZoneId");
         }
 
         public int CompareTo(object obj)
@@ -247,12 +248,26 @@ namespace ONIT.VismaNetApi.Models
             var otherCustomer = (Customer) obj;
             if (otherCustomer == null)
                 return 0;
-            return string.Compare(this.name, otherCustomer.name, StringComparison.Ordinal);
+            return string.Compare(name, otherCustomer.name, StringComparison.Ordinal);
+        }
+
+        public int CompareTo(Customer other)
+        {
+            return string.Compare(name, other.name, StringComparison.Ordinal);
         }
 
         public string GetIdentificator()
         {
             return number;
+        }
+
+        internal override void PrepareForUpdate()
+        {
+            base.PrepareForUpdate();
+            foreach (var line in directDebitLines)
+            {
+                line.operation = ApiOperation.Update;
+            }
         }
     }
 }

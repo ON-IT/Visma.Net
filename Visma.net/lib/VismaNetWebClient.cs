@@ -15,9 +15,10 @@ namespace ONIT.VismaNetApi.Lib
 {
     internal class VismaNetHttpClient
     {
-        private static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
+        public static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
         {
-            DateFormatString = "yyyy-MM-dd HH:mm:ss",
+            DateFormatString = "yyyy-MM-ddTHH:mm:ss.fffZ",
+            DateParseHandling = DateParseHandling.DateTime,
             Converters =
             {
                 new StringEnumConverter()
@@ -117,8 +118,7 @@ namespace ONIT.VismaNetApi.Lib
             message.Content = httpContent;
             var result = await HttpClient.SendAsync(message);
             if (!result.IsSuccessStatusCode)
-                VismaNetExceptionHandler.HandleException(await result.Content.ReadAsStringAsync(), null,
-                    await httpContent.ReadAsStringAsync(), url);
+                VismaNetExceptionHandler.HandleException(await result.Content.ReadAsStringAsync(), null, null, url);
             if (result.Headers.Location != null)
                 if (typeof(T) == typeof(string))
                 {

@@ -1,180 +1,208 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
-using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class JournalTransaction : DtoProviderBase,  IProvideIdentificator
+    public class JournalTransaction : DtoProviderBase, IProvideIdentificator
     {
         [JsonProperty]
-        public JournalTransactionModule? module
+        public List<Attachment> attachments { get; private set; }
+
+        public bool? autoReversing
         {
-            get { return Get<JournalTransactionModule?>(); }
-            private set { Set(value); }
+            get => Get<bool?>();
+            set => Set(value);
         }
 
         public string batchNumber
         {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-        [JsonProperty]
-        public JournalTransactionStatus? status
-        {
-            get { return Get<JournalTransactionStatus?>(); }
-            private set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
-        public bool? hold
+        public string branch
         {
-            get { return Get<bool?>(); }
-            set { Set(value); }
-        }
-
-        public DateTime? transactionDate
-        {
-            get { return Get<DateTime?>(); }
-            set { Set(value); }
-        }
-
-        public string postPeriod
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public string financialPeriod
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public string ledger
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        [JsonProperty]
-        public string ledgerDescription
-        {
-            get { return Get<string>(); }
-            private set { Set(value); }
-        }
-
-        public string currencyId
-        {
-            get { return Get<string>("currencyId"); }
-            set { Set(value); }
-        }
-
-        public bool? autoReversing
-        {
-            get { return Get<bool?>(); }
-            set { Set(value); }
-        }
-
-        [JsonProperty]
-        public bool? reversingEntry
-        {
-            get { return Get<bool?>(); }
-            private set { Set(value); }
-        }
-
-        public string description
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        [JsonProperty]
-        public string originalBatchNumber
-        {
-            get { return Get<string>(); }
-            private set { Set(value); }
-        }
-
-        [JsonProperty]
-        public decimal debitTotal
-        {
-            get { return Get<decimal>(); }
-            private set { Set(value); }
-        }
-
-        [JsonProperty]
-        public decimal debitTotalInCurrency
-        {
-            get { return Get<decimal>(); }
-            private set { Set(value); }
-        }
-
-        [JsonProperty]
-        public decimal creditTotal
-        {
-            get { return Get<decimal>(); }
-            private set { Set(value); }
-        }
-
-        [JsonProperty]
-        public decimal creditTotalInCurrency
-        {
-            get { return Get<decimal>(); }
-            private set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
         [JsonProperty]
         public decimal controlTotal
         {
-            get { return Get<decimal>(); }
-            private set { Set(value); }
+            get; //  => Get<decimal>();
+            private set; //  => Set(value);
         }
 
         public decimal controlTotalInCurrency
         {
-            get { return Get<decimal>(); }
-            set { Set(value); }
+            get => Get<decimal>();
+            set => Set(value);
         }
 
         public bool? createVatTransaction
         {
-            get { return Get<bool?>(); }
-            set { Set(value); }
+            get => Get<bool?>();
+            set => Set(value);
         }
 
-        public bool? skipVatAmountValidation
+        [JsonProperty]
+        public decimal creditTotal
         {
-            get { return Get<bool?>(); }
-            set { Set(value); }
+            get; //  => Get<decimal>();
+            private set; //  => Set(value);
+        }
+
+        [JsonProperty]
+        public decimal creditTotalInCurrency
+        {
+            get; //  => Get<decimal>();
+            private set; //  => Set(value);
+        }
+
+        public string currencyId
+        {
+            get => Get<string>("currencyId");
+            set => Set(value);
+        }
+
+        [JsonProperty]
+        public decimal debitTotal
+        {
+            get; //  => Get<decimal>();
+            private set; //  => Set(value);
+        }
+
+        [JsonProperty]
+        public decimal debitTotalInCurrency
+        {
+            get; //  => Get<decimal>();
+            private set; //  => Set(value);
+        }
+
+        public string description
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        [JsonProperty]
+        public string errorInfo { get; private set; }
+
+        [JsonProperty]
+        public decimal exchangeRate
+        {
+            get => Get<decimal>();
+            set => Set(value);
+        }
+
+        [JsonProperty]
+        public JObject extras { get; private set; }
+
+        public string financialPeriod
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public bool? hold
+        {
+            get => Get<bool?>();
+            set => Set(value);
+        }
+
+        public List<JournalTransactionLine> journalTransactionLines
+        {
+            get => Get(defaultValue: new List<JournalTransactionLine>());
+            set => Set(value);
         }
 
         [JsonProperty]
         public DateTime? lastModifiedDateTime
         {
-            get { return Get<DateTime?>(); }
-            private set { Set(value); }
+            get; //  => Get<DateTime?>();
+            private set; //  => Set(value);
+        }
+
+        public string ledger
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        [JsonProperty]
+        public string ledgerDescription
+        {
+            get; // => Get<string>();
+            private set; // => Set(value);
+        }
+
+        [JsonProperty]
+        public JournalTransactionModule? module
+        {
+            get; // => Get<JournalTransactionModule?>();
+            private set; // => Set(value);
+        }
+
+        [JsonProperty]
+        public string originalBatchNumber
+        {
+            get; //  => Get<string>();
+            private set; //  => Set(value);
+        }
+
+        public string postPeriod
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        [JsonProperty]
+        public bool? reversingEntry
+        {
+            get; //  => Get<bool?>();
+            private set; //  => Set(value);
+        }
+
+        public bool? skipVatAmountValidation
+        {
+            get => Get<bool?>();
+            set => Set(value);
+        }
+
+        [JsonProperty]
+        public JournalTransactionStatus? status
+        {
+            get; //  => Get<JournalTransactionStatus?>();
+            private set; //  => Set(value);
         }
 
         public string transactionCode
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
+        [JsonProperty]
         public string transactionCodeDescription
         {
-            get { return Get<string>(); }
-            private set { Set(value); }
+            get; //  => Get<string>();
+            private set; //  => Set(value);
         }
 
-        public List<JournalTransactionLine> journalTransactionLines
+        public DateTime? transactionDate
         {
-            get { return Get(defaultValue: new List<JournalTransactionLine>()); }
-            set { Set(value); }
+            get => Get<DateTime?>();
+            set => Set(value);
+        }
+
+        public string GetIdentificator()
+        {
+            return batchNumber;
         }
 
         public void Add(JournalTransactionLine line)
@@ -193,99 +221,6 @@ namespace ONIT.VismaNetApi.Models
                 transactionLine.operation = ApiOperation.Update;
             }
         }
-
-        public string GetIdentificator()
-        {
-            return batchNumber;
-        }
-    }
-
-    public class JournalTransactionLine : DtoProviderBase
-    {
-        public JournalTransactionLine()
-        {
-            DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
-            DtoFields.Add("lineNumber", new DtoValue(0));
-        }
-
-        public ApiOperation operation
-        {
-            get { return Get(defaultValue: new NotDto<ApiOperation>(ApiOperation.Insert)).Value; }
-            set { Set(new NotDto<ApiOperation>(value)); }
-        }
-
-        public int lineNumber
-        {
-            get { return Get<int>(); }
-            set { Set(value); }
-        }
-
-        public string accountNumber
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        [JsonProperty]
-        public string description
-        {
-            get { return Get<string>(); }
-            private set { Set(value); }
-        }
-
-        public ONIT.VismaNetApi.Models.CustomDto.Subaccount subaccount
-        {
-            get { return Get(defaultValue: new ONIT.VismaNetApi.Models.CustomDto.Subaccount()); }
-            set { Set(value); }
-        }
-
-        public string referenceNumber
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public decimal debitAmount
-        {
-            get { return Get<decimal>(); }
-            private set { Set(value); }
-        }
-
-        public decimal debitAmountInCurrency
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public decimal creditAmount
-        {
-            get { return Get<decimal>(); }
-            private set { Set(value); }
-        }
-
-        public decimal creditAmountInCurrency
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public string transactionDescription
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public VatCode vatCode
-        {
-            get { return Get<VatCode>("vatCodeId"); }
-            set { Set(value, "vatCodeId"); }
-        }
-
-        public Vat vat
-        {
-            get { return Get<Vat>("vatId"); }
-            set { Set(value, "vatId"); }
-        }
     }
 
     public enum JournalTransactionModule
@@ -303,7 +238,7 @@ namespace ONIT.VismaNetApi.Models
         ModuleEP = 11,
         ModulePM = 12,
         ModuleTX = 13,
-        ModuleCR = 14,
+        ModuleCR = 14
     }
 
     public enum JournalTransactionStatus
@@ -316,6 +251,6 @@ namespace ONIT.VismaNetApi.Models
         Voided = 6,
         Released = 7,
         PartiallyReleased = 8,
-        Scheduled = 9,
+        Scheduled = 9
     }
 }
