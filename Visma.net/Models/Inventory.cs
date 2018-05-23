@@ -13,6 +13,7 @@ namespace ONIT.VismaNetApi.Models
         private List<Attachment> _attachments;
         private List<CrossReference> _crossReferences;
         private List<WarehouseDetails> _warehouseDetails;
+        private costPriceStatistics _costPriceStatistics;
 
         [JsonProperty]
         public int inventoryId { get; }
@@ -141,5 +142,13 @@ namespace ONIT.VismaNetApi.Models
         {
             return inventoryNumber;
         }
+    }
+
+    public class costPriceStatistics
+    {
+        public decimal lastCost { get; set; }
+        public decimal averageCost { get; set; }
+        public decimal minCost { get; set; }
+        public decimal maxCost { get; set; }
     }
 }

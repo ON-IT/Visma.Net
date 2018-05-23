@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
@@ -17,15 +18,9 @@ namespace ONIT.VismaNetApi.Models
             RequiredFields.Add(nameof(orderType), new DtoValue("SO"));
         }
 
-        [JsonProperty] public List<Attachment> attachments => Get(defaultValue: new List<Attachment>());
+        [JsonProperty] public List<Attachment> attachments { get; private set; }
 
-        public NumberName branch
-        {
-            get => Get<NumberName>();
-            set => Set(value);
-        }
-
-        public NumberName branchNumber
+       public NumberName branchNumber
         {
             get => Get<NumberName>();
             set => Set(value);
@@ -43,10 +38,11 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        [JsonProperty]
         public DateTime cashDiscountDate
         {
-            get => Get<DateTime>();
-            set => Set(value);
+            get; // => Get<DateTime>();
+            private set; // => Set(value);
         }
 
         public string currency
@@ -55,9 +51,9 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public CustomerSummary customer
+        public SoCustomerSummary customer
         {
-            get => Get<CustomerSummary>();
+            get => Get<SoCustomerSummary>();
             set => Set(value);
         }
 
@@ -91,11 +87,16 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        [JsonProperty]
         public DateTime dueDate
         {
-            get => Get<DateTime>();
-            set => Set(value);
+            get; // => Get<DateTime>();
+            private set; // => Set(value);
         }
+
+        [JsonProperty] public string errorInfo { get; private set; }
+
+        [JsonProperty] public JObject extras { get; private set; }
 
         public DescriptiveDto fobPoint
         {
@@ -115,16 +116,18 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        [JsonProperty]
         public DateTime invoiceDate
         {
-            get => Get<DateTime>();
-            set => Set(value);
+            get; // => Get<DateTime>();
+            private set; // => Set(value);
         }
 
+        [JsonProperty]
         public string invoiceNbr
         {
-            get => Get<string>();
-            set => Set(value);
+            get; // => Get<string>();
+            private set; // => Set(value);
         }
 
         public bool invoiceSeparately
@@ -160,10 +163,11 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value, "orderNumber");
         }
 
+        [JsonProperty]
         public double orderTotal
         {
-            get => Get<double>();
-            set => Set(value);
+            get;// => Get<double>();
+            private set;// => Set(value);
         }
 
         public string orderType
@@ -190,10 +194,11 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        [JsonProperty]
         public string postPeriod
         {
-            get => Get<string>();
-            set => Set(value);
+            get; // => Get<string>();
+            private set; // => Set(value);
         }
 
         public DescriptiveDto preferredWarehouse
@@ -292,40 +297,42 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public Address soBillingAddress
+        public SoAddress soBillingAddress
         {
-            get => Get(defaultValue: new Address());
+            get => Get(defaultValue: new SoAddress());
             set => Set(value);
         }
 
-        public ContactInfo soBillingContact
+        public SoContactInfo soBillingContact
         {
-            get => Get(defaultValue: new ContactInfo());
+            get => Get(defaultValue: new SoContactInfo());
             set => Set(value);
         }
 
-        public Address soShippingAddress
+        public SoAddress soShippingAddress
         {
-            get => Get(defaultValue: new Address());
+            get => Get(defaultValue: new SoAddress());
             set => Set(value);
         }
 
-        public ContactInfo soShippingContact
+        public SoContactInfo soShippingContact
         {
-            get => Get(defaultValue: new ContactInfo());
+            get => Get(defaultValue: new SoContactInfo());
             set => Set(value);
         }
 
+        [JsonProperty]
         public string status
         {
-            get => Get<string>();
-            set => Set(value);
+            get;// => Get<string>();
+            private set;//( => Set(value);
         }
+        [JsonProperty]
 
         public double taxTotal
         {
-            get => Get<double>();
-            set => Set(value);
+            get;// => Get<double>();
+            private set; //=> Set(value);
         }
 
         public DescriptiveDto terms
@@ -334,22 +341,25 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public DescriptiveDto transactionType
+        public TransactionType transactionType
         {
-            get => Get(defaultValue: new DescriptiveDto());
-            set => Set(value);
+            get => Get(defaultValue: new TransactionType());
+            private set => Set(value);
         }
 
+        
+        [JsonProperty]
         public double vatExemptTotal
         {
-            get => Get<double>();
-            set => Set(value);
+            get;// => Get<double>();
+            private set;// => Set(value);
         }
 
+        [JsonProperty]
         public double vatTaxableTotal
         {
-            get => Get<double>();
-            set => Set(value);
+            get;// => Get<double>();
+            private set;// => Set(value);
         }
 
         public string GetIdentificator()
@@ -392,238 +402,5 @@ namespace ONIT.VismaNetApi.Models
         }
 
         #endregion
-    }
-
-    public class SalesOrderLine : DtoProviderBase
-    {
-        public SalesOrderLine()
-        {
-            DtoFields.Add(nameof(lineNbr), new DtoValue(0));
-            DtoFields.Add(nameof(quantity), new DtoValue(1));
-            RequiredFields.Add("warehouse", new DtoValue(null));
-            RequiredFields.Add("salesOrderOperation", new DtoValue("Issue"));
-        }
-
-        public string alternateID
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public int branch
-        {
-            get => Get<int>();
-            set => Set(value);
-        }
-
-        public NumberName branchNumber
-        {
-            get => Get<NumberName>();
-            set => Set(value);
-        }
-
-        public bool commissionable
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
-        public bool completed
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
-        public double discountAmount
-        {
-            get => Get<double>();
-            set => Set(value);
-        }
-
-        public string discountCode
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public double discountPercent
-        {
-            get => Get<double>();
-            set => Set(value);
-        }
-
-        public double discUnitPrice
-        {
-            get => Get<double>();
-            set => Set(value);
-        }
-
-        public DateTime expirationDate
-        {
-            get => Get<DateTime>();
-            set => Set(value);
-        }
-
-        public double extPrice
-        {
-            get => Get<double>();
-            set => Set(value);
-        }
-
-        public bool freeItem
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
-        public NumberName inventory
-        {
-            get => Get<NumberName>("inventoryId");
-            set => Set(value, "inventoryId");
-        }
-
-        public string invoiceNbr
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string lineDescription
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public int lineNbr
-        {
-            get => Get<int>();
-            set => Set(value);
-        }
-
-        public string lotSerialNbr
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public bool manualDiscount
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
-        public bool markForPO
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
-        public double openQty
-        {
-            get => Get<double>();
-            set => Set(value);
-        }
-
-        public ApiOperation operation
-        {
-            get => Get(defaultValue: new NotDto<ApiOperation>(ApiOperation.Insert)).Value;
-            set => Set(new NotDto<ApiOperation>(value));
-        }
-
-        public double overshipThreshold
-        {
-            get => Get<double>();
-            set => Set(value);
-        }
-
-        public string poSource
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public int projectTask
-        {
-            get => Get<int>();
-            set => Set(value);
-        }
-
-        public double qtyOnShipments
-        {
-            get => Get<double>();
-            set => Set(value);
-        }
-
-        public double quantity
-        {
-            get => Get<double>();
-            set => Set(value);
-        }
-
-        public string reasonCode
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public DateTime requestedOn
-        {
-            get => Get<DateTime>();
-            set => Set(value);
-        }
-
-        public DescriptiveDto salesPerson
-        {
-            get => Get<DescriptiveDto>();
-            set => Set(value);
-        }
-
-        public string shipComplete
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public DateTime shipOn
-        {
-            get => Get<DateTime>();
-            set => Set(value);
-        }
-
-        public string taxCategory
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public double unbilledAmount
-        {
-            get => Get<double>();
-            set => Set(value);
-        }
-
-        public double undershipThreshold
-        {
-            get => Get<double>();
-            set => Set(value);
-        }
-
-        public double unitPrice
-        {
-            get => Get<double>();
-            set => Set(value);
-        }
-
-        public string uom
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public DescriptiveDto warehouse
-        {
-            get => Get<DescriptiveDto>();
-            set => Set(value);
-        }
     }
 }
