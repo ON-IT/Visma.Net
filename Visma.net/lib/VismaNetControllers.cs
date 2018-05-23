@@ -29,6 +29,7 @@ namespace ONIT.VismaNetApi.Lib
 		public const string Attachment = "controller/api/v1/attachment";
         public const string Warehouse = "controller/api/v1/warehouse";
         public const string Location = "controller/api/v1/location";
+        public const string CustomerSalesPrices = "controller/api/v1/customersalesprice";
 
         // Resources
         public const string OAuthAuthorize = "resources/oauth/authorize";

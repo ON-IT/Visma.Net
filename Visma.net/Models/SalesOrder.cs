@@ -625,5 +625,9 @@ namespace ONIT.VismaNetApi.Models
             get => Get<DescriptiveDto>();
             set => Set(value);
         }
+        public string note {
+            get => Get<string>();
+            set => Set(value);
+        }
     }
 }
