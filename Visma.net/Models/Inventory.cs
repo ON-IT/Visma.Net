@@ -11,7 +11,6 @@ namespace ONIT.VismaNetApi.Models
     public class Inventory : DtoProviderBase, IProvideIdentificator
     {
         private List<Attachment> _attachments;
-        private List<Attributes> _attributes;
         private List<CrossReference> _crossReferences;
         private List<WarehouseDetails> _warehouseDetails;
 

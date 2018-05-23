@@ -25,35 +25,9 @@ namespace ONIT.VismaNetApi.Models
             number = customerNumber;
         }
 
-        [JsonProperty]
-        public string number
+        public bool acceptAutoInvoices
         {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        [JsonProperty]
-        public int internalId { get; private set; }
-
-        [JsonProperty]
-        public DateTime lastModifiedDateTime { get; private set; }
-
-        [JsonProperty]
-        public DateTime createdDateTime { get; private set; }
-
-        [JsonProperty]
-
-        public LocationSummary location { get; private set; }
-
-        public string name
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public CustomerStatus status
-        {
-            get => Get<CustomerStatus>();
+            get => Get<bool>();
             set => Set(value);
         }
 
@@ -63,14 +37,24 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public NumberName parentRecord { 
-            get => Get<NumberName>("parentRecordNumber");
-            set => Set(value, "parentRecordNumber");
+        [JsonProperty]
+        public List<Attributes> attributes
+        {
+            get => Get("attributeLines", new NotDto<List<Attributes>>(new List<Attributes>())?.Value);
+            set => Set(new NotDto<List<Attributes>>(value), "attributeLines");
         }
 
-        public string currencyId
+        public string corporateId
         {
             get => Get<string>();
+            set => Set(value);
+        }
+
+        [JsonProperty] public DateTime createdDateTime { get; private set; }
+
+        public int creditDaysPastDue
+        {
+            get => Get<int>();
             set => Set(value);
         }
 
@@ -80,100 +64,9 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public int creditDaysPastDue
-        {
-            get => Get<int>();
-            set => Set(value);
-        }
-
-        public bool overrideWithClassValues
-        {
-            get => Get(defaultValue: new NotDto<bool>(false)).Value;
-            set => Set(new NotDto<bool>(value));
-        }
-
-        public CustomerClass customerClass
-        {
-            get => Get("customerClassId", new CustomerClass());
-            set => Set(value, "customerClassId");
-        }
-
         public CreditTerms creditTerms
         {
             get => Get("creditTermsId", new CreditTerms());
-            set => Set(value);
-        }
-
-        public bool printInvoices
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
-        public bool acceptAutoInvoices
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
-        public bool sendInvoicesByEmail
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
-        public bool printStatements
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
-        public bool sendStatementsByEmail
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
-        public bool printMultiCurrencyStatements
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
-
-        public string vatRegistrationId
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string corporateId
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public string note
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        public VatCode vatZone
-        {
-            get => Get<VatCode>("vatZoneId");
-            set => Set(value, "vatZoneId");
-        }
-
-        public Address mainAddress
-        {
-            get => Get(defaultValue: new Address());
-            set => Set(value);
-        }
-
-        public ContactInfo mainContact
-        {
-            get => Get(defaultValue: new ContactInfo());
             set => Set(value);
         }
 
@@ -184,23 +77,16 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-
-        public Address invoiceAddress
+        public string currencyId
         {
-            get => Get(defaultValue: new Address());
+            get => Get<string>();
             set => Set(value);
         }
 
-        public ContactInfo invoiceContact
+        public CustomerClass customerClass
         {
-            get => Get(defaultValue: new ContactInfo());
-            set => Set(value);
-        }
-
-        public StatementTypes statementType
-        {
-            get => Get<StatementTypes>();
-            set => Set(value);
+            get => Get("customerClassId", new CustomerClass());
+            set => Set(value, "customerClassId");
         }
 
         public Address deliveryAddress
@@ -215,19 +101,6 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public DescriptiveDto priceClass
-        {
-            get => Get("priceClassId", new DescriptiveDto());
-            set => Set(value, "priceClassId");
-        }
-
-        [JsonProperty]
-        public List<Attributes> attributes
-        {
-            get => Get("attributeLines", new NotDto<List<Attributes>>(new List<Attributes>())?.Value);
-            set => Set(new NotDto<List<Attributes>>(value), "attributeLines");
-        }
-
         [JsonProperty]
         public List<DirectDebitLine> directDebitLines
         {
@@ -235,11 +108,140 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        [JsonProperty]
-        public JObject extras { get; private set; }
+        [JsonProperty] public string errorInfo { get; private set; }
+
+        [JsonProperty] public JObject extras { get; private set; }
+
+        [JsonProperty] public GLAccountDto glAccounts { get; private set; }
+
+        [JsonProperty] public int internalId { get; private set; }
+
+
+        public Address invoiceAddress
+        {
+            get => Get(defaultValue: new Address());
+            set => Set(value);
+        }
+
+        public ContactInfo invoiceContact
+        {
+            get => Get(defaultValue: new ContactInfo());
+            set => Set(value);
+        }
+
+        public bool invoiceToDefaultLocation
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        [JsonProperty] public DateTime lastModifiedDateTime { get; private set; }
+
+        [JsonProperty] public LocationSummary location { get; private set; }
+
+        public Address mainAddress
+        {
+            get => Get(defaultValue: new Address());
+            set => Set(value);
+        }
+
+        public ContactInfo mainContact
+        {
+            get => Get(defaultValue: new ContactInfo());
+            set => Set(value);
+        }
+
+        public string name
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string note
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
 
         [JsonProperty]
-        public string errorInfo { get; private set; }
+        public string number
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public bool overrideWithClassValues
+        {
+            get => Get(defaultValue: new NotDto<bool>(false)).Value;
+            set => Set(new NotDto<bool>(value));
+        }
+
+        public NumberName parentRecord
+        {
+            get => Get<NumberName>("parentRecordNumber");
+            set => Set(value, "parentRecordNumber");
+        }
+
+        public DescriptiveDto priceClass
+        {
+            get => Get("priceClassId", new DescriptiveDto());
+            set => Set(value, "priceClassId");
+        }
+
+        public bool printInvoices
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool printMultiCurrencyStatements
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool printStatements
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool sendInvoicesByEmail
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool sendStatementsByEmail
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public StatementTypes statementType
+        {
+            get => Get<StatementTypes>();
+            set => Set(value);
+        }
+
+        public CustomerStatus status
+        {
+            get => Get<CustomerStatus>();
+            set => Set(value);
+        }
+
+
+        public string vatRegistrationId
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public VatZone vatZone
+        {
+            get => Get<VatZone>("vatZoneId");
+            set => Set(value, "vatZoneId");
+        }
 
         public int CompareTo(object obj)
         {
@@ -254,6 +256,11 @@ namespace ONIT.VismaNetApi.Models
             return string.Compare(name, other.name, StringComparison.Ordinal);
         }
 
+        public string GetIdentificator()
+        {
+            return number;
+        }
+
         internal override void PrepareForUpdate()
         {
             base.PrepareForUpdate();
@@ -261,11 +268,6 @@ namespace ONIT.VismaNetApi.Models
             {
                 line.operation = ApiOperation.Update;
             }
-        }
-
-        public string GetIdentificator()
-        {
-            return number;
         }
     }
 }

@@ -42,11 +42,11 @@ namespace Visma.net.tests
   },
   ""defaultPrice"": 0.0,
   ""pendingCost"": 0.0,
-  ""pendingCostDate"": ""2018-04-13T10:44:45.974Z"",
+  ""pendingCostDate"": ""2018-05-22T18:50:26.591Z"",
   ""currentCost"": 0.0,
-  ""effectiveDate"": ""2018-04-13T10:44:45.974Z"",
+  ""effectiveDate"": ""2018-05-22T18:50:26.591Z"",
   ""lastCost"": 0.0,
-  ""lastModifiedDateTime"": ""2018-04-13T10:44:45.974Z"",
+  ""lastModifiedDateTime"": ""2018-05-22T18:50:26.591Z"",
   ""baseUnit"": ""string"",
   ""salesUnit"": ""string"",
   ""purchaseUnit"": ""string"",
@@ -71,7 +71,7 @@ namespace Visma.net.tests
   ""attachments"": [
     {
       ""name"": ""string"",
-      ""id"": ""fff491cd-244a-4957-899c-d15f13483a62"",
+      ""id"": ""string"",
       ""revision"": 0
     }
   ],
@@ -89,7 +89,7 @@ namespace Visma.net.tests
       ""quantityOnHand"": 0.0,
       ""available"": 0.0,
       ""availableForShipment"": 0.0,
-      ""lastModifiedDateTime"": ""2018-04-13T10:44:45.976Z""
+      ""lastModifiedDateTime"": ""2018-05-22T18:50:26.592Z""
     }
   ],
   ""extras"": {},
