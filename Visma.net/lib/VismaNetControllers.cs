@@ -32,6 +32,6 @@ namespace ONIT.VismaNetApi.Lib
 
         // Resources
         public const string OAuthAuthorize = "resources/oauth/authorize";
-        public const string UserContexts = "resources/v1/context";
+        public const string UserContext = "resources/v1/context";
     }
 }
