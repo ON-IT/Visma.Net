@@ -224,14 +224,6 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
-
-        public List<PaymentMethodDetailDescriptionValue> supplierPaymentMethodDetails
-        {
-            get { return Get(defaultValue: new List<PaymentMethodDetailDescriptionValue>());}
-            set { Set(value); }
-        }
-
-        public int CompareTo(Supplier other)
         [JsonProperty]
         public VatZone vatZone
         {
