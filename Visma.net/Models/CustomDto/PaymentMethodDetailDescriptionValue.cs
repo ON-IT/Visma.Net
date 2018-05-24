@@ -1,6 +1,8 @@
-﻿using ONIT.VismaNetApi.Lib;
+﻿using Newtonsoft.Json;
+using ONIT.VismaNetApi.Lib;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
@@ -12,6 +14,10 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             this.paymentMethodDetailDescription = paymentMethodDetailDescription;
         }
 
+        public PaymentMethodDetailDescriptionValue()
+        {
+        }
+
         public string paymentMethodDetailDescription
         {
             get => Get(defaultValue: new NotDto<string>("")).Value;
@@ -20,7 +26,11 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         public string paymentMethodDetailValue
         {
             get => Get<string>();
-            set => Set(value); 
+            set => Set(value);
         }
+
+
     }
+
+    
 }

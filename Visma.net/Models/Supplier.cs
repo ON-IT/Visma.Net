@@ -205,7 +205,7 @@ namespace ONIT.VismaNetApi.Models
 
         public List<PaymentMethodDetailDescriptionValue> supplierPaymentMethodDetails
         {
-            get { return Get(defaultValue: new List<PaymentMethodDetailDescriptionValue>()); }
+            get { return Get(defaultValue: new List<PaymentMethodDetailDescriptionValue>());}
             set { Set(value); }
         }
 
