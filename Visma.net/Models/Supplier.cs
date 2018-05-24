@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
+
 /*
  * Find: ([a-zA-Z]+) ([a-zA-Z]+) { get; set; }
  * Replace with: $1 $2 { get { return Get<$1>(); } set { Set(value); } }
@@ -37,6 +39,13 @@ namespace ONIT.VismaNetApi.Models
         {
             get => Get<AccountUsedForPayment>();
             set => Set(value);
+        }
+
+        [JsonProperty]
+        public List<Attributes> attributes
+        {
+            get => Get("attributeLines", new NotDto<List<Attributes>>(new List<Attributes>())?.Value);
+            set => Set(new NotDto<List<Attributes>>(value), "attributeLines");
         }
 
         public string cashAccount
@@ -75,24 +84,31 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        [JsonProperty] public string errorInfo { get; private set; }
 
+        [JsonProperty] public JObject extras { get; private set; }
+
+        [JsonProperty] public SupplierGLAccountDto glAccounts { get; private set; }
+
+        [JsonProperty]
         public int internalId
         {
-            get => Get<int>();
-            set => Set(value);
+            get; // => Get<int>();
+            private set; // => Set(value);
         }
 
         [JsonProperty]
         public DateTime lastModifiedDateTime
         {
-            get => Get<DateTime>();
-            private set => Set(value);
+            get; // => Get<DateTime>();
+            private set; // set => Set(value);
         }
 
-        public Location location
+        [JsonProperty]
+        public LocationSummary location
         {
-            get => Get(defaultValue: new Location());
-            set => Set(value);
+            get; // => Get(defaultValue: new LocationSummary());
+            private set; // => Set(value);
         }
 
         public Address mainAddress
@@ -117,6 +133,12 @@ namespace ONIT.VismaNetApi.Models
         {
             get => Get<string>();
             set => Set(value);
+        }
+
+        public bool overrideWithClassValues
+        {
+            get => Get<NotDto<bool>>().Value;
+            set => Set(new NotDto<bool>(value));
         }
 
         public NumberName parentRecord
@@ -203,10 +225,11 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public VatCode vatZone
+        [JsonProperty]
+        public VatZone vatZone
         {
-            get => Get("vatZoneId", new VatCode("01"));
-            set => Set(value);
+            get => Get<VatZone>("vatZoneId");
+            set => Set(value, "vatZoneId");
         }
 
         public int CompareTo(object obj)

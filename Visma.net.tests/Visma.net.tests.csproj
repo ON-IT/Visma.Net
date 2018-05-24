@@ -71,6 +71,7 @@
     <Compile Include="Helpers\VismaNetTestHelpers.cs" />
     <Compile Include="Tests\JournalTransactionsTests.cs" />
     <Compile Include="Tests\SalesOrderTests.cs" />
+    <Compile Include="Tests\SupplierTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
