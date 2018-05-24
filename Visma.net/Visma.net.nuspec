@@ -11,7 +11,7 @@
     <projectUrl>https://github.com/ON-IT/Visma.Net</projectUrl>
     <iconUrl>https://sync-it.no/Images/on-it_logo.png</iconUrl>
     <description>Get started with Visma.net Integrations.</description>
-    <copyright>Copyright ON IT AS 2014 - 2017</copyright>
+    <copyright>Copyright ON IT AS 2014 - 2018</copyright>
     <tags>Visma.net API, Visma.net Integrations, REST</tags>
     <releaseNotes>Implemented changes for Visma.net ERP 7.0.</releaseNotes>
   </metadata>
