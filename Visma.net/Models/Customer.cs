@@ -10,7 +10,6 @@ namespace ONIT.VismaNetApi.Models
 {
     public class Customer : DtoProviderBase, IProvideIdentificator, IComparable<Customer>, IComparable
     {
-        //private List<CustomerAttributes> _attributeLines;
         public Customer()
         {
             IgnoreProperties.Add(nameof(number));
@@ -112,7 +111,7 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty] public JObject extras { get; private set; }
 
-        [JsonProperty] public GLAccountDto glAccounts { get; private set; }
+        [JsonProperty] public CustomerGLAccountDto glAccounts { get; private set; }
 
         [JsonProperty] public int internalId { get; private set; }
 

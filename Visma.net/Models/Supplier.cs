@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
+using ONIT.VismaNetApi.Models.CustomDto;
+using ONIT.VismaNetApi.Models.Enums;
+
 /*
  * Find: ([a-zA-Z]+) ([a-zA-Z]+) { get; set; }
  * Replace with: $1 $2 { get { return Get<$1>(); } set { Set(value); } }
  */
-using ONIT.VismaNetApi.Models.CustomDto;
-using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
@@ -14,10 +17,11 @@ namespace ONIT.VismaNetApi.Models
     {
         public Supplier()
         {
-            IgnoreProperties.Add(nameof(this.number));
+            IgnoreProperties.Add(nameof(number));
         }
+
         /// <summary>
-        /// Create a new supplier without auto numbering
+        ///     Create a new supplier without auto numbering
         /// </summary>
         /// <param name="supplierNumber"></param>
         public Supplier(string supplierNumber)
@@ -25,194 +29,219 @@ namespace ONIT.VismaNetApi.Models
             number = supplierNumber;
         }
 
-
-        public int internalId
-        {
-            get { return Get<int>(); }
-            set {  Set(value); }
-        }
-
-        public string number
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public string name
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public string status
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public Address mainAddress
-        {
-            get { return Get<Address>(defaultValue:new Address()); }
-            set { Set(value); }
-        }
-
-        public ContactInfo mainContact
-        {
-            get { return Get<ContactInfo>(defaultValue:new ContactInfo()); }
-            set { Set(value); }
-        }
-
         public string accountReference
         {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public NumberName parentRecord
-        {
-            get { return Get<NumberName>("parentRecordNumber", new NumberName()); }
-            set { Set(value); }
-        }
-
-        public CreditTerms creditTerms
-        {
-            get { return Get<CreditTerms>("creditTermsId", defaultValue:new CreditTerms("30")); }
-            set { Set(value); }
-        }
-
-        public string documentLanguage
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public string currencyId
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public Address remitAddress
-        {
-            get { return Get<Address>(defaultValue:new Address()); }
-            set { Set(value); }
-        }
-
-        public ContactInfo remitContact
-        {
-            get { return Get<ContactInfo>(defaultValue:new ContactInfo()); }
-            set { Set(value); }
-        }
-
-        public PaymentMethod paymentMethod
-        {
-            get { return Get<PaymentMethod>("paymentMethodId", defaultValue:new PaymentMethod()); }
-            set { Set(value); }
-        }
-
-        public string cashAccount
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public SupplierChargeBearer chargeBearer
-        {
-            get { return Get<SupplierChargeBearer>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
         public AccountUsedForPayment accountUsedForPayment
         {
-            get { return Get<AccountUsedForPayment>(); }
-            set { Set(value); }
+            get => Get<AccountUsedForPayment>();
+            set => Set(value);
         }
 
-        public PaymentBy paymentBy
+        [JsonProperty]
+        public List<Attributes> attributes
         {
-            get { return Get<PaymentBy>(); }
-            set { Set(value); }
+            get => Get("attributeLines", new NotDto<List<Attributes>>(new List<Attributes>())?.Value);
+            set => Set(new NotDto<List<Attributes>>(value), "attributeLines");
         }
 
-        public int paymentLeadTime
+        public string cashAccount
         {
-            get { return Get<int>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
-        public string paymentRefDisplayMask
+        public SupplierChargeBearer chargeBearer
         {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public bool paySeparately
-        {
-            get { return Get<bool>(); }
-            set { Set(value); }
-        }
-
-        public Address supplierAddress
-        {
-            get { return Get(defaultValue:new Address()); }
-            set { Set(value); }
-        }
-
-        public ContactInfo supplierContact
-        {
-            get { return Get(defaultValue:new ContactInfo()); }
-            set { Set(value); }
-        }
-
-        public Location location
-        {
-            get { return Get(defaultValue:new Location()); }
-            set { Set(value); }
-        }
-
-        public string vatRegistrationId
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<SupplierChargeBearer>();
+            set => Set(value);
         }
 
         public string corporateId
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
-        public VatCode vatZone
+        public CreditTerms creditTerms
         {
-            get { return Get<VatCode>("vatZoneId", defaultValue:new VatCode("01")); }
-            set { Set(value); }
+            get => Get("creditTermsId", new CreditTerms("30"));
+            set => Set(value);
+        }
+
+        public string currencyId
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string documentLanguage
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        [JsonProperty] public string errorInfo { get; private set; }
+
+        [JsonProperty] public JObject extras { get; private set; }
+
+        [JsonProperty] public SupplierGLAccountDto glAccounts { get; private set; }
+
+        [JsonProperty]
+        public int internalId
+        {
+            get; // => Get<int>();
+            private set; // => Set(value);
         }
 
         [JsonProperty]
         public DateTime lastModifiedDateTime
         {
-            get { return Get<DateTime>(); }
-            private set { Set(value); }
+            get; // => Get<DateTime>();
+            private set; // set => Set(value);
+        }
+
+        [JsonProperty]
+        public LocationSummary location
+        {
+            get; // => Get(defaultValue: new LocationSummary());
+            private set; // => Set(value);
+        }
+
+        public Address mainAddress
+        {
+            get => Get(defaultValue: new Address());
+            set => Set(value);
+        }
+
+        public ContactInfo mainContact
+        {
+            get => Get(defaultValue: new ContactInfo());
+            set => Set(value);
+        }
+
+        public string name
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string number
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public bool overrideWithClassValues
+        {
+            get => Get<NotDto<bool>>().Value;
+            set => Set(new NotDto<bool>(value));
+        }
+
+        public NumberName parentRecord
+        {
+            get => Get("parentRecordNumber", new NumberName());
+            set => Set(value);
+        }
+
+        public PaymentBy paymentBy
+        {
+            get => Get<PaymentBy>();
+            set => Set(value);
+        }
+
+        public int paymentLeadTime
+        {
+            get => Get<int>();
+            set => Set(value);
+        }
+
+        public PaymentMethod paymentMethod
+        {
+            get => Get("paymentMethodId", new PaymentMethod());
+            set => Set(value);
+        }
+
+        public string paymentRefDisplayMask
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public bool paySeparately
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public Address remitAddress
+        {
+            get => Get(defaultValue: new Address());
+            set => Set(value);
+        }
+
+        public ContactInfo remitContact
+        {
+            get => Get(defaultValue: new ContactInfo());
+            set => Set(value);
+        }
+
+        public string status
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public Address supplierAddress
+        {
+            get => Get(defaultValue: new Address());
+            set => Set(value);
         }
 
         public SupplierClass supplierClass
         {
-            get { return Get("supplierClassId", defaultValue: new SupplierClass()); }
-            set { Set(value, "supplierClassId");}
+            get => Get("supplierClassId", new SupplierClass());
+            set => Set(value, "supplierClassId");
+        }
 
+        public ContactInfo supplierContact
+        {
+            get => Get(defaultValue: new ContactInfo());
+            set => Set(value);
+        }
+
+        public List<PaymentMethodDetailDescriptionValue> supplierPaymentMethodDetails
+        {
+            get => Get(defaultValue: new List<PaymentMethodDetailDescriptionValue>());
+            set => Set(value);
+        }
+
+        public string vatRegistrationId
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        [JsonProperty]
+        public VatZone vatZone
+        {
+            get => Get<VatZone>("vatZoneId");
+            set => Set(value, "vatZoneId");
+        }
+
+        public int CompareTo(object obj)
+        {
+            var othersupplier = (Supplier) obj;
+            if (othersupplier == null)
+                return 0;
+            return string.Compare(name, othersupplier.name, StringComparison.Ordinal);
         }
 
         public int CompareTo(Supplier other)
         {
             return string.Compare(name, other.name, StringComparison.Ordinal);
-        }
-
-        public int CompareTo(object obj)
-        {
-            var othersupplier = (Supplier)obj;
-            if (othersupplier == null)
-                return 0;
-            return string.Compare(this.name, othersupplier.name, StringComparison.Ordinal);
         }
 
         public string GetIdentificator()

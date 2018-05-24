@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Exceptions;
 using ONIT.VismaNetApi.Models;
 using ONIT.VismaNetApi.Models.Dimensions;
+using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Lib
 {
@@ -410,7 +411,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             var client = GetHttpClient(new VismaNetAuthorization {CompanyId = 0, Token = token});
             {
-                return await client.Get<List<CompanyContext>>(GetApiUrlForController(VismaNetControllers.UserContexts));
+                return await client.Get<List<CompanyContext>>(GetApiUrlForController(VismaNetControllers.UserContext));
             }
         }
 
@@ -428,6 +429,14 @@ namespace ONIT.VismaNetApi.Lib
             string fileName)
         {
             var url = GetApiUrlForController(VismaNetControllers.CustomerInvoice, $"/{number}/attachment");
+            return AddAttachmentToController<string>(auth, url, bytes, fileName);
+        }
+
+        internal static Task<string> AddAttachmentToSupplierInvoice(VismaNetAuthorization auth, string number,
+            byte[] bytes,
+            string fileName)
+        {
+            var url = GetApiUrlForController(VismaNetControllers.SupplierInvoices, $"/{number}/attachment");
             return AddAttachmentToController<string>(auth, url, bytes, fileName);
         }
 
@@ -523,6 +532,37 @@ namespace ONIT.VismaNetApi.Lib
             ;
             return GetHttpClient(auth)
                 .Delete(url);
+        }
+
+        public static async Task<List<CustomerSalesPrice>> FetchCustomerSalesPricesForItem(string itemNo,
+          VismaNetAuthorization authorization, PriceType priceType = PriceType.Undefined)
+        {
+            var webclient = GetHttpClient(authorization);
+            {
+                var apiUrl = GetApiUrlForController(VismaNetControllers.CustomerSalesPrices);
+                try
+                {
+                    string fullUrl = string.Empty;
+                    if (priceType == PriceType.Undefined)
+                    {
+                        fullUrl = $"{apiUrl}?inventoryId={itemNo}";
+                    }
+                    else
+                    {
+                        fullUrl = $"{apiUrl}?priceType={priceType.ToString()}&inventoryId={itemNo}";
+                    }
+                    return await webclient.Get<List<CustomerSalesPrice>>(fullUrl);
+                }
+                catch (AggregateException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                catch (WebException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                return null;
+            }
         }
 
         private class DimensionContainer
