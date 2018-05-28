@@ -133,7 +133,7 @@ namespace ONIT.VismaNetApi.Models
 
        public CustomerSummary customer
         {
-            get => Get<CustomerSummary>("customerNumber");
+            get => Get<CustomerSummary>("customerNumber",new CustomerSummary());
             set => Set(value, "customerNumber");
         }
 
