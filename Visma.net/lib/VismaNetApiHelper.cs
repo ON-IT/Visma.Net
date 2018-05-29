@@ -440,21 +440,35 @@ namespace ONIT.VismaNetApi.Lib
             return AddAttachmentToController<string>(auth, url, bytes, fileName);
         }
 
-        private static Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, byte[] bytes,
+        private static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, byte[] bytes,
+            string fileName) where T : class
+        {
+            using (var stream = new MemoryStream(bytes))
+            {
+                return await AddAttachmentToController<T>(auth, url, stream, fileName);
+            }
+        }
+
+        private static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, Stream input,
             string fileName) where T : class
         {
             var client = GetHttpClient(auth);
-            var byteArrayContent = new ByteArrayContent(bytes);
-            byteArrayContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            //var content = new ByteArrayContent(bytes);
+            using (var stream = new MemoryStream())
             {
-                FileName = fileName
-            };
-            var request = new MultipartContent
-            {
-                byteArrayContent
-            };
-            return client.PostMessage<T>(url, request);
-            
+                await input.CopyToAsync(stream);
+                // create a content part for the stream
+                var content = new StreamContent(stream);
+                content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = fileName
+                };
+                var request = new MultipartContent
+                {
+                    content
+                };
+                return await client.PostMessage<T>(url, request);
+            }
         }
 
         public static async Task<List<Contact>> FetchContactsForSupplier(string supplierNumber,
