@@ -432,6 +432,14 @@ namespace ONIT.VismaNetApi.Lib
             return AddAttachmentToController<string>(auth, url, bytes, fileName);
         }
 
+        internal static Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
+            Stream stream,
+            string fileName)
+        {
+            var url = GetApiUrlForController(VismaNetControllers.CustomerInvoice, $"/{number}/attachment");
+            return AddAttachmentToController<string>(auth, url, stream, fileName);
+        }
+
         internal static Task<string> AddAttachmentToSupplierInvoice(VismaNetAuthorization auth, string number,
             byte[] bytes,
             string fileName)
@@ -454,16 +462,18 @@ namespace ONIT.VismaNetApi.Lib
         {
             var client = GetHttpClient(auth);
             //var content = new ByteArrayContent(bytes);
+            input.Seek(0, SeekOrigin.Begin);
             using (var stream = new MemoryStream())
             {
                 await input.CopyToAsync(stream);
-                // create a content part for the stream
+                stream.Seek(0, SeekOrigin.Begin);
                 var content = new StreamContent(stream);
-                content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                 {
-                    FileName = fileName
+                    FileName = fileName,
+                    Name = "v"
                 };
-                var request = new MultipartContent
+                var request = new MultipartFormDataContent
                 {
                     content
                 };
