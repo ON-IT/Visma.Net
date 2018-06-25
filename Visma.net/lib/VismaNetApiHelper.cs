@@ -221,7 +221,7 @@ namespace ONIT.VismaNetApi.Lib
                 try
                 {
                     var url = $"{endpoint}/{customerNumber}/document";
-                    await webclient.Get<List<CustomerDocument>>(url);
+                    return await webclient.Get<List<CustomerDocument>>(url);
                 }
                 catch (AggregateException e)
                 {
