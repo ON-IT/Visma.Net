@@ -53,13 +53,6 @@ namespace ONIT.VismaNetApi.Models
             get { return Get<string>(); }
             set { Set(value); }
         }
-
-        public string customerNumber
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
         public DateTime documentDate
         {
             get { return Get<DateTime>(); }
@@ -136,11 +129,11 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
-        /// <summary>
-        /// This will just contain the name and number.
-        /// </summary>
-        [JsonProperty]
-        public Customer customer { get; internal set; }
+        public CustomerSummary customer
+        {
+            get => Get<CustomerSummary>("customerNumber", new CustomerSummary());
+            set => Set(value, "customerNumber");
+        }
 
         [JsonProperty]
         public decimal detailTotal
