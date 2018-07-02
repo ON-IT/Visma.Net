@@ -11,5 +11,10 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         {
             return new DtoValue(number);
         }
+
+        public override string ToString()
+        {
+            return !string.IsNullOrEmpty(name) ? $"{number} [{name}]" : number;
+        }
     }
 }

@@ -8,6 +8,14 @@ namespace ONIT.VismaNetApi.Models
 {
     public class Location : DtoProviderBase, IProvideIdentificator
     {
+       internal override void PrepareForUpdate()
+        {
+            IgnoreProperties.Add(nameof(baccount));
+            IgnoreProperties.Add("baccountId");
+            IgnoreProperties.Add(nameof(locationId));
+            base.PrepareForUpdate();
+        }
+
         public bool active
         {
             get => Get<bool>();
