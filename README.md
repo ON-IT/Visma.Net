@@ -16,23 +16,23 @@ Contact me on ole@on-it.no with details about your project and let's see if we'r
 * CashSale
 * Contact
 * CreditNote
-* Customer [TESTS]
-* CustomerDocument [TESTS]
-* CustomerInvoice [TESTS]
+* Customer*
+* CustomerDocument*
+* CustomerInvoice*
 * Dimension
 * FinAccount
-* Inventory [TESTS]
-* JournalTransaction [TESTS]
-* Location [TESTS]
-* Payment [TESTS]
-* SalesOrder [TESTS]
+* Inventory*
+* JournalTransaction*
+* Location*
+* Payment*
+* SalesOrder*
 * Shipment
 * Subaccount
-* Supplier [TESTS]
+* Supplier*
 * SupplierInvoice
 * Warehouse
 
-[TESTS] indicates that there's tests implemented for the dtos. This is a work in progress.
+*Tests implemented for the data models. This is a work in progress.
 
 ## Changelog
 
