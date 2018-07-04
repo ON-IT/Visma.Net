@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
@@ -240,6 +241,20 @@ namespace ONIT.VismaNetApi.Models
         {
             get => Get(defaultValue: new VatCode(), key: "vatCodeId");
             set => Set(value, "vatCodeId");
+        }
+
+        public override Dictionary<string, object> ToDto(bool delta = false)
+        {
+            if (operation == ApiOperation.Delete)
+            {
+                return Data
+                    .Where(x => x.Key == "lineNumber" || x.Key == "operation")
+                    .ToDictionary(x => x.Key, x => CreateDto(x.Value, x.Key));
+            }
+            else
+            {
+                return base.ToDto(delta);
+            }
         }
     }
 }
