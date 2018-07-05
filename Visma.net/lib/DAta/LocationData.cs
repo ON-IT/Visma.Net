@@ -31,7 +31,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <param name="entity">Entity to update</param>
         public virtual async Task Update(Location entity)
         {
-            await VismaNetApiHelper.Update(entity, entity.GetIdentificator(), ApiControllerUri, Authorization);
+            await VismaNetApiHelper.Update(entity, $"{entity.baccount.number}/{entity.locationId}", ApiControllerUri, Authorization);
         }
 
         /// <summary>
@@ -51,7 +51,9 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <returns>List of all entities</returns>
         public async Task<List<Location>> All(string baccountId)
         {
-            return await VismaNetApiHelper.GetAll<Location>($"{VismaNetControllers.Location}/{baccountId}", Authorization);
+            var all = await VismaNetApiHelper.GetAll<Location>($"{VismaNetControllers.Location}/{baccountId}", Authorization);
+            all.ForEach(x=>x.PrepareForUpdate());
+            return all;
         }
 
         /// <summary>
@@ -60,7 +62,9 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <returns>List of all entities</returns>
         public async Task<List<Location>> Find(string baccountId, NameValueCollection parameters)
         {
-            return await VismaNetApiHelper.GetAll<Location>($"{VismaNetControllers.Location}/{baccountId}", Authorization, parameters);
+            var all =  await VismaNetApiHelper.GetAll<Location>($"{VismaNetControllers.Location}/{baccountId}", Authorization, parameters);
+            all.ForEach(x=>x.PrepareForUpdate());
+            return all;
         }
 
         /// <summary>

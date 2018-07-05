@@ -285,7 +285,8 @@ namespace Visma.net.tests.Tests
   ""project"": {
     ""value"": ""string""
   },
-  ""taxDetailLines"": [
+ /* We cannot write to taxDetailLines as it messes up the totals
+""taxDetailLines"": [
     {
       ""taxId"": {
         ""value"": ""string""
@@ -297,7 +298,7 @@ namespace Visma.net.tests.Tests
         ""value"": 0.0
       }
     }
-  ],
+  ],*/
   ""invoiceLines"": [
     {
       ""discountCode"": {

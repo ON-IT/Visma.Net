@@ -6,54 +6,50 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 {
     public class ContactInfo : DtoProviderBase
     {
-        [JsonProperty]
-        public int contactId
-        {
-            get;
-            private set;
-        }
-
-        public string name
-        {
-            get { return Get<string>(); }
-            set { Set(value?.Trim()); }
-        }
-
         public string attention
         {
-            get { return Get<string>(); }
-            set { Set(value?.Trim()); }
+            get => Get<string>();
+            set => Set(value?.Trim());
         }
+
+        [JsonProperty] public int contactId { get; private set; }
 
         public string email
         {
-            get { return Get<string>(); }
-            set { Set(value?.Trim()); }
-        }
-
-        public string web
-        {
-            get { return Get<string>(); }
-            set { Set(value?.Trim()); }
-        }
-
-        public string phone1
-        {
-            get { return Get<string>(); }
-            set { Set(value?.Trim()); }
-        }
-
-        public string phone2
-        {
-            get { return Get<string>(); }
-            set { Set(value?.Trim()); }
+            get => Get<string>();
+            set => Set(value?.Trim());
         }
 
         public string fax
         {
-            get { return Get<string>(); }
-            set { Set(value?.Trim()); }
+            get => Get<string>();
+            set => Set(value?.Trim());
         }
+
+        public string name
+        {
+            get => Get<string>();
+            set => Set(value?.Trim());
+        }
+
+        public string phone1
+        {
+            get => Get<string>();
+            set => Set(value?.Trim());
+        }
+
+        public string phone2
+        {
+            get => Get<string>();
+            set => Set(value?.Trim());
+        }
+
+        public string web
+        {
+            get => Get<string>();
+            set => Set(value?.Trim());
+        }
+
         public override string ToString()
         {
             var builder = new StringBuilder();
@@ -73,6 +69,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 
             return builder.ToString().Trim();
         }
+
         /*public bool contactIdSpecified => contactId > 0;*/
     }
 }

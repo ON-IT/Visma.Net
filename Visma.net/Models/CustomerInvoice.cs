@@ -321,10 +321,12 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty] public Subaccount subaccount { get; private set; }
 
+        [JsonProperty]
         public List<TaxDetail> TaxDetails
         {
-            get => Get("taxDetailLines", new List<TaxDetail>());
-            set => Set(value, "taxDetailsLines");
+            get; //=> Get("taxDetailLines", new List<TaxDetail>());
+        
+            private set; //=> Set(value, "taxDetailsLines");
         }
 
         [JsonProperty]

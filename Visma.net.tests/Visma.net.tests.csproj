@@ -70,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\VismaNetTestHelpers.cs" />
     <Compile Include="Tests\JournalTransactionsTests.cs" />
+    <Compile Include="Tests\LocationTests.cs" />
     <Compile Include="Tests\PaymentTests.cs" />
     <Compile Include="Tests\SalesOrderTests.cs" />
     <Compile Include="Tests\SupplierTests.cs" />
