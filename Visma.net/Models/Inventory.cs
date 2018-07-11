@@ -34,12 +34,7 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        [JsonProperty]
-        public CostPriceStatistics costPriceStatistics
-        {
-            get => Get<CostPriceStatistics>();
-            private set => Set(value);
-        }
+        [JsonProperty] public CostPriceStatistics costPriceStatistics { get; private set; }
 
         [JsonProperty]
         public List<CrossReference> crossReferences
