@@ -34,7 +34,12 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        [JsonProperty] public CostPriceStatistics costPriceStatistics { get; private set; }
+        [JsonProperty]
+        public CostPriceStatistics costPriceStatistics
+        {
+            get => Get<CostPriceStatistics>();
+            private set => Set(value);
+        }
 
         [JsonProperty]
         public List<CrossReference> crossReferences
@@ -132,13 +137,5 @@ namespace ONIT.VismaNetApi.Models
         {
             return inventoryNumber;
         }
-    }
-
-    public class costPriceStatistics
-    {
-        public decimal averageCost { get; set; }
-        public decimal lastCost { get; set; }
-        public decimal maxCost { get; set; }
-        public decimal minCost { get; set; }
     }
 }
