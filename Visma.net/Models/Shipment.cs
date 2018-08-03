@@ -50,10 +50,10 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public Location location
+        public LocationSummary location
         {
-            get { return Get<Location>(); }
-            set { Set(value); }
+            get => Get("locationId", new LocationSummary());
+            set => Set(value, "locationId");
         }
 
         public ONIT.VismaNetApi.Models.CustomDto.Warehouse fromWarehouse

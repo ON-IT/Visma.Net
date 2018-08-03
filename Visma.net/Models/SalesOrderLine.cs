@@ -220,13 +220,13 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty] public int sortOrder { get; private set; }
 
-        /* This doesn't work in 7.0
+        /* This doesn't work in 7.0 
         public CustomDto.Subaccount subaccount
         {
             get => Get(defaultValue: new CustomDto.Subaccount());
             set => Set(value);
-        }*/
-
+        }
+        */
         public string taxCategory
         {
             get => Get<string>();

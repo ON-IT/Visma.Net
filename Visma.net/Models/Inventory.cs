@@ -133,12 +133,4 @@ namespace ONIT.VismaNetApi.Models
             return inventoryNumber;
         }
     }
-
-    public class costPriceStatistics
-    {
-        public decimal averageCost { get; set; }
-        public decimal lastCost { get; set; }
-        public decimal maxCost { get; set; }
-        public decimal minCost { get; set; }
-    }
 }
