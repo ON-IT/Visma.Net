@@ -44,7 +44,12 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty]
         public string postPeriod { get; private set; }
-        [JsonProperty] public string customerOrder { get; private set; }
+        [JsonProperty] public string customerOrder
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
         [JsonProperty]
         public string currency
         {
