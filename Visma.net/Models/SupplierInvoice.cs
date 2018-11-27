@@ -10,8 +10,8 @@ namespace ONIT.VismaNetApi.Models
 {
     public class SupplierNumber : IProvideCustomDto
     {
-        public string number { get; set; }
         public string name { get; set; }
+        public string number { get; set; }
 
         public object ToDto()
         {
@@ -44,222 +44,222 @@ namespace ONIT.VismaNetApi.Models
             this.referenceNumber = referenceNumber;
         }
 
-        public string financialPeriod
+        [JsonProperty]
+        public SupplierApprovalDocumentStatus approvalStatus
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<SupplierApprovalDocumentStatus>();
+            private set => Set(value);
         }
 
-        public List<SupplierInvoiceLine> invoiceLines
+        public decimal balance
         {
-            get { return Get(defaultValue: new List<SupplierInvoiceLine>()); }
-            private set { Set(value); }
+            get => Get<decimal>();
+            set => Set(value);
         }
 
-        public SupplierNumber supplier
+        public decimal balanceInCurrency
         {
-            get { return Get(defaultValue: new SupplierNumber(), key: "supplierNumber"); }
-            set { Set(value, "supplierNumber"); }
+            get => Get<decimal>();
+            set => Set(value);
         }
 
-        public bool hold
+        public decimal cashDiscount
         {
-            get { return Get<bool>(); }
-            set { Set(value); }
-        }
-
-        public Location location
-        {
-            get { return Get<Location>("locationId"); }
-            set { Set(value, "locationId"); }
-        }
-
-        public CreditTerms creditTerms
-        {
-            get { return Get<CreditTerms>(); }
-            set { Set(value); }
+            get => Get<decimal>();
+            set => Set(value);
         }
 
         public string cashDiscountDate
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
-        public decimal detailTotal
+        public decimal cashDiscountInCurrency
         {
-            get { return Get<decimal>(); }
-            set { Set(value); }
+            get => Get<decimal>();
+            set => Set(value);
         }
 
-        public decimal detailTotalInCurrency
+        public string createdDateTime
         {
-            get { return Get<decimal>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
-        public decimal vatTaxableTotal
+        public CreditTerms creditTerms
         {
-            get { return Get<decimal>(); }
-            set { Set(value); }
+            get => Get<CreditTerms>("creditTermsId");
+            set => Set(value, "creditTermsId");
         }
 
-        public decimal vatTaxableTotalInCurrency
+        public string currencyId
         {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public decimal exchangeRate
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public decimal vatExemptTotal
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public decimal vatExemptTotalInCurrency
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public decimal vatTotal
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public decimal vatTotalInCurrency
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public decimal withholdingTax
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public decimal withholdingTaxInCurrency
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public SupplierDocumentType documentType
-        {
-            get { return Get<SupplierDocumentType>(); }
-            set { Set(value); }
-        }
-
-        public string referenceNumber
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public string postPeriod
-        {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
         public DateTime? date
         {
-            get { return Get<DateTime?>(); }
-            set { Set(value); }
+            get => Get<DateTime?>();
+            set => Set(value);
+        }
+
+        public string description
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public decimal detailTotal
+        {
+            get => Get<decimal>();
+            set => Set(value);
+        }
+
+        public decimal detailTotalInCurrency
+        {
+            get => Get<decimal>();
+            set => Set(value);
+        }
+
+        public SupplierDocumentType documentType
+        {
+            get => Get<SupplierDocumentType>();
+            set => Set(value);
         }
 
         public DateTime? dueDate
         {
-            get { return Get<DateTime?>(); }
-            set { Set(value); }
+            get => Get<DateTime?>();
+            set => Set(value);
         }
 
-        [JsonProperty]
-        public SupplierApprovalDocumentStatus approvalStatus
+        public decimal exchangeRate
         {
-            get { return Get<SupplierApprovalDocumentStatus>(); }
-            private set { Set(value); }
+            get => Get<decimal>();
+            set => Set(value);
+        }
+
+        public string financialPeriod
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public bool hold
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public List<SupplierInvoiceLine> invoiceLines
+        {
+            get => Get(defaultValue: new List<SupplierInvoiceLine>());
+            private set => Set(value);
+        }
+
+        public string lastModifiedDateTime
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public Location location
+        {
+            get => Get<Location>("locationId");
+            set => Set(value, "locationId");
+        }
+
+        public string note
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public PaymentMethod paymentMethod
+        {
+            get => Get<PaymentMethod>();
+            set => Set(value);
+        }
+
+        public string postPeriod
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string referenceNumber
+        {
+            get => Get<string>();
+            set => Set(value);
         }
 
         [JsonProperty]
         public SupplierInvoiceDocumentStatus status
         {
-            get { return Get<SupplierInvoiceDocumentStatus>(); }
-            private set { Set(value); }
+            get => Get<SupplierInvoiceDocumentStatus>();
+            private set => Set(value);
         }
 
-        public string currencyId
+        public SupplierNumber supplier
         {
-            get { return Get<string>(); }
-            set { Set(value); }
-        }
-
-        public decimal balance
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public decimal balanceInCurrency
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public decimal cashDiscount
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public decimal cashDiscountInCurrency
-        {
-            get { return Get<decimal>(); }
-            set { Set(value); }
-        }
-
-        public PaymentMethod paymentMethod
-        {
-            get { return Get<PaymentMethod>(); }
-            set { Set(value); }
+            get => Get(defaultValue: new SupplierNumber(), key: "supplierNumber");
+            set => Set(value, "supplierNumber");
         }
 
         public string supplierReference
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
         }
 
-        public string note
+        public decimal vatExemptTotal
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<decimal>();
+            set => Set(value);
         }
 
-        public string description
+        public decimal vatExemptTotalInCurrency
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<decimal>();
+            set => Set(value);
         }
 
-        public string createdDateTime
+        public decimal vatTaxableTotal
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<decimal>();
+            set => Set(value);
         }
 
-        public string lastModifiedDateTime
+        public decimal vatTaxableTotalInCurrency
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<decimal>();
+            set => Set(value);
+        }
+
+        public decimal vatTotal
+        {
+            get => Get<decimal>();
+            set => Set(value);
+        }
+
+        public decimal vatTotalInCurrency
+        {
+            get => Get<decimal>();
+            set => Set(value);
+        }
+
+        public decimal withholdingTax
+        {
+            get => Get<decimal>();
+            set => Set(value);
+        }
+
+        public decimal withholdingTaxInCurrency
+        {
+            get => Get<decimal>();
+            set => Set(value);
         }
 
         public string GetIdentificator()
