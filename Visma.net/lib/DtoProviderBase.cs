@@ -127,10 +127,12 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        private static object CreateDto(object value, string key)
+        protected static object CreateDto(object value, string key)
         {
             try
             {
+                if (value is DtoValue)
+                    return value;
                 if (value is IProvideCustomDto providesCustomDto)
                 {
                     return providesCustomDto.ToDto();
