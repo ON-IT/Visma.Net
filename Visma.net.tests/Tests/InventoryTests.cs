@@ -97,9 +97,9 @@ namespace Visma.net.tests
 }";
 
         private const string update = @"{
-  ""inventoryNumber"": {
+  /* ""inventoryNumber"": {
     ""value"": ""string""
-  },
+  },*/
   ""status"": {
     ""value"": ""Active""
   },

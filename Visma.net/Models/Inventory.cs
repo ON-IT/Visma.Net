@@ -10,6 +10,16 @@ namespace ONIT.VismaNetApi.Models
 {
     public class Inventory : DtoProviderBase, IProvideIdentificator
     {
+        public Inventory()
+        {
+            IgnoreProperties.Add(nameof(inventoryNumber));
+        }
+        public Inventory(string _inventoryNumber)
+        {
+            inventoryNumber = _inventoryNumber;
+        }
+
+
         private List<Attachment> _attachments;
         private List<CrossReference> _crossReferences;
         private List<WarehouseDetails> _warehouseDetails;
