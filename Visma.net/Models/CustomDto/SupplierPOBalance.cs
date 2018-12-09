@@ -28,4 +28,5 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         public decimal totalDiscountYear { get; set; }
         public DateTime lastModified { get; set; }
     }
+
  }

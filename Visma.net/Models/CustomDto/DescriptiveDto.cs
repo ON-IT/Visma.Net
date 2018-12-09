@@ -165,8 +165,15 @@ namespace ONIT.VismaNetApi.Models
 
     public class CustomerClass : DescriptiveDto
     {
+       // public int id { get; set; }
+        public string description { get; set; }
+        public string taxZoneId { get; set; }
+        public bool requiredTaxzoneId { get; set; }
+        public string paymentMethodId { get; set; }
+
         public CustomerClass()
         {
+
         }
 
         public CustomerClass(string id) : base(id)

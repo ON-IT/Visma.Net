@@ -30,6 +30,14 @@ namespace ONIT.VismaNetApi.Lib.Data
                 await
                     VismaNetApiHelper.Get<CustomerBalance>($"{customerNumber}/balance", VismaNetControllers.Customers, Authorization);
         }
+
+        //Added René
+        public async Task<List<CustomerClass>> GetCustomerClasses()
+        {
+            return
+                await
+                    VismaNetApiHelper.Get<List<CustomerClass>>("customerClass", VismaNetControllers.Customers, Authorization);
+        }
     }
 }
 
