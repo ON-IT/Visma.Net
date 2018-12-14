@@ -151,8 +151,12 @@ namespace ONIT.VismaNetApi.Lib
                 {
                     return listOfProvidesDto.Select(x => x.ToDto()).ToList();
                 }
-                if (string.IsNullOrEmpty(string.Format("{0}", value)))
+
+                if (value == null)
+                {
                     return null;
+                }
+
                 return new DtoValue(value);
             }
             catch (Exception)
