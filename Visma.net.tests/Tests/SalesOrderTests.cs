@@ -58,10 +58,17 @@ namespace Visma.net.tests.Tests
     ""id"": ""string"",
     ""description"": ""string""
   },
-  ""owner"": {
-    ""id"": ""string"",
-    ""name"": ""string""
-  },
+ /* ""owner"": {
+    ""id"": {
+      ""value"": ""string""
+    },
+    ""employeeID"": {
+      ""value"": ""string""
+    },
+    ""name"": {
+      ""value"": ""string""
+    }
+  },*/
   ""origOrderType"": ""string"",
   ""origOrderNbr"": ""string"",
   ""soShippingContact"": {
@@ -314,9 +321,9 @@ namespace Visma.net.tests.Tests
   ""salesPerson"": {
     ""value"": ""string""
   },
-  ""owner"": {
+ /* ""owner"": {
     ""value"": ""string""
-  },
+  },*/
   ""origOrderType"": {
     ""value"": ""string""
   },
