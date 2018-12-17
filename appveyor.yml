@@ -1,5 +1,5 @@
 -
-  version: 3.5.0-pre-{build}
+  version: 3.5.1-pre-{build}
   image: Visual Studio 2017  
   pull_requests:
     do_not_increment_build_number: true
@@ -17,7 +17,7 @@
     verbosity: minimal
   environment:
     api_key:
-      secure: 9+5MJ4M65M1G/0Kqcy6KQ1huc/kc23m/GVDcvflLKYC2dtfWdQ2DiDSoO7hd6Tnm
+      secure: YXm4ryPmWSFRSxnGFhBdQF4Y3wXKQQ2qfs3N6+wh6XAdEoTsrjr4ZxEG5m3VjZdv
   deploy_script:
     - ps: ($artifacts.values | Where-Object {($_.path -like '*.nupkg') -and  !($_.path -like '*.symbols.nupkg')}) | foreach-object { write-host $_.path; dotnet nuget push $_.path -s https://www.nuget.org/api/v2/package -k $env:api_key; if ($lastexitcode -ne 0) {throw}}
 
@@ -38,6 +38,6 @@
     verbosity: minimal
   environment:
     api_key:
-      secure: 9+5MJ4M65M1G/0Kqcy6KQ1huc/kc23m/GVDcvflLKYC2dtfWdQ2DiDSoO7hd6Tnm
+      secure: YXm4ryPmWSFRSxnGFhBdQF4Y3wXKQQ2qfs3N6+wh6XAdEoTsrjr4ZxEG5m3VjZdv
   deploy_script:
     - ps: ($artifacts.values | Where-Object {($_.path -like '*.nupkg') -and  !($_.path -like '*.symbols.nupkg')}) | foreach-object { write-host $_.path; dotnet nuget push $_.path -s https://www.nuget.org/api/v2/package -k $env:api_key; if ($lastexitcode -ne 0) {throw}}
