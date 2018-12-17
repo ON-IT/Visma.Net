@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Tests\CustomerDocumentTests.cs" />
     <Compile Include="Tests\CustomerInvoiceTests.cs" />
+    <Compile Include="Tests\SupplierInvoiceTests.cs" />
     <Compile Include="Tests\CustomerTest.cs" />
     <Compile Include="Helpers\EntityBaseTest.cs" />
     <Compile Include="Tests\InventoryTests.cs" />

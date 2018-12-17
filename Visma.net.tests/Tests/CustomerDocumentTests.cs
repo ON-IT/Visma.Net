@@ -67,6 +67,7 @@ namespace Visma.net.tests
       ""description"": ""string""
     },
     ""subaccount"": {
+      ""subaccountNumber"": ""string"",
       ""subaccountId"": 0,
       ""description"": ""string"",
       ""id"": 0,

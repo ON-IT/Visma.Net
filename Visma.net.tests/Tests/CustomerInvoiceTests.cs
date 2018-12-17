@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
@@ -12,7 +7,7 @@ namespace Visma.net.tests.Tests
 {
     public class CustomerInvoiceTests : EntityBaseTest<CustomerInvoice>
     {
-        private static string dto = @"{
+        private static readonly string dto = @"{
   ""creditTerms"": {
     ""id"": ""string"",
     ""description"": ""string""
@@ -98,6 +93,7 @@ namespace Visma.net.tests.Tests
       ""discountAmountInCurrency"": 0.0,
       ""manualDiscount"": true,
       ""subaccount"": {
+        ""subaccountNumber"": ""string"",
         ""subaccountId"": 0,
         ""description"": ""string"",
         ""id"": 0,
@@ -193,6 +189,7 @@ namespace Visma.net.tests.Tests
     ""description"": ""string""
   },
   ""subaccount"": {
+    ""subaccountNumber"": ""0"",
     ""subaccountId"": 0,
     ""description"": ""string"",
     ""id"": 0,
@@ -212,7 +209,7 @@ namespace Visma.net.tests.Tests
   ""errorInfo"": ""string""
 }";
 
-        private static string update = @"{
+        private static readonly string update = @"{
   ""paymentMethodId"": {
     ""value"": ""string""
   },
@@ -420,6 +417,7 @@ namespace Visma.net.tests.Tests
     ""value"": ""string""
   }
 }";
+
         public CustomerInvoiceTests(ITestOutputHelper output) : base(dto, update)
         {
             this.output = output;
@@ -431,14 +429,13 @@ namespace Visma.net.tests.Tests
             jtoken["invoiceLines"][0]["operation"] = "Insert";
             return base.PrepareDtoForSerializer(jtoken.ToString());
         }
-        
+
         public override string PrepareDtoForUpdate(string src)
         {
-           
             var jtoken = JToken.Parse(src);
             // rutRotType is wrong in dto vs. update
             jtoken["invoiceLines"][0]["typeOfWork"]["rutRotType"] = "string";
-           return jtoken.ToString(Formatting.Indented);
+            return jtoken.ToString(Formatting.Indented);
         }
     }
 }

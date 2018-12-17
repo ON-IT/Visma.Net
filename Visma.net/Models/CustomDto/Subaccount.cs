@@ -19,6 +19,8 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         [JsonProperty]
         public string lastModifiedDateTime { get; private set; }
 
+        [JsonProperty] public string subaccountNumber { get; private set; }
+
         [JsonProperty]
         public List<Segment> segments
         {

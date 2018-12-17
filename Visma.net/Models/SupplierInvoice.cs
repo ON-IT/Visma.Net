@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
@@ -30,6 +31,8 @@ namespace ONIT.VismaNetApi.Models
 
     public class SupplierInvoice : DtoProviderBase, IProvideIdentificator
     {
+        private List<Attachment> _attachments;
+
         public SupplierInvoice()
         {
             IgnoreProperties.Add(nameof(referenceNumber));
@@ -51,6 +54,13 @@ namespace ONIT.VismaNetApi.Models
             private set => Set(value);
         }
 
+        [JsonProperty]
+        public List<Attachment> attachments
+        {
+            get => _attachments ?? (_attachments = new List<Attachment>());
+            private set => _attachments = value;
+        }
+
         public decimal balance
         {
             get => Get<decimal>();
@@ -60,6 +70,18 @@ namespace ONIT.VismaNetApi.Models
         public decimal balanceInCurrency
         {
             get => Get<decimal>();
+            set => Set(value);
+        }
+
+        public NumberName branchNumber
+        {
+            get => Get<NumberName>();
+            set => Set(value);
+        }
+
+        public string buyerReference
+        {
+            get => Get<string>();
             set => Set(value);
         }
 
@@ -80,6 +102,8 @@ namespace ONIT.VismaNetApi.Models
             get => Get<decimal>();
             set => Set(value);
         }
+
+        [JsonProperty] public string closedFinancialPeriod { get; private set; }
 
         public string createdDateTime
         {
@@ -123,6 +147,10 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        [JsonProperty] public decimal discountTotal { get; private set; }
+
+        [JsonProperty] public decimal discountTotalInCurrency { get; private set; }
+
         public SupplierDocumentType documentType
         {
             get => Get<SupplierDocumentType>();
@@ -165,9 +193,9 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public Location location
+        public LocationSummary location
         {
-            get => Get<Location>("locationId");
+            get => Get<LocationSummary>("locationId");
             set => Set(value, "locationId");
         }
 
@@ -183,6 +211,18 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        [JsonProperty]
+        public DateTime payDate { get; private set; }
+
+        [JsonProperty]
+        public string paymentMessage { get; private set; }
+
+        public string paymentRefNo
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
         public string postPeriod
         {
             get => Get<string>();
@@ -194,6 +234,9 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
+
+        [JsonProperty] public decimal roundingDiff { get; private set; }
+        [JsonProperty] public decimal roundingDiffInCurrency { get; private set; }
 
         [JsonProperty]
         public SupplierInvoiceDocumentStatus status
@@ -213,6 +256,8 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
+
+        [JsonProperty] public string taxCalculationMode { get; private set; }
 
         public decimal vatExemptTotal
         {
@@ -261,6 +306,11 @@ namespace ONIT.VismaNetApi.Models
             get => Get<decimal>();
             set => Set(value);
         }
+        
+        [JsonProperty]
+        public JObject extras { get; private set; }
+
+        [JsonProperty] public string errorInfo { get; private set; }
 
         public string GetIdentificator()
         {
