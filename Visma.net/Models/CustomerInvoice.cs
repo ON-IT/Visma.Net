@@ -371,7 +371,13 @@ namespace ONIT.VismaNetApi.Models
             private set; // { Set(value); }
         }
 
-        public string GetIdentificator()
+		public bool sendToAutoInvoice
+		{
+			get => Get<bool>();
+			set => Set(value);
+		}
+
+		public string GetIdentificator()
         {
             return referenceNumber;
         }
@@ -450,5 +456,7 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
-    }
+
+		
+	}
 }
