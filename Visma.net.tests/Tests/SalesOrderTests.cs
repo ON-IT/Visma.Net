@@ -329,9 +329,9 @@ namespace Visma.net.tests.Tests
   ""salesPerson"": {
     ""value"": ""string""
   },
-  ""owner"": {
+ /* ""owner"": {
     ""value"": ""string""
-  },
+  },*/
   ""origOrderType"": {
     ""value"": ""string""
   },
