@@ -187,12 +187,12 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
-        /*
+
         public Owner owner
         {
             get => Get(defaultValue: new Owner());
             set => Set(value);
-        }*/
+        }
 
         [JsonProperty]
         public string postPeriod
