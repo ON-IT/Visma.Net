@@ -37,6 +37,8 @@ namespace ONIT.VismaNetApi
         public readonly LocationData Location;
         public readonly SubaccountData Subaccount;
 
+        public readonly CustomerPaymentData CustomerPayment;
+
         /// <summary>
         ///     Creates a connection using token.
         /// </summary>
@@ -75,6 +77,7 @@ namespace ONIT.VismaNetApi
             Warehouse = new WarehouseData(Auth);
             Location = new LocationData(Auth);
             Subaccount = new SubaccountData(Auth);
+            CustomerPayment = new CustomerPaymentData(Auth);
         }
 
         public static string Version { get; private set; }
