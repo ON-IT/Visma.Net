@@ -21,4 +21,17 @@ namespace ONIT.VismaNetApi.Lib.Data
         }
 
     }
+
+    public class CustomerPaymentData : BaseCrudDataClass<CustomerPayment>
+    {
+        internal CustomerPaymentData(VismaNetAuthorization auth) : base(auth)
+        {
+            ApiControllerUri = VismaNetControllers.CustomerPayment;
+        }
+
+        protected CustomerPaymentData() : base(null)
+        {
+            ApiControllerUri = VismaNetControllers.CustomerPayment;
+        }
+    }
 }

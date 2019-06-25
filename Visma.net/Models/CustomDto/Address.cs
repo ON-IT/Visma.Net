@@ -70,9 +70,9 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             set { Set(value?.Trim()); }
         }
 
-        public IdName country
+        public Country country
         {
-            get { return Get("countryId", new IdName()); }
+            get { return Get("countryId", new Country()); }
             set { Set(value, "countryId"); }
         }
 

@@ -7,7 +7,7 @@ namespace Visma.net.tests
 {
     public class CustomerTest : EntityBaseTest<Customer>
     {
-        private static readonly  string dto = @"{
+        private static readonly string dto = @"{
   ""internalId"": 0,
   ""number"": ""string"",
   ""name"": ""string"",
@@ -21,7 +21,16 @@ namespace Visma.net.tests
     ""city"": ""string"",
     ""country"": {
       ""id"": ""string"",
-      ""name"": ""string""
+      ""name"": ""string"",
+      ""extras"": {
+        ""additionalProp1"": {},
+        ""additionalProp2"": {},
+        ""additionalProp3"": {}
+      },
+      ""errorInfo"": ""string"",
+      ""metadata"": {
+        ""totalCount"": 0
+      }
     },
     ""county"": {
       ""id"": ""string"",
@@ -64,7 +73,16 @@ namespace Visma.net.tests
     ""city"": ""string"",
     ""country"": {
       ""id"": ""string"",
-      ""name"": ""string""
+      ""name"": ""string"",
+      ""extras"": {
+        ""additionalProp1"": {},
+        ""additionalProp2"": {},
+        ""additionalProp3"": {}
+      },
+      ""errorInfo"": ""string"",
+      ""metadata"": {
+        ""totalCount"": 0
+      }
     },
     ""county"": {
       ""id"": ""string"",
@@ -97,7 +115,16 @@ namespace Visma.net.tests
     ""city"": ""string"",
     ""country"": {
       ""id"": ""string"",
-      ""name"": ""string""
+      ""name"": ""string"",
+      ""extras"": {
+        ""additionalProp1"": {},
+        ""additionalProp2"": {},
+        ""additionalProp3"": {}
+      },
+      ""errorInfo"": ""string"",
+      ""metadata"": {
+        ""totalCount"": 0
+      }
     },
     ""county"": {
       ""id"": ""string"",
@@ -117,9 +144,22 @@ namespace Visma.net.tests
   ""vatRegistrationId"": ""string"",
   ""corporateId"": ""string"",
   ""vatZone"": {
-    ""defaultVatCategory"": ""string"",
     ""id"": ""string"",
-    ""description"": ""string""
+    ""description"": ""string"",
+    ""defaultVatCategory"": ""string"",
+    ""defaultTaxCategory"": {
+      ""number"": ""string"",
+      ""description"": ""string""
+    },
+    ""extras"": {
+      ""additionalProp1"": {},
+      ""additionalProp2"": {},
+      ""additionalProp3"": {}
+    },
+    ""errorInfo"": ""string"",
+    ""metadata"": {
+      ""totalCount"": 0
+    }
   },
   ""location"": {
     ""countryId"": ""string"",
@@ -133,22 +173,21 @@ namespace Visma.net.tests
       ""description"": ""string""
     }
   ],
-  ""lastModifiedDateTime"": ""2018-05-22T07:27:27.816Z"",
-  ""createdDateTime"": ""2018-05-22T07:27:27.816Z"",
+  ""lastModifiedDateTime"": ""2019-06-25T09:30:45.571Z"",
+  ""createdDateTime"": ""2019-06-25T09:30:45.571Z"",
   ""directDebitLines"": [
     {
-      ""operation"": ""Insert"",
       ""id"": ""string"",
       ""mandateId"": ""string"",
       ""mandateDescription"": ""string"",
-      ""dateOfSignature"": ""2018-05-22T07:27:27.816Z"",
+      ""dateOfSignature"": ""2019-06-25T09:30:45.571Z"",
       ""isDefault"": true,
       ""oneTime"": true,
       ""bic"": ""string"",
       ""iban"": ""string"",
-      ""lastCollectionDate"": ""2018-05-22T07:27:27.816Z"",
+      ""lastCollectionDate"": ""2019-06-25T09:30:45.571Z"",
       ""maxAmount"": 0.0,
-      ""expirationDate"": ""2018-05-22T07:27:27.816Z""
+      ""expirationDate"": ""2019-06-25T09:30:45.571Z""
     }
   ],
   ""priceClass"": {
@@ -156,6 +195,11 @@ namespace Visma.net.tests
     ""description"": ""string""
   },
   ""glAccounts"": {
+    ""customerLedgerAccount"": {
+      ""type"": ""string"",
+      ""number"": ""string"",
+      ""description"": ""string""
+    },
     ""salesAccount"": {
       ""type"": ""string"",
       ""number"": ""string"",
@@ -181,17 +225,24 @@ namespace Visma.net.tests
       ""description"": ""string""
     }
   },
-  ""overrideWithClassValues"": true,
   ""invoiceToDefaultLocation"": true,
-  ""extras"": {},
+  ""extras"": {
+    ""additionalProp1"": {},
+    ""additionalProp2"": {},
+    ""additionalProp3"": {}
+  },
   ""errorInfo"": ""string"",
-  ""note"": ""string""
+  ""metadata"": {
+    ""totalCount"": 0
+  }
 }";
 
         private static readonly string update = @"{
- /* ""number"": {
+/*
+  ""number"": {
     ""value"": ""string""
-  },*/
+  },
+*/
   ""name"": {
     ""value"": ""string""
   },
@@ -423,7 +474,7 @@ namespace Visma.net.tests
         ""value"": ""string""
       },
       ""dateOfSignature"": {
-        ""value"": ""2018-05-22T07:27:27.816Z""
+        ""value"": ""2019-06-25T09:30:45.571Z""
       },
       ""isDefault"": {
         ""value"": true
@@ -438,13 +489,13 @@ namespace Visma.net.tests
         ""value"": ""string""
       },
       ""lastCollectionDate"": {
-        ""value"": ""2018-05-22T07:27:27.816Z""
+        ""value"": ""2019-06-25T09:30:45.571Z""
       },
       ""maxAmount"": {
         ""value"": 0.0
       },
       ""expirationDate"": {
-        ""value"": ""2018-05-22T07:27:27.816Z""
+        ""value"": ""2019-06-25T09:30:45.571Z""
       }
     }
   ],
@@ -459,16 +510,27 @@ namespace Visma.net.tests
     }
   ]
 }";
-
-        public override string PrepareDtoForUpdate(string src)
+        public override string PrepareDtoForSerializer(string src)
         {
-           
             var jtoken = JToken.Parse(src);
-            // rutRotType is wrong in dto vs. update
+            jtoken["overridewithclassvalues"] = true;
+            jtoken["note"] = "string";
+            jtoken["directDebitLines"][0]["operation"] = "insert";
             return jtoken.ToString(Formatting.Indented);
         }
 
-        public CustomerTest(ITestOutputHelper output) : base (dto, update)
+        public override string PrepareDtoForUpdate(string src)
+        {
+            var jtoken = JToken.Parse(src);
+            jtoken["overridewithclassvalues"] = true;
+            jtoken["note"] = "string";
+            //jtoken["number"] = "stringx";
+            //jtoken.RemoveFields("number");
+            
+            return jtoken.ToString(Formatting.Indented);
+        }
+
+        public CustomerTest(ITestOutputHelper output) : base(dto, update)
         {
             this.output = output;
         }

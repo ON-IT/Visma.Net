@@ -242,6 +242,9 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value, "vatZoneId");
         }
 
+        [JsonProperty]
+        public Metadata metadata { get; private set; }
+
         public int CompareTo(object obj)
         {
             var otherCustomer = (Customer) obj;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
@@ -13,7 +8,8 @@ namespace Visma.net.tests.Tests
     public class SupplierInvoiceTests : EntityBaseTest<SupplierInvoice>
     {
         private static string dto = @"{
- /* ""taxDetailLines"": [
+ /*
+    ""taxDetailLines"": [
     {
       ""taxId"": ""string"",
       ""recordId"": 0,
@@ -21,11 +17,12 @@ namespace Visma.net.tests.Tests
         ""number"": ""string"",
         ""description"": ""string""
       },
-      ""vatRate"": 0,
-      ""taxableAmount"": 0,
-      ""vatAmount"": 0
+      ""vatRate"": 0.0,
+      ""taxableAmount"": 0.0,
+      ""vatAmount"": 0.0
     }
-  ],*/
+  ],
+*/
   ""attachments"": [
     {
       ""name"": ""string"",
@@ -33,23 +30,27 @@ namespace Visma.net.tests.Tests
       ""revision"": 0
     }
   ],
+  ""approvalDetails"": {
+    ""attachmentID"": ""string"",
+    ""comment"": ""string""
+  },
   ""invoiceLines"": [
     {
       ""lineNumber"": 0,
       ""inventoryNumber"": ""string"",
       ""stockItem"": true,
       ""transactionDescription"": ""string"",
-      ""quantity"": 0,
+      ""quantity"": 0.0,
       ""uom"": ""string"",
-      ""unitCost"": 0,
-      ""unitCostInCurrency"": 0,
-      ""cost"": 0,
-      ""costInCurrency"": 0,
-      ""discountPercent"": 0,
-      ""discountAmount"": 0,
-      ""discountAmountInCurrency"": 0,
-      ""discountUnitCost"": 0,
-      ""discountUnitCostInCurrency"": 0,
+      ""unitCost"": 0.0,
+      ""unitCostInCurrency"": 0.0,
+      ""cost"": 0.0,
+      ""costInCurrency"": 0.0,
+      ""discountPercent"": 0.0,
+      ""discountAmount"": 0.0,
+      ""discountAmountInCurrency"": 0.0,
+      ""discountUnitCost"": 0.0,
+      ""discountUnitCostInCurrency"": 0.0,
       ""manualDiscount"": true,
       ""account"": {
         ""type"": ""Asset"",
@@ -62,7 +63,7 @@ namespace Visma.net.tests.Tests
         ""subaccountNumber"": ""string"",
         ""subaccountId"": 0,
         ""description"": ""string"",
-        ""lastModifiedDateTime"": ""2018-11-27T13:54:47.959Z"",
+        ""lastModifiedDateTime"": ""2019-06-25T10:26:04.176Z"",
         ""segments"": [
           {
             ""segmentId"": 0,
@@ -76,7 +77,10 @@ namespace Visma.net.tests.Tests
           ""additionalProp2"": {},
           ""additionalProp3"": {}
         },
-        ""errorInfo"": ""string""
+        ""errorInfo"": ""string"",
+        ""metadata"": {
+          ""totalCount"": 0
+        }
       },
       ""deferralSchedule"": 0,
       ""deferralCode"": ""string"",
@@ -112,36 +116,45 @@ namespace Visma.net.tests.Tests
     }
   ],
   ""hold"": true,
-  ""exchangeRate"": 0,
+  ""exchangeRate"": 0.0,
   ""paymentRefNo"": ""string"",
   ""creditTerms"": {
     ""id"": ""string"",
     ""description"": ""string""
   },
-  ""cashDiscountDate"": ""2018-11-27T13:54:47.959Z"",
-  ""detailTotal"": 0,
-  ""detailTotalInCurrency"": 0,
-  ""discountTotal"": 0,
-  ""discountTotalInCurrency"": 0,
-  ""vatTaxableTotal"": 0,
-  ""vatTaxableTotalInCurrency"": 0,
-  ""vatExemptTotal"": 0,
-  ""vatExemptTotalInCurrency"": 0,
-  ""withholdingTax"": 0,
-  ""withholdingTaxInCurrency"": 0,
+  ""cashDiscountDate"": ""2019-06-25T10:26:04.176Z"",
+  ""detailTotal"": 0.0,
+  ""detailTotalInCurrency"": 0.0,
+  ""discountTotal"": 0.0,
+  ""discountTotalInCurrency"": 0.0,
+  ""vatTaxableTotal"": 0.0,
+  ""vatTaxableTotalInCurrency"": 0.0,
+  ""vatExemptTotal"": 0.0,
+  ""vatExemptTotalInCurrency"": 0.0,
+  ""withholdingTax"": 0.0,
+  ""withholdingTaxInCurrency"": 0.0,
   ""buyerReference"": ""string"",
-  ""roundingDiff"": 0,
-  ""roundingDiffInCurrency"": 0,
+  ""roundingDiff"": 0.0,
+  ""roundingDiffInCurrency"": 0.0,
   ""taxCalculationMode"": ""TaxSetting"",
-  /*""supplierTaxZone"": {
+  ""supplierTaxZone"": {
+    ""id"": ""string"",
+    ""description"": ""string"",
     ""defaultVatCategory"": ""string"",
     ""defaultTaxCategory"": {
       ""number"": ""string"",
       ""description"": ""string""
     },
-    ""id"": ""string"",
-    ""description"": ""string""
-  },*/
+    ""extras"": {
+      ""additionalProp1"": {},
+      ""additionalProp2"": {},
+      ""additionalProp3"": {}
+    },
+    ""errorInfo"": ""string"",
+    ""metadata"": {
+      ""totalCount"": 0
+    }
+  },
   ""supplier"": {
     ""number"": ""string"",
     ""name"": ""string""
@@ -150,23 +163,23 @@ namespace Visma.net.tests.Tests
   ""referenceNumber"": ""string"",
   ""postPeriod"": ""string"",
   ""financialPeriod"": ""string"",
-  ""date"": ""2018-11-27T13:54:47.959Z"",
-  ""dueDate"": ""2018-11-27T13:54:47.959Z"",
+  ""date"": ""2019-06-25T10:26:04.176Z"",
+  ""dueDate"": ""2019-06-25T10:26:04.176Z"",
   ""approvalStatus"": ""New"",
   ""status"": ""Hold"",
   ""currencyId"": ""string"",
-  ""balance"": 0,
-  ""balanceInCurrency"": 0,
-  ""cashDiscount"": 0,
-  ""cashDiscountInCurrency"": 0,
+  ""balance"": 0.0,
+  ""balanceInCurrency"": 0.0,
+  ""cashDiscount"": 0.0,
+  ""cashDiscountInCurrency"": 0.0,
   ""paymentMethod"": {
     ""id"": ""string"",
     ""description"": ""string""
   },
   ""supplierReference"": ""string"",
   ""description"": ""string"",
-  ""createdDateTime"": ""2018-11-27T13:54:47.959Z"",
-  ""lastModifiedDateTime"": ""2018-11-27T13:54:47.959Z"",
+  ""createdDateTime"": ""2019-06-25T10:26:04.176Z"",
+  ""lastModifiedDateTime"": ""2019-06-25T10:26:04.176Z"",
   ""note"": ""string"",
   ""closedFinancialPeriod"": ""string"",
   ""location"": {
@@ -174,20 +187,23 @@ namespace Visma.net.tests.Tests
     ""id"": ""string"",
     ""name"": ""string""
   },
-  ""vatTotal"": 0,
-  ""vatTotalInCurrency"": 0,
+  ""vatTotal"": 0.0,
+  ""vatTotalInCurrency"": 0.0,
   ""branchNumber"": {
     ""number"": ""string"",
     ""name"": ""string""
   },
-  ""payDate"": ""2018-11-27T13:54:47.959Z"",
+  ""payDate"": ""2019-06-25T10:26:04.176Z"",
   ""paymentMessage"": ""string"",
   ""extras"": {
     ""additionalProp1"": {},
     ""additionalProp2"": {},
     ""additionalProp3"": {}
   },
-  ""errorInfo"": ""string""
+  ""errorInfo"": ""string"",
+  ""metadata"": {
+    ""totalCount"": 0
+  }
 }";
 
         private static string update = @"{
@@ -201,7 +217,7 @@ namespace Visma.net.tests.Tests
     ""value"": true
   },
   ""date"": {
-    ""value"": ""2018-11-27T13:54:47.959Z""
+    ""value"": ""2019-06-25T10:26:04.176Z""
   },
   ""postPeriod"": {
     ""value"": ""string""
@@ -231,22 +247,22 @@ namespace Visma.net.tests.Tests
     ""value"": ""string""
   },
   ""dueDate"": {
-    ""value"": ""2018-11-27T13:54:47.959Z""
+    ""value"": ""2019-06-25T10:26:04.176Z""
   },
   ""cashDiscountDate"": {
-    ""value"": ""2018-11-27T13:54:47.959Z""
+    ""value"": ""2019-06-25T10:26:04.176Z""
   },
   ""note"": {
     ""value"": ""string""
   },
   ""exchangeRate"": {
-    ""value"": 0
+    ""value"": 0.0
   },
   ""branchNumber"": {
     ""value"": ""string""
   },
   ""roundingDiffInCurrency"": {
-    ""value"": 0
+    ""value"": 0.0
   },
   ""taxCalculationMode"": {
     ""value"": ""TaxSetting""
@@ -261,24 +277,26 @@ namespace Visma.net.tests.Tests
     ""value"": ""string""
   },
   ""payDate"": {
-    ""value"": ""2018-11-27T13:54:47.959Z""
+    ""value"": ""2019-06-25T10:26:04.176Z""
   },
   ""paymentMessage"": {
     ""value"": ""string""
   },
+/*
   ""taxDetailLines"": [
     {
       ""taxId"": {
         ""value"": ""string""
       },
       ""taxableAmount"": {
-        ""value"": 0
+        ""value"": 0.0
       },
       ""vatAmount"": {
-        ""value"": 0
+        ""value"": 0.0
       }
     }
   ],
+*/
   ""invoiceLines"": [
     {
       ""operation"": ""Insert"",
@@ -292,25 +310,25 @@ namespace Visma.net.tests.Tests
         ""value"": ""string""
       },
       ""quantity"": {
-        ""value"": 0
+        ""value"": 0.0
       },
       ""uom"": {
         ""value"": ""string""
       },
       ""unitCostInCurrency"": {
-        ""value"": 0
+        ""value"": 0.0
       },
       ""costInCurrency"": {
-        ""value"": 0
+        ""value"": 0.0
       },
       ""discountPercent"": {
-        ""value"": 0
+        ""value"": 0.0
       },
       ""discountAmountInCurrency"": {
-        ""value"": 0
+        ""value"": 0.0
       },
       ""discountUnitCostInCurrency"": {
-        ""value"": 0
+        ""value"": 0.0
       },
       ""manualDiscount"": {
         ""value"": true
@@ -356,6 +374,40 @@ namespace Visma.net.tests.Tests
       },
       ""splitHierarchy"": {
         ""value"": ""string""
+      },
+      ""linkLine"": {
+        ""purchaseType"": ""PurchaseOrder"",
+        ""purchaseNumber"": {
+          ""value"": ""string""
+        },
+        ""purchaseLineNbr"": {
+          ""value"": 0
+        }
+      }
+    }
+  ],
+  ""approvalDetails"": {
+    ""attachmentID"": {
+      ""value"": ""string""
+    },
+    ""comment"": {
+      ""value"": ""string""
+    }
+  },
+  ""addPOReceiptLines"": [
+    {
+      ""poReceiptNumber"": {
+        ""value"": ""string""
+      },
+      ""poReceiptLineNumber"": {
+        ""value"": 0
+      }
+    }
+  ],
+  ""addPurchaseOrders"": [
+    {
+      ""poOrderNumber"": {
+        ""value"": ""string""
       }
     }
   ]
@@ -371,14 +423,14 @@ namespace Visma.net.tests.Tests
             jtoken["invoiceLines"][0]["operation"] = "Insert";
             return base.PrepareDtoForSerializer(jtoken.ToString());
         }
-        
+
         public override string PrepareDtoForUpdate(string src)
         {
-           
+
             var jtoken = JToken.Parse(src);
             // rutRotType is wrong in dto vs. update
-            jtoken["invoiceLines"][0]["typeOfWork"]["rutRotType"] = "string";
-           return jtoken.ToString(Formatting.Indented);
+            //  jtoken["invoiceLines"][0]["typeOfWork"]["rutRotType"] = "string";
+            return jtoken.ToString(Formatting.Indented);
         }
     }
 }

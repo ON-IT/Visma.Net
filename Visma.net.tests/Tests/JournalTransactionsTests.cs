@@ -54,7 +54,10 @@ namespace Visma.net.tests.Tests
             }
           ],
           ""extras"": {},
-          ""errorInfo"": ""string""
+          ""errorInfo"": ""string"",
+            ""metadata"":{
+                ""totalCount"": 0
+            }
         },
         ""referenceNumber"": ""string"",
         ""debitAmount"": 0.0,

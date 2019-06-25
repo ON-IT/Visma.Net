@@ -17,6 +17,12 @@ namespace ONIT.VismaNetApi.Models
             DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
         }
 
+        [JsonIgnore]
+        public ApiOperation operation
+        {
+            get => Get(defaultValue: new NotDto<ApiOperation>(ApiOperation.Insert)).Value;
+            set => Set(new NotDto<ApiOperation>(value));
+        }
         public string alternateID
         {
             get => Get<string>();
@@ -91,13 +97,7 @@ namespace ONIT.VismaNetApi.Models
             get => Get<NumberDescription>("inventoryNumber");
             set => Set(value, "inventoryNumber");
         }
-
-        public string inventoryId
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
+        
         public string invoiceNbr
         {
             get => Get<string>();
@@ -141,14 +141,7 @@ namespace ONIT.VismaNetApi.Models
         }
 
         [JsonProperty] public double openQty { get; private set; }
-
-        [JsonIgnore]
-        public ApiOperation operation
-        {
-            get => Get(defaultValue: new NotDto<ApiOperation>(ApiOperation.Insert)).Value;
-            set => Set(new NotDto<ApiOperation>(value));
-        }
-
+        
         public double overshipThreshold
         {
             get => Get<double>();
@@ -164,7 +157,7 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty]
         public int projectTask
         {
-            get => int.Parse(Get<string>());
+            get => int.TryParse(Get<string>(), out var value) ? value : 0;
             set => Set(value.ToString());
         }
 
@@ -196,7 +189,7 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty("operation")]
         public string salesOrderOperation
         {
-            get => Get<string>();
+            get => Get<string>(defaultValue: "Issue");
             set => Set(value);
         }
 

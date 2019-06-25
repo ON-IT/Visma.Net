@@ -12,7 +12,7 @@ namespace ONIT.VismaNetApi.Models
 
         public SupplierInvoiceLine()
         {
-            DtoFields.Add("operation", new NotDto<int>(1));
+            DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
             DtoFields.Add("lineNumber", new DtoValue(0));
             DtoFields.Add("quantity", new DtoValue(1));
         }
@@ -34,13 +34,13 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty]
         public decimal cost
         {
-            get => Get<decimal>();
-            private set => Set(value);
+            get;
+            private set;
         }
 
-        public DescriptionId project { get => Get<DescriptionId>(); set => Set(value); }
+        public DescriptionId project { get => Get<DescriptionId>("projectId"); set => Set(value, key: "projectId"); }
 
-        public DescriptionId projectTask { get => Get<DescriptionId>(); set => Set(value); }
+        public DescriptionId projectTask { get => Get<DescriptionId>("projectTaskId"); set => Set(value, key: "projectTaskId"); }
 
         [JsonProperty]
         public decimal costInCurrency
@@ -136,13 +136,13 @@ namespace ONIT.VismaNetApi.Models
         }
 
         [JsonProperty]
-        public string poNumber { get => Get<string>(); set => Set(value); }
+        public string poNumber { get; private set; }
 
-        [JsonProperty] public int poLineNr { get => Get<int>(); set => Set(value); }
+        [JsonProperty] public int poLineNr { get; private set; }
 
-        [JsonProperty] public string poReceiptNbr { get => Get<string>(); set => Set(value); }
+        [JsonProperty] public string poReceiptNbr { get; private set;}
 
-        [JsonProperty] public int poReceiptLineNbr { get => Get<int>(); set => Set(value); }
+        [JsonProperty] public int poReceiptLineNbr { get; private set;}
 
         public string transactionDescription
         {
@@ -153,8 +153,8 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty]
         public decimal unitCost
         {
-            get => Get<decimal>();
-            private set => Set(value);
+            get;
+            private set;
         }
 
         public decimal unitCostInCurrency

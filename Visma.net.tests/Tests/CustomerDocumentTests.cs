@@ -81,7 +81,10 @@ namespace Visma.net.tests
         }
       ],
       ""extras"": {},
-      ""errorInfo"": ""string""
+      ""errorInfo"": ""string"",
+      ""metadata"":{
+            ""totalCount"": 0
+        }
     },
     ""extras"": {},
     ""errorInfo"": ""string""

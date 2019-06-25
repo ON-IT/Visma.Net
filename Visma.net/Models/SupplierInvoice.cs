@@ -55,6 +55,13 @@ namespace ONIT.VismaNetApi.Models
         }
 
         [JsonProperty]
+        public VatZone supplierTaxZone { get; private set; }
+
+        [JsonProperty]
+
+        public ApprovalDetails approvalDetails { get => Get<ApprovalDetails>(); private set => Set(value); }
+
+        [JsonProperty]
         public List<Attachment> attachments
         {
             get => _attachments ?? (_attachments = new List<Attachment>());
@@ -311,6 +318,8 @@ namespace ONIT.VismaNetApi.Models
         public JObject extras { get; private set; }
 
         [JsonProperty] public string errorInfo { get; private set; }
+
+        [JsonProperty] public Metadata metadata { get; private set; }
 
         public string GetIdentificator()
         {
