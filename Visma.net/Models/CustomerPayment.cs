@@ -61,5 +61,14 @@ namespace ONIT.VismaNetApi.Models
         {
             return refNbr;
         }
+
+        internal override void PrepareForUpdate()
+        {
+            foreach (var line in this.paymentLines)
+                line.operation = ApiOperation.Update;
+
+            foreach (var orderToApply in ordersToApply)
+                orderToApply.operation = ApiOperation.Update;
+        }
     }
 }
