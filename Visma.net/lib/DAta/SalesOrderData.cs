@@ -14,7 +14,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             if (entity.orderType != "SO") // SO ordertypes are special.
             {
-                await VismaNetApiHelper.Update(entity, entity.GetIdentificator(), ApiControllerUri, Authorization,$"{entity.orderType}/{entity.GetIdentificator()}");
+                await VismaNetApiHelper.Update(entity, entity.GetIdentificator(), ApiControllerUri, Authorization, $"{entity.orderType}/{entity.GetIdentificator()}");
             }
             else
             {
@@ -27,7 +27,7 @@ namespace ONIT.VismaNetApi.Lib.Data
             SalesOrder rsp;
             if (entity.orderType != "SO")
             {
-                 rsp = await VismaNetApiHelper.Create(entity, ApiControllerUri, Authorization, $"{ApiControllerUri}/{entity.orderType}");
+                rsp = await VismaNetApiHelper.Create(entity, ApiControllerUri, Authorization, $"{ApiControllerUri}/{entity.orderType}");
             }
             else
             {
@@ -50,6 +50,16 @@ namespace ONIT.VismaNetApi.Lib.Data
             }
             rsp.InternalPrepareForUpdate();
             return rsp;
+        }
+
+        public async Task AddAttachment(SalesOrder salesOrder, byte[] data, string filename)
+        {
+            await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"{salesOrder.orderType}/{salesOrder.orderNo}", data, filename);
+        }
+
+        public async Task AddAttachment(SalesOrder salesOrder, int lineNumber, byte[] data, string filename)
+        {
+            await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"{salesOrder.orderType}/{salesOrder.orderNo}/{lineNumber}", data, filename);
         }
     }
 }

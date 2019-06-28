@@ -526,7 +526,25 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        private static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, byte[] bytes,
+        internal static async Task AddAttachment(VismaNetAuthorization authorization, string controller, string entityNumber, byte[] bytes, string fileName)
+        {
+            var url = GetApiUrlForController(controller, $"/{entityNumber}/attachment");
+            var client = GetHttpClient(authorization);
+
+            var content = new ByteArrayContent(bytes);
+            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+                FileName = fileName,
+                Name = "v"
+            };
+            var request = new MultipartFormDataContent
+            {
+                content
+            };
+            await client.PostMessage<object>(url, request);
+        }
+
+        internal static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, byte[] bytes,
             string fileName) where T : class
         {
             using (var stream = new MemoryStream(bytes))
@@ -535,7 +553,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        private static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, Stream input,
+        internal static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, Stream input,
             string fileName) where T : class
         {
             var client = GetHttpClient(auth);
