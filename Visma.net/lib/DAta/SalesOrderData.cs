@@ -1,4 +1,5 @@
 ﻿using ONIT.VismaNetApi.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
@@ -51,5 +52,6 @@ namespace ONIT.VismaNetApi.Lib.Data
             rsp.InternalPrepareForUpdate();
             return rsp;
         }
+       
     }
 }

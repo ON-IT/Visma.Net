@@ -13,7 +13,6 @@ namespace ONIT.VismaNetApi.Models
             IgnoreProperties.Add(nameof(baccount));
             IgnoreProperties.Add("baccountId");
             IgnoreProperties.Add(nameof(locationId));
-            base.PrepareForUpdate();
         }
 
         public bool active
@@ -33,7 +32,7 @@ namespace ONIT.VismaNetApi.Models
             get => Get<bool>();
             set => Set(value);
         }
-
+        
         public Baccount baccount
         {
             get => Get<Baccount>("baccountId");
@@ -63,7 +62,7 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
-
+        
         public string locationId
         {
             get => Get<string>();
