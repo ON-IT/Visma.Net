@@ -13,16 +13,24 @@
         <PackageTags>Visma.net API, Visma.net Integrations, REST</PackageTags>
         <PackageReleaseNotes>Increased timeout</PackageReleaseNotes>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
         <RootNamespace>ONIT.VismaNetApi</RootNamespace>
         <PackageIconUrl>https://sync-it.no/Images/on-it_logo.png</PackageIconUrl>
         <AssemblyVersion>3.5.1.10</AssemblyVersion>
         <FileVersion>3.5.1.10</FileVersion>
+        <PackageLicenseExpression></PackageLicenseExpression>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
       <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
       <PackageReference Include="System.Net.Http" Version="4.3.3" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="..\LICENSE.md">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
 </Project>
