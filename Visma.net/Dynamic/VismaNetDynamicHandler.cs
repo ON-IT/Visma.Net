@@ -9,7 +9,17 @@ namespace ONIT.VismaNetApi.Dynamic
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            result = new VismaNetDynamicEndpoint(binder.Name, Auth);
+            if(string.Equals(binder.Name, "resources", System.StringComparison.OrdinalIgnoreCase))
+            {
+                result = new VismaNetDynamicEndpoint(null, Auth, true);
+            } else if(string.Equals(binder.Name, "dynamic", System.StringComparison.OrdinalIgnoreCase))
+            {
+                result = new VismaNetDynamicEndpoint(null, Auth);
+            }
+            else
+            {
+                result = new VismaNetDynamicEndpoint(binder.Name, Auth);
+            }
             return true;
         }
     }

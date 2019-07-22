@@ -316,7 +316,12 @@ namespace ONIT.VismaNetApi.Lib
         {
             var webclient = GetHttpClient(authorization);
             {
-                if (numberToGet == null)
+                if (entityNumber == null && numberToGet == null)
+                {
+                    var apiUrl = GetApiUrlForController(apiControllerUri, string.Empty);
+                    return await webclient.Get<T>(apiUrl);
+                }
+                else if (numberToGet == null)
                 {
                     var apiUrl = GetApiUrlForController(apiControllerUri, $"/{entityNumber}");
                     return await webclient.Get<T>(apiUrl);
