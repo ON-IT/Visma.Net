@@ -82,6 +82,12 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        public string corporateId
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
         public VatZone vatZone
         {
             get => Get<VatZone>();
@@ -96,6 +102,9 @@ namespace ONIT.VismaNetApi.Models
         
         [JsonProperty]
         public string errorInfo { get; private set; }
+
+        [JsonProperty]
+        public Metadata metadata { get; private set; }
 
         public string GetIdentificator()
         {

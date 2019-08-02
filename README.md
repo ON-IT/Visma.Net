@@ -36,6 +36,28 @@ Contact me on ole@on-it.no with details about your project and let's see if we'r
 
 ## Changelog
 
+### Dynamic and Resources in v3.6
+
+You can now use vismaNet.Dyanmic and vismaNet.Resource to access all endpoints in the API with dynamic typing.
+
+Note how you can nest properties to access sub-endpoints, and use [] to access specific resources.
+
+#### Samples
+
+Get customer note
+```csharp
+var vismaNet = new VismaNet(contextId, token);
+dynamic note = await vismaNet.Dynamic.Customer["10003"].Note.Get();
+Console.WriteLine(note);
+```
+
+Get current user information
+```csharp
+var vismaNet = new VismaNet(contextId, token);
+dynamic me = await vismaNet.Resources.Context.UserDetails.Get();
+Console.WriteLine(JsonConvert.SerializeObject(me));
+```
+
 ### v3
 With this release the Visma.net API client supports NetStandard 2.0, and the binary is now renamed from ONIT.VismaNet.dll to Visma.net.dll. This might probably break something for you, so I figured it best that we bumped the version number a fair bit.
 

@@ -11,6 +11,8 @@ namespace ONIT.VismaNetApi.Models
     {
         private List<Segment> _segments;
 
+        public string subaccountNumber { get; set; }
+        
         /*[JsonProperty]
         public bool active { get; private set; }*/
 

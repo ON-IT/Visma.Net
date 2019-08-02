@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
 
@@ -12,58 +13,82 @@ namespace Visma.net.tests.Tests
     {
         private static string dto =
             @"{
-    ""baccount"": {
-      ""internalId"": 0,
-      ""number"": ""string"",
-      ""name"": ""string""
-    },
-    ""locationId"": ""string"",
-    ""locationName"": ""string"",
-    ""active"": true,
-    ""address"": {
-      ""addressId"": 0,
-      ""addressLine1"": ""string"",
-      ""addressLine2"": ""string"",
-      ""addressLine3"": ""string"",
-      ""postalCode"": ""string"",
-      ""city"": ""string"",
-      ""country"": {
-        ""id"": ""string"",
-        ""name"": ""string""
+  ""baccount"": {
+    ""internalId"": 0,
+    ""number"": ""string"",
+    ""name"": ""string""
+  },
+  ""locationId"": ""string"",
+  ""locationName"": ""string"",
+  ""active"": true,
+  ""address"": {
+    ""addressId"": 0,
+    ""addressLine1"": ""string"",
+    ""addressLine2"": ""string"",
+    ""addressLine3"": ""string"",
+    ""postalCode"": ""string"",
+    ""city"": ""string"",
+    ""country"": {
+      ""id"": ""string"",
+      ""name"": ""string"",
+      ""extras"": {
+        ""additionalProp1"": {},
+        ""additionalProp2"": {},
+        ""additionalProp3"": {}
       },
-      ""county"": {
-        ""id"": ""string"",
-        ""name"": ""string""
+      ""errorInfo"": ""string"",
+      ""metadata"": {
+        ""totalCount"": 0
       }
     },
-    ""contact"": {
-      ""contactId"": 0,
-      ""name"": ""string"",
-      ""attention"": ""string"",
-      ""email"": ""string"",
-      ""web"": ""string"",
-      ""phone1"": ""string"",
-      ""phone2"": ""string"",
-      ""fax"": ""string""
-    },
-    ""vatRegistrationId"": ""string"",
-    ""vatZone"": {
-      ""defaultVatCategory"": ""string"",
+    ""county"": {
       ""id"": ""string"",
+      ""name"": ""string""
+    }
+  },
+  ""contact"": {
+    ""contactId"": 0,
+    ""name"": ""string"",
+    ""attention"": ""string"",
+    ""email"": ""string"",
+    ""web"": ""string"",
+    ""phone1"": ""string"",
+    ""phone2"": ""string"",
+    ""fax"": ""string""
+  },
+  ""vatRegistrationId"": ""string"",
+  ""vatZone"": {
+    ""id"": ""string"",
+    ""description"": ""string"",
+    ""defaultVatCategory"": ""string"",
+    ""defaultTaxCategory"": {
+      ""number"": ""string"",
       ""description"": ""string""
     },
-    ""ediCode"": ""string"",
-    ""gln"": ""string"",
-    ""lastModifieDateTime"": ""2018-07-02T07:28:21.273Z"",
     ""extras"": {
       ""additionalProp1"": {},
       ""additionalProp2"": {},
       ""additionalProp3"": {}
     },
     ""errorInfo"": ""string"",
-    ""addressissameasmain"": true,
-    ""contactissameasmain"": true
-  }";
+    ""metadata"": {
+      ""totalCount"": 0
+    }
+  },
+  ""ediCode"": ""string"",
+  ""gln"": ""string"",
+  ""corporateId"": ""string"",
+  ""lastModifieDateTime"": ""2019-06-25T09:14:36.754Z"",
+  ""extras"": {
+    ""additionalProp1"": {},
+    ""additionalProp2"": {},
+    ""additionalProp3"": {}
+  },
+  ""errorInfo"": ""string"",
+  ""metadata"": {
+    ""totalCount"": 0
+  }
+}";
 
         public static string update = @"{
   ""baccountId"": {
@@ -145,11 +170,30 @@ namespace Visma.net.tests.Tests
   },
   ""gln"": {
     ""value"": ""string""
+  },
+  ""corporateId"": {
+    ""value"": ""string""
   }
 }";
         public LocationTests(ITestOutputHelper output) : base(dto, update)
         {
             this.output = output;
+        }
+
+        public override string PrepareDtoForUpdate(string src)
+        {
+            var jtoken = JToken.Parse(src);
+            jtoken["contactIsSameAsMain"] = true;
+            jtoken["addressIsSameAsMain"] = true;
+            return base.PrepareDtoForSerializer(jtoken.ToString());
+        }
+
+        public override string PrepareDtoForSerializer(string src)
+        {
+            var jtoken = JToken.Parse(src);
+            jtoken["contactIsSameAsMain"] = true;
+            jtoken["addressIsSameAsMain"] = true;
+            return base.PrepareDtoForSerializer(jtoken.ToString());
         }
     }
 }

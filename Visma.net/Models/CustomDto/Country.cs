@@ -1,4 +1,7 @@
-﻿namespace ONIT.VismaNetApi.Models.CustomDto
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+namespace ONIT.VismaNetApi.Models.CustomDto
 {
     public class Country : IdName
     {
@@ -11,6 +14,15 @@
         {
             
         }
+
+        [JsonProperty]
+        public JObject extras { get; private set; }
+
+        [JsonProperty]
+        public string errorInfo { get; private set; }
+        
+        [JsonProperty]
+        public Metadata metadata { get; private set; }
 
         public override string ToString()
         {

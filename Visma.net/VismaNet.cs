@@ -37,6 +37,8 @@ namespace ONIT.VismaNetApi
         public readonly LocationData Location;
         public readonly SubaccountData Subaccount;
 
+        public readonly CustomerPaymentData CustomerPayment;
+
         /// <summary>
         ///     Creates a connection using token.
         /// </summary>
@@ -75,7 +77,22 @@ namespace ONIT.VismaNetApi
             Warehouse = new WarehouseData(Auth);
             Location = new LocationData(Auth);
             Subaccount = new SubaccountData(Auth);
+            CustomerPayment = new CustomerPaymentData(Auth);
+            Dynamic = new VismaNetDynamicEndpoint(null, Auth);
+            Resources = new VismaNetDynamicEndpoint(null, Auth, true);
         }
+
+        /// <summary>
+        /// Returns a dynamic Visma.net client allowing you do access all Visma.net endpoints dynamically
+        /// </summary>
+        /// <see cref="https://integration.visma.net/API-index/"/>
+        public readonly dynamic Dynamic;
+
+        /// <summary>
+        /// Returns a dynamic Visma.net client allowing you do access all Visma.net resource endpoints dynamically
+        /// </summary>
+        /// <see cref="https://integration.visma.net/API-index/"/>
+        public readonly dynamic Resources;
 
         public static string Version { get; private set; }
         /// <summary>

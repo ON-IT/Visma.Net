@@ -56,7 +56,7 @@ namespace ONIT.VismaNetApi.Models
             get => Get<SoCustomerSummary>();
             set => Set(value);
         }
-
+   
         public string customerOrder
         {
             get => Get<string>();
@@ -187,18 +187,18 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
-        /*
+
         public Owner owner
         {
             get => Get(defaultValue: new Owner());
             set => Set(value);
-        }*/
+        }
 
         [JsonProperty]
         public string postPeriod
         {
-            get; // => Get<string>();
-            private set; // => Set(value);
+            get; 
+            private set;
         }
 
         public DescriptiveDto preferredWarehouse
@@ -361,6 +361,9 @@ namespace ONIT.VismaNetApi.Models
             get;// => Get<double>();
             private set;// => Set(value);
         }
+
+        [JsonProperty]
+        public Metadata metadata { get; private set; }
 
         public string GetIdentificator()
         {

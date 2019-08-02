@@ -1,4 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using ONIT.VismaNetApi.Exceptions;
+using ONIT.VismaNetApi.Models;
+using ONIT.VismaNetApi.Models.Dimensions;
+using ONIT.VismaNetApi.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -7,12 +13,6 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using ONIT.VismaNetApi.Exceptions;
-using ONIT.VismaNetApi.Models;
-using ONIT.VismaNetApi.Models.Dimensions;
-using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Lib
 {
@@ -316,7 +316,12 @@ namespace ONIT.VismaNetApi.Lib
         {
             var webclient = GetHttpClient(authorization);
             {
-                if (numberToGet == null)
+                if (entityNumber == null && numberToGet == null)
+                {
+                    var apiUrl = GetApiUrlForController(apiControllerUri, string.Empty);
+                    return await webclient.Get<T>(apiUrl);
+                }
+                else if (numberToGet == null)
                 {
                     var apiUrl = GetApiUrlForController(apiControllerUri, $"/{entityNumber}");
                     return await webclient.Get<T>(apiUrl);
@@ -369,7 +374,7 @@ namespace ONIT.VismaNetApi.Lib
 
         internal static async Task<List<CompanyContext>> GetContextsForToken(string token)
         {
-            var client = GetHttpClient(new VismaNetAuthorization {CompanyId = 0, Token = token});
+            var client = GetHttpClient(new VismaNetAuthorization { CompanyId = 0, Token = token });
             {
                 return await client.Get<List<CompanyContext>>(GetApiUrlForController(VismaNetControllers.UserContext));
             }
@@ -418,11 +423,16 @@ namespace ONIT.VismaNetApi.Lib
             if (string.IsNullOrEmpty(invoiceNumber)) throw new ArgumentException(nameof(invoiceNumber));
 
             var client = GetHttpClient(authorization);
-            {
-                var actionUrl =
-                    GetApiUrlForController($"{VismaNetControllers.CustomerInvoice}/{invoiceNumber}/action/{action}");
-                return await client.Post<VismaActionResult>(actionUrl, new object());
-            }
+            var actionUrl =
+                GetApiUrlForController($"{VismaNetControllers.CustomerInvoice}/{invoiceNumber}/action/{action}");
+            return await client.Post<VismaActionResult>(actionUrl, new object());
+        }
+
+        internal static async Task<VismaActionResult> Action(VismaNetAuthorization authorization, string controller, string entityNumber, string actionName, object dto = null)
+        {
+            var client = GetHttpClient(authorization);
+            var actionUrl = GetApiUrlForController($"{controller}/{entityNumber}/action/{actionName}");
+            return await client.Post<VismaActionResult>(actionUrl, dto ?? new object());
         }
 
         internal static async Task<Stream> InvoicePrint(string RefNr, VismaNetAuthorization authorization)
@@ -521,7 +531,25 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        private static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, byte[] bytes,
+        internal static async Task AddAttachment(VismaNetAuthorization authorization, string controller, string entityNumber, byte[] bytes, string fileName)
+        {
+            var url = GetApiUrlForController(controller, $"/{entityNumber}/attachment");
+            var client = GetHttpClient(authorization);
+
+            var content = new ByteArrayContent(bytes);
+            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+                FileName = fileName,
+                Name = "v"
+            };
+            var request = new MultipartFormDataContent
+            {
+                content
+            };
+            await client.PostMessage<object>(url, request);
+        }
+
+        internal static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, byte[] bytes,
             string fileName) where T : class
         {
             using (var stream = new MemoryStream(bytes))
@@ -530,7 +558,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        private static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, Stream input,
+        internal static async Task<T> AddAttachmentToController<T>(VismaNetAuthorization auth, string url, Stream input,
             string fileName) where T : class
         {
             var client = GetHttpClient(auth);

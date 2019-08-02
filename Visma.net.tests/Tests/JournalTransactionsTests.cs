@@ -40,6 +40,7 @@ namespace Visma.net.tests.Tests
         ""accountNumber"": ""string"",
         ""description"": ""string"",
         ""subaccount"": {
+          ""subaccountNumber"": ""string"",
           ""subaccountId"": 0,
           ""description"": ""string"",
           ""id"": 0,
@@ -53,7 +54,10 @@ namespace Visma.net.tests.Tests
             }
           ],
           ""extras"": {},
-          ""errorInfo"": ""string""
+          ""errorInfo"": ""string"",
+            ""metadata"":{
+                ""totalCount"": 0
+            }
         },
         ""referenceNumber"": ""string"",
         ""debitAmount"": 0.0,
