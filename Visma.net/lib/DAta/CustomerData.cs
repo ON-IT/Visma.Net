@@ -30,6 +30,13 @@ namespace ONIT.VismaNetApi.Lib.Data
                 await
                     VismaNetApiHelper.Get<CustomerBalance>($"{customerNumber}/balance", VismaNetControllers.Customers, Authorization);
         }
+
+        public async Task<string> GetNoteFor(string customerNumber)
+        {
+            return
+                await
+                    VismaNetApiHelper.Get<string>($"{customerNumber}/note", VismaNetControllers.Customers, Authorization);
+        }
     }
 }
 
