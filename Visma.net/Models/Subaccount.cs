@@ -17,9 +17,6 @@ namespace ONIT.VismaNetApi.Models
         public string description { get => Get<string>(); set => Set(value); }
 
         [JsonProperty]
-        public bool active { get => Get<bool>(); set => Set(value); }
-
-        [JsonProperty]
         public int id { get; private set; }
 
         [JsonProperty]
