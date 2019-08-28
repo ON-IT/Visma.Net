@@ -54,12 +54,12 @@ namespace ONIT.VismaNetApi.Lib.Data
 
         public async Task AddAttachment(SalesOrder salesOrder, byte[] data, string filename)
         {
-            await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"{salesOrder.orderType}/{salesOrder.orderNo}", data, filename);
+            await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"orderType/{salesOrder.orderType}/{salesOrder.orderNo}", data, filename);
         }
 
         public async Task AddAttachment(SalesOrder salesOrder, int lineNumber, byte[] data, string filename)
         {
-            await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"{salesOrder.orderType}/{salesOrder.orderNo}/{lineNumber}", data, filename);
+            await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"orderType/{salesOrder.orderType}/{salesOrder.orderNo}/{lineNumber}", data, filename);
         }
     }
 }
