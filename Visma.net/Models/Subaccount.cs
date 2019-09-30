@@ -11,11 +11,10 @@ namespace ONIT.VismaNetApi.Models
     {
         private List<Segment> _segments;
 
-        /*[JsonProperty]
-        public bool active { get; private set; }*/
+        public string subaccountNumber { get => Get<string>(); set => Set(value); }
 
         [JsonProperty]
-        public string description { get; private set; }
+        public string description { get => Get<string>(); set => Set(value); }
 
         [JsonProperty]
         public int id { get; private set; }

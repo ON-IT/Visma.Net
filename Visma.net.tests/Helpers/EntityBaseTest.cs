@@ -75,8 +75,15 @@ namespace Visma.net.tests
             var token2 = JToken.Parse(PrepareDtoForSerializer(_dto).ToLower());
             var jdp = new JsonDiffPatch();
             var patch = jdp.Diff(token1, token2);
+            
             if(patch != null)
+            {
                 output?.WriteLine(patch.ToString(Formatting.Indented));
+                output?.WriteLine("--------");
+                output?.WriteLine(token1.ToString());
+                output?.WriteLine("--------");
+                output?.WriteLine(token2.ToString());
+            }
             Assert.Null(patch);
         }
     }

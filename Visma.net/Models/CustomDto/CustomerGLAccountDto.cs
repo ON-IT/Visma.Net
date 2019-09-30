@@ -4,6 +4,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 {
     public class CustomerGLAccountDto
     {
+        [JsonProperty] public GLAccountDetailsDto customerLedgerAccount { get; private set; }
         [JsonProperty] public GLAccountDetailsDto salesAccount { get; private set; }
 
         [JsonProperty] public GLAccountDetailsDto salesEuAccount { get; private set; }

@@ -67,6 +67,7 @@ namespace Visma.net.tests
       ""description"": ""string""
     },
     ""subaccount"": {
+      ""subaccountNumber"": ""string"",
       ""subaccountId"": 0,
       ""description"": ""string"",
       ""id"": 0,
@@ -80,7 +81,10 @@ namespace Visma.net.tests
         }
       ],
       ""extras"": {},
-      ""errorInfo"": ""string""
+      ""errorInfo"": ""string"",
+      ""metadata"":{
+            ""totalCount"": 0
+        }
     },
     ""extras"": {},
     ""errorInfo"": ""string""

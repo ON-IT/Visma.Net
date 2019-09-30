@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ONIT.VismaNetApi.Interfaces;
+using ONIT.VismaNetApi.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using ONIT.VismaNetApi.Interfaces;
-using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib
 {
@@ -52,7 +52,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             var dict = _data.Where(x => _ignoreProperties == null || !_ignoreProperties.Contains(x.Key))
                 .Where(x => x.Value != null)
-                .Where(x=> !delta || GetDeltaFields().Contains(x.Key))
+                .Where(x => !delta || GetDeltaFields().Contains(x.Key))
                 .ToDictionary(x => CreateKey(x.Key),
                     x => CreateDto(x.Value, x.Key));
 
@@ -62,7 +62,7 @@ namespace ONIT.VismaNetApi.Lib
                     continue;
                 if (dtoField.Value is DtoValue value)
                 {
-                    if(value.Value == null)
+                    if (value.Value == null)
                         continue;
                     dict[dtoField.Key] = dtoField.Value;
                 }
@@ -85,25 +85,25 @@ namespace ONIT.VismaNetApi.Lib
                 _data[key] = defaultValue;
                 return defaultValue;
             }
-            
+
             if (value is long)
             {
-                return (T) (object) Convert.ToInt32((long) value);
+                return (T)(object)Convert.ToInt32((long)value);
             }
-            if (EqualityComparer<T>.Default.Equals((T) value, default(T)))
+            if (EqualityComparer<T>.Default.Equals((T)value, default(T)))
             {
                 _data[key] = defaultValue;
                 return defaultValue;
             }
 
-            return (T) value;
+            return (T)value;
         }
 
         protected void Set(object dto, [CallerMemberName] string key = null, bool silent = false)
         {
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException(nameof(key));
-         
+
             if (dto == null && _data.ContainsKey(key))
             {
                 _data.Remove(key);
@@ -133,6 +133,7 @@ namespace ONIT.VismaNetApi.Lib
             {
                 if (value is DtoValue)
                     return value;
+              
                 if (value is IProvideCustomDto providesCustomDto)
                 {
                     return providesCustomDto.ToDto();
@@ -183,7 +184,7 @@ namespace ONIT.VismaNetApi.Lib
         }
         internal virtual void PrepareForUpdate()
         {
-            
+
         }
     }
 }

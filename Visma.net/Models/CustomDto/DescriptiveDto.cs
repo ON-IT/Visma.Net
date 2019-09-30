@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Annotations;
 using ONIT.VismaNetApi.Interfaces;
 
@@ -153,6 +154,18 @@ namespace ONIT.VismaNetApi.Models
         
         [JsonProperty]
         public string defaultVatCategory { get; private set; }
+
+        [JsonProperty]
+        public NumberDescription defaultTaxCategory { get; private set; }
+
+        [JsonProperty]
+        public Metadata metadata { get; private set; }
+
+        [JsonProperty]
+        public JObject extras { get; private set; }
+
+        [JsonProperty]
+        public string errorInfo { get; private set; }
 
         public static implicit operator VatZone(string id)
         {

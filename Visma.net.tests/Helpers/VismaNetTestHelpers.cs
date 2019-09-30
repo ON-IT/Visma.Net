@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using JsonDiffPatchDotNet;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -34,6 +36,30 @@ namespace Visma.net.tests
                                 Environment.NewLine + $"{controlToken}";
             Debug.WriteLineIf(patch != null, log);
             return patch;
+        }
+
+        public static JToken RemoveFields(this JToken token, params string[] fields)
+        {
+            JContainer container = token as JContainer;
+            if (container == null) return token;
+
+            List<JToken> removeList = new List<JToken>();
+            foreach (JToken el in container.Children())
+            {
+                JProperty p = el as JProperty;
+                if (p != null && fields.Contains(p.Name))
+                {
+                    removeList.Add(el);
+                }
+                el.RemoveFields(fields);
+            }
+
+            foreach (JToken el in removeList)
+            {
+                el.Remove();
+            }
+
+            return token;
         }
     }
 }
