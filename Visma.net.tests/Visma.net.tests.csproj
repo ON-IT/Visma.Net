@@ -62,8 +62,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Visma.net, Version=3.5.1.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Visma.net.3.5.1.3\lib\net461\Visma.net.dll</HintPath>
+    <Reference Include="Visma.net, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Visma.net.3.6.0\lib\net461\Visma.net.dll</HintPath>
     </Reference>
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.abstractions.2.0.1\lib\net35\xunit.abstractions.dll</HintPath>
