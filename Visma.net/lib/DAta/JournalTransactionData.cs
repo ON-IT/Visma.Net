@@ -24,5 +24,10 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, transaction.GetIdentificator(), "release");
         }
+
+        public async Task<VismaActionResult> Release(string transactionNumber)
+        {
+            return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, transactionNumber, "release");
+        }
     }
 }
