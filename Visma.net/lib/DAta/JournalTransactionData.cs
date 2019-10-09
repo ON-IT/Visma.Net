@@ -19,5 +19,10 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"{journalTransaction.GetIdentificator()}/{lineNumber}", data, filename);
         }
+
+        public async Task<VismaActionResult> Release(JournalTransaction transaction)
+        {
+            return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, transaction.GetIdentificator(), "release");
+        }
     }
 }
