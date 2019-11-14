@@ -130,6 +130,8 @@ namespace ONIT.VismaNetApi.Models
             get => Get<VatCode>();
             set => Set(value);
         }
+        [JsonProperty]
+        public Metadata metadata { get; private set; }
 
         [JsonProperty]
         public List<WarehouseDetails> warehouseDetails

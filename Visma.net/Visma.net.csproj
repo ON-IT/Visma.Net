@@ -2,10 +2,9 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net461;net45</TargetFrameworks>
 		<Title>Visma.net</Title>
-        <Version>3.5.1.10</Version>
         <Copyright>Copyright © ON IT AS 2014 - 2018</Copyright>
 		    <Title>Visma.net</Title>
-        <Version>3.6.0</Version>
+        <Version>3.6.0.4</Version>
         <Copyright>Copyright © ON IT AS 2014 - 2019</Copyright>
         <Description>Get started with Visma.net Integrations.</Description>
         <Authors>ON IT AS</Authors>
@@ -21,12 +20,10 @@
         <RepositoryType>git</RepositoryType>
         <RootNamespace>ONIT.VismaNetApi</RootNamespace>
         <PackageIconUrl>https://sync-it.no/Images/on-it_logo.png</PackageIconUrl>
-        <AssemblyVersion>3.5.1.10</AssemblyVersion>
-        <FileVersion>3.5.1.10</FileVersion>
         <PackageLicenseExpression></PackageLicenseExpression>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-        <AssemblyVersion>3.6.0.0</AssemblyVersion>
-        <FileVersion>3.6.0.0</FileVersion>
+        <AssemblyVersion>3.6.0.4</AssemblyVersion>
+        <FileVersion>3.6.0.4</FileVersion>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
