@@ -38,6 +38,7 @@ namespace ONIT.VismaNetApi
         public readonly WarehouseData Warehouse;
         public readonly LocationData Location;
         public readonly SubaccountData Subaccount;
+        public readonly SupplierDocumentData SupplierDocument;
 
         public readonly CustomerPaymentData CustomerPayment;
 
@@ -84,6 +85,7 @@ namespace ONIT.VismaNetApi
             CustomerPayment = new CustomerPaymentData(Auth);
             Dynamic = new VismaNetDynamicEndpoint(null, Auth);
             Resources = new VismaNetDynamicEndpoint(null, Auth, true);
+            SupplierDocument = new SupplierDocumentData(Auth);
         }
 
         /// <summary>

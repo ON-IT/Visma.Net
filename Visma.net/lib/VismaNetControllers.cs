@@ -31,6 +31,7 @@ namespace ONIT.VismaNetApi.Lib
         public const string SalesOrder = "controller/api/v1/salesorder";
         public const string Subaccount = "controller/api/v1/subaccount";
         public const string Suppliers = "controller/api/v1/supplier";
+        public const string SupplierDocument = "controller/api/v1/supplierdocument";
         public const string Warehouse = "controller/api/v1/warehouse";
         public const string SupplierInvoices = "controller/api/v1/supplierinvoice";
 

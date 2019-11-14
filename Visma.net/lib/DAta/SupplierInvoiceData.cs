@@ -1,4 +1,5 @@
 ﻿using ONIT.VismaNetApi.Models;
+using ONIT.VismaNetApi.Models.Enums;
 using System;
 using System.IO;
 using System.Text;
@@ -13,6 +14,20 @@ namespace ONIT.VismaNetApi.Lib.Data
 		{
 		    ApiControllerUri = VismaNetControllers.SupplierInvoices;
 		}
+        public async Task<SupplierInvoice> Get(string entityNumber, SupplierDocumentType documentType = SupplierDocumentType.Invoice)
+        {
+            SupplierInvoice rsp;
+            if (documentType == SupplierDocumentType.Invoice) // documentType = invoice use default endpoint.
+            {
+                rsp = await VismaNetApiHelper.Get<SupplierInvoice>(entityNumber, ApiControllerUri, Authorization);
+            }
+            else
+            {
+                rsp = await VismaNetApiHelper.Get<SupplierInvoice>(entityNumber, ApiControllerUri, Authorization, $"{documentType.ToString()}/{entityNumber}");
+            }
+            rsp.InternalPrepareForUpdate();
+            return rsp;
+        }
 
         public async Task<string> AddAttachmentToInvoice(string invoiceNumber, string content, string fileName)
         {

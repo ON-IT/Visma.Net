@@ -175,6 +175,22 @@ namespace ONIT.VismaNetApi.Lib
             return AddAttachmentToController<string>(auth, url, stream, fileName);
         }
 
+        internal static Task<string> AddAttachmentToCreditNote(VismaNetAuthorization auth, string number,
+            byte[] bytes,
+            string fileName)
+        {
+            var url = GetApiUrlForController(VismaNetControllers.CreditNote, $"/{number}/attachment");
+            return AddAttachmentToController<string>(auth, url, bytes, fileName);
+        }
+
+        internal static Task<string> AddAttachmentToCreditNote(VismaNetAuthorization auth, string number,
+            Stream stream,
+            string fileName)
+        {
+            var url = GetApiUrlForController(VismaNetControllers.CreditNote, $"/{number}/attachment");
+            return AddAttachmentToController<string>(auth, url, stream, fileName);
+        }
+
         internal static Task<string> AddAttachmentToSupplierInvoice(VismaNetAuthorization auth, string number,
             byte[] bytes,
             string fileName)
