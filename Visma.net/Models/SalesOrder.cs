@@ -18,6 +18,13 @@ namespace ONIT.VismaNetApi.Models
             RequiredFields.Add(nameof(orderType), new DtoValue("SO"));
         }
 
+        public SalesOrder(string orderNo,string orderType)
+        {
+            this.orderNo = orderNo;
+            this.orderType = orderType;
+            RequiredFields.Add(nameof(orderType), new DtoValue(orderType));
+        }
+
         [JsonProperty] public List<Attachment> attachments { get; private set; }
 
        public NumberName branchNumber
@@ -187,13 +194,13 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
-
+        /*
         public Owner owner
         {
             get => Get(defaultValue: new Owner());
             set => Set(value);
         }
-
+        */
         [JsonProperty]
         public string postPeriod
         {

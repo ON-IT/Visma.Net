@@ -370,8 +370,20 @@ namespace ONIT.VismaNetApi.Models
             get; // { return Get<decimal>(); }
             private set; // { Set(value); }
         }
+        [JsonProperty]
+        public decimal roundingDiff
+        {
+            get;
+            private set;
+        }
 
-        public string GetIdentificator()
+        public bool sendToAutoInvoice
+		{
+			get => Get<bool>();
+			set => Set(value);
+		}
+
+		public string GetIdentificator()
         {
             return referenceNumber;
         }
@@ -450,5 +462,7 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
-    }
+
+		
+	}
 }

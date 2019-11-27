@@ -12,7 +12,7 @@ namespace ONIT.VismaNetApi.Models
         {
             DtoFields.Add(nameof(lineNbr), new DtoValue(0));
             DtoFields.Add(nameof(quantity), new DtoValue(1));
-            RequiredFields.Add("warehouse", new DtoValue(null));
+            //RequiredFields.Add("warehouse", new DtoValue(null));
             RequiredFields.Add("salesOrderOperation", new DtoValue("Issue"));
             DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
         }
@@ -213,13 +213,13 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty] public int sortOrder { get; private set; }
 
-        /* This doesn't work in 7.0 
-        public CustomDto.Subaccount subaccount
+        
+        public CustomDto.SubaccountOrderLine subaccount
         {
-            get => Get(defaultValue: new CustomDto.Subaccount());
+            get => Get(defaultValue: new CustomDto.SubaccountOrderLine());
             set => Set(value);
         }
-        */
+        
         public string taxCategory
         {
             get => Get<string>();
