@@ -145,6 +145,11 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
+        public Subaccount subaccount
+        {
+            get => Get<Subaccount>();
+            set => Set(value);
+        }
         public DescriptionId sub
         {
             get => Get<DescriptionId>();
