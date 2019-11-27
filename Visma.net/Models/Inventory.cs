@@ -23,6 +23,7 @@ namespace ONIT.VismaNetApi.Models
         private List<Attachment> _attachments;
         private List<CrossReference> _crossReferences;
         private List<WarehouseDetails> _warehouseDetails;
+        private List<SupplierDetails> _supplierDetails;
 
         [JsonProperty]
         public List<Attachment> attachments
@@ -138,6 +139,12 @@ namespace ONIT.VismaNetApi.Models
         {
             get => _warehouseDetails ?? (_warehouseDetails = new List<WarehouseDetails>());
             private set => _warehouseDetails = value;
+        }
+        [JsonProperty]
+        public List<SupplierDetails> supplierDetails
+        {
+            get => _supplierDetails ?? (_supplierDetails = new List<SupplierDetails>());
+            private set => _supplierDetails = value;
         }
 
         public string GetIdentificator()

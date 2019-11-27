@@ -34,6 +34,9 @@ namespace ONIT.VismaNetApi.Lib
         public const string SupplierDocument = "controller/api/v1/supplierdocument";
         public const string Warehouse = "controller/api/v1/warehouse";
         public const string SupplierInvoices = "controller/api/v1/supplierinvoice";
+        public const string InventoryIssue = "controller/api/v1/inventoryissue";
+        public const string InventoryReceipt = "controller/api/v1/inventoryReceipt";
+        public const string PurchaseReceipt = "controller/api/v1/PurchaseReceipt";
 
         // Resources
         public const string OAuthAuthorize = "resources/oauth/authorize";

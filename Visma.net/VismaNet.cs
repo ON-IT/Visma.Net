@@ -39,8 +39,10 @@ namespace ONIT.VismaNetApi
         public readonly LocationData Location;
         public readonly SubaccountData Subaccount;
         public readonly SupplierDocumentData SupplierDocument;
-
-        public readonly CustomerPaymentData CustomerPayment;
+        public readonly CustomerPaymentData CustomerPayment; 
+        public readonly InventoryIssueData InventoryIssue;
+        public readonly InventoryReceiptData InventoryReceipt;
+        public readonly PurchaseReceiptData PurchaseReceipt;
 
         /// <summary>
         ///     Creates a connection using token.
@@ -86,6 +88,10 @@ namespace ONIT.VismaNetApi
             Dynamic = new VismaNetDynamicEndpoint(null, Auth);
             Resources = new VismaNetDynamicEndpoint(null, Auth, true);
             SupplierDocument = new SupplierDocumentData(Auth);
+            InventoryIssue = new InventoryIssueData(Auth);
+            InventoryReceipt = new InventoryReceiptData(Auth);
+            PurchaseReceipt = new PurchaseReceiptData(Auth);
+
         }
 
         /// <summary>

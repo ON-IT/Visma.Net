@@ -214,9 +214,9 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty] public int sortOrder { get; private set; }
 
         
-        public CustomDto.Subaccount subaccount
+        public CustomDto.SubaccountOrderLine subaccount
         {
-            get => Get(defaultValue: new CustomDto.Subaccount());
+            get => Get(defaultValue: new CustomDto.SubaccountOrderLine());
             set => Set(value);
         }
         
