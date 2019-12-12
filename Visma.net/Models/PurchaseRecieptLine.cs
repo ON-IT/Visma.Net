@@ -145,9 +145,9 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
-        public Subaccount subaccount
+        public CustomDto.Subaccount subaccount
         {
-            get => Get<Subaccount>();
+            get => Get(defaultValue: new CustomDto.Subaccount());
             set => Set(value);
         }
         public DescriptionId sub
