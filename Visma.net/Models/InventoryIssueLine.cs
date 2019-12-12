@@ -84,9 +84,9 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
-        public string reasonCode
+        public DescriptionId reasonCode
         {
-            get => Get<string>();
+            get => Get<DescriptionId>();
             set => Set(value);
         }
         public string description
