@@ -136,10 +136,11 @@ namespace ONIT.VismaNetApi.Models
             get => Get<NumberDescription>();
             set => Set(value);
         }
-        public Account account
+        public NumberDescriptionType account
         {
-            get => Get<Account>();
-            set => Set(value);
+            get => Get("accountId", new NumberDescriptionType());
+            set => Set(value, "accountId");
+
         }
 
         public string accountDescription

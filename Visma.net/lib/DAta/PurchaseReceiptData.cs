@@ -11,9 +11,9 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             ApiControllerUri = VismaNetControllers.PurchaseReceipt;
         }
-        public async Task<VismaActionResult> Release(InventoryIssue inventoryIssue)
+        public async Task<VismaActionResult> Release(PurchaseReceipt purchaseReceipt)
         {
-            return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, inventoryIssue.GetIdentificator(), "release");
+            return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, purchaseReceipt.GetIdentificator(), "release");
         }
 
     }
