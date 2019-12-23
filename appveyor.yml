@@ -36,6 +36,6 @@
     verbosity: minimal
   environment:
     api_key:
-      secure: YXm4ryPmWSFRSxnGFhBdQF4Y3wXKQQ2qfs3N6+wh6XAdEoTsrjr4ZxEG5m3VjZdv
+      secure: hsimQaBBP8K5eG13+UGUXvZVnBXsJdeB/RqEiiqNz2R/T0b3tes+8LWu/mfVce+w
   deploy_script:
     - ps: ($artifacts.values | Where-Object {($_.path -like '*.nupkg') -and  !($_.path -like '*.symbols.nupkg')}) | foreach-object { write-host $_.path; dotnet nuget push $_.path -s https://www.nuget.org/api/v2/package -k $env:api_key; if ($lastexitcode -ne 0) {throw}}
