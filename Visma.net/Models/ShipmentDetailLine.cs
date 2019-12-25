@@ -23,6 +23,12 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
+        public int orderLineNbr
+        {
+            get { return Get<int>(); }
+            set { Set(value); }
+        }
+
         public string orderType
         {
             get { return Get<string>(); }

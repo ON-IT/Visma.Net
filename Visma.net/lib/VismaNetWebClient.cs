@@ -37,10 +37,10 @@ namespace ONIT.VismaNetApi.Lib
                 handler.AutomaticDecompression = DecompressionMethods.GZip |
                                                  DecompressionMethods.Deflate;
             handler.UseCookies = false;
-            HttpClient = new HttpClient(handler, false)
-            {
-                Timeout = TimeSpan.FromSeconds(3600)
-            };
+            HttpClient = new HttpClient(handler, false);
+
+            HttpClient.Timeout = TimeSpan.FromHours(2);
+
             HttpClient.DefaultRequestHeaders.Add("User-Agent",
                 $"Visma.Net/{VismaNet.Version} (+https://github.com/ON-IT/Visma.Net)");
             HttpClient.DefaultRequestHeaders.ExpectContinue = false;

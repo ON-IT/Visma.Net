@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
@@ -15,10 +16,10 @@ namespace ONIT.VismaNetApi.Models
             DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
         }
 
-        public Allocations allocations
+        public List<Allocations> allocations
         {
-            get => Get<Allocations>();
-            set => Set(value);
+            get => Get(defaultValue: new List<Allocations>());
+            private set => Set(value);
         }
         [JsonIgnore]
         public ApiOperation operation
@@ -48,18 +49,19 @@ namespace ONIT.VismaNetApi.Models
         }
         public NumberDescription inventory
         {
-            get => Get<NumberDescription>();
-            set => Set(value);
+            get => Get("inventoryId", new NumberDescription());
+            set => Set(value, "inventoryId");
         }
         public DescriptionId warehouse
         {
-            get => Get<DescriptionId>();
-            set => Set(value);
+            get => Get("warehouseId", new DescriptionId());
+            set => Set(value, "warehouseId");
+
         }
         public LocationSummary location
         {
-            get => Get<LocationSummary>();
-            set => Set(value);
+            get => Get("locationId", new LocationSummary());
+            set => Set(value, "locationId");
         }
         public string transactionDescription
         {
@@ -134,10 +136,11 @@ namespace ONIT.VismaNetApi.Models
             get => Get<NumberDescription>();
             set => Set(value);
         }
-        public Account account
+        public NumberDescriptionType account
         {
-            get => Get<Account>();
-            set => Set(value);
+            get => Get("accountId", new NumberDescriptionType());
+            set => Set(value, "accountId");
+
         }
 
         public string accountDescription
@@ -145,9 +148,9 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
-        public Subaccount subaccount
+        public CustomDto.Subaccount subaccount
         {
-            get => Get<Subaccount>();
+            get => Get(defaultValue: new CustomDto.Subaccount());
             set => Set(value);
         }
         public DescriptionId sub
