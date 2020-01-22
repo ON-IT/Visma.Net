@@ -61,5 +61,10 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"orderType/{salesOrder.orderType}/{salesOrder.orderNo}/{lineNumber}", data, filename);
         }
+
+        public async Task<VismaActionResult> CreateShipment(string entityNumber, CreateShipment cs)
+        {
+            return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, entityNumber, "createShipment", cs);
+        }
     }
 }
