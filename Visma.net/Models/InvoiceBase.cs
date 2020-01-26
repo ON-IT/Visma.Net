@@ -42,6 +42,12 @@ namespace ONIT.VismaNetApi.Models
             }
         }
 
+        public PaymentMethod paymentMethod
+        {
+            get => Get<PaymentMethod>("paymentMethodId");
+            set => Set(value, "paymentMethodId");
+        }
+
         public decimal exchangeRate
         {
             get { return Get<decimal>(); }
