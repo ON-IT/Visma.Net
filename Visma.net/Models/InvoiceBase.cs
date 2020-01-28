@@ -260,6 +260,12 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
+        public string note
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
+
         #endregion
 
         #region Methods
