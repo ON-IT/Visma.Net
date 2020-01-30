@@ -42,6 +42,12 @@ namespace ONIT.VismaNetApi.Models
             }
         }
 
+        public PaymentMethod paymentMethod
+        {
+            get => Get<PaymentMethod>("paymentMethodId");
+            set => Set(value, "paymentMethodId");
+        }
+
         public decimal exchangeRate
         {
             get { return Get<decimal>(); }
@@ -211,6 +217,12 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
+        public NumberName branchNumber
+        {
+            get => Get<NumberName>();
+            set => Set(value);
+        }
+
         [JsonProperty]
         public decimal amount
         {
@@ -259,11 +271,17 @@ namespace ONIT.VismaNetApi.Models
             get { return Get<string>(); }
             private set { Set(value); }
         }
-
         public string note
         {
-            get { return Get<string>(); }
-            set { Set(value); }
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public CustomerVatZone customerVatZone
+        {
+            get => Get<CustomerVatZone>("customerVatZoneId");
+            set => Set(value, "customerVatZoneId");
+
         }
 
         #endregion

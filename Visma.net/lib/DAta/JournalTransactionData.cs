@@ -26,5 +26,15 @@ namespace ONIT.VismaNetApi.Lib.Data
                 throw new ArgumentNullException(nameof(fileName), "File name must be provided and have an extention");
             return await VismaNetApiHelper.AddAttachmentToJournalTransaction(Authorization, batchNumber, byteArray, fileName);
         }
+
+        public async Task<VismaActionResult> Release(JournalTransaction transaction)
+        {
+            return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, transaction.GetIdentificator(), "release");
+        }
+
+        public async Task<VismaActionResult> Release(string transactionNumber)
+        {
+            return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, transactionNumber, "release");
+        }
     }
 }

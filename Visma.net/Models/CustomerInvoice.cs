@@ -144,6 +144,13 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        public CustomerVatZone customerVatZone
+        {
+            get => Get<CustomerVatZone>("customerVatZoneId");
+            set => Set(value, "customerVatZoneId");
+
+        }
+
         [JsonProperty]
         public decimal detailTotal
         {

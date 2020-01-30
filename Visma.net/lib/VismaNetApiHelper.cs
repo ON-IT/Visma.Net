@@ -388,6 +388,16 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        internal static async Task<Stream> GetStream(string apiControllerUri, VismaNetAuthorization authorization)
+        {
+            var client = GetHttpClient(authorization);
+            {
+                var endpoint = GetApiUrlForController(apiControllerUri);
+
+                return await client.GetStream(endpoint);
+            }
+        }
+
         internal static async Task<Stream> GetAttachment(VismaNetAuthorization auth, string attachmentid)
         {
             var client = GetHttpClient(auth);
