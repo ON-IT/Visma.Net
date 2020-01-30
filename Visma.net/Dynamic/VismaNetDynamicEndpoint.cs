@@ -40,6 +40,11 @@ namespace ONIT.VismaNetApi.Dynamic
             }
         }
 
+        public async Task<dynamic> GetAllModifiedSince(DateTime date)
+        {
+            return await VismaNetApiHelper.GetAllModifiedSince<JObject>($"{_base}{_endpointName}", date, _auth);
+        }
+
         public async Task<Stream> GetStream()
         {
             return await VismaNetApiHelper.GetStream($"{_base}{_endpointName}", _auth);
