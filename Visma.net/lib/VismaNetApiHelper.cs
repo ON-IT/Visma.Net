@@ -339,12 +339,10 @@ namespace ONIT.VismaNetApi.Lib
         {
             var listOfEntities = new List<T>();
             var webclient = GetHttpClient(authorization);
-            {
-                var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
-                var entities = await webclient.Get<List<T>>(endpoint);
-                listOfEntities.AddRange(entities);
-                return listOfEntities;
-            }
+            var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
+            var entities = await webclient.Get<List<T>>(endpoint);
+            listOfEntities.AddRange(entities);
+            return listOfEntities;
         }
 
         internal static async Task<List<T>> GetAllModifiedSince<T>(string apiControllerUri, DateTime dateTime,

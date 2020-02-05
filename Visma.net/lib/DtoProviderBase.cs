@@ -1,4 +1,5 @@
-﻿using ONIT.VismaNetApi.Interfaces;
+﻿using Newtonsoft.Json;
+using ONIT.VismaNetApi.Interfaces;
 using ONIT.VismaNetApi.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace ONIT.VismaNetApi.Lib
 {
+
     public class DtoProviderBase : IProvideDto, INotifyPropertyChanged
     {
         private Dictionary<string, object> _data;

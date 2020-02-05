@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -13,8 +15,39 @@ using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib
 {
+    public class RetryHandler : DelegatingHandler
+    {
+        // Strongly consider limiting the number of retries - "retry forever" is
+        // probably not the most user friendly way you could respond to "the
+        // network cable got pulled out."
+        private const int MaxRetries = 3;
+
+        public RetryHandler(HttpMessageHandler innerHandler)
+            : base(innerHandler)
+        { }
+
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken)
+        {
+            HttpResponseMessage response = null;
+            for (int i = 0; i < MaxRetries; i++)
+            {
+                response = await base.SendAsync(request, cancellationToken);
+                if (response.IsSuccessStatusCode)
+                {
+                    return response;
+                }
+                Trace.WriteLine($"[{i}/3] {response.StatusCode} {response.ReasonPhrase}");
+            }
+
+            return response;
+        }
+    }
+
     internal class VismaNetHttpClient
     {
+        const int MaxConnectionsPerServer = 8;
         public static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
         {
             DateFormatString = "yyyy-MM-ddTHH:mm:ss.fffZ",
@@ -37,7 +70,12 @@ namespace ONIT.VismaNetApi.Lib
                 handler.AutomaticDecompression = DecompressionMethods.GZip |
                                                  DecompressionMethods.Deflate;
             handler.UseCookies = false;
-            HttpClient = new HttpClient(handler, false)
+            #if NET45
+            #else
+            handler.MaxConnectionsPerServer = MaxConnectionsPerServer;
+            
+            #endif
+            HttpClient = new HttpClient(new RetryHandler(handler), false)
             {
                 Timeout = TimeSpan.FromSeconds(1200)
             };

@@ -8,7 +8,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Customer : DtoProviderBase, IProvideIdentificator, IComparable<Customer>, IComparable
+    public class Customer : DtoPaginatedProviderBase, IProvideIdentificator, IComparable<Customer>, IComparable
     {
         public Customer()
         {
@@ -242,8 +242,6 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value, "vatZoneId");
         }
 
-        [JsonProperty]
-        public Metadata metadata { get; private set; }
 
         public int CompareTo(object obj)
         {
