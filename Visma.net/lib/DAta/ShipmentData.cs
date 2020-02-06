@@ -5,7 +5,7 @@ using System.IO;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class ShipmentData : BaseCrudDataClass<Shipment>
+    public class ShipmentData : BasePaginatedCrudDataClass<Shipment>
     {
         public ShipmentData(VismaNetAuthorization auth) : base(auth)
         {

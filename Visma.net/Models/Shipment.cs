@@ -6,7 +6,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Shipment : DtoProviderBase, IProvideIdentificator
+    public class Shipment : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public string shipmentNumber
         {
