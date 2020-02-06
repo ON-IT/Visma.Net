@@ -217,6 +217,12 @@ namespace ONIT.VismaNetApi.Models
             private set { Set(value); }
         }
 
+        public NumberName branchNumber
+        {
+            get => Get<NumberName>();
+            set => Set(value);
+        }
+
         [JsonProperty]
         public decimal amount
         {
@@ -264,6 +270,18 @@ namespace ONIT.VismaNetApi.Models
         {
             get { return Get<string>(); }
             private set { Set(value); }
+        }
+        public string note
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public CustomerVatZone customerVatZone
+        {
+            get => Get<CustomerVatZone>("customerVatZoneId");
+            set => Set(value, "customerVatZoneId");
+
         }
 
         #endregion

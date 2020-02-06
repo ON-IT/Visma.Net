@@ -181,6 +181,12 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value, "parentRecordNumber");
         }
 
+        public CustomerPaymentMethod defaultPaymentMethod
+        {
+            get => Get<CustomerPaymentMethod>(defaultValue: new CustomerPaymentMethod());
+            set => Set(value);
+        }
+
         public DescriptiveDto priceClass
         {
             get => Get("priceClassId", new DescriptiveDto());

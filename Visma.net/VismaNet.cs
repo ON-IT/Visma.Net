@@ -31,18 +31,18 @@ namespace ONIT.VismaNetApi
         public readonly ProjectData Project;
         public readonly SalesOrderData SalesOrder;
         public readonly JournalTransactionData JournalTransaction;
-
+        public readonly GeneralLedgerTransactionData GeneralLedgerTransaction;
+        public readonly GeneralLedgerBalanceData GeneralLedgerBalance;
+        public readonly PaymentData Payment;
         public readonly BranchData Branch;
         public readonly WarehouseData Warehouse;
         public readonly LocationData Location;
         public readonly SubaccountData Subaccount;
-        public readonly CustomerPaymentData CustomerPayment;
-
-        // Obsolete endpoints
-        [Obsolete("Payment is deprecated, please use CustomerPayment instead.")]
-        public readonly PaymentData Payment;
-        [Obsolete("Method is deprecated start using the new method in endpoint Customer Credit Note")]
-        public readonly CreditNoteData CreditNote;
+        public readonly SupplierDocumentData SupplierDocument;
+        public readonly CustomerPaymentData CustomerPayment; 
+        public readonly InventoryIssueData InventoryIssue;
+        public readonly InventoryReceiptData InventoryReceipt;
+        public readonly PurchaseReceiptData PurchaseReceipt;
 
         /// <summary>
         ///     Creates a connection using token.
@@ -70,6 +70,8 @@ namespace ONIT.VismaNetApi
             Dimension = new DimensionData(Auth);
             Inventory = new InventoryData(Auth);
             JournalTransaction = new JournalTransactionData(Auth);
+            GeneralLedgerTransaction = new GeneralLedgerTransactionData(Auth);
+            GeneralLedgerBalance = new GeneralLedgerBalanceData(Auth);
             Account = new FinAccountData(Auth);
             Employee = new EmployeeData(Auth);
             CreditNote = new CreditNoteData(Auth);
@@ -85,6 +87,11 @@ namespace ONIT.VismaNetApi
             CustomerPayment = new CustomerPaymentData(Auth);
             Dynamic = new VismaNetDynamicEndpoint(null, Auth);
             Resources = new VismaNetDynamicEndpoint(null, Auth, true);
+            SupplierDocument = new SupplierDocumentData(Auth);
+            InventoryIssue = new InventoryIssueData(Auth);
+            InventoryReceipt = new InventoryReceiptData(Auth);
+            PurchaseReceipt = new PurchaseReceiptData(Auth);
+
         }
 
         /// <summary>

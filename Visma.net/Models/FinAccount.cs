@@ -65,6 +65,19 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
+        public string externalCode1
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
+
+        public string externalCode2
+        {
+            get { return Get<string>(); }
+            set { Set(value); }
+        }
+
+
         public bool cashAccount
         {
             get { return Get<bool>(); }

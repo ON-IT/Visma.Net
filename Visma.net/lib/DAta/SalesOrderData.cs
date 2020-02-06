@@ -1,4 +1,5 @@
 ﻿using ONIT.VismaNetApi.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
@@ -51,7 +52,6 @@ namespace ONIT.VismaNetApi.Lib.Data
             rsp.InternalPrepareForUpdate();
             return rsp;
         }
-
         public async Task AddAttachment(SalesOrder salesOrder, byte[] data, string filename)
         {
             await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"orderType/{salesOrder.orderType}/{salesOrder.orderNo}", data, filename);
@@ -60,6 +60,11 @@ namespace ONIT.VismaNetApi.Lib.Data
         public async Task AddAttachment(SalesOrder salesOrder, int lineNumber, byte[] data, string filename)
         {
             await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"orderType/{salesOrder.orderType}/{salesOrder.orderNo}/{lineNumber}", data, filename);
+        }
+
+        public async Task<VismaActionResult> CreateShipment(string entityNumber, CreateShipment cs)
+        {
+            return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, entityNumber, "createShipment", cs);
         }
     }
 }

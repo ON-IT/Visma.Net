@@ -1,4 +1,7 @@
 ﻿using ONIT.VismaNetApi.Models;
+using System;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
@@ -10,14 +13,18 @@ namespace ONIT.VismaNetApi.Lib.Data
             ApiControllerUri = VismaNetControllers.JournalTransaction;
         }
 
-        public async Task AddAttachment(JournalTransaction journalTransaction, byte[] data, string filename)
+        public async Task<string> AddAttachmentToJournalTransaction(string batchNumber, string content, string fileName)
         {
-            await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, journalTransaction.GetIdentificator(), data, filename);
+            return await AddAttachmentToJournalTransaction(batchNumber, Encoding.UTF8.GetBytes(content), fileName);
         }
 
-        public async Task AddAttachment(JournalTransaction journalTransaction, int lineNumber, byte[] data, string filename)
+        public async Task<string> AddAttachmentToJournalTransaction(string batchNumber, byte[] byteArray, string fileName)
         {
-            await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"{journalTransaction.GetIdentificator()}/{lineNumber}", data, filename);
+            if (byteArray == default(byte[]))
+                throw new ArgumentNullException(nameof(byteArray), "ByteArray is missing");
+            if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(Path.GetExtension(fileName)))
+                throw new ArgumentNullException(nameof(fileName), "File name must be provided and have an extention");
+            return await VismaNetApiHelper.AddAttachmentToJournalTransaction(Authorization, batchNumber, byteArray, fileName);
         }
 
         public async Task<VismaActionResult> Release(JournalTransaction transaction)

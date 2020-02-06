@@ -159,6 +159,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+
         internal static Task<string> AddAttachmentToInvoice(VismaNetAuthorization auth, string number,
             byte[] bytes,
             string fileName)
@@ -175,11 +176,35 @@ namespace ONIT.VismaNetApi.Lib
             return AddAttachmentToController<string>(auth, url, stream, fileName);
         }
 
+        internal static Task<string> AddAttachmentToCreditNote(VismaNetAuthorization auth, string number,
+            byte[] bytes,
+            string fileName)
+        {
+            var url = GetApiUrlForController(VismaNetControllers.CreditNote, $"/{number}/attachment");
+            return AddAttachmentToController<string>(auth, url, bytes, fileName);
+        }
+
+        internal static Task<string> AddAttachmentToCreditNote(VismaNetAuthorization auth, string number,
+            Stream stream,
+            string fileName)
+        {
+            var url = GetApiUrlForController(VismaNetControllers.CreditNote, $"/{number}/attachment");
+            return AddAttachmentToController<string>(auth, url, stream, fileName);
+        }
+
         internal static Task<string> AddAttachmentToSupplierInvoice(VismaNetAuthorization auth, string number,
             byte[] bytes,
             string fileName)
         {
             var url = GetApiUrlForController(VismaNetControllers.SupplierInvoices, $"/{number}/attachment");
+            return AddAttachmentToController<string>(auth, url, bytes, fileName);
+        }
+
+        internal static Task<string> AddAttachmentToJournalTransaction(VismaNetAuthorization auth, string batch,
+            byte[] bytes,
+            string fileName)
+        {
+            var url = GetApiUrlForController(VismaNetControllers.JournalTransaction, $"/{batch}/attachment");
             return AddAttachmentToController<string>(auth, url, bytes, fileName);
         }
 
@@ -415,6 +440,16 @@ namespace ONIT.VismaNetApi.Lib
                     });
 
                 return await webclient.Get<List<T>>(endpoint);
+            }
+        }
+
+        internal static async Task<Stream> GetStream(string apiControllerUri, VismaNetAuthorization authorization)
+        {
+            var client = GetHttpClient(authorization);
+            {
+                var endpoint = GetApiUrlForController(apiControllerUri);
+
+                return await client.GetStream(endpoint);
             }
         }
 

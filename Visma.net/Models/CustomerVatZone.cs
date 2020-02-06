@@ -17,6 +17,21 @@ namespace ONIT.VismaNetApi.Models
         public string errorInfo { get; private set; }
 
         [JsonProperty]
-        public MetaData metadata { get; private set; }
+        public Metadata metadata { get; private set; }
+
+        public CustomerVatZone()
+        {
+
+        }
+
+        public CustomerVatZone(string id)
+        {
+            this.id = id;
+        }
+
+        public static implicit operator CustomerVatZone(string id)
+        {
+            return new CustomerVatZone(id);
+        }
     }
 }

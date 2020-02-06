@@ -8,12 +8,20 @@ namespace ONIT.VismaNetApi.Models
 {
     public class Location : DtoPaginatedProviderBase, IProvideIdentificator
     {
-       internal override void PrepareForUpdate()
+        public Location(string baccountId, string locationId)
+        {
+            this.baccount = new Baccount();
+            this.baccount.number = baccountId;
+            this.locationId = locationId;
+            IgnoreProperties.Add(nameof(baccount));
+            IgnoreProperties.Add("baccountId");
+            IgnoreProperties.Add(nameof(locationId));
+        }
+        internal override void PrepareForUpdate()
         {
             IgnoreProperties.Add(nameof(baccount));
             IgnoreProperties.Add("baccountId");
             IgnoreProperties.Add(nameof(locationId));
-            base.PrepareForUpdate();
         }
 
         public bool active
@@ -33,7 +41,7 @@ namespace ONIT.VismaNetApi.Models
             get => Get<bool>();
             set => Set(value);
         }
-
+        
         public Baccount baccount
         {
             get => Get<Baccount>("baccountId");
@@ -63,7 +71,7 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
-
+        
         public string locationId
         {
             get => Get<string>();

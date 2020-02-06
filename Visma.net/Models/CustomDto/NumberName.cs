@@ -61,4 +61,32 @@ namespace ONIT.VismaNetApi.Models
             return new DtoValue(number);
         }
     }
+
+    public class NumberDescriptionType : IBecomeDto
+    {
+        public NumberDescriptionType()
+        {
+
+        }
+
+        public NumberDescriptionType(string number)
+        {
+            this.number = number;
+        }
+        public string number { get; set; }
+        [JsonProperty]
+        public string type { get; set; }
+        [JsonProperty]
+        public string description { get; private set; }
+
+        public static implicit operator NumberDescriptionType(string number)
+        {
+            return new NumberDescriptionType(number);
+        }
+
+        public DtoValue ToDto()
+        {
+            return new DtoValue(number);
+        }
+    }
 }
