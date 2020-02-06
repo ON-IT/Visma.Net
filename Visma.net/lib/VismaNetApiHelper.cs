@@ -363,31 +363,39 @@ namespace ONIT.VismaNetApi.Lib
         internal static async Task<List<T>> GetAll<T>(string apiControllerUri, VismaNetAuthorization authorization,
             NameValueCollection parameters = null)
         {
-            var listOfEntities = new List<T>();
             var webclient = GetHttpClient(authorization);
             var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
-            var entities = await webclient.Get<List<T>>(endpoint);
-            listOfEntities.AddRange(entities);
-            return listOfEntities;
+            return await webclient.Get<List<T>>(endpoint);
         }
 
 
-        private static NameValueCollection CreatePagionationParameters(NameValueCollection parameters, int pageSize, int page)
+        private static NameValueCollection CreatePagionationParameters(int pageSize, int page, NameValueCollection parameters)
         {
-            var collection = new NameValueCollection {
+            var pagination = new NameValueCollection {
                     { "pageSize", pageSize.ToString() },
                     { "pageNumber", page.ToString() }
                 };
-            if (parameters != null)
-                foreach (var key in parameters.AllKeys)
-                    collection[key] = parameters[key];
-            return collection;
+
+            // Make sure that pageSize and pageNumber cannot be overriden by the parameters
+            if (parameters != null) 
+                return parameters.Join(pagination);
+            
+            return pagination;
+        }
+
+        public static NameValueCollection Join(this NameValueCollection destination, NameValueCollection source)
+        {
+            if (source == null)
+                return destination;
+            foreach (var key in source.AllKeys)
+                destination[key] = source[key];
+            return destination;
         }
 
         const int initialPageSize = 1000;
         public static async Task<List<T>> GetAllWithPagination<T>(string ApiControllerUri, VismaNetAuthorization Authorization, NameValueCollection parameters = null) where T : DtoPaginatedProviderBase, IProvideIdentificator
         {
-            var firstPage = await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(parameters, initialPageSize, 1));
+            var firstPage = await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(initialPageSize, 1, parameters));
             var rsp = new List<T>();
             rsp.AddRange(firstPage);
             if (firstPage.FirstOrDefault()?.metadata?.totalCount > firstPage.Count && firstPage.Count > 0)
@@ -404,7 +412,7 @@ namespace ONIT.VismaNetApi.Lib
                     {
                         try
                         {
-                            return await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(parameters, pageSize, page));
+                            return await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(pageSize, page, parameters));
                         }
                         finally
                         {
