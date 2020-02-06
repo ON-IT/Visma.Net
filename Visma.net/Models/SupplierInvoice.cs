@@ -29,7 +29,7 @@ namespace ONIT.VismaNetApi.Models
         }
     }
 
-    public class SupplierInvoice : DtoProviderBase, IProvideIdentificator
+    public class SupplierInvoice : DtoPaginatedProviderBase, IProvideIdentificator
     {
         private List<Attachment> _attachments;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class SupplierInvoiceData : BaseCrudDataClass<SupplierInvoice>
+    public class SupplierInvoiceData : BasePaginatedCrudDataClass<SupplierInvoice>
     {
         internal SupplierInvoiceData(VismaNetAuthorization auth)
             : base(auth)
