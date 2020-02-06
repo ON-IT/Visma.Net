@@ -54,9 +54,7 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty]
         public JObject extras { get; private set; }
         public string errorInfo { get; set; }
-        [JsonProperty]
-        public Metadata metadata { get; private set; }
-
+        
         public string GetIdentificator()
         {
             return refNbr;

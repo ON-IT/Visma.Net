@@ -318,9 +318,6 @@ namespace ONIT.VismaNetApi.Models
         public JObject extras { get; private set; }
 
         [JsonProperty] public string errorInfo { get; private set; }
-
-        [JsonProperty] public Metadata metadata { get; private set; }
-
         public string GetIdentificator()
         {
             return referenceNumber;

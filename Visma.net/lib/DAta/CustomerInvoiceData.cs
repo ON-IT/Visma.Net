@@ -7,7 +7,7 @@ using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class CustomerInvoiceData : BasePaginatedCrudDataClass<CustomerInvoice>
+    public class CustomerInvoiceData : BaseCrudDataClass<CustomerInvoice>
     {
         /// <summary>
         ///     This constructor is called by the client to create the data source.

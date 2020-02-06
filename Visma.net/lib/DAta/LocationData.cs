@@ -51,7 +51,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <returns>List of all entities</returns>
         public async Task<List<Location>> All(string baccountId)
         {
-            var all = await VismaNetApiHelper.GetAll<Location>($"{VismaNetControllers.Location}/{baccountId}", Authorization);
+            var all = await VismaNetApiHelper.GetAllWithPagination<Location>($"{VismaNetControllers.Location}/{baccountId}", Authorization);
             all.ForEach(x=>x.PrepareForUpdate());
             return all;
         }
@@ -62,7 +62,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <returns>List of all entities</returns>
         public async Task<List<Location>> Find(string baccountId, NameValueCollection parameters)
         {
-            var all =  await VismaNetApiHelper.GetAll<Location>($"{VismaNetControllers.Location}/{baccountId}", Authorization, parameters);
+            var all =  await VismaNetApiHelper.GetAllWithPagination<Location>($"{VismaNetControllers.Location}/{baccountId}", Authorization, parameters);
             all.ForEach(x=>x.PrepareForUpdate());
             return all;
         }
@@ -101,15 +101,15 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             if (dateTime == DateTime.MinValue)
             {
-                var rsp = await VismaNetApiHelper.GetAll<Location>($"{VismaNetControllers.Location}/{baccountId}", Authorization);
-                rsp.ForEach(x => x.PrepareForUpdate());
-                return rsp;
+                return await All(baccountId);
             }
             else
             {
-                var rsp = await VismaNetApiHelper.GetAllModifiedSince<Location>($"{VismaNetControllers.Location}/{baccountId}", dateTime, Authorization);
-                rsp.ForEach(x => x.PrepareForUpdate());
-                return rsp;
+                return await Find(baccountId, new NameValueCollection
+                    {
+                        {"LastModifiedDateTime", dateTime.ToString(VismaNetApiHelper.VismaNetDateTimeFormat)},
+                        {"LastModifiedDateTimeCondition", ">"}
+                    });
             }
 
         }

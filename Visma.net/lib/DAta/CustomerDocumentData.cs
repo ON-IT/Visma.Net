@@ -30,7 +30,7 @@ namespace ONIT.VismaNetApi.Lib
         /// <returns></returns>
 	    public async Task<List<CustomerDocument>> All()
         {
-            return await VismaNetApiHelper.GetAll<CustomerDocument>(VismaNetControllers.CustomerDocument, _authorization).ConfigureAwait(false);
+            return await VismaNetApiHelper.GetAllWithPagination<CustomerDocument>(VismaNetControllers.CustomerDocument, _authorization);
         }
         
         /// <summary>

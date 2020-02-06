@@ -6,7 +6,7 @@ using ONIT.VismaNetApi.Models.CustomDto;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class CustomerDocument : DtoProviderBase
+    public class CustomerDocument : DtoPaginatedProviderBase, IProvideIdentificator
     {
         [JsonProperty]
         public Account account { get; private set; }
@@ -105,5 +105,6 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty]
         public string errorInfo { get; set; }
 
+        public string GetIdentificator() => referenceNumber;
     }
 }

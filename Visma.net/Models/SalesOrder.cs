@@ -362,9 +362,6 @@ namespace ONIT.VismaNetApi.Models
             private set;// => Set(value);
         }
 
-        [JsonProperty]
-        public Metadata metadata { get; private set; }
-
         public string GetIdentificator()
         {
             return orderNo;

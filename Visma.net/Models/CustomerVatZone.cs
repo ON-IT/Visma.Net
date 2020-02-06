@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ONIT.VismaNetApi.Lib;
 
 namespace ONIT.VismaNetApi.Models
 {
@@ -16,6 +17,6 @@ namespace ONIT.VismaNetApi.Models
         public string errorInfo { get; private set; }
 
         [JsonProperty]
-        public Metadata metadata { get; private set; }
+        public MetaData metadata { get; private set; }
     }
 }
