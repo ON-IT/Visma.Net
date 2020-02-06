@@ -8,7 +8,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Inventory : DtoProviderBase, IProvideIdentificator
+    public class Inventory : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public Inventory()
         {
