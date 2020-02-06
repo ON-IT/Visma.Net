@@ -34,7 +34,7 @@ namespace ONIT.VismaNetApi.Lib
             for (int i = 0; i < MaxRetries; i++)
             {
                 response = await base.SendAsync(request, cancellationToken);
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode || response.StatusCode == HttpStatusCode.NotFound)
                 {
                     return response;
                 }
@@ -73,8 +73,8 @@ namespace ONIT.VismaNetApi.Lib
             #if NET45
             #else
             handler.MaxConnectionsPerServer = MaxConnectionsPerServer;
-            
             #endif
+
             HttpClient = new HttpClient(new RetryHandler(handler), false)
             {
                 Timeout = TimeSpan.FromSeconds(1200)
