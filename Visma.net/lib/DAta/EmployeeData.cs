@@ -4,7 +4,7 @@ using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class EmployeeData : BaseCrudDataClass<Employee>
+    public class EmployeeData : BasePaginatedCrudDataClass<Employee>
     {
         internal EmployeeData(VismaNetAuthorization auth)
             : base(auth)
