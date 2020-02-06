@@ -25,20 +25,24 @@ namespace ONIT.VismaNetApi
         public readonly InventoryData Inventory;
         public readonly FinAccountData Account;
         public readonly EmployeeData Employee;
-        public readonly CreditNoteData CreditNote;
+
         public readonly ShipmentData Shipment;
         public readonly ContactData Contact;
         public readonly ProjectData Project;
         public readonly SalesOrderData SalesOrder;
         public readonly JournalTransactionData JournalTransaction;
-        [Obsolete("Payment is deprecated, please use CustomerPayment instead.")]
-        public readonly PaymentData Payment;
+
         public readonly BranchData Branch;
         public readonly WarehouseData Warehouse;
         public readonly LocationData Location;
         public readonly SubaccountData Subaccount;
-
         public readonly CustomerPaymentData CustomerPayment;
+
+        // Obsolete endpoints
+        [Obsolete("Payment is deprecated, please use CustomerPayment instead.")]
+        public readonly PaymentData Payment;
+        [Obsolete("Method is deprecated start using the new method in endpoint Customer Credit Note")]
+        public readonly CreditNoteData CreditNote;
 
         /// <summary>
         ///     Creates a connection using token.
