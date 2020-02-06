@@ -12,11 +12,21 @@ namespace ONIT.VismaNetApi.Lib.Data
             ApiControllerUri = VismaNetControllers.Warehouse;
         }
 
+        /// <summary>
+        /// Not Implemented
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public override Task<Warehouse> Add(Warehouse entity)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Not Implemented
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public override Task Update(Warehouse entity)
         {
             throw new NotImplementedException();
