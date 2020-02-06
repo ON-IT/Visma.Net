@@ -3,7 +3,7 @@
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class SubaccountData : BaseCrudDataClass<Subaccount>
+    public class SubaccountData : BasePaginatedCrudDataClass<Subaccount>
     {
         public SubaccountData(VismaNetAuthorization auth) : base(auth)
         {
