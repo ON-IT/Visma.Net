@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class SalesOrderData : BaseCrudDataClass<SalesOrder>
+    public class SalesOrderData : BasePaginatedCrudDataClass<SalesOrder>
     {
         public SalesOrderData(VismaNetAuthorization auth) : base(auth)
         {

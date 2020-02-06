@@ -9,7 +9,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class SalesOrder : DtoProviderBase, IProvideIdentificator
+    public class SalesOrder : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public SalesOrder()
         {
