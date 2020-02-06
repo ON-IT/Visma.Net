@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class CustomerPaymentData : BaseCrudDataClass<CustomerPayment>
+    public class CustomerPaymentData : BasePaginatedCrudDataClass<CustomerPayment>
     {
         internal CustomerPaymentData(VismaNetAuthorization auth) : base(auth)
         {
