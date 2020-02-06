@@ -33,7 +33,7 @@ namespace ONIT.VismaNetApi
         public readonly JournalTransactionData JournalTransaction;
         public readonly GeneralLedgerTransactionData GeneralLedgerTransaction;
         public readonly GeneralLedgerBalanceData GeneralLedgerBalance;
-        public readonly PaymentData Payment;
+        
         public readonly BranchData Branch;
         public readonly WarehouseData Warehouse;
         public readonly LocationData Location;
@@ -43,6 +43,12 @@ namespace ONIT.VismaNetApi
         public readonly InventoryIssueData InventoryIssue;
         public readonly InventoryReceiptData InventoryReceipt;
         public readonly PurchaseReceiptData PurchaseReceipt;
+
+        // Obsolete
+        [Obsolete]
+        public readonly CreditNoteData CreditNote;
+        [Obsolete]
+        public readonly PaymentData Payment;
 
         /// <summary>
         ///     Creates a connection using token.

@@ -8,7 +8,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class InventoryIssue : DtoProviderBase, IProvideIdentificator
+    public class InventoryIssue : DtoPaginatedProviderBase, IProvideIdentificator
     {
        internal override void PrepareForUpdate()
         {
@@ -84,7 +84,6 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty] public string batchNumber { get; private set; }
         [JsonProperty] public string errorInfo { get; private set; }
 
-        [JsonProperty] public Metadata metadata { get; private set; }
         [JsonProperty] public List<Attachment> attachments { get; private set; }
 
         public string GetIdentificator()
