@@ -31,6 +31,7 @@ namespace ONIT.VismaNetApi
         public readonly ProjectData Project;
         public readonly SalesOrderData SalesOrder;
         public readonly JournalTransactionData JournalTransaction;
+        [Obsolete("Payment is deprecated, please use CustomerPayment instead.")]
         public readonly PaymentData Payment;
         public readonly BranchData Branch;
         public readonly WarehouseData Warehouse;
