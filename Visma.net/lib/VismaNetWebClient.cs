@@ -20,7 +20,7 @@ namespace ONIT.VismaNetApi.Lib
         // Strongly consider limiting the number of retries - "retry forever" is
         // probably not the most user friendly way you could respond to "the
         // network cable got pulled out."
-        private const int MaxRetries = 3;
+        private const int MaxRetries = 5;
 
         public RetryHandler(HttpMessageHandler innerHandler)
             : base(innerHandler)
@@ -38,7 +38,7 @@ namespace ONIT.VismaNetApi.Lib
                 {
                     return response;
                 }
-                Trace.WriteLine($"[{i}/3] {response.StatusCode} {response.ReasonPhrase}");
+                Debug.WriteLine($"[{i}/{MaxRetries}] {response.StatusCode} {response.ReasonPhrase}");
             }
 
             return response;
@@ -47,7 +47,6 @@ namespace ONIT.VismaNetApi.Lib
 
     internal class VismaNetHttpClient
     {
-        const int MaxConnectionsPerServer = 8;
         public static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
         {
             DateFormatString = "yyyy-MM-ddTHH:mm:ss.fffZ",
@@ -72,7 +71,7 @@ namespace ONIT.VismaNetApi.Lib
             handler.UseCookies = false;
             #if NET45
             #else
-            handler.MaxConnectionsPerServer = MaxConnectionsPerServer;
+            handler.MaxConnectionsPerServer = VismaNet.MaxConcurrentRequests;
             #endif
 
             HttpClient = new HttpClient(new RetryHandler(handler), false)

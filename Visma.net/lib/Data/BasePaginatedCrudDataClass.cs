@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
@@ -13,20 +12,20 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
         }
 
-        const int initialPageSize = 500;
+        const int initialPageSize = 1000;
 
         /// <summary>
         /// Gets all entities by splitting it into totalCount / pageSize tasks and fetching them in parallel.
         /// </summary>
         /// <returns></returns>
-        /// <remarks>The order of the entities will be random. If the order matters to you, use .OrderBy.</remarks>
-        public override async Task<List<T>> All() => await AllWithParams();
+        /// <remarks>The order of the entities will be by the entity identificator. If the order matters to you, use OrderBy.</remarks>
+        public override async Task<List<T>> All() => await VismaNetApiHelper.GetAllWithPagination<T>(ApiControllerUri, Authorization);
 
         /// <summary>
         ///     Retrieves all entities from Visma.Net.
         /// </summary>
         /// <returns>List of all entities</returns>
-        public override async Task<List<T>> Find(NameValueCollection parameters) => await AllWithParams(parameters);
+        public override async Task<List<T>> Find(NameValueCollection parameters) => await VismaNetApiHelper.GetAllWithPagination<T>(ApiControllerUri, Authorization, parameters);
 
         /// <summary>
         ///     Executes the action on all elements streamed from the API.
@@ -50,35 +49,6 @@ namespace ONIT.VismaNetApi.Lib.Data
             return Task.FromResult(true);
         }
 
-        private async Task<List<T>> AllWithParams(NameValueCollection nameValueCollection = null)
-        {
-            var basenvc = new NameValueCollection { { "pageSize", initialPageSize.ToString() } };
-            if (nameValueCollection != null)
-                foreach (var key in nameValueCollection.AllKeys)
-                    basenvc[key] = nameValueCollection[key];
 
-            var firstPage = await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization, basenvc);
-            var rsp = new List<T>();
-            rsp.AddRange(firstPage);
-            if (firstPage.FirstOrDefault()?.metadata?.totalCount > firstPage.Count && firstPage.Count > 0)
-            {
-                var totalCount = firstPage.FirstOrDefault().metadata.totalCount;
-                var pageSize = firstPage.Count;
-                var pageCount = totalCount / pageSize;
-                var tasks = Enumerable.Range(2, pageCount)
-                                      .Select(page =>
-                                      {
-                                          var nvc = new NameValueCollection { { "pageSize", pageSize.ToString() }, { "pageNumber", page.ToString() } };
-                                          if (nameValueCollection != null)
-                                              foreach (var key in nameValueCollection.AllKeys)
-                                                  nvc[key] = nameValueCollection[key];
-                                          return VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization, nvc);
-                                      });
-                var completedTasks = await Task.WhenAll(tasks);
-                rsp.AddRange(completedTasks.SelectMany(x => x));
-            }
-            rsp.ForEach(x => x.InternalPrepareForUpdate());
-            return rsp;
-        }
     }
 }

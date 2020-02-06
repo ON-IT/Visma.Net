@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib
@@ -343,6 +344,62 @@ namespace ONIT.VismaNetApi.Lib
             var entities = await webclient.Get<List<T>>(endpoint);
             listOfEntities.AddRange(entities);
             return listOfEntities;
+        }
+
+
+        private static NameValueCollection CreatePagionationParameters(NameValueCollection parameters, int pageSize, int page)
+        {
+            var collection = new NameValueCollection {
+                    { "pageSize", pageSize.ToString() },
+                    { "pageNumber", page.ToString() }
+                };
+            if (parameters != null)
+                foreach (var key in parameters.AllKeys)
+                    collection[key] = parameters[key];
+            return collection;
+        }
+
+        const int initialPageSize = 1000;
+        public static async Task<List<T>> GetAllWithPagination<T>(string ApiControllerUri, VismaNetAuthorization Authorization, NameValueCollection parameters = null) where T : DtoPaginatedProviderBase, IProvideIdentificator
+        {
+            var firstPage = await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(parameters, initialPageSize, 1));
+            var rsp = new List<T>();
+            rsp.AddRange(firstPage);
+            if (firstPage.FirstOrDefault()?.metadata?.totalCount > firstPage.Count && firstPage.Count > 0)
+            {
+                var totalCount = firstPage[0].metadata.totalCount;
+                var pageSize = firstPage.Count;
+                var pageCount = totalCount / pageSize;
+                var semaphore = new SemaphoreSlim(VismaNet.MaxConcurrentRequests);
+                var taskList = new List<Task<List<T>>>();
+                foreach (var page in Enumerable.Range(2, pageCount))
+                {
+                    await semaphore.WaitAsync();
+                    taskList.Add(Task.Run(async () =>
+                    {
+                        try
+                        {
+                            return await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(parameters, pageSize, page));
+                        }
+                        finally
+                        {
+                            semaphore.Release();
+                        }
+                    }));
+                }
+                var tasks = await Task.WhenAll(taskList);
+                rsp.AddRange(tasks.SelectMany(x => x));
+            }
+            rsp.ForEach(x => x.InternalPrepareForUpdate());
+            return rsp.OrderBy(x => x.GetIdentificator()).ToList();
+        }
+
+        internal static Task<List<T>> GetAllAsyncTask<T>(string apiControllerUri, VismaNetAuthorization authorization,
+            NameValueCollection parameters = null)
+        {
+            var webclient = GetHttpClient(authorization);
+            var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
+            return webclient.Get<List<T>>(endpoint);
         }
 
         internal static async Task<List<T>> GetAllModifiedSince<T>(string apiControllerUri, DateTime dateTime,
