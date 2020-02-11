@@ -23,7 +23,7 @@ namespace ONIT.VismaNetApi.Lib.Data
             ApiControllerUri = VismaNetControllers.CustomerInvoice;
         }
         /// <summary>
-        ///     AddLarge Invoice entity runs invoicerows in first POST 100 lines then PUT:s in batches of 100 lines
+        ///     AddLarge Invoice entity runs invoicerows in first POST 500 lines then PUT:s in batches of 500 lines
         /// </summary>
         public async Task<CustomerInvoice> AddLarge(CustomerInvoice entity)
         {
@@ -31,7 +31,7 @@ namespace ONIT.VismaNetApi.Lib.Data
             bool firstbatch = true;
             List<CustomerInvoiceLine> AllLines = new List<CustomerInvoiceLine>();
             AllLines.AddRange(entity.invoiceLines);
-            foreach (var lines in AllLines.Batch(100))
+            foreach (var lines in AllLines.Batch(500))
             {
                 entity.invoiceLines.Clear();
                 entity.invoiceLines.AddRange(lines);
