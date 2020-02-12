@@ -2,12 +2,10 @@
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class SupplierDocument : DtoProviderBase, IProvideIdentificator
+    public class SupplierDocument : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public Account account { get; set; }
         public Subaccount subaccount { get; set; }
@@ -43,7 +41,6 @@ namespace ONIT.VismaNetApi.Models
         public DateTime payDate { get; set; }
         public string paymentMessage { get; set; }
         public string errorInfo { get; set; }
-        public Metadata metadata { get; set; }
 
         public string GetIdentificator()
         {

@@ -6,7 +6,7 @@ using ONIT.VismaNetApi.Models.CustomDto;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Location : DtoProviderBase, IProvideIdentificator
+    public class Location : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public Location(string baccountId, string locationId)
         {
@@ -110,9 +110,6 @@ namespace ONIT.VismaNetApi.Models
         
         [JsonProperty]
         public string errorInfo { get; private set; }
-
-        [JsonProperty]
-        public Metadata metadata { get; private set; }
 
         public string GetIdentificator()
         {

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class CustomerPayment : DtoProviderBase, IProvideIdentificator
+    public class CustomerPayment : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public string type { get => Get<string>(); set => Set(value); }
         public string refNbr { get => Get<string>("referenceNumber"); set => Set(value, "referenceNumber"); }
@@ -54,9 +54,7 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty]
         public JObject extras { get; private set; }
         public string errorInfo { get; set; }
-        [JsonProperty]
-        public Metadata metadata { get; private set; }
-
+        
         public string GetIdentificator()
         {
             return refNbr;

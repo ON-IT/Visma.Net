@@ -2,7 +2,7 @@
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class CashSaleData : BaseCrudDataClass<CashSale>
+    public class CashSaleData : BasePaginatedCrudDataClass<CashSale>
     {
         internal CashSaleData(VismaNetAuthorization auth)
             : base(auth)

@@ -8,7 +8,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class JournalTransaction : DtoProviderBase, IProvideIdentificator
+    public class JournalTransaction : DtoPaginatedProviderBase, IProvideIdentificator
     {
         [JsonProperty]
         public List<Attachment> attachments { get; private set; }

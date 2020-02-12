@@ -9,7 +9,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class SalesOrder : DtoProviderBase, IProvideIdentificator
+    public class SalesOrder : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public SalesOrder()
         {
@@ -368,9 +368,6 @@ namespace ONIT.VismaNetApi.Models
             get;// => Get<double>();
             private set;// => Set(value);
         }
-
-        [JsonProperty]
-        public Metadata metadata { get; private set; }
 
         public string GetIdentificator()
         {

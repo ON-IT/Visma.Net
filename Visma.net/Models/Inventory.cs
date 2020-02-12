@@ -8,7 +8,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Inventory : DtoProviderBase, IProvideIdentificator
+    public class Inventory : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public Inventory()
         {
@@ -131,8 +131,6 @@ namespace ONIT.VismaNetApi.Models
             get => Get<VatCode>();
             set => Set(value);
         }
-        [JsonProperty]
-        public Metadata metadata { get; private set; }
 
         [JsonProperty]
         public List<WarehouseDetails> warehouseDetails

@@ -5,7 +5,7 @@ using ONIT.VismaNetApi.Models.CustomDto;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class CustomerData : BaseCrudDataClass<Customer>
+    public class CustomerData : BasePaginatedCrudDataClass<Customer>
 	{
 		internal CustomerData(VismaNetAuthorization auth) : base(auth)
 		{

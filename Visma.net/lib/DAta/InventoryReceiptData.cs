@@ -1,11 +1,9 @@
 ﻿using ONIT.VismaNetApi.Models;
-using ONIT.VismaNetApi.Models.Enums;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class InventoryReceiptData : BaseCrudDataClass<InventoryReceipt>
+    public class InventoryReceiptData : BasePaginatedCrudDataClass<InventoryReceipt>
     {
         public InventoryReceiptData(VismaNetAuthorization auth) : base(auth)
         {

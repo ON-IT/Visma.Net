@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib
@@ -362,14 +363,76 @@ namespace ONIT.VismaNetApi.Lib
         internal static async Task<List<T>> GetAll<T>(string apiControllerUri, VismaNetAuthorization authorization,
             NameValueCollection parameters = null)
         {
-            var listOfEntities = new List<T>();
             var webclient = GetHttpClient(authorization);
+            var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
+            return await webclient.Get<List<T>>(endpoint);
+        }
+
+
+        private static NameValueCollection CreatePagionationParameters(int pageSize, int page, NameValueCollection parameters)
+        {
+            var pagination = new NameValueCollection {
+                    { "pageSize", pageSize.ToString() },
+                    { "pageNumber", page.ToString() }
+                };
+
+            // Make sure that pageSize and pageNumber cannot be overriden by the parameters
+            if (parameters != null) 
+                return parameters.Join(pagination);
+            
+            return pagination;
+        }
+
+        public static NameValueCollection Join(this NameValueCollection destination, NameValueCollection source)
+        {
+            if (source == null)
+                return destination;
+            foreach (var key in source.AllKeys)
+                destination[key] = source[key];
+            return destination;
+        }
+
+        const int initialPageSize = 1000;
+        public static async Task<List<T>> GetAllWithPagination<T>(string ApiControllerUri, VismaNetAuthorization Authorization, NameValueCollection parameters = null) where T : DtoPaginatedProviderBase, IProvideIdentificator
+        {
+            var firstPage = await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(initialPageSize, 1, parameters));
+            var rsp = new List<T>();
+            rsp.AddRange(firstPage);
+            if (firstPage.FirstOrDefault()?.metadata?.totalCount > firstPage.Count && firstPage.Count > 0)
             {
-                var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
-                var entities = await webclient.Get<List<T>>(endpoint);
-                listOfEntities.AddRange(entities);
-                return listOfEntities;
+                var totalCount = firstPage[0].metadata.totalCount;
+                var pageSize = firstPage.Count;
+                var pageCount = totalCount / pageSize;
+                var semaphore = new SemaphoreSlim(VismaNet.MaxConcurrentRequests);
+                var taskList = new List<Task<List<T>>>();
+                foreach (var page in Enumerable.Range(2, pageCount))
+                {
+                    await semaphore.WaitAsync();
+                    taskList.Add(Task.Run(async () =>
+                    {
+                        try
+                        {
+                            return await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(pageSize, page, parameters));
+                        }
+                        finally
+                        {
+                            semaphore.Release();
+                        }
+                    }));
+                }
+                var tasks = await Task.WhenAll(taskList);
+                rsp.AddRange(tasks.SelectMany(x => x));
             }
+            rsp.ForEach(x => x.InternalPrepareForUpdate());
+            return rsp.OrderBy(x => x.GetIdentificator()).ToList();
+        }
+
+        internal static Task<List<T>> GetAllAsyncTask<T>(string apiControllerUri, VismaNetAuthorization authorization,
+            NameValueCollection parameters = null)
+        {
+            var webclient = GetHttpClient(authorization);
+            var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
+            return webclient.Get<List<T>>(endpoint);
         }
 
         internal static async Task<List<T>> GetAllModifiedSince<T>(string apiControllerUri, DateTime dateTime,

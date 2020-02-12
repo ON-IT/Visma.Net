@@ -10,7 +10,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class CustomerInvoice : DtoProviderBase, IProvideIdentificator
+    public class CustomerInvoice : DtoPaginatedProviderBase, IProvideIdentificator
     {
         private List<Attachment> _attachments;
 

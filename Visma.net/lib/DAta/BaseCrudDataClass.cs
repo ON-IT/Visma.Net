@@ -1,12 +1,13 @@
-﻿using System;
+﻿using ONIT.VismaNetApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
-using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
+
     public abstract class BaseCrudDataClass<T> : BaseDataClass where T : DtoProviderBase, IProvideIdentificator
     {
         internal BaseCrudDataClass(VismaNetAuthorization auth) : base(auth)
@@ -80,12 +81,13 @@ namespace ONIT.VismaNetApi.Lib.Data
                 .ForEach(pi => formFields.Add(pi.Name, pi.GetValue(parameters, null).ToString()));
             return await Find(formFields);
         }
-        
+
         /// <summary>
         ///     Executes the action on all elements streamed from the API.
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
+        [Obsolete("This no longer works as intended. Use All() or Find() instead.")]
         public virtual async Task ForEach(Action<T> action)
         {
             await VismaNetApiHelper.ForEach(ApiControllerUri, Authorization, (T obj) =>
@@ -100,6 +102,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// </summary>
         /// <param name="action">This action can be async.</param>
         /// <returns></returns>
+        [Obsolete("This no longer works as intended. Use All() or Find() instead.")]
         public virtual async Task ForEach(Func<T, Task> action)
         {
             await VismaNetApiHelper.ForEach(ApiControllerUri, Authorization, action);
@@ -113,15 +116,15 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             if (dateTime == DateTime.MinValue)
             {
-                var rsp = await VismaNetApiHelper.GetAll<T>(ApiControllerUri, Authorization);
-                rsp.ForEach(x => x.PrepareForUpdate());
-                return rsp;
+                return await All();
             }
             else
             {
-                var rsp = await VismaNetApiHelper.GetAllModifiedSince<T>(ApiControllerUri, dateTime, Authorization);
-                rsp.ForEach(x => x.PrepareForUpdate());
-                return rsp;
+                return await Find(new NameValueCollection
+                    {
+                        {"LastModifiedDateTime", dateTime.ToString(VismaNetApiHelper.VismaNetDateTimeFormat)},
+                        {"LastModifiedDateTimeCondition", ">"}
+                    });
             }
         }
     }
