@@ -12,8 +12,6 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
         }
 
-        const int initialPageSize = 1000;
-
         /// <summary>
         /// Gets all entities by splitting it into totalCount / pageSize tasks and fetching them in parallel.
         /// </summary>

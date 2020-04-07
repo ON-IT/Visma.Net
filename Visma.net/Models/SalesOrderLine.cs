@@ -12,7 +12,6 @@ namespace ONIT.VismaNetApi.Models
         {
             DtoFields.Add(nameof(lineNbr), new DtoValue(0));
             DtoFields.Add(nameof(quantity), new DtoValue(1));
-            //RequiredFields.Add("warehouse", new DtoValue(null));
             RequiredFields.Add("salesOrderOperation", new DtoValue("Issue"));
             DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
         }

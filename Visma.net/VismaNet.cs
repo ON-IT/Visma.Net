@@ -127,8 +127,8 @@ namespace ONIT.VismaNetApi
         {
             get
             {
-                var requestLimit = maxConcurrentRequests > 0 ? maxConcurrentRequests : Environment.ProcessorCount * 2;
-                return requestLimit > 32 ? 32 : requestLimit;
+                var requestLimit = maxConcurrentRequests > 0 ? maxConcurrentRequests : 8;
+                return requestLimit > 16 ? 16 : requestLimit;
             }
 
             set => maxConcurrentRequests = value > 0 ? value : maxConcurrentRequests;
