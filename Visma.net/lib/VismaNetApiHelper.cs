@@ -392,7 +392,7 @@ namespace ONIT.VismaNetApi.Lib
             return destination;
         }
 
-        const int initialPageSize = 1000;
+        const int initialPageSize = 100;
         public static async Task<List<T>> GetAllWithPagination<T>(string ApiControllerUri, VismaNetAuthorization Authorization, NameValueCollection parameters = null) where T : DtoPaginatedProviderBase, IProvideIdentificator
         {
             var firstPage = await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(initialPageSize, 1, parameters));
