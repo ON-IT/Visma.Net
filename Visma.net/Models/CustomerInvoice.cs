@@ -340,7 +340,6 @@ namespace ONIT.VismaNetApi.Models
         public List<Applications> applications
         {
             get; 
-
             private set; 
         }
 
