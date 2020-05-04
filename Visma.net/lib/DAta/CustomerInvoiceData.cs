@@ -1,13 +1,13 @@
-﻿using System;
+﻿using ONIT.VismaNetApi.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class CustomerInvoiceData : BaseCrudDataClass<CustomerInvoice>
+    public class CustomerInvoiceData : BasePaginatedCrudDataClass<CustomerInvoice>
     {
         /// <summary>
         ///     This constructor is called by the client to create the data source.
