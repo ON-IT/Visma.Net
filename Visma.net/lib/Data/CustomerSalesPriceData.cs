@@ -1,8 +1,13 @@
-﻿using ONIT.VismaNetApi.Models;
+﻿using ONIT.VismaNetApi.Lib;
+using ONIT.VismaNetApi.Lib.Data;
+using ONIT.VismaNetApi.Models;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class CustomerSalesPriceData : BasePaginatedCollectionDataClass<CustomerSalesPrice>
+    public class CustomerSalesPriceData : BasePaginatedCrudDataClass<CustomerSalesPrice>
     {
         public CustomerSalesPriceData(VismaNetAuthorization auth) : base(auth)
         {
