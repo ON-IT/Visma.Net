@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public abstract class BasePaginatedCrudDataClass<T> : BaseCrudDataClass<T> where T : DtoPaginatedProviderBase, IProvideIdentificator
+    public class BasePaginatedCollectionDataClass<T> : BaseCollectionDataClass<T> where T : DtoPaginatedProviderBase, IProvideIdentificator
     {
-        internal BasePaginatedCrudDataClass(VismaNetAuthorization auth) : base(auth)
+        internal BasePaginatedCollectionDataClass(VismaNetAuthorization auth) : base(auth)
         {
         }
 
