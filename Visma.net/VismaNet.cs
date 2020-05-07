@@ -18,6 +18,7 @@ namespace ONIT.VismaNetApi
         public readonly CashSaleData CashSale;
         public readonly CustomerDocumentData CustomerDocument;
         public readonly CustomerInvoiceData CustomerInvoice;
+        public readonly CustomerSalesPriceData CustomerSalesPrice;
         public readonly CustomerData Customer;
         public readonly DimensionData Dimension;
         public readonly SupplierInvoiceData SupplierInvoice;
@@ -97,7 +98,7 @@ namespace ONIT.VismaNetApi
             InventoryIssue = new InventoryIssueData(Auth);
             InventoryReceipt = new InventoryReceiptData(Auth);
             PurchaseReceipt = new PurchaseReceiptData(Auth);
-
+            CustomerSalesPrice = new CustomerSalesPriceData(Auth);
         }
 
         /// <summary>
