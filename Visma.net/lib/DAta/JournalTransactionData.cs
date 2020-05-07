@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class JournalTransactionData : BaseCrudDataClass<JournalTransaction>
+    public class JournalTransactionData : BasePaginatedCrudDataClass<JournalTransaction>
     {
         public JournalTransactionData(VismaNetAuthorization auth) : base(auth)
         {
