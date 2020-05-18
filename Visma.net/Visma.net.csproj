@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFrameworks>netstandard2.1;netstandard2.0;net461;net45</TargetFrameworks>
-        <TargetFrameworks>netstandard2.0;net461;net45</TargetFrameworks>
-		<Title>Visma.net</Title>
+    		<Title>Visma.net</Title>
         <Copyright>Copyright © ON IT AS 2014 - 2020</Copyright>
 		    <Title>Visma.net</Title>
-        <Version>3.7.0.0</Version>
+        <Version>3.7.1.0</Version>
         <Description>Get started with Visma.net Integrations.</Description>
         <Authors>ON IT AS</Authors>
         <Company>ON IT AS</Company>
@@ -13,7 +12,7 @@
         <PackageProjectUrl>https://github.com/ON-IT/Visma.Net</PackageProjectUrl>
         <RepositoryUrl>https://github.com/ON-IT/Visma.Net.git</RepositoryUrl>
         <PackageTags>Visma.net API, Visma.net Integrations, REST</PackageTags>
-        <PackageReleaseNotes>Pagination and heaps of other improvements</PackageReleaseNotes>
+        <PackageReleaseNotes>Fix pagination for JournalTransaction endpoint</PackageReleaseNotes>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
@@ -21,8 +20,8 @@
         <PackageIconUrl>https://sync-it.no/Images/on-it_logo.png</PackageIconUrl>
         <PackageLicenseExpression></PackageLicenseExpression>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-        <AssemblyVersion>3.7.0.0</AssemblyVersion>
-        <FileVersion>3.7.0.0</FileVersion>
+        <AssemblyVersion>3.7.1.0</AssemblyVersion>
+        <FileVersion>3.7.1.0</FileVersion>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
