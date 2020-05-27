@@ -64,7 +64,7 @@ namespace ONIT.VismaNetApi.Lib.Data
 
         public async Task<CreateShipmentActionResult> CreateShipment(string entityNumber, CreateShipment cs)
         {
-            return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, entityNumber, "createShipment", cs);
+            return await VismaNetApiHelper.CreateShipmentAction(Authorization, ApiControllerUri, entityNumber, "createShipment", cs);
         }
     }
 }

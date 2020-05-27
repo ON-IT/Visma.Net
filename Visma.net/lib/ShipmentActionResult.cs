@@ -9,6 +9,6 @@ namespace ONIT.VismaNetApi.Lib
         public string ReferenceNumber { get; internal set; }
 
         [JsonProperty("shipmentDto")]
-        public Models.Shipment ShipmentDto { get; set; }
+        public Models.Shipment shipment { get; internal set; }
     }
 }

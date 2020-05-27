@@ -527,7 +527,14 @@ namespace ONIT.VismaNetApi.Lib
             return await client.Post<VismaActionResult>(actionUrl, new object());
         }
 
-        internal static async Task<CreateShipmentActionResult> Action(VismaNetAuthorization authorization, string controller, string entityNumber, string actionName, object dto = null)
+        internal static async Task<VismaActionResult> Action(VismaNetAuthorization authorization, string controller, string entityNumber, string actionName, object dto = null)
+        {
+            var client = GetHttpClient(authorization);
+            var actionUrl = GetApiUrlForController($"{controller}/{entityNumber}/action/{actionName}");
+            return await client.Post<VismaActionResult>(actionUrl, dto ?? new object());
+        }
+
+        internal static async Task<CreateShipmentActionResult> CreateShipmentAction(VismaNetAuthorization authorization, string controller, string entityNumber, string actionName, object dto = null)
         {
             var client = GetHttpClient(authorization);
             var actionUrl = GetApiUrlForController($"{controller}/{entityNumber}/action/{actionName}");
