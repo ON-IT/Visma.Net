@@ -26,32 +26,11 @@ namespace ONIT.VismaNetApi.Lib.Data
         public async Task<CustomerInvoice> AddLarge(CustomerInvoice entity)
         {
             CustomerInvoice rsp = null;
-            //bool firstbatch = true;
-            //List<CustomerInvoiceLine> AllLines = new List<CustomerInvoiceLine>();
-            //AllLines.AddRange(entity.invoiceLines);
-            //foreach (var lines in AllLines.Batch(100))
-            //{
-            //    entity.invoiceLines.Clear();
-            //    entity.invoiceLines.AddRange(lines);
-            //    if (firstbatch)
-            //    {
-                    System.Diagnostics.Trace.TraceInformation($"Starting post AddLarge CustomerInvoice {DateTime.Now.ToString()}");
-                    rsp = await VismaNetApiHelper.Create(entity, VismaNetControllers.CustomerInvoiceV2, Authorization, ApiControllerUri);
-                    System.Diagnostics.Trace.TraceInformation($"Finished post AddLarge CustomerInvoice {DateTime.Now.ToString()}");
-                    rsp.InternalPrepareForUpdate();
-                //    firstbatch = false;
-                //}
-                //else
-                //{
-                //    rsp.invoiceLines.Clear();
-                //    var update = new CustomerInvoice();
-                //    update.referenceNumber = rsp.referenceNumber;
-                //    update.invoiceLines.AddRange(lines);
-                //    System.Diagnostics.Trace.TraceInformation($"Starting put AddLarge CustomerInvoice {DateTime.Now.ToString()}");
-                //    await VismaNetApiHelper.Update(update,update.GetIdentificator(), VismaNetControllers.CustomerInvoiceV2, Authorization);
-                //    System.Diagnostics.Trace.TraceInformation($"Finished put AddLarge CustomerInvoice {DateTime.Now.ToString()}");
-                //}
-            //}
+            System.Diagnostics.Trace.TraceInformation($"Starting post AddLarge CustomerInvoice {DateTime.Now.ToString()}");
+            rsp = await VismaNetApiHelper.Create(entity, VismaNetControllers.CustomerInvoiceV2, Authorization, ApiControllerUri);
+            System.Diagnostics.Trace.TraceInformation($"Finished post AddLarge CustomerInvoice {DateTime.Now.ToString()}");
+            rsp.InternalPrepareForUpdate();
+               
             Console.WriteLine("All complete");
             //rsp = await Get(rsp.GetIdentificator());
             return rsp;
