@@ -6,7 +6,7 @@
         <Copyright>Copyright © ON IT AS 2014 - 2020</Copyright>
 		    <Title>Visma.net</Title>
         <Copyright>Copyright © ON IT AS 2014 - 2019</Copyright>
-        <Version>3.7.0.5</Version>
+        <Version>3.7.0.8</Version>
         <Description>Get started with Visma.net Integrations.</Description>
         <Authors>ON IT AS</Authors>
         <Company>ON IT AS</Company>
@@ -22,8 +22,8 @@
         <PackageIconUrl>https://sync-it.no/Images/on-it_logo.png</PackageIconUrl>
         <PackageLicenseExpression></PackageLicenseExpression>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-        <AssemblyVersion>3.7.0.5</AssemblyVersion>
-        <FileVersion>3.7.0.5</FileVersion>
+        <AssemblyVersion>3.7.0.8</AssemblyVersion>
+        <FileVersion>3.7.0.8</FileVersion>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
