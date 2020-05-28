@@ -31,7 +31,6 @@ namespace ONIT.VismaNetApi.Lib.Data
             System.Diagnostics.Trace.TraceInformation($"Finished post AddLarge CustomerInvoice {DateTime.Now.ToString()}");
             rsp.InternalPrepareForUpdate();
                
-            Console.WriteLine("All complete");
             //rsp = await Get(rsp.GetIdentificator());
             return rsp;
         }
