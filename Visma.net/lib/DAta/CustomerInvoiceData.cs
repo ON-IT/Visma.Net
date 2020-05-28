@@ -1,5 +1,4 @@
-﻿using ONIT.VismaNetApi.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -9,7 +8,7 @@ using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class CustomerInvoiceData : BasePaginatedCrudDataClass<CustomerInvoice>
+    public class CustomerInvoiceData : BaseCrudDataClass<CustomerInvoice>
     {
         /// <summary>
         ///     This constructor is called by the client to create the data source.
@@ -23,36 +22,18 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             ApiControllerUri = VismaNetControllers.CustomerInvoice;
         }
-        /// <summary>
-        ///     AddLarge Invoice entity runs invoicerows in first POST 500 lines then PUT:s in batches of 500 lines
-        /// </summary>
+
         public async Task<CustomerInvoice> AddLarge(CustomerInvoice entity)
         {
             CustomerInvoice rsp = null;
-            bool firstbatch = true;
-            List<CustomerInvoiceLine> AllLines = new List<CustomerInvoiceLine>();
-            AllLines.AddRange(entity.invoiceLines);
-            foreach (var lines in AllLines.Batch(500))
-            {
-                entity.invoiceLines.Clear();
-                entity.invoiceLines.AddRange(lines);
-                if (firstbatch)
-                {
-                    rsp = await VismaNetApiHelper.Create(entity, ApiControllerUri, Authorization);
-                    rsp.InternalPrepareForUpdate();
-                    firstbatch = false;
-                }
-                else
-                {
-                    rsp.invoiceLines.Clear();
-                    rsp.invoiceLines.AddRange(lines);
-                    await VismaNetApiHelper.Update(entity,rsp.GetIdentificator(), ApiControllerUri, Authorization);
-                }
-            }
-            rsp = await Get(rsp.GetIdentificator());
+            System.Diagnostics.Trace.TraceInformation($"Starting post AddLarge CustomerInvoice {DateTime.Now.ToString()}");
+            rsp = await VismaNetApiHelper.Create(entity, VismaNetControllers.CustomerInvoiceV2, Authorization, ApiControllerUri);
+            System.Diagnostics.Trace.TraceInformation($"Finished post AddLarge CustomerInvoice {DateTime.Now.ToString()}");
+            rsp.InternalPrepareForUpdate();
+               
+            //rsp = await Get(rsp.GetIdentificator());
             return rsp;
         }
-
 
         public async Task<string> AddAttachmentToInvoice(string invoiceNumber, string content, string fileName)
         {
