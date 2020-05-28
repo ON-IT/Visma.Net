@@ -40,7 +40,9 @@ namespace ONIT.VismaNetApi.Lib
                 }
                 Debug.WriteLine($"[{i}/{MaxRetries}] {response.StatusCode} {response.ReasonPhrase}");
                 // Will give an taskCanceledException if not disposed.
-                response.Dispose();
+                if (i < MaxRetries - 1) {
+                  response.Dispose();
+                }
             }
 
             return response;
