@@ -6,5 +6,7 @@ namespace ONIT.VismaNetApi.Lib
     {
         [JsonProperty("metadata")]
         public MetaData metadata { get; internal set; }
+
+        internal virtual int GetSubCount() => 1;
     }
 }

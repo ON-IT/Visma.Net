@@ -337,6 +337,13 @@ namespace ONIT.VismaNetApi.Models
         }
 
         [JsonProperty]
+        public List<Applications> applications
+        {
+            get; 
+            private set; 
+        }
+
+        [JsonProperty]
         public decimal vatExemptTotal
         {
             get; 

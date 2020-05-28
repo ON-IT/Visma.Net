@@ -377,9 +377,9 @@ namespace ONIT.VismaNetApi.Lib
                 };
 
             // Make sure that pageSize and pageNumber cannot be overriden by the parameters
-            if (parameters != null) 
+            if (parameters != null)
                 return parameters.Join(pagination);
-            
+
             return pagination;
         }
 
@@ -398,10 +398,11 @@ namespace ONIT.VismaNetApi.Lib
             var firstPage = await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(initialPageSize, 1, parameters));
             var rsp = new List<T>();
             rsp.AddRange(firstPage);
-            if (firstPage.FirstOrDefault()?.metadata?.totalCount > firstPage.Count && firstPage.Count > 0)
+            var count = firstPage.Sum(x => x.GetSubCount());
+            if (firstPage.FirstOrDefault()?.metadata?.totalCount > count && count > 0)
             {
                 var totalCount = firstPage[0].metadata.totalCount;
-                var pageSize = firstPage.Count;
+                var pageSize = count;
                 var pageCount = totalCount / pageSize;
                 var semaphore = new SemaphoreSlim(VismaNet.MaxConcurrentRequests);
                 var taskList = new List<Task<List<T>>>();
