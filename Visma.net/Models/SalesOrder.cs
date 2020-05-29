@@ -103,6 +103,13 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty] public string errorInfo { get; private set; }
 
+        [JsonProperty]
+        public double exchangeRate
+        {
+            get;
+            private set;
+        }
+
         [JsonProperty] public JObject extras { get; private set; }
 
         public DescriptiveDto fobPoint
@@ -175,6 +182,13 @@ namespace ONIT.VismaNetApi.Models
         {
             get;// => Get<double>();
             private set;// => Set(value);
+        }
+
+        [JsonProperty]
+        public double orderTotalInBaseCurrency
+        {
+            get;
+            private set;
         }
 
         public string orderType
@@ -334,12 +348,19 @@ namespace ONIT.VismaNetApi.Models
             get;// => Get<string>();
             private set;//( => Set(value);
         }
-        [JsonProperty]
 
+        [JsonProperty]
         public double taxTotal
         {
             get;// => Get<double>();
             private set; //=> Set(value);
+        }
+
+        [JsonProperty]
+        public double taxTotalInBaseCurrency
+        {
+            get;
+            private set;
         }
 
         public DescriptiveDto terms
@@ -354,7 +375,6 @@ namespace ONIT.VismaNetApi.Models
             private set => Set(value);
         }
 
-        
         [JsonProperty]
         public double vatExemptTotal
         {
@@ -363,10 +383,24 @@ namespace ONIT.VismaNetApi.Models
         }
 
         [JsonProperty]
+        public double vatExemptTotalInBaseCurrency
+        {
+            get;
+            private set;
+        }
+
+        [JsonProperty]
         public double vatTaxableTotal
         {
             get;// => Get<double>();
             private set;// => Set(value);
+        }
+
+        [JsonProperty]
+        public double vatTaxableTotalInBaseCurrency
+        {
+            get;
+            private set;
         }
 
         public string GetIdentificator()
