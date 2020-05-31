@@ -66,5 +66,10 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             return await VismaNetApiHelper.CreateShipmentAction(Authorization, ApiControllerUri, entityNumber, "createShipment", cs);
         }
+
+        public async Task<VismaActionResult> CancelSalesOrder(string entityNumber, SalesOrder so)
+        {
+            return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, entityNumber, "cancelSalesOrder", so);
+        }
     }
 }
