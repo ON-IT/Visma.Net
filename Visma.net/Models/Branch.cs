@@ -1,13 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
+using System;
 
 namespace ONIT.VismaNetApi.Models
 {
     public class Branch : DtoProviderBase, IProvideIdentificator
     {
-        public string number { get { return Get<string>();} set { Set(value); } }
+        public string number { get { return Get<string>(); } set { Set(value); } }
         public string name { get { return Get<string>(); } set { Set(value); } }
+
+        [JsonProperty]
+        public bool isMainBranch { get; internal set; }
         public Address mainAddress { get { return Get<Address>(); } set { Set(value); } }
         public ContactInfo mainContact { get { return Get<ContactInfo>(); } set { Set(value); } }
         public Address deliveryAddress { get { return Get<Address>(); } set { Set(value); } }
