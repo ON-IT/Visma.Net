@@ -22,7 +22,16 @@
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <AssemblyVersion>3.7.1.0</AssemblyVersion>
         <FileVersion>3.7.1.0</FileVersion>
-    </PropertyGroup>
+    
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
       <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
