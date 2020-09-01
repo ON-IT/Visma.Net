@@ -28,6 +28,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             get => _segments ?? (_segments = new List<Segment>());
             private set => _segments = value;
         }
+
         [JsonProperty]
         public string errorInfo { get; private set; }
 

@@ -131,7 +131,7 @@ namespace ONIT.VismaNetApi
                 return requestLimit > 32 ? 32 : requestLimit;
             }
 
-            set => maxConcurrentRequests = value > 0 ? value : maxConcurrentRequests;
+            set => maxConcurrentRequests = 1; //value > 0 ? value : maxConcurrentRequests;
         }
 
         static VismaNet()

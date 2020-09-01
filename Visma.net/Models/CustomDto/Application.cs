@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
 {
-   public class Applications
+   public class Application
     {     
         public string docType { get; set; }
       
@@ -31,9 +31,9 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         public string paymentRef { get; set; }
 
         public string status { get; set; }
-
+  
         public DateTime applicationDate { get; set; }
- 
+
         public string applicationPeriod { get; set; }
 
         public string invoiceText { get; set; }

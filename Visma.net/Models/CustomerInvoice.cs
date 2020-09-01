@@ -331,19 +331,19 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty]
         public List<TaxDetail> TaxDetails
         {
-            get; //=> Get("taxDetailLines", new List<TaxDetail>());
-        
+            get; //=> Get("taxDetailLines", new List<TaxDetail>());        
             private set; //=> Set(value, "taxDetailsLines");
         }
 
-        [JsonProperty]
-        public List<Applications> applications
-        {
-            get; 
-            private set; 
-        }
+      [JsonProperty]
+      public List<Application> applications
+      {
+        get; 
+        private set;
+      }
 
-        [JsonProperty]
+
+      [JsonProperty]
         public decimal vatExemptTotal
         {
             get; 
@@ -392,10 +392,10 @@ namespace ONIT.VismaNetApi.Models
         }
 
         public bool sendToAutoInvoice
-		{
-			get => Get<bool>();
-			set => Set(value);
-		}
+		    {
+			    get => Get<bool>();
+			    set => Set(value);
+		    }
 
 		public string GetIdentificator()
         {
