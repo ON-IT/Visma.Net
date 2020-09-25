@@ -169,6 +169,12 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        public bool overrideNumberSeries
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
         public bool overrideWithClassValues
         {
             get => Get(defaultValue: new NotDto<bool>(false)).Value;
