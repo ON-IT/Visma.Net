@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,10 +40,13 @@ namespace ONIT.VismaNetApi.Lib
         /// <returns></returns>
 	    public async Task<List<CustomerDocument>> AllModifiedSince(DateTime date)
         {
-            return
-                await
-                    VismaNetApiHelper.GetAllModifiedSince<CustomerDocument>(VismaNetControllers.CustomerDocument, date,
-                        _authorization).ConfigureAwait(false);
+            var parameters = new NameValueCollection
+                    {
+                        {"LastModifiedDateTime", date.ToString(VismaNetApiHelper.VismaNetDateTimeFormat)},
+                        {"LastModifiedDateTimeCondition", ">"}
+                    };
+
+            return await VismaNetApiHelper.GetAllWithPagination<CustomerDocument>(VismaNetControllers.CustomerDocument, _authorization, parameters);
         }
         
         /// <summary>

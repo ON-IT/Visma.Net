@@ -3,7 +3,6 @@
         <TargetFrameworks>netstandard2.0;net461;net45</TargetFrameworks>
     		<Title>Visma.net</Title>
         <Copyright>Copyright © ON IT AS 2014 - 2020</Copyright>
-		    <Title>Visma.net</Title>
         <Version>3.7.1.0</Version>
         <Description>Get started with Visma.net Integrations.</Description>
         <Authors>ON IT AS</Authors>

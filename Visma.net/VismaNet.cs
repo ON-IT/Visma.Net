@@ -134,6 +134,15 @@ namespace ONIT.VismaNetApi
 
             set => maxConcurrentRequests = value > 0 ? value : maxConcurrentRequests;
         }
+        private static int maxRetries;
+        /// <summary>
+        /// Gets or sets the maximum number of retries sent to the API. Min: 1, Max: 5, Default: 5.
+        /// </summary>
+        public static int MaxRetries
+        {
+            get { return maxRetries > 0 ? maxRetries : 5; }
+            set => maxRetries = (value > 0 && value < 6) ? value : 5;
+        }
 
         static VismaNet()
         {

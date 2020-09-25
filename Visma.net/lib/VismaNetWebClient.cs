@@ -20,7 +20,7 @@ namespace ONIT.VismaNetApi.Lib
         // Strongly consider limiting the number of retries - "retry forever" is
         // probably not the most user friendly way you could respond to "the
         // network cable got pulled out."
-        private const int MaxRetries = 5;
+        private int MaxRetries = VismaNet.MaxRetries;
 
         public RetryHandler(HttpMessageHandler innerHandler)
             : base(innerHandler)
@@ -39,6 +39,10 @@ namespace ONIT.VismaNetApi.Lib
                     return response;
                 }
                 Debug.WriteLine($"[{i}/{MaxRetries}] {response.StatusCode} {response.ReasonPhrase}");
+                // Will give an taskCanceledException if not disposed.
+                if (i < MaxRetries - 1) {
+                  response.Dispose();
+                }
             }
 
             return response;
