@@ -8,56 +8,8 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class CashSale : DtoProviderBase, IProvideIdentificator
+    public class CashSale : DtoPaginatedProviderBase, IProvideIdentificator
     {
-        // WRITEABLE
-        //public class CashSaleUpdateDto
-        //{
-        //    public DtoValue<string> CashAccount { get; set; }
-        //    public DtoValue<string> PaymentReference { get; set; }
-        //    public CashSaleLinesUpdateDto[] CashSalesLines { get; set; }
-        //    public DtoValue<string> ReferenceNumber { get; set; }
-        //    public DtoValue<string> CustomerNum-ber { get; set; }
-        //    public DtoValue<DateTime> DocumentDate { get; set; }
-        //    public DtoValue<bool> Hold { get; set; }
-        //    public DtoValue<string> PostPeriod { get; set; }
-        //    public DtoValue<string> InvoiceText { get; set; }
-        //    public DtoValue<string> LocationId { get; set; }
-        //    public DtoValue<string> CurrencyId { get; set; }
-        //    public DtoValue<string> CreditTermsId { get; set; } // "CreditTerms"
-        //    public DtoValue<DateTime> CashDiscountDate { get; set; }
-        //    public DtoValue<string> PaymentMethodId { get; set; } // "PaymentMethod" (PaymentMethodDto)
-        //    public DtoValue<Nullable<int>> SalesPersonID { get; set; }
-        //    public DtoValue<string> Note { get; set; }
-        //}
-
-        /* READABLE */
-        //public class CashSaleDto
-        //{
-        //    public LocationDto Location { get; set; }
-        //    public decimal DetailTotal { get; set; }
-        //    public decimal DetailTotalInCurrency { get; set; }
-        //    public decimal VatTaxableTotal { get; set; }
-        //    public decimal VatTaxableTotalInCurrency { get; set; }
-        //    public decimal VatExemptTotal { get; set; }
-        //    public decimal VatExemptTotalInCurrency { get; set; }
-        //    public decimal VatTotal { get; set; }
-        //    public decimal VatTotalInCurrency { get; set; }
-        //    public string SalesPersonDescr { get; set; }
-        //    public CustomerNumberDto Customer { get; set; }
-        //    public Nullable<CustomerDocumentTypes> DocumentType { get; set; }
-        //    public Nullable<CustomerDocumentStatuses> Status { get; set; }
-        //    public decimal Amount { get; set; }
-        //    public decimal AmountInCurrency { get; set; }
-        //    public decimal Balance { get; set; }
-        //    public decimal BalanceInCurrency { get; set; }
-        //    public decimal CashDiscount { get; set; }
-        //    public decimal CashDiscountInCurrency { get; set; }
-        //    public string CustomerRefNumber { get; set; }
-        //    public Nullable<DateTime> LastModifiedDateTime { get; set; }
-        //    public Nullable<DateTime> CreatedDateTime { get; set; }
-        //}
-
         public CashSale()
         {
             DtoFields.Add("creditTermsId", new CreditTerms("30"));

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class CustomerSalesPrice : DtoProviderBase
+    public class CustomerSalesPrice : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public int recordId { get; set; }
         public PriceType priceType
@@ -26,5 +26,10 @@ namespace ONIT.VismaNetApi.Models
         public DateTime effectiveDate { get; set; }
         public DateTime expirationDate { get; set; }
         public DateTime lastModifiedDateTime { get; set; }
+
+        public string GetIdentificator()
+        {
+            return recordId.ToString();
+        }
     }
 }

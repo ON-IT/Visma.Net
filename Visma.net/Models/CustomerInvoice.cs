@@ -10,7 +10,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class CustomerInvoice : DtoProviderBase, IProvideIdentificator
+    public class CustomerInvoice : DtoPaginatedProviderBase, IProvideIdentificator
     {
         private List<Attachment> _attachments;
 
@@ -334,6 +334,13 @@ namespace ONIT.VismaNetApi.Models
             get; //=> Get("taxDetailLines", new List<TaxDetail>());
         
             private set; //=> Set(value, "taxDetailsLines");
+        }
+
+        [JsonProperty]
+        public List<Applications> applications
+        {
+            get; 
+            private set; 
         }
 
         [JsonProperty]

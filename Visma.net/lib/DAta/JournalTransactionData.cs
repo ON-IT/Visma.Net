@@ -1,17 +1,34 @@
 ﻿using ONIT.VismaNetApi.Models;
 using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class JournalTransactionData : BaseCrudDataClass<JournalTransaction>
+    public class JournalTransactionData : BasePaginatedCrudDataClass<JournalTransaction>
     {
         public JournalTransactionData(VismaNetAuthorization auth) : base(auth)
         {
             ApiControllerUri = VismaNetControllers.JournalTransaction;
         }
+
+        /// <summary>
+        /// Gets all entities by splitting it into totalCount / pageSize tasks and fetching them in parallel.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>The order of the entities will be by the entity identificator. If the order matters to you, use OrderBy.</remarks>
+        public override async Task<List<JournalTransaction>> All() => PostProcessJournalTransactions(await VismaNetApiHelper.GetAllWithPagination<JournalTransaction>(ApiControllerUri, Authorization));
+
+        /// <summary>
+        ///     Retrieves all entities from Visma.Net.
+        /// </summary>
+        /// <returns>List of all entities</returns>
+        public override async Task<List<JournalTransaction>> Find(NameValueCollection parameters) => PostProcessJournalTransactions(await VismaNetApiHelper.GetAllWithPagination<JournalTransaction>(ApiControllerUri, Authorization, parameters));
+
 
         public async Task<string> AddAttachmentToJournalTransaction(string batchNumber, string content, string fileName)
         {
@@ -35,6 +52,22 @@ namespace ONIT.VismaNetApi.Lib.Data
         public async Task<VismaActionResult> Release(string transactionNumber)
         {
             return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, transactionNumber, "release");
+        }
+        private static List<JournalTransaction> PostProcessJournalTransactions(List<JournalTransaction> source)
+        {
+            var dict = new Dictionary<string, JournalTransaction>();
+            foreach (var invoice in source)
+            {
+                if (dict.ContainsKey(invoice.batchNumber))
+                {
+                    dict[invoice.batchNumber].journalTransactionLines.AddRange(invoice.journalTransactionLines);
+                }
+                else
+                {
+                    dict[invoice.batchNumber] = invoice;
+                }
+            }
+            return dict.Values.ToList();
         }
     }
 }

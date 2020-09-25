@@ -6,7 +6,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Shipment : DtoProviderBase, IProvideIdentificator
+    public class Shipment : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public string shipmentNumber
         {
@@ -41,6 +41,18 @@ namespace ONIT.VismaNetApi.Models
         public DateTime shipmentDate
         {
             get { return Get<DateTime>(); }
+            set { Set(value); }
+        }
+
+        public DateTime lastModifiedDateTime
+        {
+            get { return Get<DateTime>(); }
+            set { Set(value); }
+        }
+
+        public string note
+        {
+            get { return Get<string>(); }
             set { Set(value); }
         }
 

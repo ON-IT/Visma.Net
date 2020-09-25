@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class SalesOrderData : BaseCrudDataClass<SalesOrder>
+    public class SalesOrderData : BasePaginatedCrudDataClass<SalesOrder>
     {
         public SalesOrderData(VismaNetAuthorization auth) : base(auth)
         {
@@ -60,6 +60,11 @@ namespace ONIT.VismaNetApi.Lib.Data
         public async Task AddAttachment(SalesOrder salesOrder, int lineNumber, byte[] data, string filename)
         {
             await VismaNetApiHelper.AddAttachment(Authorization, ApiControllerUri, $"orderType/{salesOrder.orderType}/{salesOrder.orderNo}/{lineNumber}", data, filename);
+        }
+
+        public async Task<VismaActionResult> CreateShipment(string entityNumber, CreateShipment cs)
+        {
+            return await VismaNetApiHelper.Action(Authorization, ApiControllerUri, entityNumber, "createShipment", cs);
         }
     }
 }

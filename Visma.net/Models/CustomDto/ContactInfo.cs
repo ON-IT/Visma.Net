@@ -43,12 +43,45 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             get => Get<string>();
             set => Set(value?.Trim());
         }
+        public string phone3
+        {
+            get => Get<string>();
+            set => Set(value?.Trim());
+        }
 
         public string web
         {
             get => Get<string>();
             set => Set(value?.Trim());
         }
+        public string title
+        {
+            get => Get<string>();
+            set => Set(value?.Trim());
+        }
+
+        public string firstName
+        {
+            get => Get<string>();
+            set => Set(value?.Trim());
+        }
+
+        public string midName
+        {
+            get => Get<string>();
+            set => Set(value?.Trim());
+        }
+        public string lastName
+        {
+            get => Get<string>();
+            set => Set(value?.Trim());
+        }
+        public string employeeContact
+        {
+            get => Get<string>();
+            set => Set(value?.Trim());
+        }
+
 
         public override string ToString()
         {
@@ -64,8 +97,20 @@ namespace ONIT.VismaNetApi.Models.CustomDto
                 builder.AppendLine(phone1);
             if (!string.IsNullOrWhiteSpace(phone2))
                 builder.AppendLine(phone2);
+            if (!string.IsNullOrWhiteSpace(phone3))
+                builder.AppendLine(phone3);
             if (!string.IsNullOrWhiteSpace(fax))
                 builder.AppendLine(fax);
+            if (!string.IsNullOrWhiteSpace(employeeContact))
+                builder.AppendLine(employeeContact);
+            if (!string.IsNullOrWhiteSpace(lastName))
+                builder.AppendLine(lastName);
+            if (!string.IsNullOrWhiteSpace(midName))
+                builder.AppendLine(midName);
+            if (!string.IsNullOrWhiteSpace(firstName))
+                builder.AppendLine(firstName);
+            if (!string.IsNullOrWhiteSpace(title))
+                builder.AppendLine(title);
 
             return builder.ToString().Trim();
         }

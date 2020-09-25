@@ -7,7 +7,7 @@ using ONIT.VismaNetApi.Models.CustomDto;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Subaccount : DtoProviderBase, IProvideIdentificator
+    public class Subaccount : DtoPaginatedProviderBase, IProvideIdentificator
     {
         private List<Segment> _segments;
 

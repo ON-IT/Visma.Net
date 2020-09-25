@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Annotations;
 using ONIT.VismaNetApi.Interfaces;
+using ONIT.VismaNetApi.Lib;
 
 namespace ONIT.VismaNetApi.Models
 {
@@ -159,7 +160,7 @@ namespace ONIT.VismaNetApi.Models
         public NumberDescription defaultTaxCategory { get; private set; }
 
         [JsonProperty]
-        public Metadata metadata { get; private set; }
+        public MetaData metadata { get; private set; }
 
         [JsonProperty]
         public JObject extras { get; private set; }

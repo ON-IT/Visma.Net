@@ -3,57 +3,11 @@ using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class GeneralLedgerTransaction : DtoProviderBase, IProvideIdentificator
+    public class GeneralLedgerTransaction : DtoPaginatedProviderBase, IProvideIdentificator
     {
-        /*
-        "lineNumber": 0,
-    "module": "string",
-    "batchNumber": "string",
-    "tranDate": "2019-06-07T09:02:51.256Z",
-    "period": "string",
-    "description": "string",
-    "refNumber": "string",
-    "branch": {
-      "number": "string",
-      "name": "string"
-    },
-    "account": {
-      "type": "Asset",
-      "externalCode1": "string",
-      "externalCode2": "string",
-      "externalCode1Info": {
-        "number": "string",
-        "description": "string"
-      },
-      "externalCode2Info": {
-        "number": "string",
-        "description": "string"
-      },
-      "glConsolAccountCD": "string",
-      "number": "string",
-      "description": "string"
-    },
-    "ledger": {
-      "id": "string",
-      "description": "string"
-    },
-    "subaccount": "string",
-    "begBalance": 0,
-    "debitAmount": 0,
-    "creditAmount": 0,
-    "endingBalance": 0,
-    "currency": "string",
-    "currBegBalance": 0,
-    "currDebitAmount": 0,
-    "currCreditAmount": 0,
-    "currEndingBalance": 0,
-    "lastModifiedDateTime": "2019-06-07T09:02:51.256Z",
-        */
         public int lineNumber
         {
             get => Get<int>();

@@ -13,7 +13,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class Supplier : DtoProviderBase, IProvideIdentificator, IComparable<Supplier>, IComparable
+    public class Supplier : DtoPaginatedProviderBase, IProvideIdentificator, IComparable<Supplier>, IComparable
     {
         public Supplier()
         {
@@ -137,7 +137,7 @@ namespace ONIT.VismaNetApi.Models
 
         public bool overrideWithClassValues
         {
-            get => Get<NotDto<bool>>().Value;
+            get => Get<NotDto<bool>>(defaultValue: new NotDto<bool>(false)).Value;
             set => Set(new NotDto<bool>(value));
         }
 

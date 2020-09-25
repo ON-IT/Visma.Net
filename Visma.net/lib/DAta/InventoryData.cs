@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class InventoryData : BaseCrudDataClass<Inventory>
+    public class InventoryData : BasePaginatedCrudDataClass<Inventory>
     {
         public InventoryData(VismaNetAuthorization auth) : base(auth)
         {

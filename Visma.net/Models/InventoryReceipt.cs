@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
-using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class InventoryReceipt : DtoProviderBase, IProvideIdentificator
+    public class InventoryReceipt : DtoPaginatedProviderBase, IProvideIdentificator
     {
-       internal override void PrepareForUpdate()
+        internal override void PrepareForUpdate()
         {
             foreach (var issueLine in receiptLines)
             {
@@ -84,7 +83,6 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty] public string batchNumber { get; private set; }
         [JsonProperty] public string errorInfo { get; private set; }
 
-        [JsonProperty] public Metadata metadata { get; private set; }
         [JsonProperty] public List<Attachment> attachments { get; private set; }
 
         public string GetIdentificator()

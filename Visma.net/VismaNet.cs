@@ -1,14 +1,14 @@
-﻿using System;
+﻿using ONIT.VismaNetApi.Dynamic;
+using ONIT.VismaNetApi.Exceptions;
+using ONIT.VismaNetApi.Lib;
+using ONIT.VismaNetApi.Lib.Data;
+using ONIT.VismaNetApi.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using ONIT.VismaNetApi.Dynamic;
-using ONIT.VismaNetApi.Exceptions;
-using ONIT.VismaNetApi.Lib;
-using ONIT.VismaNetApi.Lib.Data;
-using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi
 {
@@ -18,6 +18,7 @@ namespace ONIT.VismaNetApi
         public readonly CashSaleData CashSale;
         public readonly CustomerDocumentData CustomerDocument;
         public readonly CustomerInvoiceData CustomerInvoice;
+        public readonly CustomerSalesPriceData CustomerSalesPrice;
         public readonly CustomerData Customer;
         public readonly DimensionData Dimension;
         public readonly SupplierInvoiceData SupplierInvoice;
@@ -25,7 +26,7 @@ namespace ONIT.VismaNetApi
         public readonly InventoryData Inventory;
         public readonly FinAccountData Account;
         public readonly EmployeeData Employee;
-        public readonly CreditNoteData CreditNote;
+
         public readonly ShipmentData Shipment;
         public readonly ContactData Contact;
         public readonly ProjectData Project;
@@ -33,7 +34,7 @@ namespace ONIT.VismaNetApi
         public readonly JournalTransactionData JournalTransaction;
         public readonly GeneralLedgerTransactionData GeneralLedgerTransaction;
         public readonly GeneralLedgerBalanceData GeneralLedgerBalance;
-        public readonly PaymentData Payment;
+        
         public readonly BranchData Branch;
         public readonly WarehouseData Warehouse;
         public readonly LocationData Location;
@@ -43,6 +44,12 @@ namespace ONIT.VismaNetApi
         public readonly InventoryIssueData InventoryIssue;
         public readonly InventoryReceiptData InventoryReceipt;
         public readonly PurchaseReceiptData PurchaseReceipt;
+
+        // Obsolete
+        [Obsolete]
+        public readonly CreditNoteData CreditNote;
+        [Obsolete]
+        public readonly PaymentData Payment;
 
         /// <summary>
         ///     Creates a connection using token.
@@ -91,7 +98,7 @@ namespace ONIT.VismaNetApi
             InventoryIssue = new InventoryIssueData(Auth);
             InventoryReceipt = new InventoryReceiptData(Auth);
             PurchaseReceipt = new PurchaseReceiptData(Auth);
-
+            CustomerSalesPrice = new CustomerSalesPriceData(Auth);
         }
 
         /// <summary>
@@ -106,11 +113,28 @@ namespace ONIT.VismaNetApi
         /// <see cref="https://integration.visma.net/API-index/"/>
         public readonly dynamic Resources;
 
+
         public static string Version { get; private set; }
         /// <summary>
         /// Provide a name for your application. This will make it easier for Visma to identify your integration in their logs.
         /// </summary>
         public static string ApplicationName { get; set; }
+        
+        private static int maxConcurrentRequests;
+        /// <summary>
+        /// Gets or sets the maximum number of concurrent requests sent to the API. Min: 1, Max: 32, Default: Environment.ProcessorCount * 2 (unless > 32.).
+        /// </summary>
+        public static int MaxConcurrentRequests
+        {
+            get
+            {
+                var requestLimit = maxConcurrentRequests > 0 ? maxConcurrentRequests : 8;
+                return requestLimit > 16 ? 16 : requestLimit;
+            }
+
+            set => maxConcurrentRequests = value > 0 ? value : maxConcurrentRequests;
+        }
+
         static VismaNet()
         {
             Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -120,7 +144,7 @@ namespace ONIT.VismaNetApi
         {
             return await VismaNetApiHelper.TestConnection(Auth);
         }
-        
+
         /// <summary>
         /// Get a new token from Visma.net
         /// </summary>
@@ -136,9 +160,9 @@ namespace ONIT.VismaNetApi
 
         public static string GetOAuthUrl(string client_id, string callback, string state = null)
         {
-            if(string.IsNullOrEmpty(client_id))
+            if (string.IsNullOrEmpty(client_id))
                 throw new ArgumentException(nameof(client_id));
-            if(string.IsNullOrEmpty(callback))
+            if (string.IsNullOrEmpty(callback))
                 throw new ArgumentException(nameof(callback));
             return
                 $"{VismaNetApiHelper.BaseApiUrl}{VismaNetControllers.OAuthAuthorize}?response_type=code&client_id={client_id}&scope=financialstasks&redirect_uri={Uri.EscapeDataString(callback)}&state={(state ?? Guid.NewGuid().ToString())}";
@@ -153,9 +177,9 @@ namespace ONIT.VismaNetApi
             return await VismaNetApiHelper.GetContextsForToken(token);
         }
 
-		public async Task<Stream> GetAttachment(string attachmentId)
-		{
-			return await VismaNetApiHelper.GetAttachment(Auth, attachmentId);
-		}
+        public async Task<Stream> GetAttachment(string attachmentId)
+        {
+            return await VismaNetApiHelper.GetAttachment(Auth, attachmentId);
+        }
     }
 }

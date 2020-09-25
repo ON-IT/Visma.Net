@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
+    [Obsolete("Payment is deprecated, please use CustomerPayment instead.")]
     public class PaymentData : BaseCrudDataClass<Payment>
     {
         internal PaymentData(VismaNetAuthorization auth) : base(auth)

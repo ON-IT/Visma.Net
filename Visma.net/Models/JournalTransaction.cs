@@ -8,7 +8,7 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class JournalTransaction : DtoProviderBase, IProvideIdentificator
+    public class JournalTransaction : DtoPaginatedProviderBase, IProvideIdentificator
     {
         [JsonProperty]
         public List<Attachment> attachments { get; private set; }
@@ -214,13 +214,18 @@ namespace ONIT.VismaNetApi.Models
             journalTransactionLines.Add(line);
         }
 
+        internal override int GetSubCount()
+        {
+            return journalTransactionLines.Count;
+        }
+
         internal override void PrepareForUpdate()
         {
             foreach (var transactionLine in journalTransactionLines)
             {
                 transactionLine.operation = ApiOperation.Update;
             }
-        }
+        } 
     }
 
     public enum JournalTransactionModule
