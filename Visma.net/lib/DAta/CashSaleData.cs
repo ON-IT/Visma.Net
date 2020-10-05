@@ -10,12 +10,4 @@ namespace ONIT.VismaNetApi.Lib.Data
 		    ApiControllerUri = VismaNetControllers.CashSale;
 		}
     }
-
-    public class ProjectData : BaseCrudDataClass<Project>
-    {
-        internal ProjectData(VismaNetAuthorization auth) : base(auth)
-        {
-            ApiControllerUri = VismaNetControllers.Project;
-        }
-    }
 }
