@@ -365,6 +365,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             var webclient = GetHttpClient(authorization);
             var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
+            Console.WriteLine($"GET {endpoint}");
             return await webclient.Get<List<T>>(endpoint);
         }
 
@@ -376,9 +377,11 @@ namespace ONIT.VismaNetApi.Lib
                     { "pageNumber", page.ToString() }
                 };
 
-            // Make sure that pageSize and pageNumber cannot be overriden by the parameters
             if (parameters != null)
-                return parameters.Join(pagination);
+            {
+                var nvc = new NameValueCollection(parameters);
+                return nvc.Join(pagination);
+            }
 
             return pagination;
         }
