@@ -365,7 +365,6 @@ namespace ONIT.VismaNetApi.Lib
         {
             var webclient = GetHttpClient(authorization);
             var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
-            Console.WriteLine($"GET {endpoint}");
             return await webclient.Get<List<T>>(endpoint);
         }
 
