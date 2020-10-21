@@ -6,6 +6,7 @@ namespace ONIT.VismaNetApi.Lib
         public const string Token = "security/api/v2/token";
 
         // Financials
+        public const string Attribute = "controller/api/v1/attribute";
         public const string Attachment = "controller/api/v1/attachment";
         public const string Branch = "controller/api/v1/branch";
         public const string CashSale = "controller/api/v1/cashsale";
@@ -29,6 +30,7 @@ namespace ONIT.VismaNetApi.Lib
         public const string Location = "controller/api/v1/location";
         public const string Payment = "controller/api/v1/payment";
         public const string Project = "controller/api/v1/project";
+        public const string ProjectTask = "controller/api/v1/projecttask";
         public const string SalesOrder = "controller/api/v1/salesorder";
         public const string Subaccount = "controller/api/v1/subaccount";
         public const string Suppliers = "controller/api/v1/supplier";

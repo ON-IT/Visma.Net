@@ -159,6 +159,13 @@ namespace ONIT.VismaNetApi.Models
             private set => Set(value);
         }
 
+        [JsonProperty]
+        public List<SalesOrderShipment> shipments
+        {
+            get => Get(defaultValue: new List<SalesOrderShipment>());
+            private set => Set(value);
+        }
+
         public LocationSummary location
         {
             get => Get(defaultValue: new LocationSummary());

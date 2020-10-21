@@ -23,5 +23,7 @@ namespace ONIT.VismaNetApi.Models
         public DateTime plannedEnd { get { return Get<DateTime>(); } set { Set(value); } }
         public DateTime startDate { get { return Get<DateTime>(); } set { Set(value); } }
         public DescriptiveDto rateTable { get { return Get<DescriptiveDto>(); } set { Set(value); } }
+
+        public string status { get { return Get<string>(); } set { Set(value); } }
     }
 }
