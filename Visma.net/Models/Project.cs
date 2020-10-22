@@ -40,7 +40,7 @@ namespace ONIT.VismaNetApi.Models
 
         public ProjectManager projectManager {
             get => Get("projectManger", new ProjectManager()); // Misspelled in Visma API projectManger not projectManager
-            set => Set(value, "employeeNumber");
+            set => Set(value);
         }
 
         public bool restrictEmployees { get { return Get<bool>(); } set { Set(value); } }

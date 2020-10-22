@@ -14,7 +14,7 @@ namespace ONIT.VismaNetApi.Models
 
         object IProvideCustomDto.ToDto()
         {
-            return new DtoValue(number);
+            return new DtoValue(employeeNumber);
         }
     }
 }
