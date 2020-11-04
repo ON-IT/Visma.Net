@@ -14,6 +14,12 @@ namespace ONIT.VismaNetApi.Models
             IgnoreProperties.Add(nameof(this.projectID));
             IgnoreProperties.Add(nameof(this.internalID));
         }
+
+        public Project(string projectNumber)
+        {
+            projectID = projectNumber;
+            IgnoreProperties.Add(nameof(this.internalID));
+        }
         [JsonProperty]
         public double assets { get; private set; }
         [JsonProperty]
@@ -31,12 +37,20 @@ namespace ONIT.VismaNetApi.Models
         public string description { get { return Get<string>(); } set { Set(value); } }
         public DateTime startDate { get { return Get<DateTime>(); } set { Set(value); } }
         public DateTime endDate { get { return Get<DateTime>(); } set { Set(value); } }
-        [JsonProperty]
-        public ProjectManager projectManager { get { return Get<ProjectManager>(); } private set { Set(value); } }
+
+        public ProjectManager projectManager {
+            get => Get("projectManger", new ProjectManager()); // Misspelled in Visma API projectManger not projectManager
+            set => Set(value);
+        }
+
         public bool restrictEmployees { get { return Get<bool>(); } set { Set(value); } }
         public bool restrictEquipment { get { return Get<bool>(); } set { Set(value); } }
         public Visibility visibility { get { return Get(defaultValue:new Visibility()); } set { Set(value); } }
-        public DescriptiveDto defSub { get { return Get<DescriptiveDto>(); } set { Set(value); } }
+        public CustomDto.SubaccountProject defSub
+        {
+            get => Get("defSub",defaultValue: new CustomDto.SubaccountProject());
+            set => Set(value);
+        }
         public string billingPeriod { get { return Get<string>(); } set { Set(value); } }
         //public DescriptiveDto customerLocation { get { return Get<DescriptiveDto>(); } set { Set(value); } }
         public DescriptiveDto allocationRule { get { return Get<DescriptiveDto>(); } set { Set(value); } }

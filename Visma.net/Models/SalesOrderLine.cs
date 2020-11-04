@@ -261,5 +261,11 @@ namespace ONIT.VismaNetApi.Models
             get => Get<DescriptiveDto>();
             set => Set(value);
         }
+
+        public string externalLink
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
     }
 }
