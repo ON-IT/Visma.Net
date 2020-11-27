@@ -80,10 +80,16 @@ namespace ONIT.VismaNetApi.Models
         }
 
         [JsonProperty]
-        public DescriptiveDto project { get; private set; }
+        public DescriptiveDto project { 
+            get => Get(defaultValue: new DescriptiveDto());
+            set => Set(value);
+        }
 
         [JsonProperty]
-        public DescriptiveDto projectTask { get; private set; }
+        public DescriptiveDto projectTask {
+            get => Get(defaultValue: new DescriptiveDto());
+            set => Set(value);
+        }
 
         public string referenceNumber
         {
