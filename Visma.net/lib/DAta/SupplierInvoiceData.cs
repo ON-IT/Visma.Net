@@ -23,10 +23,38 @@ namespace ONIT.VismaNetApi.Lib.Data
             }
             else
             {
-                rsp = await VismaNetApiHelper.Get<SupplierInvoice>(entityNumber, ApiControllerUri, Authorization, $"{documentType.ToString()}/{entityNumber}");
+                rsp = await VismaNetApiHelper.Get<SupplierInvoice>(entityNumber, ApiControllerUri, Authorization, $"{documentType}/{entityNumber}");
             }
             rsp.InternalPrepareForUpdate();
             return rsp;
+        }
+
+        public override async Task<SupplierInvoice> Add(SupplierInvoice entity)
+        {
+            SupplierInvoice rsp;
+            if (entity.documentType != SupplierDocumentType.Invoice)
+            {
+                rsp = await VismaNetApiHelper.Create(entity, ApiControllerUri, Authorization, $"{ApiControllerUri}/{entity.documentType}");
+            }
+            else
+            {
+                rsp = await VismaNetApiHelper.Create(entity, ApiControllerUri, Authorization);
+            }
+            rsp.InternalPrepareForUpdate();
+            return rsp;
+        }
+
+
+        public override async Task Update(SupplierInvoice entity)
+        {
+            if (entity.documentType != SupplierDocumentType.Invoice) // SO ordertypes are special.
+            {
+                await VismaNetApiHelper.Update(entity, entity.GetIdentificator(), ApiControllerUri, Authorization, $"{entity.documentType}/{entity.GetIdentificator()}");
+            }
+            else
+            {
+                await VismaNetApiHelper.Update(entity, entity.GetIdentificator(), ApiControllerUri, Authorization);
+            }
         }
 
         public async Task<string> AddAttachmentToInvoice(string invoiceNumber, string content, string fileName)
