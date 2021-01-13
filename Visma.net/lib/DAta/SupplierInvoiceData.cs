@@ -62,6 +62,11 @@ namespace ONIT.VismaNetApi.Lib.Data
             return await AddAttachmentToInvoice(invoice.referenceNumber, Encoding.UTF8.GetBytes(content), fileName, invoice.documentType);
         }
 
+        public async Task<string> AddAttachmentToInvoice(SupplierInvoice invoice, byte[] content, string fileName)
+        {
+            return await AddAttachmentToInvoice(invoice.referenceNumber, content, fileName, invoice.documentType);
+        }
+
         public async Task<string> AddAttachmentToInvoice(string invoiceNumber, string content, string fileName, SupplierDocumentType documentType = SupplierDocumentType.Invoice)
         {
                 return await AddAttachmentToInvoice(invoiceNumber, Encoding.UTF8.GetBytes(content), fileName, documentType);
@@ -79,7 +84,12 @@ namespace ONIT.VismaNetApi.Lib.Data
             }
             return await VismaNetApiHelper.AddAttachmentToSupplierInvoice(Authorization, invoiceNumber, byteArray, fileName);
         }
-        public async Task<string> AddAttachmentToInvoice(string invoiceNumber, Stream stream, string fileName, SupplierDocumentType documentType = SupplierDocumentType.Invoice)
+
+        public async Task<string> AddAttachmentToInvoice(SupplierInvoice invoice, Stream stream, string fileName)
+        {
+            return await AddAttachmentToInvoice(invoice.referenceNumber, stream, fileName, invoice.documentType);
+        }
+            public async Task<string> AddAttachmentToInvoice(string invoiceNumber, Stream stream, string fileName, SupplierDocumentType documentType = SupplierDocumentType.Invoice)
         {
             if (stream == default(Stream))
                 throw new ArgumentNullException(nameof(stream), "Stream is missing");
