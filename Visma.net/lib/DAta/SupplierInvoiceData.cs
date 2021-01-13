@@ -47,7 +47,7 @@ namespace ONIT.VismaNetApi.Lib.Data
 
         public override async Task Update(SupplierInvoice entity)
         {
-            if (entity.documentType != SupplierDocumentType.Invoice) // SO ordertypes are special.
+            if (entity.documentType != SupplierDocumentType.Invoice)
             {
                 await VismaNetApiHelper.Update(entity, entity.GetIdentificator(), ApiControllerUri, Authorization, $"{entity.documentType}/{entity.GetIdentificator()}");
             }
@@ -55,6 +55,11 @@ namespace ONIT.VismaNetApi.Lib.Data
             {
                 await VismaNetApiHelper.Update(entity, entity.GetIdentificator(), ApiControllerUri, Authorization);
             }
+        }
+
+        public async Task<string> AddAttachmentToInvoice(SupplierInvoice invoice, string content, string fileName)
+        {
+            return await AddAttachmentToInvoice(invoice.referenceNumber, Encoding.UTF8.GetBytes(content), fileName, invoice.documentType);
         }
 
         public async Task<string> AddAttachmentToInvoice(string invoiceNumber, string content, string fileName, SupplierDocumentType documentType = SupplierDocumentType.Invoice)
