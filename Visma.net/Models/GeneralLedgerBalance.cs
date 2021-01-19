@@ -8,59 +8,8 @@ using System.Text;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class GeneralLedgerBalance : DtoProviderBase, IProvideIdentificator
+    public class GeneralLedgerBalance : DtoPaginatedProviderBase, IProvideIdentificator
     {
-        /*
-        {
-    "branch": {
-      "number": "string",
-      "name": "string"
-    },
-    "ledger": {
-      "id": "string",
-      "description": "string"
-    },
-    "balanceType": "Actual",
-    "financialPeriod": "string",
-    "account": {
-      "type": "Asset",
-      "externalCode1": "string",
-      "externalCode2": "string",
-      "externalCode1Info": {
-        "number": "string",
-        "description": "string"
-      },
-      "externalCode2Info": {
-        "number": "string",
-        "description": "string"
-      },
-      "glConsolAccountCD": "string",
-      "number": "string",
-      "description": "string"
-    },
-    "subaccountId": "string",
-    "subAccountCd": "string",
-    "currencyId": "string",
-    "periodToDateDebit": 0,
-    "periodToDateCredit": 0,
-    "beginningBalance": 0,
-    "yearToDateBalance": 0,
-    "periodToDateDebitInCurrency": 0,
-    "periodToDateCreditInCurrency": 0,
-    "beginningBalanceInCurrency": 0,
-    "yearToDateBalanceInCurrency": 0,
-    "yearClosed": true,
-    "extras": {
-      "additionalProp1": {},
-      "additionalProp2": {},
-      "additionalProp3": {}
-    },
-    "errorInfo": "string",
-    "metadata": {
-      "totalCount": 0
-    }
-  }
-        */
         public NumberName branch
         {
             get => Get<NumberName>();

@@ -25,7 +25,7 @@ namespace ONIT.VismaNetApi.Lib
         public const string InventorySummary = "controller/api/v1/inventorysummary";
         public const string JournalTransaction = "controller/api/v1/journaltransaction";
         public const string GeneralLedgerTransaction = "controller/api/v1/GeneralLedgerTransactions";
-        public const string GeneralLedgerBalance = "controller/api/v1/generalLedgerBalance";
+        public const string GeneralLedgerBalanceV2 = "controller/api/v2/generalLedgerBalance";
         public const string Shipments = "controller/api/v1/shipment";
         public const string Location = "controller/api/v1/location";
         public const string Payment = "controller/api/v1/payment";
