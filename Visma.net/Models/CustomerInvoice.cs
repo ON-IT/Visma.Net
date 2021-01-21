@@ -184,6 +184,18 @@ namespace ONIT.VismaNetApi.Models
             private set; // { Set(value); }
         }
 
+        public SoAddress invoiceAddress
+        {
+            get => Get(defaultValue: new SoAddress());
+            set => Set(value);
+        }
+
+        public ContactInvoice invoiceContact
+        {
+            get => Get(defaultValue: new ContactInvoice());
+            set => Set(value);
+        }
+
         [JsonProperty] public DateTime dunningLetterDate { get; private set; }
 
         [JsonProperty] public int dunningLetterLevel { get; private set; }

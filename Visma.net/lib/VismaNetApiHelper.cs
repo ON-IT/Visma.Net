@@ -689,7 +689,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        private static string GetApiUrlForController(string controller, string append = null,
+        internal static string GetApiUrlForController(string controller, string append = null,
             NameValueCollection parameters = null)
         {
             var controllerUri = string.Format("{0}/{1}{2}",

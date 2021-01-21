@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class GeneralLedgerBalanceData : BaseCrudDataClass<GeneralLedgerBalance>
+    public class GeneralLedgerBalanceData : BasePaginatedCrudDataClass<GeneralLedgerBalance>
     {
         public GeneralLedgerBalanceData(VismaNetAuthorization auth) : base(auth)
         {
-            ApiControllerUri = VismaNetControllers.GeneralLedgerBalance;
+            ApiControllerUri = VismaNetControllers.GeneralLedgerBalanceV2;
         }
 
         public override Task<List<GeneralLedgerBalance>> All()
