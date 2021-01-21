@@ -410,6 +410,18 @@ namespace ONIT.VismaNetApi.Models
             private set;
         }
 
+        public bool isRotRutDeductible
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public RotRutDetails rotRutDetails
+        {
+            get => Get(defaultValue: new RotRutDetails());
+            set => Set(value);
+        }
+
         public string GetIdentificator()
         {
             return orderNo;
