@@ -2,9 +2,8 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net461;net45</TargetFrameworks>
     		<Title>Visma.net</Title>
-        <Copyright>Copyright © ON IT AS 2014 - 2020</Copyright>
-        <Version>3.7.2.1</Version>
-        <Version>3.7.1.18</Version>
+        <Copyright>Copyright © ON IT AS 2014 - 2021</Copyright>
+        <Version>3.7.3.0</Version>
         <Description>Get started with Visma.net Integrations.</Description>
         <Authors>ON IT AS</Authors>
         <Company>ON IT AS</Company>
@@ -20,10 +19,8 @@
         <PackageIconUrl>https://sync-it.no/Images/on-it_logo.png</PackageIconUrl>
         <PackageLicenseExpression></PackageLicenseExpression>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-        <AssemblyVersion>3.7.2.1</AssemblyVersion>
-        <FileVersion>3.7.2.1</FileVersion>
-        <AssemblyVersion>3.7.1.18</AssemblyVersion>
-        <FileVersion>3.7.1.18</FileVersion>
+        <AssemblyVersion>3.7.3.0</AssemblyVersion>
+        <FileVersion>3.7.3.0</FileVersion>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />

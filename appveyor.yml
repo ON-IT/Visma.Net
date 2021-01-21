@@ -1,4 +1,4 @@
-- version: 3.7.3-pre-{build}
+- version: 3.7.4-pre-{build}
   image: Visual Studio 2017
   pull_requests:
     do_not_increment_build_number: true
