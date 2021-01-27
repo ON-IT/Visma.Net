@@ -392,12 +392,25 @@ namespace ONIT.VismaNetApi.Models
         }
 
         public bool sendToAutoInvoice
-		    {
-			    get => Get<bool>();
-			    set => Set(value);
-		    }
+	    {
+		    get => Get<bool>();
+		    set => Set(value);
+	    }
+	    
+	public bool dontPrint
+    	{
+	    get => Get<bool>();
+	    set => Set(value);
+    	}
 
-		public string GetIdentificator()
+        public bool dontEmail
+        {
+	    get => Get<bool>();
+	    set => Set(value);
+        }
+
+
+	public string GetIdentificator()
         {
             return referenceNumber;
         }
