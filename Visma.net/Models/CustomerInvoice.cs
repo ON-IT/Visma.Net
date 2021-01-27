@@ -409,7 +409,19 @@ namespace ONIT.VismaNetApi.Models
 			set => Set(value);
 		}
 
-		public string GetIdentificator()
+        public bool dontPrint
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public bool dontEmail
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        public string GetIdentificator()
         {
             return referenceNumber;
         }
