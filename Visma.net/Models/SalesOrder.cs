@@ -184,6 +184,12 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value, "orderNumber");
         }
 
+        public string paymentRef
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
         [JsonProperty]
         public double orderTotal
         {
