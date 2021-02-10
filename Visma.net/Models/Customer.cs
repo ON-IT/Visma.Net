@@ -66,7 +66,7 @@ namespace ONIT.VismaNetApi.Models
         public CreditTerms creditTerms
         {
             get => Get("creditTermsId", new CreditTerms());
-            set => Set(value);
+            set => Set(value, "creditTermsId");
         }
 
 
