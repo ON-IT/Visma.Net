@@ -4,6 +4,8 @@
     		<Title>Visma.net</Title>
         <Copyright>Copyright © ON IT AS 2014 - 2020</Copyright>
         <Version>3.7.1.21</Version>
+        <Copyright>Copyright © ON IT AS 2014 - 2021</Copyright>
+        <Version>3.7.3.1</Version>
         <Description>Get started with Visma.net Integrations.</Description>
         <Authors>ON IT AS</Authors>
         <Company>ON IT AS</Company>
@@ -11,7 +13,7 @@
         <PackageProjectUrl>https://github.com/ON-IT/Visma.Net</PackageProjectUrl>
         <RepositoryUrl>https://github.com/ON-IT/Visma.Net.git</RepositoryUrl>
         <PackageTags>Visma.net API, Visma.net Integrations, REST</PackageTags>
-        <PackageReleaseNotes>Fix pagination for JournalTransaction endpoint</PackageReleaseNotes>
+        <PackageReleaseNotes>Fix issue with pagination with parameters</PackageReleaseNotes>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
@@ -21,6 +23,8 @@
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <AssemblyVersion>3.7.1.21</AssemblyVersion>
         <FileVersion>3.7.1.21</FileVersion>
+        <AssemblyVersion>3.7.3.1</AssemblyVersion>
+        <FileVersion>3.7.3.1</FileVersion>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />

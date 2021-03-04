@@ -75,7 +75,8 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <returns></returns>
         public async Task<List<CustomerInvoice>> ForCustomer(string customerNumber)
         {
-            return await VismaNetApiHelper.FetchInvoicesForCustomerCd(customerNumber, Authorization);
+            var apiUrl = VismaNetApiHelper.GetApiUrlForController(VismaNetControllers.Customers, $"{customerNumber}/invoice");
+            return await VismaNetApiHelper.GetAllWithPagination<CustomerInvoice>(apiUrl, Authorization);
         }
 
         /// <summary>

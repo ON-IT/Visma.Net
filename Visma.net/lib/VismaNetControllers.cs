@@ -40,10 +40,10 @@ namespace ONIT.VismaNetApi.Lib
         public const string InventoryIssue = "controller/api/v1/inventoryissue";
         public const string InventoryReceipt = "controller/api/v1/inventoryReceipt";
         public const string PurchaseReceipt = "controller/api/v1/PurchaseReceipt";
+        public const string CustomerCreditNote = "controller/api/v1/customerCreditNote";
 
         // Resources
         public const string OAuthAuthorize = "resources/oauth/authorize";
         public const string UserContext = "resources/v1/context";
-
     }
 }

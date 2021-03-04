@@ -365,7 +365,6 @@ namespace ONIT.VismaNetApi.Lib
         {
             var webclient = GetHttpClient(authorization);
             var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
-            Console.WriteLine($"GET {endpoint}");
             return await webclient.Get<List<T>>(endpoint);
         }
 
@@ -400,6 +399,8 @@ namespace ONIT.VismaNetApi.Lib
         {
             var firstPage = await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(initialPageSize, 1, parameters));
             var rsp = new List<T>();
+            if (firstPage == null)
+                return rsp;
             rsp.AddRange(firstPage);
             var count = firstPage.Sum(x => x.GetSubCount());
             if (firstPage.FirstOrDefault()?.metadata?.totalCount > count && count > 0)
