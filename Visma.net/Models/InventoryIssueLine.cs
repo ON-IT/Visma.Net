@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
@@ -97,6 +98,11 @@ namespace ONIT.VismaNetApi.Models
         public NumberName branchNumber
         {
             get => Get<NumberName>();
+            set => Set(value);
+        }
+        public List<Allocations> allocations
+        {
+            get => Get(defaultValue: new List<Allocations>());
             set => Set(value);
         }
     }
