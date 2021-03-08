@@ -189,7 +189,7 @@ namespace ONIT.VismaNetApi.Models
 
         public CustomerPaymentMethod defaultPaymentMethod
         {
-            get => Get<CustomerPaymentMethod>(defaultValue: new CustomerPaymentMethod());
+            get => Get<CustomerPaymentMethod>();
             set => Set(value);
         }
 

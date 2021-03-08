@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
@@ -98,6 +99,23 @@ namespace ONIT.VismaNetApi.Models
         {
             get => Get<NumberName>();
             set => Set(value);
+        }
+        public List<Allocations> allocations
+        {
+            get => Get(defaultValue: new List<Allocations>());
+            set { 
+                if (value != null && value.Count > 0) 
+                { 
+                    IgnoreProperties.Add(nameof(quantity));
+                    DtoFields.Remove(nameof(quantity));
+                } 
+                else 
+                { 
+                    IgnoreProperties.Remove(nameof(quantity));
+                    DtoFields.Add(nameof(quantity), new DtoValue(1));
+                }
+                Set(value);
+            }
         }
     }
 }
