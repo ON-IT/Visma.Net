@@ -66,7 +66,7 @@ namespace ONIT.VismaNetApi.Models
         public CreditTerms creditTerms
         {
             get => Get("creditTermsId", new CreditTerms());
-            set => Set(value);
+            set => Set(value, "creditTermsId");
         }
 
 
@@ -196,7 +196,7 @@ namespace ONIT.VismaNetApi.Models
 
         public CustomerPaymentMethod defaultPaymentMethod
         {
-            get => Get<CustomerPaymentMethod>(defaultValue: new CustomerPaymentMethod());
+            get => Get<CustomerPaymentMethod>();
             set => Set(value);
         }
 
