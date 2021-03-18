@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace ONIT.VismaNetApi.Models
 {
@@ -187,6 +187,13 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value, "parentRecordNumber");
         }
 
+        [JsonProperty("defaultPaymentMethodId")]
+        internal string defaultPaymentMethodId
+        {
+            get => defaultPaymentMethod?.paymentMethodId;
+            set => defaultPaymentMethod = new CustomerPaymentMethod(value, true);
+        }
+
         public CustomerPaymentMethod defaultPaymentMethod
         {
             get => Get<CustomerPaymentMethod>(defaultValue: new CustomerPaymentMethod());
@@ -257,7 +264,7 @@ namespace ONIT.VismaNetApi.Models
 
         public int CompareTo(object obj)
         {
-            var otherCustomer = (Customer) obj;
+            var otherCustomer = (Customer)obj;
             if (otherCustomer == null)
                 return 0;
             return string.Compare(name, otherCustomer.name, StringComparison.Ordinal);
