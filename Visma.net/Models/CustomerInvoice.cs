@@ -312,13 +312,13 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        /* public RotRutDetails rotRutDetails
-        {
-            get => Get(defaultValue: new RotRutDetails());
-            set => Set(value);
-        }*/
+    public RotRutDetails rotRutDetails
+    {
+      get => Get(defaultValue: new RotRutDetails());
+      set => Set(value);
+    }
 
-        [JsonProperty]
+    [JsonProperty]
         public string salesPersonDescr
         {
             get; // { return Get<string>(); }
