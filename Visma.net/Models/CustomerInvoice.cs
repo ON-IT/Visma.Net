@@ -420,6 +420,11 @@ namespace ONIT.VismaNetApi.Models
             get => Get<bool>();
             set => Set(value);
         }
+        public bool overrideNumberSeries
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
 
         public string GetIdentificator()
         {
