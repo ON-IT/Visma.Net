@@ -19,10 +19,22 @@ namespace ONIT.VismaNetApi.Lib.Data
         protected CustomerCreditNoteData() : base(null)
         {
             ApiControllerUri = VismaNetControllers.CustomerCreditNote;
-
         }
 
-        public async Task<string> AddAttachmentToCreditNote(string creditNoteNumber, string content, string fileName)
+    public override async Task<CustomerCreditNote> Add(CustomerCreditNote entity)
+    {
+      CustomerCreditNote rsp = null;
+      System.Diagnostics.Trace.TraceInformation($"Starting post AddLarge CustomerCreditNote {DateTime.Now.ToString()}");
+      rsp = await VismaNetApiHelper.Create(entity, VismaNetControllers.CustomerCreditNoteV2, Authorization, ApiControllerUri);
+      System.Diagnostics.Trace.TraceInformation($"Finished post AddLarge CustomerCreditNote {DateTime.Now.ToString()}");
+      rsp.InternalPrepareForUpdate();
+
+      //rsp = await Get(rsp.GetIdentificator());
+      return rsp;
+    }
+
+
+    public async Task<string> AddAttachmentToCreditNote(string creditNoteNumber, string content, string fileName)
         {
             return await AddAttachmentToCreditNote(creditNoteNumber, Encoding.UTF8.GetBytes(content), fileName);
         }
