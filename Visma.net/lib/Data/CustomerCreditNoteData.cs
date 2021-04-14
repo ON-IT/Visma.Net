@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class CustomerCreditNoteData : BaseCrudDataClass<CustomerCreditNote>
+    public class CustomerCreditNoteData : BasePaginatedCrudDataClass<CustomerCreditNote>
     {
         /// <summary>
 		///     This constructor is called by the client to create the data source.
@@ -19,7 +19,13 @@ namespace ONIT.VismaNetApi.Lib.Data
         protected CustomerCreditNoteData() : base(null)
         {
             ApiControllerUri = VismaNetControllers.CustomerCreditNote;
+        }
 
+        public override async Task<CustomerCreditNote> Add(CustomerCreditNote entity)
+        {
+            var rsp = await VismaNetApiHelper.Create(entity, VismaNetControllers.CustomerCreditNoteV2, Authorization);
+            rsp.InternalPrepareForUpdate();
+            return rsp;
         }
 
         public async Task<string> AddAttachmentToCreditNote(string creditNoteNumber, string content, string fileName)
