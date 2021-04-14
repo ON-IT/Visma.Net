@@ -22,6 +22,13 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             ApiControllerUri = VismaNetControllers.CustomerInvoice;
         }
+        // Redirect to V2 since V1 Post will be depricated
+        public override async Task<CustomerInvoice> Add(CustomerInvoice entity)
+        {
+            var rsp = await VismaNetApiHelper.Create(entity, VismaNetControllers.CustomerInvoiceV2, Authorization, VismaNetControllers.CustomerInvoice);
+            rsp.InternalPrepareForUpdate();
+            return rsp;
+        }
 
         public async Task<CustomerInvoice> AddLarge(CustomerInvoice entity)
         {
