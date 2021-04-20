@@ -204,7 +204,7 @@ namespace ONIT.VismaNetApi.Lib
             byte[] bytes,
             string fileName)
         {
-            var url = GetApiUrlForController(VismaNetControllers.JournalTransaction, $"/{batch}/attachment");
+            var url = GetApiUrlForController(VismaNetControllers.JournalTransactionV2, $"/{batch}/attachment");
             return AddAttachmentToController<string>(auth, url, bytes, fileName);
         }
 
