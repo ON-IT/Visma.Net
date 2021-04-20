@@ -23,7 +23,7 @@ namespace ONIT.VismaNetApi.Lib
         public const string FinAccount = "controller/api/v1/account";
         public const string Inventory = "controller/api/v1/inventory";
         public const string InventorySummary = "controller/api/v1/inventorysummary";
-        public const string JournalTransactionV2 = "controller/api/v2/journaltransaction";
+        public const string JournalTransaction = "controller/api/v2/journaltransaction";
         public const string GeneralLedgerTransaction = "controller/api/v1/GeneralLedgerTransactions";
         public const string GeneralLedgerBalanceV2 = "controller/api/v2/generalLedgerBalance";
         public const string Shipments = "controller/api/v1/shipment";
@@ -41,6 +41,7 @@ namespace ONIT.VismaNetApi.Lib
         public const string InventoryReceipt = "controller/api/v1/inventoryReceipt";
         public const string PurchaseReceipt = "controller/api/v1/PurchaseReceipt";
         public const string CustomerCreditNote = "controller/api/v1/customerCreditNote";
+        public const string CustomerCreditNoteV2 = "controller/api/v2/customerCreditNote";
 
         // Resources
         public const string OAuthAuthorize = "resources/oauth/authorize";

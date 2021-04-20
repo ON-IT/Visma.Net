@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using ONIT.VismaNetApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -9,9 +12,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib
 {
@@ -40,8 +40,9 @@ namespace ONIT.VismaNetApi.Lib
                 }
                 Debug.WriteLine($"[{i}/{MaxRetries}] {response.StatusCode} {response.ReasonPhrase}");
                 // Will give an taskCanceledException if not disposed.
-                if (i < MaxRetries - 1) {
-                  response.Dispose();
+                if (i < MaxRetries - 1)
+                {
+                    response.Dispose();
                 }
             }
 
@@ -73,10 +74,10 @@ namespace ONIT.VismaNetApi.Lib
                 handler.AutomaticDecompression = DecompressionMethods.GZip |
                                                  DecompressionMethods.Deflate;
             handler.UseCookies = false;
-            #if NET45
-            #else
+#if NET45
+#else
             handler.MaxConnectionsPerServer = VismaNet.MaxConcurrentRequests;
-            #endif
+#endif
 
             HttpClient = new HttpClient(new RetryHandler(handler), false)
             {
@@ -140,7 +141,7 @@ namespace ONIT.VismaNetApi.Lib
             if (string.IsNullOrEmpty(stringData))
                 return default(T);
 
-            return await Deserialize<T>(stringData);
+            return Deserialize<T>(stringData);
         }
 
         internal async Task<Stream> GetStream(string url)
@@ -178,7 +179,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             using (var message = PrepareMessage(HttpMethod.Post, url))
             {
-                var serialized = await Serialize(data);
+                var serialized = Serialize(data);
                 message.Content = new StringContent(serialized, Encoding.UTF8, "application/json");
 
                 var result = await HttpClient.SendAsync(message);
@@ -210,12 +211,12 @@ namespace ONIT.VismaNetApi.Lib
                     return default(T);
                 try
                 {
-                    return await Deserialize<T>(stringData);
+                    return Deserialize<T>(stringData);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     throw new Exception("Could not serialize:" + Environment.NewLine + Environment.NewLine +
-                                        stringData);
+                                        stringData, e);
                 }
             }
         }
@@ -224,7 +225,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             using (var message = PrepareMessage(HttpMethod.Put, url))
             {
-                var serialized = await Serialize(data);
+                var serialized = Serialize(data);
                 message.Content = new StringContent(serialized, Encoding.UTF8, "application/json");
 
                 var result = await HttpClient.SendAsync(message);
@@ -244,21 +245,18 @@ namespace ONIT.VismaNetApi.Lib
 
                 if (string.IsNullOrEmpty(stringData))
                     return default(T);
-                return await Deserialize<T>(stringData);
+                return Deserialize<T>(stringData);
             }
         }
 
-        private async Task<string> Serialize(object obj)
+        private string Serialize(object obj)
         {
-            return
-                await
-                    Task.Factory.StartNew(() =>
-                        JsonConvert.SerializeObject(obj, Formatting.Indented, SerializerSettings));
+            return JsonConvert.SerializeObject(obj, Formatting.Indented, SerializerSettings);
         }
 
-        private async Task<T> Deserialize<T>(string str)
+        private T Deserialize<T>(string str)
         {
-            return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(str));
+            return JsonConvert.DeserializeObject<T>(str);
         }
 
         // http://stackoverflow.com/a/24115672/491094

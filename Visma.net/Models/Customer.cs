@@ -187,12 +187,13 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value, "parentRecordNumber");
         }
 
+        /*
         [JsonProperty("defaultPaymentMethodId")]
         internal string defaultPaymentMethodId
         {
             get => defaultPaymentMethod?.paymentMethodId;
             set => defaultPaymentMethod = new CustomerPaymentMethod(value, true);
-        }
+        }*/
 
         public CustomerPaymentMethod defaultPaymentMethod
         {
