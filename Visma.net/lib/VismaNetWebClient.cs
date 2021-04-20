@@ -190,7 +190,7 @@ namespace ONIT.VismaNetApi.Lib
                     }
                     else
                     {
-                        var pattern = @".(.*)\/(\d+)";
+                        var pattern = @".(.*)\/(.+)";
                         var substitution = @"$2";
                         var regex = new Regex(pattern);
                         var id = regex.Replace(result.Headers.Location.AbsoluteUri, substitution);
