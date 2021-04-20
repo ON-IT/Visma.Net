@@ -47,9 +47,10 @@ namespace ONIT.VismaNetApi
         public readonly InventoryIssueData InventoryIssue;
         public readonly InventoryReceiptData InventoryReceipt;
         public readonly PurchaseReceiptData PurchaseReceipt;
+        public readonly PurchaseOrderData PurchaseOrder;
 
-        // Obsolete
-        [Obsolete]
+    // Obsolete
+    [Obsolete]
         public readonly CreditNoteData CreditNote;
         [Obsolete]
         public readonly PaymentData Payment;
