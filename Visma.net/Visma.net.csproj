@@ -26,7 +26,7 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
       <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-      <PackageReference Include="System.Net.Http" Version="4.3.3" />
+      <PackageReference Include="System.Net.Http" Version="4.3.4" />
     </ItemGroup>
     <ItemGroup>
       <None Include="..\LICENSE.md">
