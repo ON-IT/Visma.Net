@@ -428,6 +428,12 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        public string paymentMethod
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
         public string GetIdentificator()
         {
             return orderNo;

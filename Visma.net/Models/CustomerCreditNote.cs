@@ -143,6 +143,12 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
+        public bool overrideNumberSeries
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
         #endregion
 
         #region Read only properties (CustomerInvoiceDto)
