@@ -78,7 +78,6 @@ namespace ONIT.VismaNetApi.Models
       set { Set(value); }
     }
 
-
     public string customerRefNumber
     {
       get { return Get<string>(); }
@@ -303,6 +302,15 @@ namespace ONIT.VismaNetApi.Models
       get { return Get<string>(); }
       private set { Set(value); }
     }
+
+    [JsonProperty]
+    public string paymentReference
+    {
+      get { return Get<string>(); }
+      private set { Set(value); }
+    }
+
+
     public string note
     {
       get => Get<string>();
