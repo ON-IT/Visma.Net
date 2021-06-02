@@ -24,6 +24,7 @@ namespace ONIT.VismaNetApi.Lib.Data
     // Redirect to V2 since V1 Post will be depricated
     public override async Task<CustomerCreditNote> Add(CustomerCreditNote entity)
     {
+      //var rsp = await VismaNetApiHelper.Create(entity, VismaNetControllers.CustomerCreditNoteV2, Authorization);
       var rsp = await VismaNetApiHelper.Create(entity, VismaNetControllers.CustomerCreditNoteV2, Authorization,VismaNetControllers.CustomerCreditNote);
       rsp.InternalPrepareForUpdate();
       return rsp;
