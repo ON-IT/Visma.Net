@@ -38,7 +38,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         {
             return await VismaNetApiHelper.AddExchangeRate(exchangeRate, Authorization);
         }
-        []
+        
         //Update Currency seams not to work in vismas api.
         public async Task<List<ExchangeRate>> UpdateExchangesRate(ExchangeRate exchangeRate)
         {
