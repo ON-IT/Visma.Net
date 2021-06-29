@@ -273,6 +273,34 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        internal static async Task<List<ExchangeRate>> FetchExchangeRates(string toCurrencyId,DateTime effectiveDate, VismaNetAuthorization auth)
+        {
+            var webClient = GetHttpClient(auth);
+            {
+                var apiUrl = GetApiUrlForController(VismaNetControllers.Currency, $"/exchangerates/{toCurrencyId.TrimStart('/')}/{effectiveDate.ToString("yyyy-MM-dd")}");
+                return await webClient.Get<List<ExchangeRate>>(apiUrl);
+            }
+        }
+
+        internal static async Task<List<ExchangeRate>> AddExchangeRate(ExchangeRate exchangeRate, VismaNetAuthorization auth)
+        {
+            var webClient = GetHttpClient(auth);
+            {
+                var apiUrl = GetApiUrlForController(VismaNetControllers.Currency, $"/exchangerates/{exchangeRate.baseCurrencyId.TrimStart('/')}");
+                return await webClient.Post<List<ExchangeRate>>(apiUrl,exchangeRate.ToDto(), $"{GetApiUrlForController(VismaNetControllers.Currency)}/exchangerates/{exchangeRate.baseCurrencyId.TrimStart('/')}/{exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}", true);
+            }
+        }
+
+        internal static async Task<List<ExchangeRate>> UpdateExchangeRate(ExchangeRate exchangeRate, VismaNetAuthorization auth)
+        {
+            var webClient = GetHttpClient(auth);
+            {
+                var apiUrl = GetApiUrlForController(VismaNetControllers.Currency, $"/exchangerates/{exchangeRate.currencyRateId}");
+                return await webClient.Put<List<ExchangeRate>>(apiUrl, exchangeRate.ToDto(),$"{GetApiUrlForController(VismaNetControllers.Currency)}/exchangerates/{exchangeRate.baseCurrencyId.TrimStart('/')}/{exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}",true);
+            }
+        }
+
+
         internal static async Task<List<CustomerInvoice>> FetchInvoicesForCustomerCd(string customerCd,
             VismaNetAuthorization authorization)
         {

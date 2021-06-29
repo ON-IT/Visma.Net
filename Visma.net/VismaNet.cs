@@ -23,6 +23,7 @@ namespace ONIT.VismaNetApi
         public readonly CustomerCreditNoteData CustomerCreditNote;
         public readonly AttributeData Attribute;
         public readonly CustomerData Customer;
+        public readonly CurrencyData Currency;
         public readonly DimensionData Dimension;
         public readonly SupplierInvoiceData SupplierInvoice;
         public readonly SupplierData Supplier;
@@ -73,6 +74,7 @@ namespace ONIT.VismaNetApi
             };
             Attribute = new AttributeData(Auth);
             Customer = new CustomerData(Auth);
+            Currency = new CurrencyData(Auth);
             CustomerInvoice = new CustomerInvoiceData(Auth);
             Supplier = new SupplierData(Auth);
             SupplierInvoice = new SupplierInvoiceData(Auth);
