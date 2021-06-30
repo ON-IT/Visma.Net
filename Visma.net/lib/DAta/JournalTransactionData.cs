@@ -13,7 +13,7 @@ namespace ONIT.VismaNetApi.Lib.Data
     {
         public JournalTransactionData(VismaNetAuthorization auth) : base(auth)
         {
-            ApiControllerUri = VismaNetControllers.JournalTransaction;
+            ApiControllerUri = VismaNetControllers.JournalTransactionV2;
         }
 
         /// <summary>

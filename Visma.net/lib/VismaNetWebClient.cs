@@ -175,7 +175,7 @@ namespace ONIT.VismaNetApi.Lib
             return default(T);
         }
 
-        internal async Task<T> Post<T>(string url, object data, string urlToGet = null)
+        internal async Task<T> Post<T>(string url, object data, string urlToGet = null, bool ignoreAbsoluteUri = false)
         {
             using (var message = PrepareMessage(HttpMethod.Post, url))
             {
@@ -184,21 +184,24 @@ namespace ONIT.VismaNetApi.Lib
 
                 var result = await HttpClient.SendAsync(message);
 
-                if (result.Headers.Location != null)
+                if (result.Headers.Location != null && !ignoreAbsoluteUri)
                     if (urlToGet == null)
                     {
                         return await Get<T>(result.Headers.Location.AbsoluteUri);
                     }
                     else
                     {
-                        var pattern = @".(.*)\/(\d+)";
+                        var pattern = @".(.*)\/(.+)";
                         var substitution = @"$2";
                         var regex = new Regex(pattern);
                         var id = regex.Replace(result.Headers.Location.AbsoluteUri, substitution);
                         return await Get<T>($"{urlToGet}/{id}");
                     }
-                if (result.StatusCode == HttpStatusCode.NoContent)
-                    return await Get<T>(url);
+                if (result.StatusCode == HttpStatusCode.NoContent || ignoreAbsoluteUri)
+                    if (urlToGet != null)
+                        return await Get<T>(urlToGet);
+                    else
+                        return await Get<T>(url);
 
                 var stringData = await result.Content.ReadAsStringAsync();
 
@@ -221,7 +224,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal async Task<T> Put<T>(string url, object data, string urlToGet = null)
+        internal async Task<T> Put<T>(string url, object data, string urlToGet = null, bool ignoreAbsoluteUri = false)
         {
             using (var message = PrepareMessage(HttpMethod.Put, url))
             {
@@ -229,9 +232,9 @@ namespace ONIT.VismaNetApi.Lib
                 message.Content = new StringContent(serialized, Encoding.UTF8, "application/json");
 
                 var result = await HttpClient.SendAsync(message);
-                if (result.Headers.Location != null)
+                if (result.Headers.Location != null && !ignoreAbsoluteUri)
                     return await Get<T>(result.Headers.Location.AbsoluteUri);
-                if (result.StatusCode == HttpStatusCode.NoContent)
+                if (result.StatusCode == HttpStatusCode.NoContent || ignoreAbsoluteUri)
                     if (urlToGet != null)
                         return await Get<T>(urlToGet);
                     else
