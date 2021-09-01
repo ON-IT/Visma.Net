@@ -48,6 +48,7 @@ namespace ONIT.VismaNetApi
         public readonly InventoryIssueData InventoryIssue;
         public readonly InventoryReceiptData InventoryReceipt;
         public readonly PurchaseReceiptData PurchaseReceipt;
+        public readonly PurchaseOrderData PurchaseOrder;
 
         // Obsolete
         [Obsolete]
@@ -106,6 +107,7 @@ namespace ONIT.VismaNetApi
             PurchaseReceipt = new PurchaseReceiptData(Auth);
             CustomerSalesPrice = new CustomerSalesPriceData(Auth);
             CustomerCreditNote = new CustomerCreditNoteData(Auth);
+            PurchaseOrder = new PurchaseOrderData(Auth); 
         }
 
         /// <summary>
