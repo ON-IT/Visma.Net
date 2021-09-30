@@ -54,6 +54,11 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>("orderNbr");
             set => Set(value, "orderNbr");
         }
+        public Owner owner
+        {
+            get => Get(defaultValue: new Owner());
+            set => Set(value);
+        }
         [JsonProperty] public decimal orderTotal { get; private set; }
 
         [JsonProperty] public decimal orderTotalInBaseCurrency { get; private set; }
