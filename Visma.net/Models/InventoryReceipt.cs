@@ -18,9 +18,9 @@ namespace ONIT.VismaNetApi.Models
         }
 
         [JsonProperty]
-        public List<InventoryRecieptLine> receiptLines
+        public List<InventoryReceiptLine> receiptLines
         {
-            get => Get(defaultValue: new List<InventoryRecieptLine>());
+            get => Get(defaultValue: new List<InventoryReceiptLine>());
             private set => Set(value);
         }
 

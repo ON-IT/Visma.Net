@@ -8,9 +8,9 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class PurchaseRecieptLine : DtoProviderBase
+    public class PurchaseReceiptLine : DtoProviderBase
     {
-        public PurchaseRecieptLine()
+        public PurchaseReceiptLine()
         {
             DtoFields.Add(nameof(lineNbr), new DtoValue(0));
             DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
@@ -32,9 +32,9 @@ namespace ONIT.VismaNetApi.Models
             get => Get<int>();
             set => Set(value);
         }
-        public PurchaseRecieptLineType lineType
+        public PurchaseReceiptLineType lineType
         {
-            get => Get<PurchaseRecieptLineType>();
+            get => Get<PurchaseReceiptLineType>();
             set => Set(value);
         }
         public NumberName branchId

@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ONIT.VismaNetApi.Models.Enums
 {
-    public enum PurchaseRecieptType
+    public enum PurchaseReceiptStatus
     {
         Undefined = 0,
-        PoReceipt = 1,
-        PoReturn = 2,
-        TransferReceipt = 3
+        Hold = 1,
+        Balanced = 2,
+        Released = 3
     }
 }

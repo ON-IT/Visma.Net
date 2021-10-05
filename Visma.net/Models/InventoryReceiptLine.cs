@@ -7,9 +7,9 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class InventoryRecieptLine : DtoProviderBase
+    public class InventoryReceiptLine : DtoProviderBase
     {
-        public InventoryRecieptLine()
+        public InventoryReceiptLine()
         {
             DtoFields.Add(nameof(lineNumber), new DtoValue(0));
             DtoFields.Add(nameof(quantity), new DtoValue(1));

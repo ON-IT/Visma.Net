@@ -7,9 +7,9 @@ using ONIT.VismaNetApi.Models.Enums;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class PurchaseRecieptLandedcost : DtoProviderBase
+    public class PurchaseReceiptLandedcost : DtoProviderBase
     {
-        public PurchaseRecieptLandedcost()
+        public PurchaseReceiptLandedcost()
         {
             DtoFields.Add(nameof(lineNbr), new DtoValue(0));
             DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));

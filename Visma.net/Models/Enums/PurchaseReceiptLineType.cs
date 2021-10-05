@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ONIT.VismaNetApi.Models.Enums
 {
-    public enum PurchaseRecieptLineType
+    public enum PurchaseReceiptLineType
     {
         Undefined = 0,
         GoodsForInventory = 1,

@@ -19,21 +19,21 @@ namespace ONIT.VismaNetApi.Models
         }
 
         [JsonProperty]
-        public List<PurchaseRecieptLine> lines
+        public List<PurchaseReceiptLine> lines
         {
-            get => Get(defaultValue: new List<PurchaseRecieptLine>());
+            get => Get(defaultValue: new List<PurchaseReceiptLine>());
             private set => Set(value);
         }
         [JsonProperty]
-        public List<PurchaseRecieptLandedcost> landedCost
+        public List<PurchaseReceiptLandedcost> landedCost
         {
-            get => Get(defaultValue: new List<PurchaseRecieptLandedcost>());
+            get => Get(defaultValue: new List<PurchaseReceiptLandedcost>());
             private set => Set(value);
         }
 
-        public PurchaseRecieptType receiptType
+        public PurchaseReceiptType receiptType
         {
-            get => Get<PurchaseRecieptType>();
+            get => Get<PurchaseReceiptType>();
             set => Set(value);
         }
         public string receiptNbr
@@ -46,9 +46,9 @@ namespace ONIT.VismaNetApi.Models
             get => Get<bool>();
             set => Set(value);
         }
-        public PurchaseRecieptStatus status
+        public PurchaseReceiptStatus status
         {
-            get => Get<PurchaseRecieptStatus>();
+            get => Get<PurchaseReceiptStatus>();
             set => Set(value);
         }
         public DateTime date
