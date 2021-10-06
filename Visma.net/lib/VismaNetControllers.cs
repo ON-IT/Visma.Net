@@ -22,6 +22,7 @@ namespace ONIT.VismaNetApi.Lib
         public const string Dimensions = "controller/api/v1/dimension";
         public const string Employee = "controller/api/v1/employee";
         public const string FinAccount = "controller/api/v1/account";
+        public const string FinancialPeriod = "controller/api/v1/financialPeriod";
         public const string Inventory = "controller/api/v1/inventory";
         public const string InventorySummary = "controller/api/v1/inventorysummary";
         public const string JournalTransactionV2 = "controller/api/v2/journaltransaction";

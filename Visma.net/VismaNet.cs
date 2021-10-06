@@ -29,6 +29,7 @@ namespace ONIT.VismaNetApi
         public readonly SupplierData Supplier;
         public readonly InventoryData Inventory;
         public readonly FinAccountData Account;
+        public readonly FinancialPeriodData FinancialPeriod;
         public readonly EmployeeData Employee;
 
         public readonly ShipmentData Shipment;
@@ -87,6 +88,7 @@ namespace ONIT.VismaNetApi
             GeneralLedgerTransaction = new GeneralLedgerTransactionData(Auth);
             GeneralLedgerBalance = new GeneralLedgerBalanceData(Auth);
             Account = new FinAccountData(Auth);
+            FinancialPeriod = new FinancialPeriodData(Auth);
             Employee = new EmployeeData(Auth);
             CreditNote = new CreditNoteData(Auth);
             Shipment = new ShipmentData(Auth);

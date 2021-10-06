@@ -33,12 +33,18 @@ namespace ONIT.VismaNetApi.Lib
         {
             return await VismaNetApiHelper.GetAllWithPagination<CustomerDocument>(VismaNetControllers.CustomerDocument, _authorization);
         }
-        
+
+
+        public async Task<List<CustomerDocument>> Find(NameValueCollection parameters) {
+            return await VismaNetApiHelper.GetAllWithPagination<CustomerDocument>(VismaNetControllers.CustomerDocument, _authorization, parameters);
+        }
+
+
         /// <summary>
         /// Retrieves all documents
         /// </summary>
         /// <returns></returns>
-	    public async Task<List<CustomerDocument>> AllModifiedSince(DateTime date)
+        public async Task<List<CustomerDocument>> AllModifiedSince(DateTime date)
         {
             var parameters = new NameValueCollection
                     {
