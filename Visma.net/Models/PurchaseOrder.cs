@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,15 @@ using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
+=======
+﻿using Newtonsoft.Json;
+using ONIT.VismaNetApi.Lib;
+using ONIT.VismaNetApi.Models.CustomDto;
+using ONIT.VismaNetApi.Models.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+>>>>>>> Stashed changes
 
 namespace ONIT.VismaNetApi.Models
 {
@@ -14,6 +24,7 @@ namespace ONIT.VismaNetApi.Models
         public PurchaseOrder()
         {
             IgnoreProperties.Add(nameof(orderNbr));
+<<<<<<< Updated upstream
             IgnoreProperties.Add("orderNumber");
             RequiredFields.Add(nameof(orderType), new DtoValue("PO"));
         }
@@ -47,25 +58,46 @@ namespace ONIT.VismaNetApi.Models
          private set;
        }
 
+=======
+            IgnoreProperties.Add("orderNbr");
+            RequiredFields.Add(nameof(orderType), new DtoValue("PO"));
+
+        }
+
+        public PurchaseOrder(string orderNo, string orderType)
+        {
+          this.orderNbr = orderNo;
+          this.orderType = orderType;
+          RequiredFields.Add(nameof(orderType), new DtoValue(orderType));
+        }
+
+>>>>>>> Stashed changes
         public string currency
         {
             get => Get<string>();
             set => Set(value);
         }
+<<<<<<< Updated upstream
 
    
+=======
+>>>>>>> Stashed changes
         public DateTime date
         {
             get => Get<DateTime>();
             set => Set(value);
         }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         public string description
         {
             get => Get<string>();
             set => Set(value);
         }
 
+<<<<<<< Updated upstream
 
         [JsonProperty]
         public double exchangeRate
@@ -84,6 +116,15 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty] public DateTime lastModifiedDateTime { get; private set; }
 
+=======
+        public bool hold
+        {
+          get => Get<bool>();
+          set => Set(value);
+        }
+
+    [JsonProperty] public DateTime lastModifiedDateTime { get; private set; }
+>>>>>>> Stashed changes
         [JsonProperty]
         public List<PurchaseOrderLine> lines
         {
@@ -91,6 +132,7 @@ namespace ONIT.VismaNetApi.Models
             private set => Set(value);
         }
 
+<<<<<<< Updated upstream
 
         public LocationSummary location
         {
@@ -98,6 +140,11 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+=======
+        [JsonProperty] public decimal lineTotal { get; private set; }
+
+        [JsonProperty] public decimal lineTotalInBaseCurrency { get; private set; }
+>>>>>>> Stashed changes
         public string note
         {
             get => Get<string>();
@@ -106,6 +153,7 @@ namespace ONIT.VismaNetApi.Models
 
         public string orderNbr
         {
+<<<<<<< Updated upstream
             get => Get<string>("orderNumber");
             set => Set(value, "orderNumber");
         }
@@ -139,6 +187,27 @@ namespace ONIT.VismaNetApi.Models
         */
 
         public DateTime promisedOn
+=======
+            get => Get<string>("orderNbr");
+            set => Set(value, "orderNbr");
+        }
+        public Owner owner
+        {
+            get => Get(defaultValue: new Owner());
+            set => Set(value);
+        }
+        [JsonProperty] public decimal orderTotal { get; private set; }
+
+        [JsonProperty] public decimal orderTotalInBaseCurrency { get; private set; }
+
+        public string orderType
+        {
+          get => Get<string>();
+          set => Set(value);
+        }
+
+    public DateTime promisedOn
+>>>>>>> Stashed changes
         {
             get => Get<DateTime>();
             set => Set(value);
@@ -151,6 +220,7 @@ namespace ONIT.VismaNetApi.Models
           set => Set(value);
         }
 
+<<<<<<< Updated upstream
         [JsonProperty]
         public string status
         {
@@ -194,10 +264,37 @@ namespace ONIT.VismaNetApi.Models
             private set;
         }
 
+=======
+
+    public SoCustomerSummary supplier
+        {
+            get => Get<SoCustomerSummary>();
+            set => Set(value);
+        }
+        public string supplierRef
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        [JsonProperty]
+        public List<TaxDetail> taxDetails { get; private set; }
+        [JsonProperty] public decimal taxTotal { get; private set; }
+        [JsonProperty] public decimal taxTotalInBaseCurrency { get; private set; }
+        [JsonProperty] public decimal vatExemptTotal { get; private set; }
+        [JsonProperty] public decimal vatExemptTotalInBaseCurrency { get; private set; }
+        public void Add(PurchaseOrderLine line)
+        {
+            line.lineNbr = 1;
+            if (lines.Count > 0)
+                line.lineNbr = Math.Max(lines.Count + 1, lines.Max(x => x.lineNbr) + 1);
+            lines.Add(line);
+        }
+>>>>>>> Stashed changes
         public string GetIdentificator()
         {
             return orderNbr;
         }
+<<<<<<< Updated upstream
 
         internal override void PrepareForUpdate()
         {
@@ -236,3 +333,14 @@ namespace ONIT.VismaNetApi.Models
         #endregion
     }
 }
+=======
+        internal override void PrepareForUpdate()
+        {
+            foreach (var purchaseOrderLine in lines)
+            {
+                purchaseOrderLine.operation = ApiOperation.Update;
+            }
+        }
+    }
+}
+>>>>>>> Stashed changes

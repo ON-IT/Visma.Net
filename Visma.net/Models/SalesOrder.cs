@@ -184,7 +184,13 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value, "orderNumber");
         }
 
-        public string paymentRef
+        public bool overrideNumberSeries
+        {
+          get => Get<bool>();
+          set => Set(value);
+        }
+
+    public string paymentRef
         {
             get => Get<string>();
             set => Set(value);
@@ -428,7 +434,15 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public string GetIdentificator()
+        public DescriptiveDto paymentMethod
+        {
+            get => Get(defaultValue: new DescriptiveDto());
+            set => Set(value);
+        }
+
+
+
+    public string GetIdentificator()
         {
             return orderNo;
         }
