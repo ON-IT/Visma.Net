@@ -77,7 +77,11 @@ namespace ONIT.VismaNetApi.Models
       get { return Get<DateTime>(); }
       set { Set(value); }
     }
-
+    public DateTime documentDueDate
+    {
+      get => Get<DateTime>();
+      set => Set(value);
+    }
     public string customerRefNumber
     {
       get { return Get<string>(); }
