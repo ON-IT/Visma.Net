@@ -158,9 +158,9 @@ namespace ONIT.VismaNetApi.Models
             get => Get<DescriptionId>();
             set => Set(value);
         }
-        public Account actualAccount
+        public NumberDescriptionType actualAccount
         {
-            get => Get<Account>();
+            get => Get<NumberDescriptionType>();
             set => Set(value);
         }
         public DescriptionId actualSub
