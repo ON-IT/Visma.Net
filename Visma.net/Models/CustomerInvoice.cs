@@ -187,6 +187,12 @@ namespace ONIT.VismaNetApi.Models
         public SoAddress invoiceAddress
         {
             get => Get(defaultValue: new SoAddress());
+            set => Set(value); 
+        }
+        // Since Visma uses diffrent names for invoiceAdress and billingAdress in POST and Get
+        private SoAddress billingAddress
+        {
+            get =>  Get(defaultValue: new SoAddress());
             set => Set(value);
         }
 
@@ -452,6 +458,8 @@ namespace ONIT.VismaNetApi.Models
         {
             foreach (var customerInvoiceLine in invoiceLines)
                 customerInvoiceLine.operation = ApiOperation.Update;
+
+            billingAddress = invoiceAddress;
         }
     }
 
