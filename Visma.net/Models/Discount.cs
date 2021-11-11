@@ -105,9 +105,9 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public List<discountBreakpoint> discountBreakpoints
+        public List<DiscountBreakpoint> discountBreakpoints
         {
-            get => Get(defaultValue: new List<discountBreakpoint>());
+            get => Get(defaultValue: new List<DiscountBreakpoint>());
             set => Set(value);
         }
 
@@ -130,7 +130,7 @@ namespace ONIT.VismaNetApi.Models
         [JsonProperty]
         public List<JObject> branches { get; private set; }
 
-        public void Add(discountBreakpoint line)
+        public void Add(DiscountBreakpoint line)
         {
             line.lineNbr = 1;
             if (discountBreakpoints.Count > 0)
@@ -146,9 +146,9 @@ namespace ONIT.VismaNetApi.Models
             }
         }
     }
-    public class discountBreakpoint : DtoProviderBase
+    public class DiscountBreakpoint : DtoProviderBase
     {
-        public discountBreakpoint()
+        public DiscountBreakpoint()
         {
             DtoFields.Add("operation", new NotDto<ApiOperation>(ApiOperation.Insert));
             DtoFields.Add("lineNbr", new DtoValue(0));

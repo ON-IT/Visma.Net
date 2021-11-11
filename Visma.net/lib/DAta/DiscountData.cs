@@ -21,5 +21,10 @@ namespace ONIT.VismaNetApi.Lib.Data
             // Redirect to V2 endpoint with correct structure.
             return VismaNetApiHelper.GetAllWithPagination<Discount>(VismaNetControllers.DiscountV2, Authorization);
         }
+
+        public override Task<List<Discount>> Find(NameValueCollection parameters)
+        {
+            return VismaNetApiHelper.GetAllWithPagination<Discount>(VismaNetControllers.DiscountV2, Authorization, parameters);
+        }
     }
 }
