@@ -186,10 +186,10 @@ namespace ONIT.VismaNetApi.Models
 
         public SoAddress invoiceAddress
         {
-            get => Get(defaultValue: new SoAddress());
-            set => Set(value);
+            get => Get("billingAddress", defaultValue: new SoAddress());
+            set => Set(value, "billingAddress"); 
         }
-
+        
         public ContactInvoice invoiceContact
         {
             get => Get(defaultValue: new ContactInvoice());
