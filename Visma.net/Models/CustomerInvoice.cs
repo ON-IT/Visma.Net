@@ -187,18 +187,9 @@ namespace ONIT.VismaNetApi.Models
         public SoAddress invoiceAddress
         {
             get => Get("billingAddress", defaultValue: new SoAddress());
-            set => Set(value, "invoiceAddress"); 
+            set => Set(value, "billingAddress"); 
         }
-        //// Since Visma uses diffrent names for invoiceAdress and billingAdress in POST and Get
-        //private SoAddress billingAddress
-        //{
-        //    get {
-        //        billingAddress = invoiceAddress;
-        //        return Get<SoAddress>(); 
-        //    }
-        //    set => Set(value);
-        //}
-
+        
         public ContactInvoice invoiceContact
         {
             get => Get(defaultValue: new ContactInvoice());

@@ -25,6 +25,7 @@ namespace ONIT.VismaNetApi
         public readonly CustomerData Customer;
         public readonly CurrencyData Currency;
         public readonly DimensionData Dimension;
+        public readonly DiscountData Discount;
         public readonly SupplierInvoiceData SupplierInvoice;
         public readonly SupplierData Supplier;
         public readonly InventoryData Inventory;
@@ -83,6 +84,7 @@ namespace ONIT.VismaNetApi
             CashSale = new CashSaleData(Auth);
             CustomerDocument = new CustomerDocumentData(Auth);
             Dimension = new DimensionData(Auth);
+            Discount = new DiscountData(Auth);
             Inventory = new InventoryData(Auth);
             JournalTransaction = new JournalTransactionData(Auth);
             GeneralLedgerTransaction = new GeneralLedgerTransactionData(Auth);

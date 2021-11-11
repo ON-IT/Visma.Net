@@ -280,8 +280,12 @@ namespace ONIT.VismaNetApi.Models
             get => Get<decimal>();
             set => Set(value);
         }
-
         public decimal vatExemptTotalInCurrency
+        {
+            get => Get<decimal>();
+            set => Set(value);
+        }
+        public decimal amount
         {
             get => Get<decimal>();
             set => Set(value);
