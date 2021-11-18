@@ -68,16 +68,19 @@ namespace ONIT.VismaNetApi.Models
             get => Get<DateTime?>();
             set => Set(value);
         }
+        [JsonProperty]
         public DateTime? lastUpdateDate
         {
             get; //=> Get<DateTime?>();
             private set; //=> Set(value);
         }
+        [JsonProperty]
         public DateTime? createdDateTime
         {
             get; //=> Get<DateTime?>();
             private set; //=> Set(value);
         }
+        [JsonProperty]
         public DateTime? lastModifiedDateTime
         {
             get; //=> Get<DateTime?>();
