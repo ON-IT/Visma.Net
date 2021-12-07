@@ -100,6 +100,28 @@ namespace ONIT.VismaNetApi.Models
         }
     }
 
+  public class EntryType : DescriptiveDto
+  {
+    public EntryType()
+    {
+
+    }
+    public static implicit operator EntryType(string id)
+    {
+      return new EntryType
+      {
+        id = id
+      };
+    }
+
+    public EntryType(string id)
+        : base(id)
+    {
+    }
+
+  }
+
+
     public class VatCode : DescriptiveDto
     {
         public VatCode()
