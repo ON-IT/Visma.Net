@@ -33,8 +33,23 @@ namespace ONIT.VismaNetApi.Models
 
     public string offsetAccount { get => Get<string>(); set => Set(value); }
 
-    [JsonProperty] 
-    public Subaccount offsetSubaccount { get; private set; }
+    //[JsonProperty] 
+    //public Subaccount offsetSubaccount { get; private set; }
+
+    //public CustomDto.Subaccount offsetSubaccount
+    //{
+    //  get => Get(defaultValue: new CustomDto.Subaccount());
+    //  set => Set(value);
+    //}
+
+
+    public CustomDto.Subaccount offsetSubaccount
+    {
+      get => Get(defaultValue: new CustomDto.Subaccount());
+      set => Set(value);
+    }
+
+
 
     public string vatCode { get => Get<string>(); set => Set(value); }
 
