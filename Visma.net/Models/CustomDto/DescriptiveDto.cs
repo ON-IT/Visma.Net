@@ -289,37 +289,4 @@ namespace ONIT.VismaNetApi.Models
         }
     }
 
-  //public class DefaultWarehouse : DescriptiveDto
-  //{
-  //  public DefaultWarehouse()
-  //  {
-  //  }
-
-  //  public DefaultWarehouse(string id) : base(id)
-  //  {
-  //  }
-
-  //  public static implicit operator DefaultWarehouse(string id)
-  //  {
-  //    return new DefaultWarehouse(id);
-  //  }
-  //}
-
-  //public class DefaultWarehouse : DescriptiveDto
-  //{
-  //  public DefaultWarehouse()
-  //  {
-  //  }
-
-  //  public DefaultWarehouse(string id) : base(id)
-  //  {
-  //  }
-
-  //  public static implicit operator DefaultWarehouse(string id)
-  //  {
-  //    return new DefaultWarehouse(id);
-  //  }
-  //}
-
-
 }
