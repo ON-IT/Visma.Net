@@ -288,4 +288,5 @@ namespace ONIT.VismaNetApi.Models
             return new PostingClass(id);
         }
     }
+
 }
