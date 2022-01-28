@@ -9,16 +9,17 @@ namespace ONIT.VismaNetApi.Models
     public class ExchangeRate : DtoProviderBase
     {
         [JsonProperty]
-        public int currencyInfoId { get; set; }
-        [JsonProperty]
-        public int currencyRateId { get; set; }
-        public string currencyId
+        public int id { get; set; }
+        public string fromCurrencyId
         {
             get => Get<string>();
             set => Set(value);
         }
-        [JsonProperty]
-        public string baseCurrencyId { get; set; }
+        public string toCurrencyId
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
         public string rateType
         {
             get => Get<string>();
@@ -35,7 +36,7 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
         [JsonProperty]
-        public decimal recipRate { get; set; }
+        public decimal rateReciprocal { get; set; }
         public string multDiv
         {
             get => Get<string>();

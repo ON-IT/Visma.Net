@@ -277,7 +277,7 @@ namespace ONIT.VismaNetApi.Lib
         {
             var webClient = GetHttpClient(auth);
             {
-                var apiUrl = GetApiUrlForController(VismaNetControllers.Currency, $"/exchangerates/{toCurrencyId.TrimStart('/')}/{effectiveDate.ToString("yyyy-MM-dd")}");
+                var apiUrl = GetApiUrlForController(VismaNetControllers.CurrencyRate, $"?toCurrency={toCurrencyId.TrimStart('/')}&fromDate={effectiveDate.ToString("yyyy-MM-dd")}&toDate={effectiveDate.ToString("yyyy-MM-dd")}");
                 return await webClient.Get<List<ExchangeRate>>(apiUrl);
             }
         }
@@ -286,8 +286,8 @@ namespace ONIT.VismaNetApi.Lib
         {
             var webClient = GetHttpClient(auth);
             {
-                var apiUrl = GetApiUrlForController(VismaNetControllers.Currency, $"/exchangerates/{exchangeRate.baseCurrencyId.TrimStart('/')}");
-                return await webClient.Post<List<ExchangeRate>>(apiUrl,exchangeRate.ToDto(), $"{GetApiUrlForController(VismaNetControllers.Currency)}/exchangerates/{exchangeRate.baseCurrencyId.TrimStart('/')}/{exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}", true);
+                var apiUrl = GetApiUrlForController(VismaNetControllers.CurrencyRate, $"/");
+                return await webClient.Post<List<ExchangeRate>>(apiUrl,exchangeRate.ToDto(), $"{GetApiUrlForController(VismaNetControllers.CurrencyRate)}?toCurrency={exchangeRate.toCurrencyId.TrimStart('/')}&fromDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}&toDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}", true);
             }
         }
 
@@ -295,8 +295,8 @@ namespace ONIT.VismaNetApi.Lib
         {
             var webClient = GetHttpClient(auth);
             {
-                var apiUrl = GetApiUrlForController(VismaNetControllers.Currency, $"/exchangerates/{exchangeRate.currencyRateId}");
-                return await webClient.Put<List<ExchangeRate>>(apiUrl, exchangeRate.ToDto(),$"{GetApiUrlForController(VismaNetControllers.Currency)}/exchangerates/{exchangeRate.baseCurrencyId.TrimStart('/')}/{exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}",true);
+                var apiUrl = GetApiUrlForController(VismaNetControllers.CurrencyRate, $"/");
+                return await webClient.Put<List<ExchangeRate>>(apiUrl, exchangeRate.ToDto(), $"{GetApiUrlForController(VismaNetControllers.CurrencyRate)}?toCurrency={exchangeRate.toCurrencyId.TrimStart('/')}&fromDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}&toDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}", true);
             }
         }
 
