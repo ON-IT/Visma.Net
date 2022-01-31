@@ -23,7 +23,7 @@ namespace ONIT.VismaNetApi.Models
     {
       IgnoreProperties.Add(nameof(this.referenceNumber));
     }
-
+    
 
 
     #region Writable properties (CustomerInvoiceUpdateDto)
@@ -151,7 +151,77 @@ namespace ONIT.VismaNetApi.Models
       get { return Get<int?>(); }
       set { Set(value); }
     }
+    public ContactSummary contact
+    {
+        get => Get<ContactSummary>();
+        set => Set(value);
+    }
 
+    public DescriptiveDto project
+    {
+        get => Get<DescriptiveDto>();
+        set => Set(value);
+    }
+
+    public CustomerVatZone customerVatZone
+    {
+        get => Get<CustomerVatZone>("customerVatZoneId");
+        set => Set(value, "customerVatZoneId");
+    }
+
+    public SoAddress invoiceAddress
+    {
+        get => Get(defaultValue: new SoAddress());
+        set => Set(value);
+    }
+
+    public ContactInvoice invoiceContact
+    {
+        get => Get(defaultValue: new ContactInvoice());
+        set => Set(value);
+    }
+
+    public bool sendToAutoInvoice
+    {
+        get => Get<bool>();
+        set => Set(value);
+    }
+
+    public DateTime origInvoiceDate
+    {
+        get => Get<DateTime>();
+        set => Set(value);
+    }
+
+    public string financialPeriod
+    {
+        get => Get<string>();
+        set => Set(value);
+    }
+
+    public string cashAccount
+    {
+        get => Get<string>();
+        set => Set(value);
+    }
+
+    public CustomerSummary customer
+    {
+        get => Get<CustomerSummary>("customerNumber", new CustomerSummary());
+        set => Set(value, "customerNumber");
+    }
+
+    public NumberName branchNumber
+    {
+        get => Get<NumberName>();
+        set => Set(value);
+    }
+
+    public string note
+    {
+        get => Get<string>();
+        set => Set(value);
+    }
     #endregion
 
     #region Read only properties (CustomerInvoiceDto)
@@ -168,12 +238,6 @@ namespace ONIT.VismaNetApi.Models
     {
       get { return Get<InvoiceStatus>(); }
       private set { Set(value); }
-    }
-
-    public CustomerSummary customer
-    {
-      get => Get<CustomerSummary>("customerNumber", new CustomerSummary());
-      set => Set(value, "customerNumber");
     }
 
     [JsonProperty]
@@ -218,12 +282,6 @@ namespace ONIT.VismaNetApi.Models
       private set { Set(value); }
     }
 
-    public VatCode vatCode
-    {
-      get { return Get<VatCode>(); }
-      set { Set(value); }
-    }
-
     [JsonProperty]
     public decimal vatTotal
     {
@@ -252,12 +310,6 @@ namespace ONIT.VismaNetApi.Models
       private set { Set(value); }
     }
 
-    public NumberName branchNumber
-    {
-      get => Get<NumberName>();
-      set => Set(value);
-    }
-
     [JsonProperty]
     public decimal amount
     {
@@ -269,7 +321,7 @@ namespace ONIT.VismaNetApi.Models
     public decimal amountInCurrency
     {
       get { return Get<decimal>(); }
-      set { Set(value); }
+      private set { Set(value); }
     }
 
     [JsonProperty]
@@ -312,20 +364,6 @@ namespace ONIT.VismaNetApi.Models
     {
       get { return Get<string>(); }
       private set { Set(value); }
-    }
-
-
-    public string note
-    {
-      get => Get<string>();
-      set => Set(value);
-    }
-
-    public CustomerVatZone customerVatZone
-    {
-      get => Get<CustomerVatZone>("customerVatZoneId");
-      set => Set(value, "customerVatZoneId");
-
     }
 
     #endregion
