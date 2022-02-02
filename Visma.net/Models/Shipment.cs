@@ -56,9 +56,9 @@ namespace ONIT.VismaNetApi.Models
             set { Set(value); }
         }
 
-        public Customer customer
+        public SoCustomerSummary customer
         {
-            get { return Get<Customer>(); }
+            get { return Get<SoCustomerSummary>(); }
             set { Set(value); }
         }
 
