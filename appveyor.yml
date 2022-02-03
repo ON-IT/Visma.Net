@@ -1,4 +1,4 @@
-- version: 3.7.4-pre-{build}
+- version: 3.7.5-pre-{build}
   image: Visual Studio 2017
   pull_requests:
     do_not_increment_build_number: true
@@ -16,7 +16,7 @@
     verbosity: minimal
   environment:
     api_key:
-      secure: bbuSczgkYtHFRXBw+FPW74bn4SlbY2gWdBqLCjwJARyBlwHxTM06FnvSzva/5CSd
+      secure: Zmz7YDRuNyXnWhC1RXktwDJuXwhZOXdKOOkavWkf917x3g+CQco0R9dLiAv56NCc
   deploy_script:
     - ps: ($artifacts.values | Where-Object {($_.path -like '*.nupkg') -and  !($_.path -like '*.symbols.nupkg')}) | foreach-object { write-host $_.path; dotnet nuget push $_.path -s https://www.nuget.org/api/v2/package -k $env:api_key; if ($lastexitcode -ne 0) {throw}}
 

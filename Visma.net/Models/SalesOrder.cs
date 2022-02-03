@@ -221,6 +221,11 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
+        public string gln
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
         /*
         public Owner owner
         {
@@ -428,6 +433,12 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        public DescriptiveDto paymentMethod
+        {
+            get => Get(defaultValue: new DescriptiveDto());
+            set => Set(value);
+        }
+        
         public string GetIdentificator()
         {
             return orderNo;

@@ -68,7 +68,16 @@ namespace ONIT.VismaNetApi.Models
             private set => _attachments = value;
         }
 
-        public decimal balance
+
+    [JsonProperty]
+    public List<TaxDetail> taxDetailLines
+    {
+      get; //=> Get("taxDetailLines", new List<TaxDetail>());
+
+      private set; //=> Set(value, "taxDetailsLines");
+    }
+
+    public decimal balance
         {
             get => Get<decimal>();
             set => Set(value);
@@ -271,8 +280,12 @@ namespace ONIT.VismaNetApi.Models
             get => Get<decimal>();
             set => Set(value);
         }
-
         public decimal vatExemptTotalInCurrency
+        {
+            get => Get<decimal>();
+            set => Set(value);
+        }
+        public decimal amount
         {
             get => Get<decimal>();
             set => Set(value);
@@ -313,8 +326,10 @@ namespace ONIT.VismaNetApi.Models
             get => Get<decimal>();
             set => Set(value);
         }
-        
-        [JsonProperty]
+
+
+
+    [JsonProperty]
         public JObject extras { get; private set; }
 
         [JsonProperty] public string errorInfo { get; private set; }

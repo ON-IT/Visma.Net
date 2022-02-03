@@ -102,7 +102,25 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-        public string purchaseUnit
+    public DescriptiveDto defaultWarehouse
+    {
+      get => Get<DescriptiveDto>();
+      set => Set(value);
+    }
+
+    public DescriptiveDto defaultIssueFrom
+    {
+      get => Get<DescriptiveDto>();
+      set => Set(value);
+    }
+
+    public DescriptiveDto defaultReceiptTo
+    {
+      get => Get<DescriptiveDto>();
+      set => Set(value);
+    }
+
+    public string purchaseUnit
         {
             get => Get<string>();
             set => Set(value);

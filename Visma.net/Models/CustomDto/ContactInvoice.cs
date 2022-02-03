@@ -16,8 +16,8 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 
         public string businessName
         {
-            get => Get<string>();
-            set => Set(value?.Trim());
+            get => Get<string>("name");
+            set => Set(value?.Trim(), "name");
         }
         public string attention
         {
