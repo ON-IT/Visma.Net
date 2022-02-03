@@ -114,7 +114,7 @@ namespace ONIT.VismaNetApi.Dynamic
                     nvc.Add(keyValuePair.Key, keyValuePair.Value);
                 }
             }
-            return await VismaNetApiHelper.GetAll<JObject>($"{_base}{_endpointName}", _auth, nvc);
+            return await VismaNetApiHelper.GetAllAsDefined<JToken>($"{_base}{_endpointName}", _auth, nvc);
         }
 
         #endregion

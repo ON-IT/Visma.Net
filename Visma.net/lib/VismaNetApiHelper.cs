@@ -368,6 +368,13 @@ namespace ONIT.VismaNetApi.Lib
             return await webclient.Get<List<T>>(endpoint);
         }
 
+        internal static async Task<T> GetAllAsDefined<T>(string apiControllerUri, VismaNetAuthorization authorization,
+            NameValueCollection parameters = null)
+        {
+            var webclient = GetHttpClient(authorization);
+            var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
+            return await webclient.Get<T>(endpoint);
+        }
 
         private static NameValueCollection CreatePagionationParameters(int pageSize, int page, NameValueCollection parameters)
         {
