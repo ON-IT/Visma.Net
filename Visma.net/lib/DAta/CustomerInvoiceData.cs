@@ -1,10 +1,9 @@
-﻿using System;
+﻿using ONIT.VismaNetApi.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using ONIT.VismaNetApi.Helpers;
-using ONIT.VismaNetApi.Models;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
@@ -37,7 +36,7 @@ namespace ONIT.VismaNetApi.Lib.Data
             rsp = await VismaNetApiHelper.Create(entity, VismaNetControllers.CustomerInvoiceV2, Authorization, ApiControllerUri);
             System.Diagnostics.Trace.TraceInformation($"Finished post AddLarge CustomerInvoice {DateTime.Now.ToString()}");
             rsp.InternalPrepareForUpdate();
-               
+
             //rsp = await Get(rsp.GetIdentificator());
             return rsp;
         }
@@ -82,8 +81,7 @@ namespace ONIT.VismaNetApi.Lib.Data
         /// <returns></returns>
         public async Task<List<CustomerInvoice>> ForCustomer(string customerNumber)
         {
-            var apiUrl = VismaNetApiHelper.GetApiUrlForController(VismaNetControllers.Customers, $"{customerNumber}/invoice");
-            return await VismaNetApiHelper.GetAllWithPagination<CustomerInvoice>(apiUrl, Authorization);
+            return await VismaNetApiHelper.GetAllWithPagination<CustomerInvoice>($"{VismaNetControllers.Customers}/{customerNumber}/invoice", Authorization);
         }
 
         /// <summary>
