@@ -438,7 +438,20 @@ namespace ONIT.VismaNetApi.Models
             get => Get(defaultValue: new DescriptiveDto());
             set => Set(value);
         }
-        
+
+        public string cashAccount
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public int contactId
+        {
+            get => Get<int>();
+            set => Set(value);
+        }
+
+
         public string GetIdentificator()
         {
             return orderNo;
