@@ -202,9 +202,11 @@ namespace ONIT.VismaNetApi.Lib
 
         internal static Task<string> AddAttachmentToJournalTransaction(VismaNetAuthorization auth, string batch,
             byte[] bytes,
-            string fileName)
+            string fileName,
+            JournalTransactionModule module = JournalTransactionModule.ModuleGL)
         {
-            var url = GetApiUrlForController(VismaNetControllers.JournalTransactionV2, $"/{batch}/attachment");
+
+            var url = GetApiUrlForController(VismaNetControllers.JournalTransactionV2, $"/module/{module.ToString().Substring(6)}/{batch}/attachment");
             return AddAttachmentToController<string>(auth, url, bytes, fileName);
         }
 
@@ -396,6 +398,13 @@ namespace ONIT.VismaNetApi.Lib
             return await webclient.Get<List<T>>(endpoint);
         }
 
+        internal static async Task<T> GetAllAsDefined<T>(string apiControllerUri, VismaNetAuthorization authorization,
+            NameValueCollection parameters = null)
+        {
+            var webclient = GetHttpClient(authorization);
+            var endpoint = GetApiUrlForController(apiControllerUri, parameters: parameters);
+            return await webclient.Get<T>(endpoint);
+        }
 
         private static NameValueCollection CreatePagionationParameters(int pageSize, int page, NameValueCollection parameters)
         {
@@ -422,7 +431,7 @@ namespace ONIT.VismaNetApi.Lib
             return destination;
         }
 
-        const int initialPageSize = 100;
+        const int initialPageSize = 1000;
         public static async Task<List<T>> GetAllWithPagination<T>(string ApiControllerUri, VismaNetAuthorization Authorization, NameValueCollection parameters = null) where T : DtoPaginatedProviderBase, IProvideIdentificator
         {
             var firstPage = await GetAll<T>(ApiControllerUri, Authorization, CreatePagionationParameters(initialPageSize, 1, parameters));

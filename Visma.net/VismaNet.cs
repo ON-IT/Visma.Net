@@ -137,14 +137,14 @@ namespace ONIT.VismaNetApi
 
     private static int maxConcurrentRequests;
     /// <summary>
-    /// Gets or sets the maximum number of concurrent requests sent to the API. Min: 1, Max: 32, Default: Environment.ProcessorCount * 2 (unless > 32.).
+    /// Gets or sets the maximum number of concurrent requests sent to the API. Min: 1, Max: 8.
     /// </summary>
     public static int MaxConcurrentRequests
     {
       get
       {
         var requestLimit = maxConcurrentRequests > 0 ? maxConcurrentRequests : 8;
-        return requestLimit > 16 ? 16 : requestLimit;
+        return requestLimit > 8 ? 8 : requestLimit;
       }
 
       set => maxConcurrentRequests = value > 0 ? value : maxConcurrentRequests;
