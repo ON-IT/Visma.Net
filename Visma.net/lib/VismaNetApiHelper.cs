@@ -180,7 +180,7 @@ namespace ONIT.VismaNetApi.Lib
             byte[] bytes,
             string fileName)
         {
-            var url = GetApiUrlForController(VismaNetControllers.CreditNote, $"/{number}/attachment");
+            var url = GetApiUrlForController(VismaNetControllers.CustomerCreditNote, $"/{number}/attachment");
             return AddAttachmentToController<string>(auth, url, bytes, fileName);
         }
 
@@ -188,7 +188,7 @@ namespace ONIT.VismaNetApi.Lib
             Stream stream,
             string fileName)
         {
-            var url = GetApiUrlForController(VismaNetControllers.CreditNote, $"/{number}/attachment");
+            var url = GetApiUrlForController(VismaNetControllers.CustomerCreditNote, $"/{number}/attachment");
             return AddAttachmentToController<string>(auth, url, stream, fileName);
         }
 
