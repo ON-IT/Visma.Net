@@ -1,0 +1,67 @@
+﻿{
+  type: Payment,
+  refNbr: string,
+  status: Hold,
+  hold: true,
+  applicationDate: DateTime_1,
+  applicationPeriod: string,
+  paymentRef: string,
+  customer: {
+    number: string,
+    name: string
+  },
+  location: {
+    countryId: string,
+    id: string,
+    name: string
+  },
+  paymentMethod: {
+    description: string,
+    id: string
+  },
+  cashAccount: string,
+  currency: string,
+  invoiceText: string,
+  branch: string,
+  lastModifiedDateTime: DateTime_1,
+  paymentLines: [
+    {
+      operation: Insert,
+      documentType: Invoice,
+      refNbr: string,
+      writeOffReasonCode: {
+        description: string,
+        id: string
+      },
+      date: DateTime_1,
+      dueDate: DateTime_1,
+      cashDiscountDate: DateTime_1,
+      description: string,
+      currency: string,
+      postPeriod: string,
+      customerOrder: string
+    }
+  ],
+  ordersToApply: [
+    {
+      operation: Insert,
+      orderType: string,
+      orderNo: string,
+      status: Open,
+      date: DateTime_1,
+      dueDate: DateTime_1,
+      cashDiscountDate: DateTime_1,
+      description: string,
+      currency: string,
+      invoiceNbr: string,
+      invoiceDate: DateTime_1
+    }
+  ],
+  extras: {
+    additionalProp1: {},
+    additionalProp2: {},
+    additionalProp3: {}
+  },
+  errorInfo: string,
+  metadata: {}
+}

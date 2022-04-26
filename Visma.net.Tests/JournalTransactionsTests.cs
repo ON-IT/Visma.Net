@@ -2,7 +2,7 @@
 using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
 
-namespace Visma.net.tests.Tests
+namespace Visma.net.Tests
 {
     public class JournalTransactionsTests : EntityBaseTest<JournalTransaction>
     {
@@ -47,7 +47,7 @@ namespace Visma.net.tests.Tests
           ""lastModifiedDateTime"": ""2018-05-22T07:27:28.561Z"",
           ""segments"": [
             {
-              ""segmentId"": 0,
+              ""segmentId"": 1,
               ""segmentDescription"": ""string"",
               ""segmentValue"": ""string"",
               ""segmentValueDescription"": ""string""

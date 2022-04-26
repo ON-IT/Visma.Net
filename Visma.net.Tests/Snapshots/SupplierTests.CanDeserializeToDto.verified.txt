@@ -1,0 +1,228 @@
+﻿{
+  accountReference: {
+    Value: string
+  },
+  accountUsedForPayment: {
+    Value: IBAN
+  },
+  attributeLines: [
+    {
+      attributeId: {
+        Value: string
+      },
+      attributeValue: {
+        Value: string
+      }
+    }
+  ],
+  cashAccount: {
+    Value: string
+  },
+  chargeBearer: {
+    Value: Payer
+  },
+  corporateId: {
+    Value: string
+  },
+  creditTermsId: {
+    Value: string
+  },
+  currencyId: {
+    Value: string
+  },
+  documentLanguage: {
+    Value: string
+  },
+  mainAddress: {
+    Value: {
+      addressLine1: {
+        Value: string
+      },
+      addressLine2: {
+        Value: string
+      },
+      addressLine3: {
+        Value: string
+      },
+      city: {
+        Value: string
+      },
+      countryId: {
+        Value: string
+      },
+      county: {
+        Value: string
+      },
+      postalCode: {
+        Value: string
+      }
+    }
+  },
+  mainContact: {
+    Value: {
+      attention: {
+        Value: string
+      },
+      email: {
+        Value: string
+      },
+      fax: {
+        Value: string
+      },
+      name: {
+        Value: string
+      },
+      phone1: {
+        Value: string
+      },
+      phone2: {
+        Value: string
+      },
+      web: {
+        Value: string
+      }
+    }
+  },
+  name: {
+    Value: string
+  },
+  overrideWithClassValues: true,
+  parentRecordNumber: {
+    Value: string
+  },
+  paymentBy: {
+    Value: DueDate
+  },
+  paymentLeadTime: {
+    Value: 0
+  },
+  paymentMethodId: {
+    Value: string
+  },
+  paymentRefDisplayMask: {
+    Value: string
+  },
+  paySeparately: {
+    Value: true
+  },
+  remitAddress: {
+    Value: {
+      addressLine1: {
+        Value: string
+      },
+      addressLine2: {
+        Value: string
+      },
+      addressLine3: {
+        Value: string
+      },
+      city: {
+        Value: string
+      },
+      countryId: {
+        Value: string
+      },
+      county: {
+        Value: string
+      },
+      postalCode: {
+        Value: string
+      }
+    }
+  },
+  remitContact: {
+    Value: {
+      attention: {
+        Value: string
+      },
+      email: {
+        Value: string
+      },
+      fax: {
+        Value: string
+      },
+      name: {
+        Value: string
+      },
+      phone1: {
+        Value: string
+      },
+      phone2: {
+        Value: string
+      },
+      web: {
+        Value: string
+      }
+    }
+  },
+  status: {
+    Value: Active
+  },
+  supplierAddress: {
+    Value: {
+      addressLine1: {
+        Value: string
+      },
+      addressLine2: {
+        Value: string
+      },
+      addressLine3: {
+        Value: string
+      },
+      city: {
+        Value: string
+      },
+      countryId: {
+        Value: string
+      },
+      county: {
+        Value: string
+      },
+      postalCode: {
+        Value: string
+      }
+    }
+  },
+  supplierClassId: {
+    Value: string
+  },
+  supplierContact: {
+    Value: {
+      attention: {
+        Value: string
+      },
+      email: {
+        Value: string
+      },
+      fax: {
+        Value: string
+      },
+      name: {
+        Value: string
+      },
+      phone1: {
+        Value: string
+      },
+      phone2: {
+        Value: string
+      },
+      web: {
+        Value: string
+      }
+    }
+  },
+  supplierPaymentMethodDetails: [
+    {
+      paymentMethodDetailDescription: string,
+      paymentMethodDetailValue: {
+        Value: string
+      }
+    }
+  ],
+  vatRegistrationId: {
+    Value: string
+  },
+  vatZoneId: {
+    Value: string
+  }
+}

@@ -1,0 +1,163 @@
+﻿{
+  account: {
+    description: string,
+    number: string,
+    type: Asset,
+    externalCode1: string,
+    externalCode2: string
+  },
+  attachments: [
+    {
+      name: string,
+      id: string
+    }
+  ],
+  branchNumber: {
+    number: string,
+    name: string
+  },
+  cashAccount: string,
+  cashDiscountDate: DateTime_1,
+  closedFinancialPeriod: string,
+  contact: {
+    name: string
+  },
+  createdDateTime: DateTime_1,
+  creditTerms: {
+    description: string,
+    id: string
+  },
+  currencyId: string,
+  customer: {
+    number: string,
+    name: string
+  },
+  customerRefNumber: string,
+  documentDate: DateTime_1,
+  documentDueDate: DateTime_1,
+  documentType: Invoice,
+  invoiceAddress: {
+    country: {}
+  },
+  invoiceContact: {},
+  dunningLetterDate: DateTime_1,
+  errorInfo: string,
+  externalReference: string,
+  financialPeriod: string,
+  hold: true,
+  invoiceLines: [
+    {
+      account: {
+        description: string,
+        number: string,
+        type: Asset,
+        externalCode1: string,
+        externalCode2: string
+      },
+      attachments: [
+        {
+          name: string,
+          id: string
+        }
+      ],
+      branchNumber: {
+        number: string,
+        name: string
+      },
+      deferralCode: string,
+      description: string,
+      discountCode: string,
+      inventoryNumber: string,
+      isRotRutDeductible: true,
+      itemType: Service,
+      manualDiscount: true,
+      note: string,
+      operation: Insert,
+      projectTask: {
+        description: string,
+        id: string
+      },
+      salesperson: string,
+      seller: {
+        description: string,
+        id: string
+      },
+      subaccount: {
+        description: string,
+        lastModifiedDateTime: DateTimeOffset_1,
+        subaccountNumber: string,
+        segments: [
+          {
+            segmentDescription: string,
+            segmentValue: string,
+            segmentValueDescription: string
+          }
+        ],
+        errorInfo: string,
+        metadata: {}
+      },
+      termEndDate: DateTime_1,
+      termStartDate: DateTime_1,
+      typeOfWork: {
+        rutRotType: Rut,
+        description: string,
+        xmlTag: string
+      },
+      uOM: string,
+      vatCode: {
+        description: string,
+        id: string
+      }
+    }
+  ],
+  invoiceText: string,
+  isRotRutDeductible: true,
+  lastModifiedDateTime: DateTime_1,
+  location: {
+    countryId: string,
+    id: string,
+    name: string
+  },
+  note: string,
+  paymentMethod: {
+    description: string,
+    id: string
+  },
+  paymentReference: string,
+  postPeriod: string,
+  project: {
+    description: string,
+    id: string
+  },
+  referenceNumber: string,
+  salesPerson: {
+    description: string,
+    id: string
+  },
+  rotRutDetails: {},
+  salesPersonDescr: string,
+  salesPersonID: 0,
+  status: Hold,
+  subaccount: {
+    subaccountNumber: 0,
+    description: string,
+    errorInfo: string,
+    lastModifiedDateTime: DateTimeOffset_2,
+    segments: [
+      {
+        segmentDescription: string,
+        segmentValue: string,
+        segmentValueDescription: string
+      }
+    ]
+  },
+  TaxDetails: [
+    {
+      taxId: string,
+      vatId: {
+        number: string,
+        description: string
+      }
+    }
+  ]
+}

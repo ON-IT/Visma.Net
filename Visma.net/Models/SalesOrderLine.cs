@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace ONIT.VismaNetApi.Models
 {
@@ -35,6 +35,14 @@ namespace ONIT.VismaNetApi.Models
             get => Get<NumberName>();
             set => Set(value);
         }
+
+        [JsonProperty]
+        public string projectTaskCd { get; private set; }
+
+        public bool isRotRutDeductible { get => Get<bool>(); set => Set(value); }
+
+        [JsonProperty]
+        public double unitPriceInBaseCurrency { get; private set; }
 
         public bool commissionable
         {
@@ -96,7 +104,7 @@ namespace ONIT.VismaNetApi.Models
             get => Get<NumberDescription>("inventoryNumber");
             set => Set(value, "inventoryNumber");
         }
-        
+
         public string invoiceNbr
         {
             get => Get<string>();
@@ -140,7 +148,7 @@ namespace ONIT.VismaNetApi.Models
         }
 
         [JsonProperty] public double openQty { get; private set; }
-        
+
         public double overshipThreshold
         {
             get => Get<double>();
@@ -212,13 +220,13 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty] public int sortOrder { get; private set; }
 
-        
+
         public CustomDto.SubaccountOrderLine subaccount
         {
             get => Get(defaultValue: new CustomDto.SubaccountOrderLine());
             set => Set(value);
         }
-        
+
         public string taxCategory
         {
             get => Get<string>();

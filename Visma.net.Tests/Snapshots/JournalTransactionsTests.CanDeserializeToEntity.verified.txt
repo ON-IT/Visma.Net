@@ -1,0 +1,80 @@
+﻿{
+  attachments: [
+    {
+      name: string,
+      id: string
+    }
+  ],
+  autoReversing: true,
+  batchNumber: string,
+  branch: string,
+  createVatTransaction: true,
+  currencyId: string,
+  description: string,
+  errorInfo: string,
+  financialPeriod: string,
+  hold: true,
+  journalTransactionLines: [
+    {
+      accountNumber: string,
+      attachments: [
+        {
+          name: string,
+          id: string
+        }
+      ],
+      branch: string,
+      customerSupplier: string,
+      description: string,
+      module: ModuleGL,
+      operation: Insert,
+      project: {
+        description: string,
+        id: string
+      },
+      projectTask: {
+        description: string,
+        id: string
+      },
+      referenceNumber: string,
+      subaccount: {
+        description: string,
+        lastModifiedDateTime: DateTimeOffset_1,
+        subaccountNumber: string,
+        segments: [
+          {
+            segmentId: Id_1,
+            segmentDescription: string,
+            segmentValue: string,
+            segmentValueDescription: string
+          }
+        ],
+        errorInfo: string,
+        metadata: {}
+      },
+      transactionDescription: string,
+      transactionType: string,
+      uom: string,
+      vat: {
+        description: string,
+        id: string
+      },
+      vatCode: {
+        description: string,
+        id: string
+      }
+    }
+  ],
+  lastModifiedDateTime: DateTime_1,
+  ledger: string,
+  ledgerDescription: string,
+  module: ModuleGL,
+  originalBatchNumber: string,
+  postPeriod: string,
+  reversingEntry: true,
+  skipVatAmountValidation: true,
+  status: Hold,
+  transactionCode: string,
+  transactionCodeDescription: string,
+  transactionDate: DateTime_1
+}

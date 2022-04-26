@@ -3,13 +3,14 @@ using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
 
-namespace Visma.net.tests.Tests
+namespace Visma.net.Tests
 {
     public class SalesOrderTests : EntityBaseTest<SalesOrder>
     {
         private static readonly string dto = @"
 {
   ""project"": 0,
+  ""projectCD"": ""string"",
   ""printDescriptionOnInvoice"": true,
   ""printNoteOnExternalDocuments"": true,
   ""printNoteOnInternalDocuments"": true,
@@ -35,14 +36,10 @@ namespace Visma.net.tests.Tests
     ""country"": {
       ""id"": ""string"",
       ""name"": ""string"",
-      ""extras"": {
-        ""additionalProp1"": {},
-        ""additionalProp2"": {},
-        ""additionalProp3"": {}
-      },
       ""errorInfo"": ""string"",
       ""metadata"": {
-        ""totalCount"": 0
+        ""totalCount"": 0,
+        ""maxPageSize"": 0
       }
     },
     ""county"": {
@@ -58,35 +55,34 @@ namespace Visma.net.tests.Tests
       ""number"": ""string"",
       ""description"": ""string""
     },
-    ""extras"": {
-      ""additionalProp1"": {},
-      ""additionalProp2"": {},
-      ""additionalProp3"": {}
-    },
     ""errorInfo"": ""string"",
     ""metadata"": {
-      ""totalCount"": 0
+      ""totalCount"": 0,
+      ""maxPageSize"": 0
     }
   },
   ""invoiceSeparately"": true,
   ""invoiceNbr"": ""string"",
-  ""invoiceDate"": ""2019-06-25T07:53:56.740Z"",
+  ""invoiceDate"": ""2022-04-26T12:18:39.596Z"",
   ""terms"": {
     ""id"": ""string"",
     ""description"": ""string""
   },
-  ""dueDate"": ""2019-06-25T07:53:56.740Z"",
-  ""cashDiscountDate"": ""2019-06-25T07:53:56.740Z"",
+  ""dueDate"": ""2022-04-26T12:18:39.596Z"",
+  ""cashDiscountDate"": ""2022-04-26T12:18:39.596Z"",
   ""postPeriod"": ""string"",
   ""salesPerson"": {
     ""id"": ""string"",
     ""description"": ""string""
   },
-   ""owner"": {
-    ""id"": ""string"",
+  ""commissionPercent"": ""string"",
+  ""commissionAmount"": ""string"",
+  ""commissionableAmount"": ""string"",
+  ""owner"": {
+    ""id"": ""00000000-0000-0000-0000-000000000000"",
     ""employeeId"": ""string"",
     ""name"": ""string""
-  }, 
+  },
   ""origOrderType"": ""string"",
   ""origOrderNbr"": ""string"",
   ""soShippingContact"": {
@@ -111,14 +107,10 @@ namespace Visma.net.tests.Tests
     ""country"": {
       ""id"": ""string"",
       ""name"": ""string"",
-      ""extras"": {
-        ""additionalProp1"": {},
-        ""additionalProp2"": {},
-        ""additionalProp3"": {}
-      },
       ""errorInfo"": ""string"",
       ""metadata"": {
-        ""totalCount"": 0
+        ""totalCount"": 0,
+        ""maxPageSize"": 0
       }
     },
     ""county"": {
@@ -126,10 +118,10 @@ namespace Visma.net.tests.Tests
       ""name"": ""string""
     }
   },
-  ""schedShipment"": ""2019-06-25T07:53:56.740Z"",
+  ""schedShipment"": ""2022-04-26T12:18:39.596Z"",
   ""shipSeparately"": true,
   ""shipComplete"": ""BackOrderAllowed"",
-  ""cancelBy"": ""2019-06-25T07:53:56.740Z"",
+  ""cancelBy"": ""2022-04-26T12:18:39.596Z"",
   ""canceled"": true,
   ""preferredWarehouse"": {
     ""id"": ""string"",
@@ -156,24 +148,32 @@ namespace Visma.net.tests.Tests
   ""saturdayDelivery"": true,
   ""insurance"": true,
   ""transactionType"": {
-    ""Id"": 0,
+    ""id"": 0,
     ""description"": ""string""
   },
+  ""paymentMethod"": {
+    ""id"": ""string"",
+    ""description"": ""string""
+  },
+  ""cashAccount"": ""string"",
+  ""paymentRef"": ""string"",
+  ""isRotRutDeductible"": true,
+  ""emailed"": true,
   ""lines"": [
     {
       ""invoiceNbr"": ""string"",
       ""operation"": ""Issue"",
       ""freeItem"": true,
-      ""requestedOn"": ""2019-06-25T07:53:56.740Z"",
-      ""shipOn"": ""2019-06-25T07:53:56.740Z"",
+      ""requestedOn"": ""2022-04-26T12:18:39.596Z"",
+      ""shipOn"": ""2022-04-26T12:18:39.596Z"",
       ""shipComplete"": ""BackOrderAllowed"",
-      ""undershipThreshold"": 0.0,
-      ""overshipThreshold"": 0.0,
+      ""undershipThreshold"": 0,
+      ""overshipThreshold"": 0,
       ""completed"": true,
       ""markForPO"": true,
       ""poSource"": ""DropShipToOrder"",
       ""lotSerialNbr"": ""string"",
-      ""expirationDate"": ""2019-06-25T07:53:56.740Z"",
+      ""expirationDate"": ""2022-04-26T12:18:39.596Z"",
       ""reasonCode"": ""string"",
       ""salesPerson"": {
         ""id"": ""string"",
@@ -183,12 +183,13 @@ namespace Visma.net.tests.Tests
       ""commissionable"": true,
       ""alternateID"": ""string"",
       ""projectTask"": 0,
-/*
+      ""projectTaskCd"": ""string"",
       ""subaccount"": {
         ""id"": ""string"",
         ""description"": ""string""
       },
-*/
+      ""externalLink"": ""string"",
+      ""isRotRutDeductible"": true,
       ""lineNbr"": 0,
       ""sortOrder"": 0,
       ""inventory"": {
@@ -200,18 +201,19 @@ namespace Visma.net.tests.Tests
         ""description"": ""string""
       },
       ""uom"": ""string"",
-      ""quantity"": 0.0,
-      ""qtyOnShipments"": 0.0,
-      ""openQty"": 0.0,
-      ""unitCost"": 0.0,
-      ""unitPrice"": 0.0,
+      ""quantity"": 0,
+      ""qtyOnShipments"": 0,
+      ""openQty"": 0,
+      ""unitCost"": 0,
+      ""unitPrice"": 0,
+      ""unitPriceInBaseCurrency"": 0,
       ""discountCode"": ""string"",
-      ""discountPercent"": 0.0,
-      ""discountAmount"": 0.0,
+      ""discountPercent"": 0,
+      ""discountAmount"": 0,
       ""manualDiscount"": true,
-      ""discUnitPrice"": 0.0,
-      ""extPrice"": 0.0,
-      ""unbilledAmount"": 0.0,
+      ""discUnitPrice"": 0,
+      ""extPrice"": 0,
+      ""unbilledAmount"": 0,
       ""lineDescription"": ""string"",
       ""branchNumber"": {
         ""number"": ""string"",
@@ -221,18 +223,32 @@ namespace Visma.net.tests.Tests
       ""attachments"": [
         {
           ""name"": ""string"",
-          ""id"": ""string"",
+          ""id"": ""00000000-0000-0000-0000-000000000000"",
           ""revision"": 0
         }
       ]
+    }
+  ],
+  ""shipments"": [
+    {
+      ""shipmentType"": ""string"",
+      ""shipmentNo"": ""string"",
+      ""shipmentDate"": ""2022-04-26T12:18:39.596Z"",
+      ""shippedQty"": 0,
+      ""shippedWeight"": 0,
+      ""shippedVolume"": 0,
+      ""invoiceType"": ""string"",
+      ""invoiceNo"": ""string"",
+      ""inventoryDocType"": ""string"",
+      ""inventoryRefNo"": ""string""
     }
   ],
   ""orderType"": ""string"",
   ""orderNo"": ""string"",
   ""status"": ""Open"",
   ""hold"": true,
-  ""date"": ""2019-06-25t07:53:56.740z"",
-  ""requestOn"": ""2019-06-25t07:53:56.740z"",
+  ""date"": ""2022-04-26T12:18:39.596Z"",
+  ""requestOn"": ""2022-04-26T12:18:39.596Z"",
   ""customerOrder"": ""string"",
   ""customerRefNo"": ""string"",
   ""customer"": {
@@ -240,6 +256,7 @@ namespace Visma.net.tests.Tests
     ""number"": ""string"",
     ""name"": ""string""
   },
+  ""contactId"": 0,
   ""location"": {
     ""countryId"": ""string"",
     ""id"": ""string"",
@@ -247,11 +264,18 @@ namespace Visma.net.tests.Tests
   },
   ""currency"": ""string"",
   ""description"": ""string"",
-  ""orderTotal"": 0.0,
-  ""vatTaxableTotal"": 0.0,
-  ""vatExemptTotal"": 0.0,
-  ""taxTotal"": 0.0,
-  ""lastModifiedDateTime"": ""2019-06-25t07:53:56.740z"",
+  ""orderTotal"": 0,
+  ""orderTotalInBaseCurrency"": 0,
+  ""vatTaxableTotal"": 0,
+  ""vatTaxableTotalInBaseCurrency"": 0,
+  ""vatExemptTotal"": 0,
+  ""vatExemptTotalInBaseCurrency"": 0,
+  ""taxTotal"": 0,
+  ""taxTotalInBaseCurrency"": 0,
+  ""exchangeRate"": 0,
+  ""discountTotal"": 0,
+  ""discountTotalInBaseCurrency"": 0,
+  ""lastModifiedDateTime"": ""2022-04-26T12:18:39.596Z"",
   ""branchNumber"": {
     ""number"": ""string"",
     ""name"": ""string""
@@ -260,18 +284,14 @@ namespace Visma.net.tests.Tests
   ""attachments"": [
     {
       ""name"": ""string"",
-      ""id"": ""string"",
+      ""id"": ""00000000-0000-0000-0000-000000000000"",
       ""revision"": 0
     }
   ],
-  ""extras"": {
-    ""additionalProp1"": {},
-    ""additionalProp2"": {},
-    ""additionalProp3"": {}
-  },
   ""errorInfo"": ""string"",
   ""metadata"": {
-    ""totalCount"": 0
+    ""totalCount"": 0,
+    ""maxPageSize"": 0
   }
 }";
 
@@ -357,9 +377,9 @@ namespace Visma.net.tests.Tests
   ""salesPerson"": {
     ""value"": ""string""
   },
-   ""owner"": {
-    ""value"": ""string""
-  }, 
+  ""owner"": {
+    ""value"": ""00000000-0000-0000-0000-000000000000""
+  },
   ""origOrderType"": {
     ""value"": ""string""
   },
@@ -423,7 +443,7 @@ namespace Visma.net.tests.Tests
     }
   },
   ""schedShipment"": {
-    ""value"": ""2019-06-25t07:53:56.740z""
+    ""value"": ""2022-04-26T12:19:24.981Z""
   },
   ""shipSeparately"": {
     ""value"": true
@@ -432,7 +452,7 @@ namespace Visma.net.tests.Tests
     ""value"": ""BackOrderAllowed""
   },
   ""cancelBy"": {
-    ""value"": ""2019-06-25t07:53:56.740z""
+    ""value"": ""2022-04-26T12:19:24.981Z""
   },
   ""canceled"": {
     ""value"": true
@@ -467,6 +487,55 @@ namespace Visma.net.tests.Tests
   ""transactionType"": {
     ""value"": 0
   },
+  ""paymentMethod"": {
+    ""value"": ""string""
+  },
+  ""cashAccount"": {
+    ""value"": ""string""
+  },
+  ""paymentRef"": {
+    ""value"": ""string""
+  },
+  ""isRotRutDeductible"": {
+    ""value"": true
+  },
+  ""emailed"": {
+    ""value"": true
+  },
+  ""rotRutDetails"": {
+    ""distributedAutomaticaly"": {
+      ""value"": true
+    },
+    ""type"": {
+      ""value"": ""Rut""
+    },
+    ""appartment"": {
+      ""value"": ""string""
+    },
+    ""estate"": {
+      ""value"": ""string""
+    },
+    ""organizationNbr"": {
+      ""value"": ""string""
+    },
+    ""distribution"": [
+      {
+        ""operation"": ""Insert"",
+        ""lineNbr"": {
+          ""value"": 0
+        },
+        ""personalId"": {
+          ""value"": ""string""
+        },
+        ""amount"": {
+          ""value"": 0
+        },
+        ""extra"": {
+          ""value"": true
+        }
+      }
+    ]
+  },
   ""lines"": [
     {
       ""invoiceNbr"": {
@@ -479,19 +548,19 @@ namespace Visma.net.tests.Tests
         ""value"": true
       },
       ""requestedOn"": {
-        ""value"": ""2019-06-25t07:53:56.740z""
+        ""value"": ""2022-04-26T12:19:24.981Z""
       },
       ""shipOn"": {
-        ""value"": ""2019-06-25t07:53:56.740z""
+        ""value"": ""2022-04-26T12:19:24.981Z""
       },
       ""shipComplete"": {
         ""value"": ""BackOrderAllowed""
       },
       ""undershipThreshold"": {
-        ""value"": 0.0
+        ""value"": 0
       },
       ""overshipThreshold"": {
-        ""value"": 0.0
+        ""value"": 0
       },
       ""completed"": {
         ""value"": true
@@ -506,7 +575,7 @@ namespace Visma.net.tests.Tests
         ""value"": ""string""
       },
       ""expirationDate"": {
-        ""value"": ""2019-06-25t07:53:56.740z""
+        ""value"": ""2022-04-26T12:19:24.981Z""
       },
       ""reasonCode"": {
         ""value"": ""string""
@@ -526,12 +595,18 @@ namespace Visma.net.tests.Tests
       ""projectTask"": {
         ""value"": ""string""
       },
-      /*""subaccount"": [
+      ""subaccount"": [
         {
           ""segmentId"": 0,
           ""segmentValue"": ""string""
         }
-      ],*/
+      ],
+      ""externalLink"": {
+        ""value"": ""string""
+      },
+      ""isRotRutDeductible"": {
+        ""value"": true
+      },
       ""branchNumber"": {
         ""value"": ""string""
       },
@@ -539,11 +614,9 @@ namespace Visma.net.tests.Tests
       ""lineNbr"": {
         ""value"": 0
       },
-/*
       ""inventoryId"": {
         ""value"": ""string""
       },
-*/
       ""inventoryNumber"": {
         ""value"": ""string""
       },
@@ -554,19 +627,19 @@ namespace Visma.net.tests.Tests
         ""value"": ""string""
       },
       ""quantity"": {
-        ""value"": 0.0
+        ""value"": 0
       },
       ""unitCost"": {
-        ""value"": 0.0
+        ""value"": 0
       },
       ""unitPrice"": {
-        ""value"": 0.0
+        ""value"": 0
       },
       ""discountPercent"": {
-        ""value"": 0.0
+        ""value"": 0
       },
       ""discountAmount"": {
-        ""value"": 0.0
+        ""value"": 0
       },
       ""discountCode"": {
         ""value"": ""string""
@@ -575,7 +648,7 @@ namespace Visma.net.tests.Tests
         ""value"": true
       },
       ""discUnitPrice"": {
-        ""value"": 0.0
+        ""value"": 0
       },
       ""lineDescription"": {
         ""value"": ""string""
@@ -588,19 +661,17 @@ namespace Visma.net.tests.Tests
   ""orderType"": {
     ""value"": ""string""
   },
-/*
   ""orderNumber"": {
     ""value"": ""string""
   },
-*/
   ""hold"": {
     ""value"": true
   },
   ""date"": {
-    ""value"": ""2019-06-25t07:53:56.740z""
+    ""value"": ""2022-04-26T12:19:24.981Z""
   },
   ""requestOn"": {
-    ""value"": ""2019-06-25t07:53:56.740z""
+    ""value"": ""2022-04-26T12:19:24.981Z""
   },
   ""customerOrder"": {
     ""value"": ""string""
@@ -614,26 +685,32 @@ namespace Visma.net.tests.Tests
   ""location"": {
     ""value"": ""string""
   },
-/*
+  ""contactId"": {
+    ""value"": 0
+  },
   ""gln"": {
     ""value"": ""string""
   },
   ""vatRegistrationId"": {
     ""value"": ""string""
   },
-*/
   ""currency"": {
     ""value"": ""string""
   },
   ""description"": {
     ""value"": ""string""
   },
- /* ""recalculateShipment"": true,*/
+  ""recalculateShipment"": {
+    ""value"": true
+  },
   ""branchNumber"": {
     ""value"": ""string""
   },
   ""note"": {
     ""value"": ""string""
+  },
+  ""overrideNumberSeries"": {
+    ""value"": true
   }
 }";
 

@@ -6,5 +6,8 @@ namespace ONIT.VismaNetApi.Lib
     {
         [JsonProperty("totalCount")]
         public int totalCount { get; internal set; }
+
+        [JsonProperty("maxPageSize")]
+        public int maxPageSize { get; internal set; }
     }
 }

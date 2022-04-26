@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
 
-namespace Visma.net.tests
+namespace Visma.net.Tests
 {
     public class CustomerTest : EntityBaseTest<Customer>
     {
@@ -526,7 +526,7 @@ namespace Visma.net.tests
             jtoken["note"] = "string";
             //jtoken["number"] = "stringx";
             //jtoken.RemoveFields("number");
-            
+
             return jtoken.ToString(Formatting.Indented);
         }
 

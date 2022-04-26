@@ -1,0 +1,79 @@
+﻿{
+  active: {
+    Value: true
+  },
+  address: {
+    Value: {
+      addressLine1: {
+        Value: string
+      },
+      addressLine2: {
+        Value: string
+      },
+      addressLine3: {
+        Value: string
+      },
+      city: {
+        Value: string
+      },
+      countryId: {
+        Value: string
+      },
+      county: {
+        Value: string
+      },
+      postalCode: {
+        Value: string
+      }
+    }
+  },
+  addressIsSameAsMain: {
+    Value: true
+  },
+  contact: {
+    Value: {
+      attention: {
+        Value: string
+      },
+      email: {
+        Value: string
+      },
+      fax: {
+        Value: string
+      },
+      name: {
+        Value: string
+      },
+      phone1: {
+        Value: string
+      },
+      phone2: {
+        Value: string
+      },
+      web: {
+        Value: string
+      }
+    }
+  },
+  contactIsSameAsMain: {
+    Value: true
+  },
+  corporateId: {
+    Value: string
+  },
+  ediCode: {
+    Value: string
+  },
+  gln: {
+    Value: string
+  },
+  locationName: {
+    Value: string
+  },
+  vatRegistrationId: {
+    Value: string
+  },
+  vatZone: {
+    Value: string
+  }
+}

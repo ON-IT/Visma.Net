@@ -1,7 +1,7 @@
 ﻿using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
 
-namespace Visma.net.tests.Tests
+namespace Visma.net.Tests
 {
     public class PaymentTests : EntityBaseTest<Payment>
     {

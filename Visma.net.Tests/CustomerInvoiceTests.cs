@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
 
-namespace Visma.net.tests.Tests
+namespace Visma.net.Tests
 {
     public class CustomerInvoiceTests : EntityBaseTest<CustomerInvoice>
     {

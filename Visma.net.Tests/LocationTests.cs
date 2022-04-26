@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
 
-namespace Visma.net.tests.Tests
+namespace Visma.net.Tests
 {
     public class LocationTests : EntityBaseTest<Location>
     {
-        private static string dto =
+        private static readonly string dto =
             @"{
   ""baccount"": {
     ""internalId"": 0,

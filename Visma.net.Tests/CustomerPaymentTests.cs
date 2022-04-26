@@ -1,17 +1,12 @@
 ﻿using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit.Abstractions;
 
-namespace Visma.net.tests.Tests
+namespace Visma.net.Tests
 {
     public class CustomerPaymentTests : EntityBaseTest<CustomerPayment>
     {
-        private static string dto = @"
+        private static readonly string dto = @"
 {
   ""type"": ""Payment"",
   ""refNbr"": ""string"",
@@ -98,7 +93,7 @@ namespace Visma.net.tests.Tests
 }
 ";
 
-        private static string update =
+        private static readonly string update =
             @"{
   ""referenceNumber"": {
     ""value"": ""string""
@@ -186,8 +181,6 @@ namespace Visma.net.tests.Tests
         public CustomerPaymentTests(ITestOutputHelper output) : base(dto, update)
         {
             this.output = output;
-
-
         }
 
         public override string PrepareDtoForSerializer(string src)

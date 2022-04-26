@@ -1,0 +1,156 @@
+﻿{
+  branchNumber: {
+    Value: string
+  },
+  cashAccount: {
+    Value: string
+  },
+  cashDiscountDate: {
+    Value: DateTime_1
+  },
+  contact: {
+    Value: 0
+  },
+  creditTermsId: {
+    Value: string
+  },
+  currencyId: {
+    Value: string
+  },
+  customerNumber: {
+    Value: string
+  },
+  customerRefNumber: {
+    Value: string
+  },
+  documentDate: {
+    Value: DateTime_1
+  },
+  documentDueDate: {
+    Value: DateTime_1
+  },
+  domesticServicesDeductibleDocument: {
+    Value: true
+  },
+  exchangeRate: {
+    Value: 0.0
+  },
+  externalReference: {
+    Value: string
+  },
+  financialPeriod: {
+    Value: string
+  },
+  hold: {
+    Value: true
+  },
+  invoiceLines: [
+    {
+      accountNumber: {
+        Value: string
+      },
+      branchNumber: {
+        Value: string
+      },
+      deferralCode: {
+        Value: string
+      },
+      deferralSchedule: {
+        Value: 0
+      },
+      description: {
+        Value: string
+      },
+      discountAmountInCurrency: {
+        Value: 0.0
+      },
+      discountCode: {
+        Value: string
+      },
+      discountPercent: {
+        Value: 0.0
+      },
+      domesticServicesDeductible: {
+        Value: true
+      },
+      inventoryNumber: {
+        Value: string
+      },
+      itemType: {
+        Value: Service
+      },
+      lineNumber: {
+        Value: 0
+      },
+      manualAmountInCurrency: {
+        Value: 0.0
+      },
+      manualDiscount: {
+        Value: true
+      },
+      note: {
+        Value: string
+      },
+      operation: Insert,
+      quantity: {
+        Value: 0.0
+      },
+      salesperson: {
+        Value: string
+      },
+      subaccount: [
+        {
+          segmentValue: string
+        }
+      ],
+      taskId: {
+        Value: string
+      },
+      termEndDate: {
+        Value: DateTime_1
+      },
+      termStartDate: {
+        Value: DateTime_1
+      },
+      typeOfWork: {
+        Value: Rut
+      },
+      unitPriceInCurrency: {
+        Value: 0.0
+      },
+      uOM: {
+        Value: string
+      },
+      vatCodeId: {
+        Value: string
+      }
+    }
+  ],
+  invoiceText: {
+    Value: string
+  },
+  locationId: {
+    Value: string
+  },
+  note: {
+    Value: string
+  },
+  paymentMethodId: {
+    Value: string
+  },
+  paymentReference: {
+    Value: string
+  },
+  postPeriod: {
+    Value: string
+  },
+  project: {
+    Value: string
+  },
+  salesPerson: {
+    Value: string
+  },
+  salesPersonID: {
+    Value: 0
+  }
+}

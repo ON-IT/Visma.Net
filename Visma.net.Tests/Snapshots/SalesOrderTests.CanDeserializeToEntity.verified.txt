@@ -1,0 +1,234 @@
+﻿{
+  attachments: [
+    {
+      name: string,
+      id: Guid_Empty
+    }
+  ],
+  ProjectCD: string,
+  branchNumber: {
+    number: string,
+    name: string
+  },
+  commissionPercent: string,
+  commissionAmount: string,
+  commissionableAmount: string,
+  cancelBy: DateTime_1,
+  canceled: true,
+  cashDiscountDate: DateTime_1,
+  currency: string,
+  customer: {
+    number: string,
+    name: string
+  },
+  customerOrder: string,
+  customerRefNo: string,
+  customerVATZone: {
+    defaultVatCategory: string,
+    defaultTaxCategory: {
+      number: string,
+      description: string
+    },
+    errorInfo: string,
+    metadata: {},
+    description: string,
+    id: string
+  },
+  date: DateTime_1,
+  description: string,
+  dueDate: DateTime_1,
+  errorInfo: string,
+  fobPoint: {
+    description: string,
+    id: string
+  },
+  hold: true,
+  insurance: true,
+  invoiceDate: DateTime_1,
+  invoiceNbr: string,
+  invoiceSeparately: true,
+  lastModifiedDateTime: DateTime_1,
+  lines: [
+    {
+      alternateID: string,
+      attachments: [
+        {
+          name: string,
+          id: Guid_Empty
+        }
+      ],
+      branchNumber: {
+        number: string,
+        name: string
+      },
+      projectTaskCd: string,
+      isRotRutDeductible: true,
+      commissionable: true,
+      completed: true,
+      discountCode: string,
+      expirationDate: DateTime_1,
+      freeItem: true,
+      inventory: {
+        number: string,
+        description: string
+      },
+      invoiceNbr: string,
+      lineDescription: string,
+      lotSerialNbr: string,
+      manualDiscount: true,
+      markForPO: true,
+      note: string,
+      poSource: DropShipToOrder,
+      reasonCode: string,
+      requestedOn: DateTime_1,
+      operation: Issue,
+      salesPerson: {
+        description: string,
+        id: string
+      },
+      shipComplete: BackOrderAllowed,
+      shipOn: DateTime_1,
+      subaccount: {
+        description: string,
+        id: string
+      },
+      taxCategory: string,
+      uom: string,
+      warehouse: {
+        description: string,
+        id: string
+      },
+      externalLink: string
+    }
+  ],
+  shipments: [
+    {
+      shipmentType: string,
+      shipmentNo: string,
+      shipmentDate: DateTime_1,
+      invoiceType: string,
+      invoiceNo: string,
+      inventoryDocType: string,
+      inventoryRefNo: string
+    }
+  ],
+  location: {
+    countryId: string,
+    id: string,
+    name: string
+  },
+  note: string,
+  orderNo: string,
+  paymentRef: string,
+  orderType: string,
+  origOrderNbr: string,
+  origOrderType: string,
+  owner: {
+    id: Guid_Empty,
+    name: string,
+    employeeId: string
+  },
+  postPeriod: string,
+  cashAccount: string,
+  emailed: true,
+  preferredWarehouse: {
+    description: string,
+    id: string
+  },
+  printDescriptionOnInvoice: true,
+  printNoteOnExternalDocuments: true,
+  printNoteOnInternalDocuments: true,
+  requestOn: DateTime_1,
+  residentialDelivery: true,
+  salesPerson: {
+    description: string,
+    id: string
+  },
+  saturdayDelivery: true,
+  schedShipment: DateTime_1,
+  shipComplete: BackOrderAllowed,
+  shippingTerms: {
+    description: string,
+    id: string
+  },
+  shippingZone: {
+    description: string,
+    id: string
+  },
+  shipSeparately: true,
+  shipVia: {
+    description: string,
+    id: string
+  },
+  soBillingAddress: {
+    overrideAddress: true,
+    addressLine1: string,
+    addressLine2: string,
+    addressLine3: string,
+    postalCode: string,
+    city: string,
+    country: {
+      errorInfo: string,
+      metadata: {},
+      id: string,
+      name: string
+    },
+    county: {
+      id: string,
+      name: string
+    }
+  },
+  soBillingContact: {
+    overrideContact: true,
+    attention: string,
+    email: string,
+    fax: string,
+    name: string,
+    phone1: string,
+    phone2: string,
+    web: string
+  },
+  soShippingAddress: {
+    overrideAddress: true,
+    addressLine1: string,
+    addressLine2: string,
+    addressLine3: string,
+    postalCode: string,
+    city: string,
+    country: {
+      errorInfo: string,
+      metadata: {},
+      id: string,
+      name: string
+    },
+    county: {
+      id: string,
+      name: string
+    }
+  },
+  soShippingContact: {
+    overrideContact: true,
+    attention: string,
+    email: string,
+    fax: string,
+    name: string,
+    phone1: string,
+    phone2: string,
+    web: string
+  },
+  status: Open,
+  terms: {
+    description: string,
+    id: string
+  },
+  transactionType: {
+    description: string
+  },
+  isRotRutDeductible: true,
+  rotRutDetails: {},
+  paymentMethod: {
+    description: string,
+    id: string
+  },
+  metadata: {}
+}

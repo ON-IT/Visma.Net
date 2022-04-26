@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ONIT.VismaNetApi.Models;
+﻿using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
 
-namespace Visma.net.tests
+namespace Visma.net.Tests
 {
     public class CustomerDocumentTests : EntityBaseTest<CustomerDocument>
     {
-        private static string dto = @"{
+        private static readonly string dto = @"{
     ""documentDueDate"": ""2018-05-22T07:27:28.158Z"",
     ""branch"": {
       ""number"": ""string"",

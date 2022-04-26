@@ -1,0 +1,77 @@
+﻿{
+  attachments: [
+    {
+      name: string,
+      id: string
+    }
+  ],
+  attributes: [
+    {
+      value: string,
+      id: string,
+      description: string
+    }
+  ],
+  baseUnit: string,
+  costPriceStatistics: {},
+  crossReferences: [
+    {
+      alternateType: CPN,
+      bAccount: {
+        number: string,
+        name: string
+      },
+      alternateID: string,
+      description: string
+    }
+  ],
+  currentCost: 0.0,
+  defaultPrice: 0.0,
+  description: string,
+  effectiveDate: DateTime_1,
+  errorInfo: string,
+  inventoryNumber: string,
+  itemClass: {
+    type: NonStockItem,
+    attributes: [
+      {
+        attributeid: string,
+        description: string,
+        required: true,
+        attributetype: Text,
+        defaultvalue: string,
+        details: [
+          {
+            id: string,
+            description: string
+          }
+        ]
+      }
+    ],
+    description: string,
+    id: string
+  },
+  lastCost: 0.0,
+  lastModifiedDateTime: DateTime_1,
+  pendingCost: 0.0,
+  pendingCostDate: DateTime_1,
+  postingClass: {
+    description: string,
+    id: string
+  },
+  purchaseUnit: string,
+  salesUnit: string,
+  status: Active,
+  type: NonStockItem,
+  vatCode: {
+    description: string,
+    id: string
+  },
+  warehouseDetails: [
+    {
+      isDefault: true,
+      warehouse: string,
+      lastModifiedDateTime: DateTime_2
+    }
+  ]
+}

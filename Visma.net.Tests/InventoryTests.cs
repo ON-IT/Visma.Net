@@ -1,7 +1,7 @@
 ﻿using ONIT.VismaNetApi.Models;
 using Xunit.Abstractions;
 
-namespace Visma.net.tests
+namespace Visma.net.Tests
 {
     public class InventoryTests : EntityBaseTest<Inventory>
     {

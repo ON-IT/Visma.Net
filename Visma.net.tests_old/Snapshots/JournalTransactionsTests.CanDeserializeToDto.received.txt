@@ -1,0 +1,94 @@
+{
+  autoReversing: {
+    Value: true
+  },
+  batchNumber: {
+    Value: string
+  },
+  branch: {
+    Value: string
+  },
+  controlTotalInCurrency: {
+    Value: 0.0
+  },
+  createVatTransaction: {
+    Value: true
+  },
+  currencyId: {
+    Value: string
+  },
+  description: {
+    Value: string
+  },
+  exchangeRate: {
+    Value: 0.0
+  },
+  financialPeriod: {
+    Value: string
+  },
+  hold: {
+    Value: true
+  },
+  journalTransactionLines: [
+    {
+      accountNumber: {
+        Value: string
+      },
+      branch: {
+        Value: string
+      },
+      creditAmountInCurrency: {
+        Value: 0.0
+      },
+      debitAmountInCurrency: {
+        Value: 0.0
+      },
+      lineNumber: {
+        Value: 0
+      },
+      operation: Insert,
+      project: {
+        Value: string
+      },
+      projectTask: {
+        Value: string
+      },
+      referenceNumber: {
+        Value: string
+      },
+      subaccount: [
+        {
+          segmentId: Id_1,
+          segmentValue: string
+        }
+      ],
+      transactionDescription: {
+        Value: string
+      },
+      uom: {
+        Value: string
+      },
+      vatCodeId: {
+        Value: string
+      },
+      vatId: {
+        Value: string
+      }
+    }
+  ],
+  ledger: {
+    Value: string
+  },
+  postPeriod: {
+    Value: string
+  },
+  skipVatAmountValidation: {
+    Value: true
+  },
+  transactionCode: {
+    Value: string
+  },
+  transactionDate: {
+    Value: DateTime_1
+  }
+}
