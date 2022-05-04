@@ -43,6 +43,9 @@
       debitAmountInCurrency: {
         Value: 0.0
       },
+      inventoryNumber: {
+        Value: string
+      },
       lineNumber: {
         Value: 0
       },
@@ -52,6 +55,9 @@
       },
       projectTask: {
         Value: string
+      },
+      quantity: {
+        Value: 0.0
       },
       referenceNumber: {
         Value: string

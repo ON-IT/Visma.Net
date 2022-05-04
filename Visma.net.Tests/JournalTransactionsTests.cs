@@ -7,104 +7,109 @@ namespace Visma.net.Tests
     public class JournalTransactionsTests : EntityBaseTest<JournalTransaction>
     {
         private static readonly string dto = @"{
-    ""module"": ""ModuleGL"",
-    ""batchNumber"": ""string"",
-    ""status"": ""Hold"",
-    ""hold"": true,
-    ""transactionDate"": ""2018-05-22T07:27:28.561Z"",
-    ""postPeriod"": ""string"",
-    ""financialPeriod"": ""string"",
-    ""ledger"": ""string"",
-    ""ledgerDescription"": ""string"",
-    ""currencyId"": ""string"",
-    ""exchangeRate"": 0.0,
-    ""autoReversing"": true,
-    ""reversingEntry"": true,
-    ""description"": ""string"",
-    ""originalBatchNumber"": ""string"",
-    ""debitTotal"": 0.0,
-    ""debitTotalInCurrency"": 0.0,
-    ""creditTotal"": 0.0,
-    ""creditTotalInCurrency"": 0.0,
-    ""controlTotal"": 0.0,
-    ""controlTotalInCurrency"": 0.0,
-    ""createVatTransaction"": true,
-    ""skipVatAmountValidation"": true,
-    ""lastModifiedDateTime"": ""2018-05-22T07:27:28.561Z"",
-    ""transactionCode"": ""string"",
-    ""transactionCodeDescription"": ""string"",
-    ""branch"": ""string"",
-    ""journalTransactionLines"": [
-      {
-        ""lineNumber"": 0,
-        ""accountNumber"": ""string"",
+  ""module"": ""ModuleGL"",
+  ""batchNumber"": ""string"",
+  ""status"": ""Hold"",
+  ""hold"": true,
+  ""transactionDate"": ""2022-04-27T10:28:12.204Z"",
+  ""postPeriod"": ""string"",
+  ""financialPeriod"": ""string"",
+  ""ledger"": ""string"",
+  ""ledgerDescription"": ""string"",
+  ""currencyId"": ""string"",
+  ""exchangeRate"": 0,
+  ""autoReversing"": true,
+  ""reversingEntry"": true,
+  ""description"": ""string"",
+  ""originalBatchNumber"": ""string"",
+  ""debitTotal"": 0,
+  ""debitTotalInCurrency"": 0,
+  ""creditTotal"": 0,
+  ""creditTotalInCurrency"": 0,
+  ""controlTotal"": 0,
+  ""controlTotalInCurrency"": 0,
+  ""createVatTransaction"": true,
+  ""skipVatAmountValidation"": true,
+  ""lastModifiedDateTime"": ""2022-04-27T10:28:12.204Z"",
+  ""transactionCode"": ""string"",
+  ""transactionCodeDescription"": ""string"",
+  ""branch"": ""string"",
+  ""journalTransactionLines"": [
+    {
+      ""lineNumber"": 0,
+      ""accountNumber"": ""string"",
+      ""description"": ""string"",
+      ""subaccount"": {
+        ""subaccountNumber"": ""string"",
+        ""subaccountId"": 0,
         ""description"": ""string"",
-        ""subaccount"": {
-          ""subaccountNumber"": ""string"",
-          ""subaccountId"": 0,
-          ""description"": ""string"",
-          ""id"": 0,
-          ""lastModifiedDateTime"": ""2018-05-22T07:27:28.561Z"",
-          ""segments"": [
-            {
-              ""segmentId"": 1,
-              ""segmentDescription"": ""string"",
-              ""segmentValue"": ""string"",
-              ""segmentValueDescription"": ""string""
-            }
-          ],
-          ""extras"": {},
-          ""errorInfo"": ""string"",
-            ""metadata"":{
-                ""totalCount"": 0
-            }
-        },
-        ""referenceNumber"": ""string"",
-        ""debitAmount"": 0.0,
-        ""debitAmountInCurrency"": 0.0,
-        ""creditAmount"": 0.0,
-        ""creditAmountInCurrency"": 0.0,
-        ""transactionDescription"": ""string"",
-        ""vatCode"": {
-          ""id"": ""string"",
-          ""description"": ""string""
-        },
-        ""vat"": {
-          ""id"": ""string"",
-          ""description"": ""string""
-        },
-        ""branch"": ""string"",
-        ""customerSupplier"": ""string"",
-        ""transactionType"": ""string"",
-        ""module"": ""ModuleGL"",
-        ""uom"": ""string"",
-        ""project"": {
-          ""id"": ""string"",
-          ""description"": ""string""
-        },
-        ""projectTask"": {
-          ""id"": ""string"",
-          ""description"": ""string""
-        },
-        ""attachments"": [
+        ""lastModifiedDateTime"": ""2022-04-27T10:28:12.204Z"",
+        ""active"": true,
+        ""segments"": [
           {
-            ""name"": ""string"",
-            ""id"": ""string"",
-            ""revision"": 0
+            ""segmentId"": 1,
+            ""segmentDescription"": ""string"",
+            ""segmentValue"": ""string"",
+            ""segmentValueDescription"": ""string""
           }
-        ]
-      }
-    ],
-    ""attachments"": [
-      {
-        ""name"": ""string"",
+        ],
+        ""errorInfo"": ""string"",
+        ""metadata"": {
+          ""totalCount"": 0,
+          ""maxPageSize"": 0
+        }
+      },
+      ""referenceNumber"": ""string"",
+      ""debitAmount"": 0,
+      ""debitAmountInCurrency"": 0,
+      ""creditAmount"": 0,
+      ""creditAmountInCurrency"": 0,
+      ""transactionDescription"": ""string"",
+      ""vatCode"": {
         ""id"": ""string"",
-        ""revision"": 0
-      }
-    ],
-    ""extras"": {},
-    ""errorInfo"": ""string""
-  }";
+        ""description"": ""string""
+      },
+      ""vat"": {
+        ""id"": ""string"",
+        ""description"": ""string""
+      },
+      ""branch"": ""string"",
+      ""customerSupplier"": ""string"",
+      ""transactionType"": ""string"",
+      ""module"": ""ModuleGL"",
+      ""uom"": ""string"",
+      ""project"": {
+        ""id"": ""string"",
+        ""description"": ""string""
+      },
+      ""projectTask"": {
+        ""id"": ""string"",
+        ""description"": ""string""
+      },
+      ""attachments"": [
+        {
+          ""name"": ""string"",
+          ""id"": ""00000000-0000-0000-0000-000000000000"",
+          ""revision"": 0
+        }
+      ],
+      ""quantity"": 0,
+      ""inventoryNumber"": ""string""
+    }
+  ],
+  ""attachments"": [
+    {
+      ""name"": ""string"",
+      ""id"": ""00000000-0000-0000-0000-000000000000"",
+      ""revision"": 0
+    }
+  ],
+  ""errorInfo"": ""string"",
+  ""metadata"": {
+    ""totalCount"": 0,
+    ""maxPageSize"": 0
+  }
+}";
 
         private static readonly string update = @"{
   ""batchNumber"": {

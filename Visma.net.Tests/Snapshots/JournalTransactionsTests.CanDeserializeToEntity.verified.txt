@@ -2,7 +2,7 @@
   attachments: [
     {
       name: string,
-      id: string
+      id: Guid_Empty
     }
   ],
   autoReversing: true,
@@ -20,7 +20,7 @@
       attachments: [
         {
           name: string,
-          id: string
+          id: Guid_Empty
         }
       ],
       branch: string,
@@ -50,8 +50,10 @@
           }
         ],
         errorInfo: string,
+        active: true,
         metadata: {}
       },
+      inventoryNumber: string,
       transactionDescription: string,
       transactionType: string,
       uom: string,
@@ -76,5 +78,6 @@
   status: Hold,
   transactionCode: string,
   transactionCodeDescription: string,
-  transactionDate: DateTime_1
+  transactionDate: DateTime_1,
+  metadata: {}
 }

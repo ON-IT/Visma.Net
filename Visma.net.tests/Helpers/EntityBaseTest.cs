@@ -7,6 +7,7 @@ using Xunit.Abstractions;
 
 namespace Visma.net.Tests
 {
+
     public abstract class EntityBaseTest<T> : VerifyBase where T : DtoProviderBase
     {
         protected ITestOutputHelper output;
