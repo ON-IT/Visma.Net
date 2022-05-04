@@ -10,7 +10,7 @@
         <PackageProjectUrl>https://github.com/ON-IT/Visma.Net</PackageProjectUrl>
         <RepositoryUrl>https://github.com/ON-IT/Visma.Net.git</RepositoryUrl>
         <PackageTags>Visma.net API, Visma.net Integrations, REST</PackageTags>
-        <PackageReleaseNotes>Fix issue with pagination with parameters</PackageReleaseNotes>
+        <PackageReleaseNotes>https://github.com/ON-IT/Visma.Net/releases</PackageReleaseNotes>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
