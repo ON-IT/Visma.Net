@@ -1,6 +1,6 @@
 # Visma.net Integrations API Client for .Net
 
-[![Build status](https://ci.appveyor.com/api/projects/status/0blvwjrcuew4phr3?svg=true)](https://ci.appveyor.com/project/omelhus/visma-net) [![NuGet version](https://buildstats.info/nuget/visma.net)](https://www.nuget.org/packages/Visma.net)
+[![Build status](https://github.com/ON-IT/Visma.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/ON-IT/Visma.Net/actions/workflows/dotnet.yml) [![NuGet version](https://buildstats.info/nuget/visma.net)](https://www.nuget.org/packages/Visma.net)
 
 This is an open source Visma.net Integrations API Client for .Net.
 
@@ -8,31 +8,6 @@ Please set VismaNet.ApplicationName before doing any requests. This will allow V
 
 ## Do you need help with an integration?
 Contact me on ole@on-it.no with details about your project and let's see if we're a good fit.
-
-## Coverage
-
-* Attachment
-* Branch
-* CashSale
-* Contact
-* CreditNote
-* Customer*
-* CustomerDocument*
-* CustomerInvoice*
-* Dimension
-* FinAccount
-* Inventory*
-* JournalTransaction*
-* Location*
-* Payment*
-* SalesOrder*
-* Shipment
-* Subaccount
-* Supplier*
-* SupplierInvoice
-* Warehouse
-
-*Tests implemented for the data models. This is a work in progress.
 
 ## Changelog
 
