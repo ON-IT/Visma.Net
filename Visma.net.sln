@@ -7,7 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Visma.net", "Visma.net\Vism
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2125312D-9F7D-4581-9E51-EB6D046B5029}"
 	ProjectSection(SolutionItems) = preProject
-		appveyor.yml = appveyor.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -18,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CAE6FE
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visma.net.Tests", "Visma.net.Tests\Visma.net.Tests.csproj", "{968B96DD-DE9F-4326-AE15-623831C871C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Visma.net.Tests", "Visma.net.Tests\Visma.net.Tests.csproj", "{968B96DD-DE9F-4326-AE15-623831C871C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
