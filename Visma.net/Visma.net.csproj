@@ -20,6 +20,8 @@
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <PackageIcon>on_it_logo.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <AssemblyVersion>4.0.0</AssemblyVersion>
+        <FileVersion>4.0.0</FileVersion>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
