@@ -10,6 +10,8 @@ on:
       - src/**
       - tests/**
       - build/**
+      - Visma.net/**
+      - Visma.net.Tests/**
       - .github/workflows/dotnet.yml
       - global.json
   pull_request:
@@ -17,6 +19,8 @@ on:
       - main
     paths:
       - src/**
+      - Visma.net/**
+      - Visma.net.Tests/**
       - tests/**
       - build/**
       - .github/workflows/dotnet.yml
