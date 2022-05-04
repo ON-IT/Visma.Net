@@ -20,6 +20,10 @@ on:
   schedule:
     - cron: '15 2 * * 4'
 
+env:
+  BUILD_CONFIG: "Release"
+  SOLUTION: "Visma.net.sln"
+
 jobs:
   analyze:
     name: Analyze
@@ -55,8 +59,8 @@ jobs:
         
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v2
+    - name: Build
+        run: dotnet build $env:SOLUTION -c $env:BUILD_CONFIG 
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
