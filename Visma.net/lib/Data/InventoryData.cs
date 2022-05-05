@@ -1,4 +1,4 @@
-﻿using ONIT.VismaNetApi.Models;
+using ONIT.VismaNetApi.Models;
 using ONIT.VismaNetApi.Models.Enums;
 using System;
 using System.Collections.Generic;

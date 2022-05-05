@@ -21,6 +21,7 @@ namespace ONIT.VismaNetApi.Lib
     public const string Discount = "controller/api/v1/discount";
     public const string DiscountV2 = "controller/api/v2/discount";
     public const string Currency = "controller/api/v1/currency";
+    public const string CurrencyRate = "controller/api/v2/currencyrate";
     public const string Dimensions = "controller/api/v1/dimension";
     public const string Employee = "controller/api/v1/employee";
     public const string FinAccount = "controller/api/v1/account";
