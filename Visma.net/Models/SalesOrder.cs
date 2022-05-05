@@ -461,9 +461,6 @@ namespace ONIT.VismaNetApi.Models
         }
 
         [JsonProperty]
-        public int contactId { get; private set; }
-
-        [JsonProperty]
         public double discountTotal
         {
             get;
@@ -472,6 +469,13 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty]
         public double discountTotalInBaseCurrency { get; private set; }
+
+        public int contactId
+        {
+            get => Get<int>();
+            set => Set(value);
+        }
+
 
         public string GetIdentificator()
         {
