@@ -2,7 +2,7 @@
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    public class ProjectData : BaseCrudDataClass<Project>
+    public class ProjectData : BasePaginatedCrudDataClass<Project>
     {
         internal ProjectData(VismaNetAuthorization auth) : base(auth)
         {
