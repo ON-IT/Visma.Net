@@ -11,6 +11,9 @@
   cashAccount: {
     Value: string
   },
+  contactId: {
+    Value: 0
+  },
   currency: {
     Value: string
   },
