@@ -7,7 +7,7 @@ using ONIT.VismaNetApi.Models.Enums;
 namespace ONIT.VismaNetApi.Models
 {
 
-    public class Project : DtoProviderBase, IProvideIdentificator
+    public class Project : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public Project()
         {
@@ -39,7 +39,7 @@ namespace ONIT.VismaNetApi.Models
         public DateTime endDate { get { return Get<DateTime>(); } set { Set(value); } }
 
         public ProjectManager projectManager {
-            get => Get("projectManger", new ProjectManager()); // Misspelled in Visma API projectManger not projectManager
+            get => Get("projectManager", new ProjectManager());
             set => Set(value);
         }
 
