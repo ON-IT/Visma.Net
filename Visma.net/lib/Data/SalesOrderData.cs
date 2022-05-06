@@ -1,9 +1,10 @@
 ﻿using ONIT.VismaNetApi.Models;
-using System.Collections.Generic;
+using System;
 using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
+    [Obsolete("WILL STOP WORKING 01-06-2023! Replaced by https://salesorder.visma.net.")]
     public class SalesOrderData : BasePaginatedCrudDataClass<SalesOrder>
     {
         public SalesOrderData(VismaNetAuthorization auth) : base(auth)
