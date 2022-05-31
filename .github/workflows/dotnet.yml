@@ -60,7 +60,7 @@ jobs:
         run: dotnet build $env:SOLUTION -c $env:BUILD_CONFIG -p:Version=$env:BUILD_VERSION -p:FileVersion=$env:BUILD_VERSION --no-restore
 
       - name: Test
-        run: dotnet test -c $env:BUILD_CONFIG /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --no-restore --no-build -c Release --verbosity normal
+        run: dotnet test -c $env:BUILD_CONFIG /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --no-restore --no-build --verbosity normal
 
       - name: Codecov
         uses: codecov/codecov-action@v1
