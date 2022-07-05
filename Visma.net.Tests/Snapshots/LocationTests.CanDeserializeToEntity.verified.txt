@@ -1,0 +1,70 @@
+﻿{
+  active: true,
+  address: {
+    addressLine1: string,
+    addressLine2: string,
+    addressLine3: string,
+    postalCode: string,
+    city: string,
+    country: {
+      extras: {
+        additionalProp1: {},
+        additionalProp2: {},
+        additionalProp3: {}
+      },
+      errorInfo: string,
+      metadata: {},
+      id: string,
+      name: string
+    },
+    county: {
+      id: string,
+      name: string
+    }
+  },
+  addressIsSameAsMain: true,
+  baccount: {
+    number: string,
+    name: string
+  },
+  contact: {
+    attention: string,
+    email: string,
+    fax: string,
+    name: string,
+    phone1: string,
+    phone2: string,
+    web: string
+  },
+  contactIsSameAsMain: true,
+  ediCode: string,
+  gln: string,
+  locationId: string,
+  locationName: string,
+  vatRegistrationId: string,
+  corporateId: string,
+  vatZone: {
+    defaultVatCategory: string,
+    defaultTaxCategory: {
+      number: string,
+      description: string
+    },
+    metadata: {},
+    extras: {
+      additionalProp1: {},
+      additionalProp2: {},
+      additionalProp3: {}
+    },
+    errorInfo: string,
+    description: string,
+    id: string
+  },
+  lastModifieDateTime: DateTime_1,
+  extras: {
+    additionalProp1: {},
+    additionalProp2: {},
+    additionalProp3: {}
+  },
+  errorInfo: string,
+  metadata: {}
+}

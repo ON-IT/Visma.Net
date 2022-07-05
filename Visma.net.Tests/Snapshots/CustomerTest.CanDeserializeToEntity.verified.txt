@@ -1,0 +1,212 @@
+﻿{
+  acceptAutoInvoices: true,
+  accountReference: string,
+  attributes: [
+    {
+      value: string,
+      id: string,
+      description: string
+    }
+  ],
+  corporateId: string,
+  createdDateTime: DateTime_1,
+  creditTerms: {
+    description: string,
+    id: string
+  },
+  creditVerification: Disabled,
+  currencyId: string,
+  customerClass: {
+    description: string,
+    id: string
+  },
+  deliveryAddress: {
+    addressLine1: string,
+    addressLine2: string,
+    addressLine3: string,
+    postalCode: string,
+    city: string,
+    country: {
+      extras: {
+        additionalProp1: {},
+        additionalProp2: {},
+        additionalProp3: {}
+      },
+      errorInfo: string,
+      metadata: {},
+      id: string,
+      name: string
+    },
+    county: {
+      id: string,
+      name: string
+    }
+  },
+  deliveryContact: {
+    attention: string,
+    email: string,
+    fax: string,
+    name: string,
+    phone1: string,
+    phone2: string,
+    web: string
+  },
+  directDebitLines: [
+    {
+      operation: Insert,
+      id: string,
+      mandateId: string,
+      mandateDescription: string,
+      dateOfSignature: DateTime_1,
+      isDefault: true,
+      oneTime: true,
+      bic: string,
+      iban: string,
+      lastCollectionDate: DateTime_1,
+      expirationDate: DateTime_1
+    }
+  ],
+  errorInfo: string,
+  extras: {
+    additionalProp1: {},
+    additionalProp2: {},
+    additionalProp3: {}
+  },
+  glAccounts: {
+    customerLedgerAccount: {
+      description: string,
+      number: string,
+      type: string
+    },
+    salesAccount: {
+      description: string,
+      number: string,
+      type: string
+    },
+    salesEuAccount: {
+      description: string,
+      number: string,
+      type: string
+    },
+    salesExportAccount: {
+      description: string,
+      number: string,
+      type: string
+    },
+    salesNonTaxableAccount: {
+      description: string,
+      number: string,
+      type: string
+    },
+    salesSubaccount: {
+      description: string,
+      id: string
+    }
+  },
+  invoiceAddress: {
+    addressLine1: string,
+    addressLine2: string,
+    addressLine3: string,
+    postalCode: string,
+    city: string,
+    country: {
+      extras: {
+        additionalProp1: {},
+        additionalProp2: {},
+        additionalProp3: {}
+      },
+      errorInfo: string,
+      metadata: {},
+      id: string,
+      name: string
+    },
+    county: {
+      id: string,
+      name: string
+    }
+  },
+  invoiceContact: {
+    attention: string,
+    email: string,
+    fax: string,
+    name: string,
+    phone1: string,
+    phone2: string,
+    web: string
+  },
+  invoiceToDefaultLocation: true,
+  lastModifiedDateTime: DateTime_1,
+  location: {
+    countryId: string,
+    id: string,
+    name: string
+  },
+  mainAddress: {
+    addressLine1: string,
+    addressLine2: string,
+    addressLine3: string,
+    postalCode: string,
+    city: string,
+    country: {
+      extras: {
+        additionalProp1: {},
+        additionalProp2: {},
+        additionalProp3: {}
+      },
+      errorInfo: string,
+      metadata: {},
+      id: string,
+      name: string
+    },
+    county: {
+      id: string,
+      name: string
+    }
+  },
+  mainContact: {
+    attention: string,
+    email: string,
+    fax: string,
+    name: string,
+    phone1: string,
+    phone2: string,
+    web: string
+  },
+  name: string,
+  note: string,
+  number: string,
+  overrideWithClassValues: true,
+  parentRecord: {
+    number: string,
+    name: string
+  },
+  priceClass: {
+    description: string,
+    id: string
+  },
+  printInvoices: true,
+  printMultiCurrencyStatements: true,
+  printStatements: true,
+  sendInvoicesByEmail: true,
+  sendStatementsByEmail: true,
+  statementType: OpenItem,
+  status: Active,
+  vatRegistrationId: string,
+  vatZone: {
+    defaultVatCategory: string,
+    defaultTaxCategory: {
+      number: string,
+      description: string
+    },
+    metadata: {},
+    extras: {
+      additionalProp1: {},
+      additionalProp2: {},
+      additionalProp3: {}
+    },
+    errorInfo: string,
+    description: string,
+    id: string
+  },
+  metadata: {}
+}

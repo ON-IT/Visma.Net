@@ -1,0 +1,268 @@
+﻿{
+  acceptAutoInvoices: {
+    Value: true
+  },
+  accountReference: {
+    Value: string
+  },
+  attributeLines: [
+    {
+      attributeId: {
+        Value: string
+      },
+      attributeValue: {
+        Value: string
+      }
+    }
+  ],
+  corporateId: {
+    Value: string
+  },
+  creditDaysPastDue: {
+    Value: 0
+  },
+  creditLimit: {
+    Value: 0.0
+  },
+  creditTermsId: {
+    Value: string
+  },
+  creditVerification: {
+    Value: Disabled
+  },
+  currencyId: {
+    Value: string
+  },
+  customerClassId: {
+    Value: string
+  },
+  deliveryAddress: {
+    Value: {
+      addressLine1: {
+        Value: string
+      },
+      addressLine2: {
+        Value: string
+      },
+      addressLine3: {
+        Value: string
+      },
+      city: {
+        Value: string
+      },
+      countryId: {
+        Value: string
+      },
+      county: {
+        Value: string
+      },
+      postalCode: {
+        Value: string
+      }
+    }
+  },
+  deliveryContact: {
+    Value: {
+      attention: {
+        Value: string
+      },
+      email: {
+        Value: string
+      },
+      fax: {
+        Value: string
+      },
+      name: {
+        Value: string
+      },
+      phone1: {
+        Value: string
+      },
+      phone2: {
+        Value: string
+      },
+      web: {
+        Value: string
+      }
+    }
+  },
+  directDebitLines: [
+    {
+      bic: {
+        Value: string
+      },
+      dateOfSignature: {
+        Value: DateTime_1
+      },
+      expirationDate: {
+        Value: DateTime_1
+      },
+      iban: {
+        Value: string
+      },
+      id: string,
+      isDefault: {
+        Value: true
+      },
+      lastCollectionDate: {
+        Value: DateTime_1
+      },
+      mandateDescription: {
+        Value: string
+      },
+      mandateId: {
+        Value: string
+      },
+      maxAmount: {
+        Value: 0.0
+      },
+      oneTime: {
+        Value: true
+      },
+      operation: Insert
+    }
+  ],
+  invoiceAddress: {
+    Value: {
+      addressLine1: {
+        Value: string
+      },
+      addressLine2: {
+        Value: string
+      },
+      addressLine3: {
+        Value: string
+      },
+      city: {
+        Value: string
+      },
+      countryId: {
+        Value: string
+      },
+      county: {
+        Value: string
+      },
+      postalCode: {
+        Value: string
+      }
+    }
+  },
+  invoiceContact: {
+    Value: {
+      attention: {
+        Value: string
+      },
+      email: {
+        Value: string
+      },
+      fax: {
+        Value: string
+      },
+      name: {
+        Value: string
+      },
+      phone1: {
+        Value: string
+      },
+      phone2: {
+        Value: string
+      },
+      web: {
+        Value: string
+      }
+    }
+  },
+  invoiceToDefaultLocation: {
+    Value: true
+  },
+  mainAddress: {
+    Value: {
+      addressLine1: {
+        Value: string
+      },
+      addressLine2: {
+        Value: string
+      },
+      addressLine3: {
+        Value: string
+      },
+      city: {
+        Value: string
+      },
+      countryId: {
+        Value: string
+      },
+      county: {
+        Value: string
+      },
+      postalCode: {
+        Value: string
+      }
+    }
+  },
+  mainContact: {
+    Value: {
+      attention: {
+        Value: string
+      },
+      email: {
+        Value: string
+      },
+      fax: {
+        Value: string
+      },
+      name: {
+        Value: string
+      },
+      phone1: {
+        Value: string
+      },
+      phone2: {
+        Value: string
+      },
+      web: {
+        Value: string
+      }
+    }
+  },
+  name: {
+    Value: string
+  },
+  note: {
+    Value: string
+  },
+  overrideWithClassValues: true,
+  parentRecordNumber: {
+    Value: string
+  },
+  priceClassId: {
+    Value: string
+  },
+  printInvoices: {
+    Value: true
+  },
+  printMultiCurrencyStatements: {
+    Value: true
+  },
+  printStatements: {
+    Value: true
+  },
+  sendInvoicesByEmail: {
+    Value: true
+  },
+  sendStatementsByEmail: {
+    Value: true
+  },
+  statementType: {
+    Value: OpenItem
+  },
+  status: {
+    Value: Active
+  },
+  vatRegistrationId: {
+    Value: string
+  },
+  vatZoneId: {
+    Value: string
+  }
+}

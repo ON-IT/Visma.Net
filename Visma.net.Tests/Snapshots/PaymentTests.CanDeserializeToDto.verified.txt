@@ -1,0 +1,84 @@
+﻿{
+  applicationDate: {
+    Value: DateTime_1
+  },
+  applicationPeriod: {
+    Value: string
+  },
+  branch: {
+    Value: string
+  },
+  cashAccount: {
+    Value: string
+  },
+  currency: {
+    Value: string
+  },
+  customer: {
+    Value: string
+  },
+  hold: {
+    Value: true
+  },
+  invoiceText: {
+    Value: string
+  },
+  location: {
+    Value: string
+  },
+  ordersToApply: [
+    {
+      appliedToOrder: {
+        Value: 0.0
+      },
+      operation: Insert,
+      orderNumber: {
+        Value: string
+      },
+      orderType: {
+        Value: string
+      }
+    }
+  ],
+  paymentAmount: {
+    Value: 0.0
+  },
+  paymentLines: [
+    {
+      amountPaid: {
+        Value: 0.0
+      },
+      balanceWriteOff: {
+        Value: 0.0
+      },
+      cashDiscountTaken: {
+        Value: 0.0
+      },
+      crossRate: {
+        Value: 0.0
+      },
+      documentType: {
+        Value: Invoice
+      },
+      operation: Insert,
+      refNbr: {
+        Value: string
+      },
+      writeOffReasonCode: {
+        Value: string
+      }
+    }
+  ],
+  paymentMethod: {
+    Value: string
+  },
+  paymentRef: {
+    Value: string
+  },
+  referenceNumber: {
+    Value: string
+  },
+  type: {
+    Value: Payment
+  }
+}

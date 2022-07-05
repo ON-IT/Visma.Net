@@ -4,7 +4,10 @@ namespace ONIT.VismaNetApi.Lib
 {
     public class MetaData
     {
-        [JsonProperty("totalCount")]
+        [JsonProperty]
         public int totalCount { get; internal set; }
+
+        [JsonProperty]
+        public int maxPageSize { get; internal set; }
     }
 }

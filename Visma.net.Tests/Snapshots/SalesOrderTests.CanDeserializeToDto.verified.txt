@@ -1,0 +1,391 @@
+﻿{
+  branchNumber: {
+    Value: string
+  },
+  cancelBy: {
+    Value: DateTime_1
+  },
+  canceled: {
+    Value: true
+  },
+  cashAccount: {
+    Value: string
+  },
+  contactId: {
+    Value: 0
+  },
+  currency: {
+    Value: string
+  },
+  customer: {
+    Value: string
+  },
+  customerOrder: {
+    Value: string
+  },
+  customerRefNo: {
+    Value: string
+  },
+  customerVATZone: {
+    Value: string
+  },
+  date: {
+    Value: DateTime_1
+  },
+  description: {
+    Value: string
+  },
+  emailed: {
+    Value: true
+  },
+  fobPoint: {
+    Value: string
+  },
+  hold: {
+    Value: true
+  },
+  insurance: {
+    Value: true
+  },
+  invoiceSeparately: {
+    Value: true
+  },
+  isRotRutDeductible: {
+    Value: true
+  },
+  lines: [
+    {
+      alternateID: {
+        Value: string
+      },
+      branchNumber: {
+        Value: string
+      },
+      commissionable: {
+        Value: true
+      },
+      completed: {
+        Value: true
+      },
+      discountAmount: {
+        Value: 0.0
+      },
+      discountCode: {
+        Value: string
+      },
+      discountPercent: {
+        Value: 0.0
+      },
+      discUnitPrice: {
+        Value: 0.0
+      },
+      expirationDate: {
+        Value: DateTime_1
+      },
+      externalLink: {
+        Value: string
+      },
+      freeItem: {
+        Value: true
+      },
+      inventoryNumber: {
+        Value: string
+      },
+      invoiceNbr: {
+        Value: string
+      },
+      isRotRutDeductible: {
+        Value: true
+      },
+      lineDescription: {
+        Value: string
+      },
+      lineNbr: {
+        Value: 0
+      },
+      lotSerialNbr: {
+        Value: string
+      },
+      manualDiscount: {
+        Value: true
+      },
+      markForPO: {
+        Value: true
+      },
+      note: {
+        Value: string
+      },
+      operation: Insert,
+      overshipThreshold: {
+        Value: 0.0
+      },
+      poSource: {
+        Value: DropShipToOrder
+      },
+      projectTask: {
+        Value: 0
+      },
+      quantity: {
+        Value: 0.0
+      },
+      reasonCode: {
+        Value: string
+      },
+      requestedOn: {
+        Value: DateTime_1
+      },
+      salesOrderOperation: {
+        Value: Issue
+      },
+      salesPerson: {
+        Value: string
+      },
+      shipComplete: {
+        Value: BackOrderAllowed
+      },
+      shipOn: {
+        Value: DateTime_1
+      },
+      subaccount: [],
+      taxCategory: {
+        Value: string
+      },
+      undershipThreshold: {
+        Value: 0.0
+      },
+      unitCost: {
+        Value: 0.0
+      },
+      unitPrice: {
+        Value: 0.0
+      },
+      uom: {
+        Value: string
+      },
+      warehouse: {
+        Value: string
+      }
+    }
+  ],
+  location: {
+    Value: string
+  },
+  note: {
+    Value: string
+  },
+  orderType: {
+    Value: string
+  },
+  origOrderNbr: {
+    Value: string
+  },
+  origOrderType: {
+    Value: string
+  },
+  paymentMethod: {
+    Value: string
+  },
+  paymentRef: {
+    Value: string
+  },
+  preferredWarehouse: {
+    Value: string
+  },
+  printDescriptionOnInvoice: {
+    Value: true
+  },
+  printNoteOnExternalDocuments: {
+    Value: true
+  },
+  printNoteOnInternalDocuments: {
+    Value: true
+  },
+  priority: {
+    Value: 0
+  },
+  project: {
+    Value: 0
+  },
+  requestOn: {
+    Value: DateTime_1
+  },
+  residentialDelivery: {
+    Value: true
+  },
+  salesPerson: {
+    Value: string
+  },
+  saturdayDelivery: {
+    Value: true
+  },
+  schedShipment: {
+    Value: DateTime_1
+  },
+  shipComplete: {
+    Value: BackOrderAllowed
+  },
+  shipments: [
+    {
+      inventoryDocType: {
+        Value: string
+      },
+      inventoryRefNo: {
+        Value: string
+      },
+      invoiceNo: {
+        Value: string
+      },
+      invoiceType: {
+        Value: string
+      },
+      shipmentDate: {
+        Value: DateTime_1
+      },
+      shipmentNo: {
+        Value: string
+      },
+      shipmentType: {
+        Value: string
+      },
+      shippedQty: {
+        Value: 0.0
+      },
+      shippedVolume: {
+        Value: 0.0
+      },
+      shippedWeight: {
+        Value: 0.0
+      }
+    }
+  ],
+  shippingTerms: {
+    Value: string
+  },
+  shippingZone: {
+    Value: string
+  },
+  shipSeparately: {
+    Value: true
+  },
+  shipVia: {
+    Value: string
+  },
+  soBillingAddress: {
+    Value: {
+      addressLine1: {
+        Value: string
+      },
+      addressLine2: {
+        Value: string
+      },
+      addressLine3: {
+        Value: string
+      },
+      city: {
+        Value: string
+      },
+      countryId: {
+        Value: string
+      },
+      county: {
+        Value: string
+      },
+      overrideAddress: {
+        Value: true
+      },
+      postalCode: {
+        Value: string
+      }
+    }
+  },
+  soBillingContact: {
+    Value: {
+      attention: {
+        Value: string
+      },
+      email: {
+        Value: string
+      },
+      fax: {
+        Value: string
+      },
+      name: {
+        Value: string
+      },
+      overrideContact: {
+        Value: true
+      },
+      phone1: {
+        Value: string
+      },
+      phone2: {
+        Value: string
+      },
+      web: {
+        Value: string
+      }
+    }
+  },
+  soShippingAddress: {
+    Value: {
+      addressLine1: {
+        Value: string
+      },
+      addressLine2: {
+        Value: string
+      },
+      addressLine3: {
+        Value: string
+      },
+      city: {
+        Value: string
+      },
+      countryId: {
+        Value: string
+      },
+      county: {
+        Value: string
+      },
+      overrideAddress: {
+        Value: true
+      },
+      postalCode: {
+        Value: string
+      }
+    }
+  },
+  soShippingContact: {
+    Value: {
+      attention: {
+        Value: string
+      },
+      email: {
+        Value: string
+      },
+      fax: {
+        Value: string
+      },
+      name: {
+        Value: string
+      },
+      overrideContact: {
+        Value: true
+      },
+      phone1: {
+        Value: string
+      },
+      phone2: {
+        Value: string
+      },
+      web: {
+        Value: string
+      }
+    }
+  },
+  terms: {
+    Value: string
+  },
+  transactionType: {
+    Value: 0
+  }
+}

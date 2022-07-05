@@ -1,0 +1,42 @@
+﻿{
+  attributeLines: [
+    {
+      attributeId: {
+        Value: string
+      },
+      attributeValue: {
+        Value: string
+      }
+    }
+  ],
+  baseUnit: {
+    Value: string
+  },
+  defaultPrice: {
+    Value: 0.0
+  },
+  description: {
+    Value: string
+  },
+  itemClass: {
+    Value: string
+  },
+  postingClass: {
+    Value: string
+  },
+  purchaseUnit: {
+    Value: string
+  },
+  salesUnit: {
+    Value: string
+  },
+  status: {
+    Value: Active
+  },
+  type: {
+    Value: NonStockItem
+  },
+  vatCode: {
+    Value: string
+  }
+}

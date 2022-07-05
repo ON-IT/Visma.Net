@@ -1,0 +1,191 @@
+﻿{
+  approvalDetails: {
+    attachmentID: {
+      Value: string
+    },
+    comment: {
+      Value: string
+    }
+  },
+  approvalStatus: {
+    Value: New
+  },
+  balance: {
+    Value: 0.0
+  },
+  balanceInCurrency: {
+    Value: 0.0
+  },
+  branchNumber: {
+    Value: string
+  },
+  buyerReference: {
+    Value: string
+  },
+  cashDiscount: {
+    Value: 0.0
+  },
+  cashDiscountDate: {
+    Value: DateTimeOffset_1
+  },
+  cashDiscountInCurrency: {
+    Value: 0.0
+  },
+  createdDateTime: {
+    Value: DateTimeOffset_1
+  },
+  creditTermsId: {
+    Value: string
+  },
+  currencyId: {
+    Value: string
+  },
+  date: {
+    Value: DateTime_1
+  },
+  description: {
+    Value: string
+  },
+  detailTotal: {
+    Value: 0.0
+  },
+  detailTotalInCurrency: {
+    Value: 0.0
+  },
+  documentType: {
+    Value: Check
+  },
+  dueDate: {
+    Value: DateTime_1
+  },
+  exchangeRate: {
+    Value: 0.0
+  },
+  financialPeriod: {
+    Value: string
+  },
+  hold: {
+    Value: true
+  },
+  invoiceLines: [
+    {
+      accountNumber: {
+        Value: string
+      },
+      branchNumber: {
+        Value: string
+      },
+      costInCurrency: {
+        Value: 0.0
+      },
+      deferralCode: {
+        Value: string
+      },
+      deferralSchedule: {
+        Value: 0
+      },
+      discountAmountInCurrency: {
+        Value: 0.0
+      },
+      discountPercent: {
+        Value: 0.0
+      },
+      discountUnitCostInCurrency: {
+        Value: 0.0
+      },
+      inventoryNumber: {
+        Value: string
+      },
+      lineNumber: {
+        Value: 0
+      },
+      manualDiscount: {
+        Value: true
+      },
+      note: {
+        Value: string
+      },
+      operation: Insert,
+      projectId: {
+        Value: string
+      },
+      projectTaskId: {
+        Value: string
+      },
+      quantity: {
+        Value: 0.0
+      },
+      splitHierarchy: {
+        Value: string
+      },
+      subaccount: [
+        {
+          segmentValue: string
+        }
+      ],
+      transactionDescription: {
+        Value: string
+      },
+      unitCostInCurrency: {
+        Value: 0.0
+      },
+      uom: {
+        Value: string
+      },
+      vatCodeId: {
+        Value: string
+      }
+    }
+  ],
+  lastModifiedDateTime: {
+    Value: DateTimeOffset_1
+  },
+  locationId: {
+    Value: string
+  },
+  note: {
+    Value: string
+  },
+  paymentMethod: {
+    Value: string
+  },
+  paymentRefNo: {
+    Value: string
+  },
+  postPeriod: {
+    Value: string
+  },
+  status: {
+    Value: Hold
+  },
+  supplierNumber: {
+    Value: string
+  },
+  supplierReference: {
+    Value: string
+  },
+  vatExemptTotal: {
+    Value: 0.0
+  },
+  vatExemptTotalInCurrency: {
+    Value: 0.0
+  },
+  vatTaxableTotal: {
+    Value: 0.0
+  },
+  vatTaxableTotalInCurrency: {
+    Value: 0.0
+  },
+  vatTotal: {
+    Value: 0.0
+  },
+  vatTotalInCurrency: {
+    Value: 0.0
+  },
+  withholdingTax: {
+    Value: 0.0
+  },
+  withholdingTaxInCurrency: {
+    Value: 0.0
+  }
+}

@@ -1,0 +1,142 @@
+﻿{
+  approvalStatus: New,
+  supplierTaxZone: {
+    defaultVatCategory: string,
+    defaultTaxCategory: {
+      number: string,
+      description: string
+    },
+    metadata: {},
+    extras: {
+      additionalProp1: {},
+      additionalProp2: {},
+      additionalProp3: {}
+    },
+    errorInfo: string,
+    description: string,
+    id: string
+  },
+  approvalDetails: {
+    attachmentID: string,
+    comment: string
+  },
+  attachments: [
+    {
+      name: string,
+      id: string
+    }
+  ],
+  branchNumber: {
+    number: string,
+    name: string
+  },
+  buyerReference: string,
+  cashDiscountDate: DateTimeOffset_1,
+  closedFinancialPeriod: string,
+  createdDateTime: DateTimeOffset_1,
+  creditTerms: {
+    description: string,
+    id: string
+  },
+  currencyId: string,
+  date: DateTime_1,
+  description: string,
+  documentType: Check,
+  dueDate: DateTime_1,
+  financialPeriod: string,
+  hold: true,
+  invoiceLines: [
+    {
+      account: {
+        description: string,
+        number: string,
+        type: Asset,
+        externalCode1: string,
+        externalCode2: string
+      },
+      branchNumber: {
+        number: string,
+        name: string
+      },
+      splitHierarchy: string,
+      project: {
+        description: string,
+        id: string
+      },
+      projectTask: {
+        description: string,
+        id: string
+      },
+      deferralCode: string,
+      deferralSchedule: 0,
+      inventoryNumber: string,
+      manualDiscount: true,
+      note: string,
+      attachments: [
+        {
+          name: string,
+          id: string
+        }
+      ],
+      operation: Insert,
+      stockItem: true,
+      subaccount: {
+        description: string,
+        lastModifiedDateTime: DateTimeOffset_1,
+        subaccountNumber: string,
+        segments: [
+          {
+            segmentDescription: string,
+            segmentValue: string,
+            segmentValueDescription: string
+          }
+        ],
+        errorInfo: string,
+        extras: {
+          additionalProp1: {},
+          additionalProp2: {},
+          additionalProp3: {}
+        },
+        metadata: {}
+      },
+      poNumber: string,
+      poReceiptNbr: string,
+      transactionDescription: string,
+      uom: string,
+      vatCode: {
+        description: string,
+        id: string
+      }
+    }
+  ],
+  lastModifiedDateTime: DateTimeOffset_1,
+  location: {
+    countryId: string,
+    id: string,
+    name: string
+  },
+  note: string,
+  paymentMethod: {
+    description: string,
+    id: string
+  },
+  payDate: DateTime_1,
+  paymentMessage: string,
+  paymentRefNo: string,
+  postPeriod: string,
+  referenceNumber: string,
+  status: Hold,
+  supplier: {
+    name: string,
+    number: string
+  },
+  supplierReference: string,
+  taxCalculationMode: TaxSetting,
+  extras: {
+    additionalProp1: {},
+    additionalProp2: {},
+    additionalProp3: {}
+  },
+  errorInfo: string,
+  metadata: {}
+}
