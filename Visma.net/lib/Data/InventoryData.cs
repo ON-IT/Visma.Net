@@ -43,5 +43,10 @@ namespace ONIT.VismaNetApi.Lib.Data
                     });
             }
         }
+
+        public async Task<List<ItemClass>> GetAllItemClasses()
+        {
+            return await VismaNetApiHelper.GetAllItemClasses(Authorization);
+        }
     }
 }

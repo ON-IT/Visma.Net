@@ -81,6 +81,29 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        public static async Task<List<ItemClass>> GetAllItemClasses(VismaNetAuthorization authorization)
+        {
+            var webclient = GetHttpClient(authorization);
+            {
+                var apiUrl = GetApiUrlForController(VismaNetControllers.Inventory);
+                try
+                {
+                    var fullUrl = $"{apiUrl}/itemClass";
+                    return await webclient.Get<List<ItemClass>>(fullUrl);
+                }
+                catch (AggregateException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                catch (WebException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+
+                return null;
+            }
+        }
+
         public static async Task<List<CustomerSalesPrice>> FetchCustomerSalesPricesForItem(string itemNo,
             VismaNetAuthorization authorization, PriceType priceType = PriceType.Undefined)
         {
