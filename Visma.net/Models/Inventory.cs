@@ -103,25 +103,25 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
-    public DescriptiveDto defaultWarehouse
-    {
-      get => Get<DescriptiveDto>();
-      set => Set(value);
-    }
+        public DescriptiveDto defaultWarehouse
+        {
+            get => Get<DescriptiveDto>();
+            set => Set(value);
+        }
 
-    public DescriptiveDto defaultIssueFrom
-    {
-      get => Get<DescriptiveDto>();
-      set => Set(value);
-    }
+        public DescriptiveDto defaultIssueFrom
+        {
+            get => Get<DescriptiveDto>();
+            set => Set(value);
+        }
 
-    public DescriptiveDto defaultReceiptTo
-    {
-      get => Get<DescriptiveDto>();
-      set => Set(value);
-    }
+        public DescriptiveDto defaultReceiptTo
+        {
+            get => Get<DescriptiveDto>();
+            set => Set(value);
+        }
 
-    public string purchaseUnit
+        public string purchaseUnit
         {
             get => Get<string>();
             set => Set(value);
@@ -130,6 +130,18 @@ namespace ONIT.VismaNetApi.Models
         public string salesUnit
         {
             get => Get<string>();
+            set => Set(value);
+        }
+
+        public string body
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public DescriptiveDto priceClass
+        {
+            get => Get<DescriptiveDto>();
             set => Set(value);
         }
 
