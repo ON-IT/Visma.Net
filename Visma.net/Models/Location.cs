@@ -13,12 +13,12 @@ namespace ONIT.VismaNetApi.Models
             this.baccount = new Baccount();
             this.baccount.number = baccountId;
             this.locationId = locationId;
-            IgnoreProperties.Add(nameof(baccount));
-            if (!standAloneLocation)
-            {
-                IgnoreProperties.Add("baccountId");
-                IgnoreProperties.Add(nameof(locationId));
-            }
+            //IgnoreProperties.Add(nameof(baccount));
+            //if (!standAloneLocation)
+            //{
+            //    IgnoreProperties.Add("baccountId");
+            //    IgnoreProperties.Add(nameof(locationId));
+            //}
         }
  
         internal override void PrepareForUpdate()
