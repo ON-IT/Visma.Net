@@ -13,8 +13,6 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         [JsonProperty]
         public string description { get; private set; }
         [JsonProperty]
-        public int id { get; private set; }
-        [JsonProperty]
         public int subaccountId { get; private set; }
         [JsonProperty]
         public string lastModifiedDateTime { get; private set; }
