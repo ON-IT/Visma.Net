@@ -24,7 +24,6 @@ namespace ONIT.VismaNetApi.Models
         private List<CrossReference> _crossReferences;
         private List<WarehouseDetails> _warehouseDetails;
         private List<SupplierDetails> _supplierDetails;
-        private List<Packaging> _packaging;
 
         [JsonProperty]
         public List<Attachment> attachments
