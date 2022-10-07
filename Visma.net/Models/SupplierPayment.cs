@@ -21,7 +21,7 @@ namespace ONIT.VismaNetApi.Models
         public LocationSummary location { get => Get<LocationSummary>(); set => Set(value); }
         public PaymentMethod paymentMethod { get => Get<PaymentMethod>(); set => Set(value); }
         public string cashAccount { get => Get<string>(); set => Set(value); }
-        //public string currency { get => Get<string>(); set => Set(value); }
+        public CurrencySummary currency { get => Get<CurrencySummary>(); set => Set(value); }
         public string description { get => Get<string>(); set => Set(value); }
         public decimal paymentAmount { get => Get<decimal>(); set => Set(value); }
         [JsonProperty]

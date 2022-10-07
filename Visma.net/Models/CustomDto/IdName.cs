@@ -31,6 +31,34 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         }
     }
 
+    public class IdDescription : IBecomeDto
+    {
+        public IdDescription()
+        {
+
+        }
+
+        public IdDescription(string id)
+        {
+            this.id = id;
+        }
+
+        public string id { get; set; }
+
+        [JsonProperty]
+        public string descriptuin { get; private set; }
+
+        public static implicit operator IdDescription(string id)
+        {
+            return new IdDescription(id);
+        }
+
+        public DtoValue ToDto()
+        {
+            return new DtoValue(id);
+        }
+    }
+
     public class IdValue : IBecomeDto
     {
         public IdValue()

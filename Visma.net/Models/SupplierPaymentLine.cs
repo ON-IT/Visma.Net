@@ -42,8 +42,8 @@ namespace ONIT.VismaNetApi.Models
         public decimal cashDiscountBalance { get; private set; }
         [JsonProperty]
         public string description { get; private set; }
-        //[JsonProperty]
-        //public string currency { get; private set; }
+        [JsonProperty]
+        public string currency { get; private set; }
         [JsonProperty]
         public string postPeriod { get; private set; }
         [JsonProperty]
