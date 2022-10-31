@@ -4,15 +4,16 @@ using Xunit.Abstractions;
 
 namespace Visma.net.Tests
 {
-    public class LocationTests : EntityBaseTest<Location>
-    {
-        private static readonly string dto =
-            @"{
-  ""baccount"": {
-    ""internalId"": 0,
-    ""number"": ""string"",
-    ""name"": ""string""
-  },
+  public class LocationTests : EntityBaseTest<Location>
+  {
+   private static readonly string dto =
+        @"{  
+  //          ""baccount"": {
+  //  ""internalId"": 0,
+  //  ""number"": ""string"",
+  //  ""name"": ""string""
+  //},
+ ""baccountId"": ""string"",
   ""locationId"": ""string"",
   ""locationName"": ""string"",
   ""active"": true,
@@ -85,7 +86,7 @@ namespace Visma.net.Tests
   }
 }";
 
-        public static string update = @"{
+public static string update = @"{
   ""baccountId"": {
     ""value"": ""string""
   },
@@ -170,25 +171,25 @@ namespace Visma.net.Tests
     ""value"": ""string""
   }
 }";
-        public LocationTests(ITestOutputHelper output) : base(dto, update)
-        {
-            this.output = output;
-        }
-
-        public override string PrepareDtoForUpdate(string src)
-        {
-            var jtoken = JToken.Parse(src);
-            jtoken["contactIsSameAsMain"] = true;
-            jtoken["addressIsSameAsMain"] = true;
-            return base.PrepareDtoForSerializer(jtoken.ToString());
-        }
-
-        public override string PrepareDtoForSerializer(string src)
-        {
-            var jtoken = JToken.Parse(src);
-            jtoken["contactIsSameAsMain"] = true;
-            jtoken["addressIsSameAsMain"] = true;
-            return base.PrepareDtoForSerializer(jtoken.ToString());
-        }
+    public LocationTests(ITestOutputHelper output) : base(dto, update)
+    {
+      this.output = output;
     }
+
+    public override string PrepareDtoForUpdate(string src)
+    {
+      var jtoken = JToken.Parse(src);
+      jtoken["contactIsSameAsMain"] = true;
+      jtoken["addressIsSameAsMain"] = true;
+      return base.PrepareDtoForSerializer(jtoken.ToString());
+    }
+
+    public override string PrepareDtoForSerializer(string src)
+    {
+      var jtoken = JToken.Parse(src);
+      jtoken["contactIsSameAsMain"] = true;
+      jtoken["addressIsSameAsMain"] = true;
+      return base.PrepareDtoForSerializer(jtoken.ToString());
+    }
+  }
 }

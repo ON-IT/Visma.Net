@@ -23,4 +23,11 @@
     <ProjectReference Include="..\Visma.net\Visma.net.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Snapshots\LocationTests.CanDeserializeToDto.received.txt">
+      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+      <DependentUpon>%(ParentFile).cs</DependentUpon>
+    </None>
+  </ItemGroup>
+
 </Project>

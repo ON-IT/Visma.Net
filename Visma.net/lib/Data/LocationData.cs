@@ -32,7 +32,8 @@ namespace ONIT.VismaNetApi.Lib.Data
     public virtual async Task Update(Location entity)
     {
       entity.InternalPrepareForUpdate();
-      await VismaNetApiHelper.Update(entity, $"{entity.baccount.number.Trim()}/{entity.locationId.Trim()}", ApiControllerUri, Authorization);
+      await VismaNetApiHelper.Update(entity, $"{entity.baccountId.Trim()}/{entity.locationId.Trim()}", ApiControllerUri, Authorization);
+      //await VismaNetApiHelper.Update(entity, $"{entity.baccount.number.Trim()}/{entity.locationId.Trim()}", ApiControllerUri, Authorization);
     }
 
     /// <summary>
