@@ -18,6 +18,7 @@
       }
     ],
     errorInfo: string,
+    active: false,
     metadata: {}
   },
   branch: {
