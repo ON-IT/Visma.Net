@@ -7,11 +7,7 @@
     postalCode: string,
     city: string,
     country: {
-      extras: {
-        additionalProp1: {},
-        additionalProp2: {},
-        additionalProp3: {}
-      },
+      extras: {},
       errorInfo: string,
       metadata: {},
       id: string,
@@ -47,21 +43,13 @@
       description: string
     },
     metadata: {},
-    extras: {
-      additionalProp1: {},
-      additionalProp2: {},
-      additionalProp3: {}
-    },
+    extras: {},
     errorInfo: string,
     description: string,
     id: string
   },
   lastModifieDateTime: DateTime_1,
-  extras: {
-    additionalProp1: {},
-    additionalProp2: {},
-    additionalProp3: {}
-  },
+  extras: {},
   errorInfo: string,
   metadata: {}
 }

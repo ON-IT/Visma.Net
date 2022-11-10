@@ -43,7 +43,7 @@
         subaccountNumber: string,
         segments: [
           {
-            segmentId: Id_1,
+            segmentId: 1,
             segmentDescription: string,
             segmentValue: string,
             segmentValueDescription: string

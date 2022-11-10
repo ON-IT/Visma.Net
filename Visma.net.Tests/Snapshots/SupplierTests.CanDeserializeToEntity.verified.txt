@@ -157,5 +157,6 @@
     defaultVatCategory: string,
     description: string,
     id: string
-  }
+  },
+  overrideNumberSeries: false
 }
