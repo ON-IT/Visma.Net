@@ -15,13 +15,13 @@ namespace ONIT.VismaNetApi.Lib.Data
             ApiControllerUri = VismaNetControllers.Branch;
         }
 
-        public async Task<BackgroundData> GetStatus(string statusId)
+        public async Task<BackgroundStatus> GetStatus(string statusId)
         {
-            return await VismaNetApiHelper.Get<BackgroundData>(statusId, ApiControllerUri, Authorization);
+            return await VismaNetApiHelper.Get<BackgroundStatus>(statusId, ApiControllerUri, Authorization);
         }
-        public async Task<T> GetContent<T>(string statusId) where T : class, new()
+        public async Task<T> GetContent<T>(string statusId) 
         {
-            return await VismaNetApiHelper.Get<T>(statusId, ApiControllerUri, Authorization);
+            return await VismaNetApiHelper.Get<T>($"{statusId}/content", ApiControllerUri, Authorization);
         }
     }
 }

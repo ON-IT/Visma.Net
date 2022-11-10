@@ -17,6 +17,9 @@ namespace ONIT.VismaNetApi
     public class VismaNet : VismaNetDynamicHandler
     {
         public readonly CashTransactionData CashTransaction;
+
+        public readonly BackgroundData Background;
+
         public readonly CashSaleData CashSale;
         public readonly CustomerDocumentData CustomerDocument;
         public readonly CustomerInvoiceData CustomerInvoice;
@@ -121,6 +124,7 @@ namespace ONIT.VismaNetApi
             CustomerCreditNote = new CustomerCreditNoteData(Auth);
             PurchaseOrder = new PurchaseOrderData(Auth);
             CashTransaction = new CashTransactionData(Auth);
+            Background = new BackgroundData(Auth);
         }
 
         /// <summary>

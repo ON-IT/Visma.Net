@@ -1,5 +1,5 @@
-﻿using System;
-using ONIT.VismaNetApi.Lib;
+﻿using ONIT.VismaNetApi.Lib;
+using System;
 
 namespace ONIT.VismaNetApi.Exceptions
 {
@@ -12,7 +12,7 @@ namespace ONIT.VismaNetApi.Exceptions
         }
 
         public VismaNetException(VismaNetExceptionDetails exceptionDetails, Exception innerException)
-            : base(exceptionDetails.DetailsMessage, innerException)
+            : base(exceptionDetails?.DetailsMessage, innerException)
         {
             Details = exceptionDetails;
         }

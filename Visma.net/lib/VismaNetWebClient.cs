@@ -139,7 +139,7 @@ namespace ONIT.VismaNetApi.Lib
             url = url.Replace("http://", "https://"); // force https
             var result = await HttpClient.SendAsync(PrepareMessage(HttpMethod.Get, url));
             var stringData = await result.Content.ReadAsStringAsync();
-            if (result.StatusCode != HttpStatusCode.OK)
+            if (!result.IsSuccessStatusCode)
             {
                 VismaNetExceptionHandler.HandleException(stringData, null, null, url);
                 return default(T);
@@ -155,7 +155,7 @@ namespace ONIT.VismaNetApi.Lib
             url = url.Replace("http://", "https://"); // force https
             var result = await HttpClient.SendAsync(PrepareMessage(HttpMethod.Get, url));
             var streamData = await result.Content.ReadAsStreamAsync();
-            if (result.StatusCode != HttpStatusCode.OK)
+            if (!result.IsSuccessStatusCode)
                 VismaNetExceptionHandler.HandleException("Error downloading stream from Visma.net", null, null, url);
             return streamData;
         }
@@ -215,7 +215,7 @@ namespace ONIT.VismaNetApi.Lib
 
                 var stringData = await result.Content.ReadAsStringAsync();
 
-                if (result.StatusCode != HttpStatusCode.OK)
+                if (!result.IsSuccessStatusCode)
                 {
                     VismaNetExceptionHandler.HandleException(stringData, null, serialized);
                     return default(T);
@@ -254,7 +254,7 @@ namespace ONIT.VismaNetApi.Lib
                     else
                         return await Get<T>(url);
                 var stringData = await result.Content.ReadAsStringAsync();
-                if (result.StatusCode != HttpStatusCode.OK)
+                if (!result.IsSuccessStatusCode)
                 {
                     VismaNetExceptionHandler.HandleException(stringData, null, serialized, url);
                     return default(T);

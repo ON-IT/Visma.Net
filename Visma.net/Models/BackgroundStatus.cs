@@ -9,8 +9,14 @@ namespace ONIT.VismaNetApi.Models
     {
         [JsonProperty]
         public string id { get; set; }
+        /// <summary>
+        /// Current status of a background API operation. Possible values are 'Started’, ‘Finished’ and 'Failed’.
+        /// </summary>
         [JsonProperty]
         public string status { get; set; }
+        /// <summary>
+        /// The Http Status Code of the finished background API operation. Value is 0 when operation is not done.
+        /// </summary>
         [JsonProperty]
         public int statusCode { get; set; }
         [JsonProperty]
