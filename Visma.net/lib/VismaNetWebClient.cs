@@ -63,9 +63,11 @@ namespace ONIT.VismaNetApi.Lib
             NullValueHandling = NullValueHandling.Ignore
         };
 
-        private static readonly HttpClient HttpClient;
+        private static readonly HttpClient HttpClientStatic;
 
         private readonly VismaNetAuthorization _authorization;
+
+        private HttpClient HttpClient => _authorization.HttpClient ?? HttpClientStatic;
 
         static VismaNetHttpClient()
         {
@@ -79,13 +81,10 @@ namespace ONIT.VismaNetApi.Lib
             handler.MaxConnectionsPerServer = VismaNet.MaxConcurrentRequests;
 #endif
 
-            HttpClient = new HttpClient(new RetryHandler(handler), false)
+            HttpClientStatic = new HttpClient(new RetryHandler(handler), false)
             {
                 Timeout = TimeSpan.FromSeconds(1200)
             };
-            HttpClient.DefaultRequestHeaders.Add("User-Agent",
-                $"Visma.Net/{VismaNet.Version} (+https://github.com/ON-IT/Visma.Net)");
-            HttpClient.DefaultRequestHeaders.ExpectContinue = false;
         }
 
         internal VismaNetHttpClient(VismaNetAuthorization auth = null)
@@ -104,11 +103,18 @@ namespace ONIT.VismaNetApi.Lib
                     message.Headers.Add("branchid", _authorization.BranchId.ToString());
             }
             message.Headers.Add("ipp-application-type", VismaNetApiHelper.ApplicationType);
+            message.Headers.ExpectContinue = false;
             message.Headers.Accept.Clear();
             message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             if (!string.IsNullOrEmpty(VismaNet.ApplicationName))
+            {
                 message.Headers.Add("User-Agent",
-                    $"Visma.Net/{VismaNet.Version} (+https://github.com/ON-IT/Visma.Net) ({VismaNet.ApplicationName})");
+                        $"Visma.Net/{VismaNet.Version} (+https://github.com/ON-IT/Visma.Net) ({VismaNet.ApplicationName})");
+            }
+            else
+            {
+                message.Headers.Add("User-Agent", $"Visma.Net/{VismaNet.Version} (+https://github.com/ON-IT/Visma.Net)");
+            }
             return message;
         }
 
@@ -175,10 +181,14 @@ namespace ONIT.VismaNetApi.Lib
             return default(T);
         }
 
-        internal async Task<T> Post<T>(string url, object data, string urlToGet = null, bool ignoreAbsoluteUri = false)
+        internal async Task<T> Post<T>(string url, object data, string urlToGet = null, bool ignoreAbsoluteUri = false, string erpApiBackground = null)
         {
             using (var message = PrepareMessage(HttpMethod.Post, url))
             {
+                if (!string.IsNullOrEmpty(erpApiBackground))
+                {
+                    message.Headers.Add("erp-api-background", erpApiBackground);
+                }
                 var serialized = Serialize(data);
                 message.Content = new StringContent(serialized, Encoding.UTF8, "application/json");
 
@@ -224,10 +234,14 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal async Task<T> Put<T>(string url, object data, string urlToGet = null, bool ignoreAbsoluteUri = false)
+        internal async Task<T> Put<T>(string url, object data, string urlToGet = null, bool ignoreAbsoluteUri = false, string erpApiBackground = null)
         {
             using (var message = PrepareMessage(HttpMethod.Put, url))
             {
+                if (!string.IsNullOrEmpty(erpApiBackground))
+                {
+                    message.Headers.Add("erp-api-background", erpApiBackground);
+                }
                 var serialized = Serialize(data);
                 message.Content = new StringContent(serialized, Encoding.UTF8, "application/json");
 
