@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using ONIT.VismaNetApi.Exceptions;
 using ONIT.VismaNetApi.Lib;
+using System;
+using System.IO;
+using System.Net;
 
 namespace ONIT.VismaNetApi
 {
@@ -37,7 +37,7 @@ namespace ONIT.VismaNetApi
 
         internal static void HandleException(Stream stream, Exception e = null, string request = null, string endpoint = null)
         {
-            HandleException(new StreamReader(stream).ReadToEnd(), e, request,endpoint);
+            HandleException(new StreamReader(stream).ReadToEnd(), e, request, endpoint);
         }
 
         internal static void HandleException(string data, Exception e = null, string request = null, string endpoint = null)
@@ -49,8 +49,8 @@ namespace ONIT.VismaNetApi
         {
             var details = JsonConvert.DeserializeObject<VismaNetExceptionDetails>(data);
 
-            if (details.ExceptionMessage != null)
-			{
+            if (details?.ExceptionMessage != null)
+            {
                 if (details.ExceptionMessage.IndexOf("companyincontext", StringComparison.OrdinalIgnoreCase) > -1 ||
                     details.ExceptionMessage.IndexOf("token", StringComparison.OrdinalIgnoreCase) > -1)
                     throw new InvalidTokenException(details, ex);
