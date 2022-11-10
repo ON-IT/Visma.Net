@@ -37,9 +37,12 @@
   documentDueDate: DateTime_1,
   documentType: Invoice,
   invoiceAddress: {
+    overrideAddress: false,
     country: {}
   },
-  invoiceContact: {},
+  invoiceContact: {
+    overrideContact: false
+  },
   dunningLetterDate: DateTime_1,
   errorInfo: string,
   externalReference: string,
@@ -94,6 +97,7 @@
           }
         ],
         errorInfo: string,
+        active: false,
         metadata: {}
       },
       termEndDate: DateTime_1,
@@ -134,7 +138,9 @@
     description: string,
     id: string
   },
-  rotRutDetails: {},
+  rotRutDetails: {
+    distributedAutomaticaly: false
+  },
   salesPersonDescr: string,
   salesPersonID: 0,
   status: Hold,
@@ -159,5 +165,9 @@
         description: string
       }
     }
-  ]
+  ],
+  sendToAutoInvoice: false,
+  dontPrint: false,
+  dontEmail: false,
+  overrideNumberSeries: false
 }

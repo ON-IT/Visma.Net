@@ -57,11 +57,7 @@
       invoiceDate: DateTime_1
     }
   ],
-  extras: {
-    additionalProp1: {},
-    additionalProp2: {},
-    additionalProp3: {}
-  },
+  extras: {},
   errorInfo: string,
   metadata: {}
 }
