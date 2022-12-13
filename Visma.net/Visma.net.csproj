@@ -4,7 +4,7 @@
     		<Title>Visma.net</Title>
         <Copyright>Copyright © ON IT AS 2014 - 2020</Copyright>
         <Copyright>Copyright © ON IT AS 2014 - 2021</Copyright>
-        <Version>4.0.3.11</Version>
+        <Version>4.1.0.1</Version>
         <TargetFrameworks>netstandard2.0;net462;net6</TargetFrameworks>
     	<Title>Visma.net</Title>
         <Copyright>Copyright © ON IT AS 2014 - 2022</Copyright>
