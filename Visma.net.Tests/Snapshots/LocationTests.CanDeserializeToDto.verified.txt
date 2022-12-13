@@ -30,6 +30,9 @@
   addressIsSameAsMain: {
     Value: true
   },
+  baccountId: {
+    Value: string
+  },
   contact: {
     Value: {
       attention: {
@@ -65,6 +68,9 @@
     Value: string
   },
   gln: {
+    Value: string
+  },
+  locationId: {
     Value: string
   },
   locationName: {

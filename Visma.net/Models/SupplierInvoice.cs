@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ONIT.VismaNetApi.Models
 {
@@ -69,15 +69,15 @@ namespace ONIT.VismaNetApi.Models
         }
 
 
-    [JsonProperty]
-    public List<TaxDetail> taxDetailLines
-    {
-      get; //=> Get("taxDetailLines", new List<TaxDetail>());
+        [JsonProperty]
+        public List<TaxDetail> taxDetailLines
+        {
+            get; //=> Get("taxDetailLines", new List<TaxDetail>());
 
-      private set; //=> Set(value, "taxDetailsLines");
-    }
+            private set; //=> Set(value, "taxDetailsLines");
+        }
 
-    public decimal balance
+        public decimal balance
         {
             get => Get<decimal>();
             set => Set(value);
@@ -332,10 +332,14 @@ namespace ONIT.VismaNetApi.Models
             get => Get<decimal>();
             set => Set(value);
         }
+        public bool overrideNumberSeries
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
 
 
-
-    [JsonProperty]
+        [JsonProperty]
         public JObject extras { get; private set; }
 
         [JsonProperty] public string errorInfo { get; private set; }

@@ -6,6 +6,7 @@ using ONIT.VismaNetApi.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace ONIT.VismaNetApi
     public class VismaNet : VismaNetDynamicHandler
     {
         public readonly CashTransactionData CashTransaction;
+
+        public readonly BackgroundData Background;
+
         public readonly CashSaleData CashSale;
         public readonly CustomerDocumentData CustomerDocument;
         public readonly CustomerInvoiceData CustomerInvoice;
@@ -70,7 +74,8 @@ namespace ONIT.VismaNetApi
         /// <param name="companyId">Company context</param>
         /// <param name="token">The predefined token from Visma.net</param>
         /// <param name="branchId">Branch ID to work with in the Visma.net Company (optional)</param>
-        public VismaNet(int companyId, string token, int branchId = 0)
+        /// <param name="httpClient">Bring your own HttpClient</param>
+        public VismaNet(int companyId, string token, int branchId = 0, HttpClient httpClient = null)
         {
             if (string.IsNullOrEmpty(token))
                 throw new InvalidArgumentsException("Token is missing");
@@ -79,7 +84,8 @@ namespace ONIT.VismaNetApi
             {
                 Token = token,
                 CompanyId = companyId,
-                BranchId = branchId
+                BranchId = branchId,
+                HttpClient = httpClient
             };
             Attribute = new AttributeData(Auth);
             Customer = new CustomerData(Auth);
@@ -120,6 +126,7 @@ namespace ONIT.VismaNetApi
             CustomerCreditNote = new CustomerCreditNoteData(Auth);
             PurchaseOrder = new PurchaseOrderData(Auth);
             CashTransaction = new CashTransactionData(Auth);
+            Background = new BackgroundData(Auth);
         }
 
         /// <summary>

@@ -298,7 +298,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal static async Task<List<ExchangeRate>> FetchExchangeRates(string toCurrencyId,DateTime effectiveDate, VismaNetAuthorization auth)
+        internal static async Task<List<ExchangeRate>> FetchExchangeRates(string toCurrencyId, DateTime effectiveDate, VismaNetAuthorization auth)
         {
             var webClient = GetHttpClient(auth);
             {
@@ -312,7 +312,7 @@ namespace ONIT.VismaNetApi.Lib
             var webClient = GetHttpClient(auth);
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.CurrencyRate, $"/");
-                return await webClient.Post<List<ExchangeRate>>(apiUrl,exchangeRate.ToDto(), $"{GetApiUrlForController(VismaNetControllers.CurrencyRate)}?toCurrency={exchangeRate.toCurrencyId.TrimStart('/')}&fromDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}&toDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}", true);
+                return await webClient.Post<List<ExchangeRate>>(apiUrl, exchangeRate.ToDto(), $"{GetApiUrlForController(VismaNetControllers.CurrencyRate)}?toCurrency={exchangeRate.toCurrencyId.TrimStart('/')}&fromDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}&toDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}", true);
             }
         }
 
@@ -596,6 +596,13 @@ namespace ONIT.VismaNetApi.Lib
             var client = GetHttpClient(authorization);
             var actionUrl = GetApiUrlForController($"{controller}/{entityNumber}/action/{actionName}");
             return await client.Post<VismaActionResult>(actionUrl, dto ?? new object());
+        }
+
+        internal static async Task<BackgroundStatus> BackgroundAction(VismaNetAuthorization authorization, string controller, string entityNumber, string actionName, string erpApiBackground, object dto = null)
+        {
+            var client = GetHttpClient(authorization);
+            var actionUrl = GetApiUrlForController($"{controller}/{entityNumber}/action/{actionName}");
+            return await client.Post<BackgroundStatus>(actionUrl, dto ?? new object(), erpApiBackground: erpApiBackground);
         }
 
         internal static async Task<CreateShipmentActionResult> CreateShipmentAction(VismaNetAuthorization authorization, string controller, string entityNumber, string actionName, object dto = null)
