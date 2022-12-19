@@ -5,7 +5,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
     public class CustomerGLAccountDto
     {
         [JsonProperty] public GLAccountDetailsDto customerLedgerAccount { get; private set; }
-        [JsonProperty] public Subaccount customerLedgerSubAccount { get; private set; }
+        [JsonProperty] public SubaccountGlAccount customerLedgerSubAccount { get; private set; }
         [JsonProperty] public GLAccountDetailsDto salesAccount { get; private set; }
 
         [JsonProperty] public GLAccountDetailsDto salesEuAccount { get; private set; }
@@ -28,7 +28,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         [JsonProperty] public GLAccountDetailsDto expenseEUAccount { get; private set; }
         [JsonProperty] public GLAccountDetailsDto expenseAccountImport { get; private set; }
 
-        [JsonProperty] public Subaccount expenseSubaccount { get; private set; }
+        [JsonProperty] public SubaccountGlAccount expenseSubaccount { get; private set; }
     }
     
 }

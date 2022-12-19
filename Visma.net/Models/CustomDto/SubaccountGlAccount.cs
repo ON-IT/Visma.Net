@@ -6,14 +6,12 @@ using System.Linq;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
 {
-    public class Subaccount : IProvideCustomDto
+    public class SubaccountGlAccount : IProvideCustomDto
     {
         private List<Segment> _segments;
 
         [JsonProperty]
         public string description { get; private set; }
-        [JsonProperty]
-        public int id { get; private set; }
         [JsonProperty]
         public int subaccountId { get; private set; }
         [JsonProperty]
