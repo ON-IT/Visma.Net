@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using ONIT.VismaNetApi.Interfaces;
+using ONIT.VismaNetApi.Lib;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
 {
@@ -14,21 +16,44 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 
         [JsonProperty] public GLAccountDetailsDto salesNonTaxableAccount { get; private set; }
 
-        [JsonProperty] public Subaccount salesSubaccount { get; private set; }
+        [JsonProperty] public SubaccountGlAccount salesSubaccount { get; private set; }
     }
 
-    public class SupplierGLAccountDto
+    public class SupplierGLAccountDto : DtoProviderBase
     {
-        [JsonProperty] public GLAccountDetailsDto supplierAccount { get; private set; }
+        [JsonProperty] public GLAccountDetailsDto supplierAccount {
+            get => Get<GLAccountDetailsDto>();
+            private set => Set(value);
+        }
 
-        [JsonProperty] public GLAccountDetailsDto expenseAccount { get; private set; }
+        [JsonProperty] public GLAccountDetailsDto expenseAccount {
+            get => Get<GLAccountDetailsDto>();
+            private set => Set(value);
+        }
 
-        [JsonProperty] public GLAccountDetailsDto expenseAccountNonTax { get; private set; }
+        [JsonProperty] public GLAccountDetailsDto expenseAccountNonTax {
+            get => Get<GLAccountDetailsDto>();
+            private set => Set(value);
+        }
 
-        [JsonProperty] public GLAccountDetailsDto expenseEUAccount { get; private set; }
-        [JsonProperty] public GLAccountDetailsDto expenseAccountImport { get; private set; }
+        [JsonProperty] public GLAccountDetailsDto expenseEUAccount {
+            get => Get<GLAccountDetailsDto>();
+            private set => Set(value);
+        }
+        [JsonProperty] public GLAccountDetailsDto expenseAccountImport {
+            get => Get<GLAccountDetailsDto>();
+            private set => Set(value);
+        }
 
-        [JsonProperty] public SubaccountGlAccount expenseSubaccount { get; private set; }
+        [JsonProperty] public IdDescription expenseSubaccount { 
+            get => Get<IdDescription>(); 
+            private set => Set(value); 
+        }
+
+        public DtoValue ToDto()
+        {
+            return new DtoValue(this);
+        }
     }
     
 }

@@ -1,13 +1,19 @@
 ﻿using Newtonsoft.Json;
+using ONIT.VismaNetApi.Interfaces;
 
 namespace ONIT.VismaNetApi.Models.CustomDto
 {
-    public class GLAccountDetailsDto
+    public class GLAccountDetailsDto : IBecomeDto
     {
-        [JsonProperty] public string description { get; private set; }
+        public string description { get; private set; }
 
-        [JsonProperty] public string number { get; private set; }
+        public string number { get; set; }
 
-        [JsonProperty] public string type { get; private set; }
+        public string type { get; private set; }
+
+        public DtoValue ToDto()
+        {
+            return new DtoValue(number);
+        }
     }
 }

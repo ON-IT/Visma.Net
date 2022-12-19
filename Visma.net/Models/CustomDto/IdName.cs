@@ -45,8 +45,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 
         public string id { get; set; }
 
-        [JsonProperty]
-        public string descriptuin { get; private set; }
+        public string description { get; private set; }
 
         public static implicit operator IdDescription(string id)
         {

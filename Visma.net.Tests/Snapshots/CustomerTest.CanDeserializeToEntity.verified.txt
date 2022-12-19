@@ -92,7 +92,8 @@
     },
     salesSubaccount: {
       description: string,
-      id: string
+      subaccountNumber: string,
+      active: false
     }
   },
   invoiceAddress: {

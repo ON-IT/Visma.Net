@@ -221,7 +221,7 @@ namespace Visma.net.Tests
       ""description"": ""string""
     },
     ""salesSubaccount"": {
-      ""id"": ""string"",
+      ""subaccountNumber"": ""string"",
       ""description"": ""string""
     }
   },
