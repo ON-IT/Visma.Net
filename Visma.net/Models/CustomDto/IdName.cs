@@ -45,7 +45,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
 
         public string id { get; set; }
 
-        public string description { get; private set; }
+        public string description { get; set; }
 
         public static implicit operator IdDescription(string id)
         {
