@@ -10,9 +10,9 @@ namespace ONIT.VismaNetApi.Models
   {
     public Location(string baccountId, string locationId, bool standAloneLocation = false)
     {
-      //this.baccount = new Baccount();
-      //this.baccount.number = baccountId;
-      this.baccountId = baccountId;
+      this.baccount = new Baccount();
+      this.baccount.number = baccountId;
+      //this.baccountId = baccountId;
       this.locationId = locationId;
 
 
@@ -51,17 +51,17 @@ namespace ONIT.VismaNetApi.Models
       set => Set(value);
     }
 
-    //public Baccount baccount
-    //{
-    //    get => Get<Baccount>("baccountId");
-    //    set => Set(value, "baccountId");
-    //}
-
-    public string baccountId
+    public Baccount baccount
     {
-      get => Get<string>();
-      set => Set(value);
+        get => Get<Baccount>("baccountId");
+        set => Set(value, "baccountId");
     }
+
+    //public string baccountId
+    //{
+    //  get => Get<string>();
+    //  set => Set(value);
+    //}
 
     public ContactInfo contact
     {
@@ -128,7 +128,7 @@ namespace ONIT.VismaNetApi.Models
 
     public string GetIdentificator()
     {
-      return baccountId;// baccount?.number;
+      return baccount?.number;
     }
   }
 }
