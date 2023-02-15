@@ -54,6 +54,7 @@ namespace ONIT.VismaNetApi.Lib
         public const string CashTransaction = "controller/api/v1/cashTransaction";
         public const string Background = "controller/api/v1/background";
         public const string SupplierPayment = "controller/api/v1/supplierpayment";
+        public const string ProjectTransaction = "/controller/api/v1/projecttransaction";
 
         // Resources
         public const string OAuthAuthorize = "resources/oauth/authorize";
