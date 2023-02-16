@@ -264,7 +264,7 @@ namespace ONIT.VismaNetApi.Models
 
         public LocationSummary location
         {
-            get => Get("locationId", new LocationSummary());
+            get => Get<LocationSummary>("locationId");
             set => Set(value, "locationId");
         }
 

@@ -19,7 +19,9 @@
     }
   },
   addressIsSameAsMain: true,
-  baccountId: string,
+  baccount: {
+    number: string
+  },
   contact: {
     attention: string,
     email: string,

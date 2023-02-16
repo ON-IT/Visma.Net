@@ -5,6 +5,9 @@ namespace ONIT.VismaNetApi.Lib
         // Security
         public const string Token = "security/api/v2/token";
 
+        // Visma Connect
+        public const string VismaConnectToken = "https://connect.visma.com/connect/token";
+
         // Financials
         public const string Attribute = "controller/api/v1/attribute";
         public const string Attachment = "controller/api/v1/attachment";
@@ -50,6 +53,7 @@ namespace ONIT.VismaNetApi.Lib
         public const string CustomerCreditNoteV2 = "controller/api/v2/customerCreditNote";
         public const string CashTransaction = "controller/api/v1/cashTransaction";
         public const string Background = "controller/api/v1/background";
+        public const string SupplierPayment = "controller/api/v1/supplierpayment";
         public const string ProjectTransaction = "/controller/api/v1/projecttransaction";
 
         // Resources

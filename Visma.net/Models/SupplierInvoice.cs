@@ -251,6 +251,12 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        public string cashAccount
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
         [JsonProperty] public decimal roundingDiff { get; private set; }
         [JsonProperty] public decimal roundingDiffInCurrency { get; private set; }
 

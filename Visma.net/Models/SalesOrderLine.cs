@@ -275,5 +275,6 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
+        
     }
 }

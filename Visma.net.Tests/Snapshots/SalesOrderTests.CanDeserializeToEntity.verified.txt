@@ -233,5 +233,6 @@
     description: string,
     id: string
   },
+  overrideNumberSeries: false,
   metadata: {}
 }

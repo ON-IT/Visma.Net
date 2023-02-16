@@ -81,6 +81,29 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        public static async Task<List<ItemClass>> GetAllItemClasses(VismaNetAuthorization authorization)
+        {
+            var webclient = GetHttpClient(authorization);
+            {
+                var apiUrl = GetApiUrlForController(VismaNetControllers.Inventory);
+                try
+                {
+                    var fullUrl = $"{apiUrl}/itemClass";
+                    return await webclient.Get<List<ItemClass>>(fullUrl);
+                }
+                catch (AggregateException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                catch (WebException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+
+                return null;
+            }
+        }
+
         public static async Task<List<CustomerSalesPrice>> FetchCustomerSalesPricesForItem(string itemNo,
             VismaNetAuthorization authorization, PriceType priceType = PriceType.Undefined)
         {
@@ -554,6 +577,23 @@ namespace ONIT.VismaNetApi.Lib
                 });
                 var data = await webclient.PostMessage<JObject>(url, content);
                 return data["token"].Value<string>();
+            }
+        }
+        internal static async Task<string> GetTokenFromVismaConnect(string clientId, string secret, string tenant_id, string scope = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
+        {
+            var webclient = GetHttpClient(new VismaNetAuthorization());
+            {
+                var url = VismaNetControllers.VismaConnectToken;
+                var content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("client_id", clientId),
+                    new KeyValuePair<string, string>("client_secret", secret),
+                    new KeyValuePair<string, string>("tenant_id", tenant_id),
+                    new KeyValuePair<string, string>("scope", scope),
+                    new KeyValuePair<string, string>("grant_type", "client_credentials")
+                });
+                var data = await webclient.PostMessage<JObject>(url, content);
+                return data["access_token"].Value<string>();
             }
         }
 

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -33,6 +34,7 @@ namespace ONIT.VismaNetApi
         public readonly DimensionData Dimension;
         public readonly DiscountData Discount;
         public readonly SupplierInvoiceData SupplierInvoice;
+        public readonly SupplierPaymentData SupplierPayment;
         public readonly SupplierData Supplier;
         public readonly InventoryData Inventory;
         public readonly FinAccountData Account;
@@ -94,6 +96,7 @@ namespace ONIT.VismaNetApi
             CustomerInvoice = new CustomerInvoiceData(Auth);
             Supplier = new SupplierData(Auth);
             SupplierInvoice = new SupplierInvoiceData(Auth);
+            SupplierPayment = new SupplierPaymentData(Auth);
             CashSale = new CashSaleData(Auth);
             CustomerDocument = new CustomerDocumentData(Auth);
             Dimension = new DimensionData(Auth);
@@ -210,6 +213,11 @@ namespace ONIT.VismaNetApi
         {
             return await VismaNetApiHelper.GetTokenOAuth(client_id, client_secret, code, redirect_uri);
         }
+        public static async Task<string> GetTokenFromVismaConnect(string clientId, string secret, string tenant_id, string scope = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
+        {
+            return await VismaNetApiHelper.GetTokenFromVismaConnect(clientId,secret,tenant_id,scope);
+        }
+
         public static async Task<List<CompanyContext>> GetContextsForToken(string token)
         {
             return await VismaNetApiHelper.GetContextsForToken(token);
