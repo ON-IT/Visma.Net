@@ -89,6 +89,11 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        public DescriptiveDto priceClass
+        {
+            get => Get("priceClassId", new DescriptiveDto());
+            set => Set(value, "priceClassId");
+        }
         [JsonProperty] public decimal? lastCost { get; private set; }
 
         public DateTime? lastModifiedDateTime { get; set; }
