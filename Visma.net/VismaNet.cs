@@ -1,5 +1,6 @@
 ﻿using ONIT.VismaNetApi.Dynamic;
 using ONIT.VismaNetApi.Exceptions;
+using ONIT.VismaNetApi.lib.Data;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Lib.Data;
 using ONIT.VismaNetApi.Models;
@@ -43,6 +44,7 @@ namespace ONIT.VismaNetApi
         public readonly ShipmentData Shipment;
         public readonly ContactData Contact;
         public readonly ProjectData Project;
+        public readonly ProjectTransactionData ProjectTransaction;
 
         public readonly JournalTransactionData JournalTransaction;
         public readonly GeneralLedgerTransactionData GeneralLedgerTransaction;
@@ -115,6 +117,7 @@ namespace ONIT.VismaNetApi
             Shipment = new ShipmentData(Auth);
             Contact = new ContactData(Auth);
             Project = new ProjectData(Auth);
+            ProjectTransaction = new ProjectTransactionData(Auth);
 #pragma warning disable CS0618 // Type or member is obsolete
             SalesOrder = new SalesOrderData(Auth);
 #pragma warning restore CS0618 // Type or member is obsolete
