@@ -579,21 +579,29 @@ namespace ONIT.VismaNetApi.Lib
                 return data["token"].Value<string>();
             }
         }
-        internal static async Task<string> GetTokenFromVismaConnect(string clientId, string secret, string tenant_id, string scope = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
+        internal static async Task<VismaConnectToken> GetTokenFromVismaConnect(string clientId, string secret, string tenant_id, string scope = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
         {
-            var webclient = GetHttpClient(new VismaNetAuthorization());
+            try
             {
-                var url = VismaNetControllers.VismaConnectToken;
-                var content = new FormUrlEncodedContent(new[]
+                var webclient = GetHttpClient(new VismaNetAuthorization());
                 {
+                    var url = VismaNetControllers.VismaConnectToken;
+                    var content = new FormUrlEncodedContent(new[]
+                    {
                     new KeyValuePair<string, string>("client_id", clientId),
                     new KeyValuePair<string, string>("client_secret", secret),
                     new KeyValuePair<string, string>("tenant_id", tenant_id),
                     new KeyValuePair<string, string>("scope", scope),
                     new KeyValuePair<string, string>("grant_type", "client_credentials")
                 });
-                var data = await webclient.PostMessage<JObject>(url, content);
-                return data["access_token"].Value<string>();
+                    var data = await webclient.PostMessageVismaConnect(url, content);
+
+                    
+                    return new VismaConnectToken { access_token = data["access_token"].Value<string>(), expires_on = DateTimeOffset.UtcNow.AddSeconds(data["expires_in"].Value<int>()) };
+                }
+            } catch (Exception ex) 
+            {
+                throw ex;
             }
         }
 

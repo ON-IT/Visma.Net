@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
 {
-    [Obsolete("WILL STOP WORKING 01-06-2023! Replaced by https://salesorder.visma.net.")]
+    [Obsolete("WILL STOP WORKING 01-06-2023! Replaced by https://salesorder.visma.net. use SalesOrderV3")]
     public class SalesOrderData : BasePaginatedCrudDataClass<SalesOrder>
     {
         public SalesOrderData(VismaNetAuthorization auth) : base(auth)

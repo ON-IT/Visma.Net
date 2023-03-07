@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using ONIT.VismaNetApi.Exceptions;
 using ONIT.VismaNetApi.Models;
 using System;
 using System.Collections.Generic;
@@ -97,10 +99,24 @@ namespace ONIT.VismaNetApi.Lib
             var message = new HttpRequestMessage(method, resource);
             if (_authorization != null)
             {
-                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _authorization.Token);
-                message.Headers.Add("ipp-company-id", string.Format("{0}", _authorization.CompanyId));
-                if (_authorization.BranchId > 0)
-                    message.Headers.Add("branchid", _authorization.BranchId.ToString());
+                if (_authorization.VismaConnectClientId != null) // new auth via Visma Connect
+                {
+                    // Check for token expired ( 5 minutes grace )
+                    if (_authorization.VismaConnectToken == null || _authorization.VismaConnectTokenExpire.AddMinutes(-5) > DateTimeOffset.UtcNow)
+                    {
+                        var vToken = VismaNetApiHelper.GetTokenFromVismaConnect(_authorization.VismaConnectClientId, _authorization.VismaConnectClientSecret, _authorization.VismaConnectTenantId, _authorization.VismaConnectScopes).Result;
+                        _authorization.VismaConnectToken = vToken.access_token;
+                        _authorization.VismaConnectTokenExpire = vToken.expires_on;
+                    }
+                    message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _authorization.VismaConnectToken);
+                }
+                else
+                {
+                    message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _authorization.Token);
+                    message.Headers.Add("ipp-company-id", string.Format("{0}", _authorization.CompanyId));
+                    if (_authorization.BranchId > 0)
+                        message.Headers.Add("branchid", _authorization.BranchId.ToString());
+                }
             }
             message.Headers.Add("ipp-application-type", VismaNetApiHelper.ApplicationType);
             message.Headers.ExpectContinue = false;
@@ -179,6 +195,34 @@ namespace ONIT.VismaNetApi.Lib
                 return JsonConvert.DeserializeObject<T>(content);
 
             return default(T);
+        }
+
+        internal async Task<JObject> PostMessageVismaConnect(string url, HttpContent httpContent) 
+        {
+            var message = PrepareMessage(HttpMethod.Post, url);
+            message.Content = httpContent;
+            var result = await HttpClient.SendAsync(message);
+            string content = await result.Content.ReadAsStringAsync();
+            JObject jsonObj = null;
+            if (!string.IsNullOrEmpty(content))
+                jsonObj = JsonConvert.DeserializeObject<JObject>(content);
+
+            if (!result.IsSuccessStatusCode)
+            {
+                if (!string.IsNullOrEmpty(content))
+                {
+                    throw new VismaConnectException($"Error: {jsonObj["error"].Value<string>()}, statuscode: {(int)result.StatusCode} {result.ReasonPhrase}", content);
+                }
+                else
+                {
+                    throw new VismaConnectException($"Unknown error, statuscode: {(int)result.StatusCode} {result.ReasonPhrase}");
+                }
+                
+            }
+            else
+            {
+                return jsonObj;
+            }
         }
 
         internal async Task<T> Post<T>(string url, object data, string urlToGet = null, bool ignoreAbsoluteUri = false, string erpApiBackground = null)

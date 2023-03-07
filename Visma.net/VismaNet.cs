@@ -59,8 +59,10 @@ namespace ONIT.VismaNetApi
         public readonly PurchaseReceiptData PurchaseReceipt;
         public readonly PurchaseOrderData PurchaseOrder;
 
+        public readonly SalesOrderV3.ClientSalesOrderV3 SalesOrderV3;
+
         // Obsolete
-        [Obsolete("SALES ORDER WILL STOP WORKING 2023-06-01! Replaced by https://salesorder.visma.net.")]
+        [Obsolete("SALES ORDER WILL STOP WORKING 2023-06-01! Replaced by https://salesorder.visma.net. use SalesOrderV3.")]
         public readonly SalesOrderData SalesOrder;
 
         [Obsolete("Deprecated. Start using the new method in endpoint Customer Credit Note.", true)]
@@ -76,9 +78,9 @@ namespace ONIT.VismaNetApi
         /// <param name="token">The predefined token from Visma.net</param>
         /// <param name="branchId">Branch ID to work with in the Visma.net Company (optional)</param>
         /// <param name="httpClient">Bring your own HttpClient</param>
-        public VismaNet(int companyId, string token, int branchId = 0, HttpClient httpClient = null)
+        public VismaNet(int companyId, string token, int branchId = 0, HttpClient httpClient = null, string VismaConnectClientId = null, string VismaConnectClientSecret = null, string VismaConnectTenantId = null,string VismaConnectScopes = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
         {
-            if (string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token) && VismaConnectClientId == null)
                 throw new InvalidArgumentsException("Token is missing");
 
             Auth = new VismaNetAuthorization
@@ -86,7 +88,11 @@ namespace ONIT.VismaNetApi
                 Token = token,
                 CompanyId = companyId,
                 BranchId = branchId,
-                HttpClient = httpClient
+                HttpClient = httpClient,
+                VismaConnectClientId = VismaConnectClientId,
+                VismaConnectClientSecret = VismaConnectClientSecret,
+                VismaConnectTenantId = VismaConnectTenantId,
+                VismaConnectScopes = VismaConnectScopes
             };
             Attribute = new AttributeData(Auth);
             Customer = new CustomerData(Auth);
@@ -128,6 +134,7 @@ namespace ONIT.VismaNetApi
             PurchaseOrder = new PurchaseOrderData(Auth);
             CashTransaction = new CashTransactionData(Auth);
             Background = new BackgroundData(Auth);
+            SalesOrderV3 = new SalesOrderV3.ClientSalesOrderV3(Auth);
         }
 
         /// <summary>
@@ -210,7 +217,7 @@ namespace ONIT.VismaNetApi
         {
             return await VismaNetApiHelper.GetTokenOAuth(client_id, client_secret, code, redirect_uri);
         }
-        public static async Task<string> GetTokenFromVismaConnect(string clientId, string secret, string tenant_id, string scope = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
+        public static async Task<VismaConnectToken> GetTokenFromVismaConnect(string clientId, string secret, string tenant_id, string scope = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
         {
             return await VismaNetApiHelper.GetTokenFromVismaConnect(clientId,secret,tenant_id,scope);
         }
