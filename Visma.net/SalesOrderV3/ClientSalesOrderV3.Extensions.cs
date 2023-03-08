@@ -2,6 +2,7 @@
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models;
 using ONIT.VismaNetApi.SalesOrderV3.Exceptions;
+using ONIT.VismaNetApi.SalesOrderV3.Extensions;
 using ONIT.VismaNetApi.SalesOrderV3.Models;
 using System;
 using System.CodeDom.Compiler;
@@ -207,17 +208,41 @@ namespace ONIT.VismaNetApi.SalesOrderV3
             return rsp;
         }
 
-        public async Task<SalesOrderDto> createNewSalesOrder(NewSalesOrderCommand newSalesOrder, IEnumerable<SalesOrderExpansions> expansions = null)
-        {
-            var resp = await SalesOrders_CreateNewItem_Async(newSalesOrder);
-            // https://salesorder.visma.net/api/v3/SalesOrders/SO/000223
-            var uri = resp.Headers.FirstOrDefault(h => h.Key == "Location").Value.First();
-            Uri uri1 = new Uri(uri);
-            var ordno = uri1.Segments[uri1.Segments.Length - 1].Replace("/", "");
-            var type = uri1.Segments[uri1.Segments.Length - 2].Replace("/","");
-            var ord = await SalesOrders_GetItemAsync_typeorderIdAsync(type, ordno,expansions);
-            return ord.Result;
-        }
+    public async Task<SalesOrderDto> createNewSalesOrder(NewSalesOrderCommand newSalesOrder, IEnumerable<SalesOrderExpansions> expansions = null)
+    {
+      return await PostNewSalesOrder(newSalesOrder, expansions);
+    }
+
+    public async Task<SalesOrderDto> createNewSalesOrder(SalesOrder salesOrder, IEnumerable<SalesOrderExpansions> expansions = null)
+    {
+      var newSalesOrder = SalesOrderExtensions.toV3SalesOrder(salesOrder);
+      return await PostNewSalesOrder(newSalesOrder, expansions);
+    }
+
+    private async Task<SalesOrderDto> PostNewSalesOrder(NewSalesOrderCommand newSalesOrder, IEnumerable<SalesOrderExpansions> expansions = null)
+    {
+      var resp = await SalesOrders_CreateNewItem_Async(newSalesOrder);
+      // https://salesorder.visma.net/api/v3/SalesOrders/SO/000223
+      var uri = resp.Headers.FirstOrDefault(h => h.Key == "Location").Value.First();
+      Uri uri1 = new Uri(uri);
+      var ordno = uri1.Segments[uri1.Segments.Length - 1].Replace("/", "");
+      var type = uri1.Segments[uri1.Segments.Length - 2].Replace("/", "");
+      var ord = await SalesOrders_GetItemAsync_typeorderIdAsync(type, ordno, expansions);
+      return ord.Result;
 
     }
+
+    //public async Task<SalesOrderDto> createNewSalesOrder(NewSalesOrderCommand newSalesOrder, IEnumerable<SalesOrderExpansions> expansions = null)
+    //{
+    //    var resp = await SalesOrders_CreateNewItem_Async(newSalesOrder);
+    //    // https://salesorder.visma.net/api/v3/SalesOrders/SO/000223
+    //    var uri = resp.Headers.FirstOrDefault(h => h.Key == "Location").Value.First();
+    //    Uri uri1 = new Uri(uri);
+    //    var ordno = uri1.Segments[uri1.Segments.Length - 1].Replace("/", "");
+    //    var type = uri1.Segments[uri1.Segments.Length - 2].Replace("/","");
+    //    var ord = await SalesOrders_GetItemAsync_typeorderIdAsync(type, ordno,expansions);
+    //    return ord.Result;
+    //}
+
+  }
 }
