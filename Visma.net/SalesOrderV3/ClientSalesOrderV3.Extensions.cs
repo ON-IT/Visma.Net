@@ -235,7 +235,6 @@ namespace ONIT.VismaNetApi.SalesOrderV3
     //public async Task<SalesOrderDto> createNewSalesOrder(NewSalesOrderCommand newSalesOrder, IEnumerable<SalesOrderExpansions> expansions = null)
     //{
     //    var resp = await SalesOrders_CreateNewItem_Async(newSalesOrder);
-    //    // https://salesorder.visma.net/api/v3/SalesOrders/SO/000223
     //    var uri = resp.Headers.FirstOrDefault(h => h.Key == "Location").Value.First();
     //    Uri uri1 = new Uri(uri);
     //    var ordno = uri1.Segments[uri1.Segments.Length - 1].Replace("/", "");
