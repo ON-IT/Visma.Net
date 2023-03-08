@@ -27,11 +27,7 @@
     postalCode: string,
     city: string,
     country: {
-      extras: {
-        additionalProp1: {},
-        additionalProp2: {},
-        additionalProp3: {}
-      },
+      extras: {},
       errorInfo: string,
       metadata: {},
       id: string,
@@ -67,11 +63,7 @@
     }
   ],
   errorInfo: string,
-  extras: {
-    additionalProp1: {},
-    additionalProp2: {},
-    additionalProp3: {}
-  },
+  extras: {},
   glAccounts: {
     customerLedgerAccount: {
       description: string,
@@ -100,7 +92,8 @@
     },
     salesSubaccount: {
       description: string,
-      id: string
+      subaccountNumber: string,
+      active: false
     }
   },
   invoiceAddress: {
@@ -110,11 +103,7 @@
     postalCode: string,
     city: string,
     country: {
-      extras: {
-        additionalProp1: {},
-        additionalProp2: {},
-        additionalProp3: {}
-      },
+      extras: {},
       errorInfo: string,
       metadata: {},
       id: string,
@@ -148,11 +137,7 @@
     postalCode: string,
     city: string,
     country: {
-      extras: {
-        additionalProp1: {},
-        additionalProp2: {},
-        additionalProp3: {}
-      },
+      extras: {},
       errorInfo: string,
       metadata: {},
       id: string,
@@ -175,6 +160,7 @@
   name: string,
   note: string,
   number: string,
+  overrideNumberSeries: false,
   overrideWithClassValues: true,
   parentRecord: {
     number: string,
@@ -199,11 +185,7 @@
       description: string
     },
     metadata: {},
-    extras: {
-      additionalProp1: {},
-      additionalProp2: {},
-      additionalProp3: {}
-    },
+    extras: {},
     errorInfo: string,
     description: string,
     id: string

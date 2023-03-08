@@ -7,11 +7,7 @@
       description: string
     },
     metadata: {},
-    extras: {
-      additionalProp1: {},
-      additionalProp2: {},
-      additionalProp3: {}
-    },
+    extras: {},
     errorInfo: string,
     description: string,
     id: string
@@ -92,11 +88,8 @@
           }
         ],
         errorInfo: string,
-        extras: {
-          additionalProp1: {},
-          additionalProp2: {},
-          additionalProp3: {}
-        },
+        active: false,
+        extras: {},
         metadata: {}
       },
       poNumber: string,
@@ -132,11 +125,8 @@
   },
   supplierReference: string,
   taxCalculationMode: TaxSetting,
-  extras: {
-    additionalProp1: {},
-    additionalProp2: {},
-    additionalProp3: {}
-  },
+  overrideNumberSeries: false,
+  extras: {},
   errorInfo: string,
   metadata: {}
 }

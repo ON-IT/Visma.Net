@@ -45,8 +45,8 @@
       type: string
     },
     expenseSubaccount: {
-      description: string,
-      id: string
+      id: string,
+      description: string
     }
   },
   lastModifiedDateTime: DateTime_1,
@@ -157,5 +157,6 @@
     defaultVatCategory: string,
     description: string,
     id: string
-  }
+  },
+  overrideNumberSeries: false
 }

@@ -33,6 +33,28 @@
   documentLanguage: {
     Value: string
   },
+  glAccounts: {
+    Value: {
+      expenseAccount: {
+        Value: string
+      },
+      expenseAccountImport: {
+        Value: string
+      },
+      expenseAccountNonTax: {
+        Value: string
+      },
+      expenseEUAccount: {
+        Value: string
+      },
+      expenseSubaccount: {
+        Value: string
+      },
+      supplierAccount: {
+        Value: string
+      }
+    }
+  },
   mainAddress: {
     Value: {
       addressLine1: {

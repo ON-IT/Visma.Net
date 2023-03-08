@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace ONIT.VismaNetApi.Models
 {
-    public class CustomerPayment : DtoPaginatedProviderBase, IProvideIdentificator
+    public class SupplierPayment : DtoPaginatedProviderBase, IProvideIdentificator
     {
         public string type { get => Get<string>(); set => Set(value); }
         public string refNbr { get => Get<string>("referenceNumber"); set => Set(value, "referenceNumber"); }
@@ -17,39 +17,30 @@ namespace ONIT.VismaNetApi.Models
         public DateTime applicationDate { get => Get<DateTime>(); set => Set(value); }
         public string applicationPeriod { get => Get<string>(); set => Set(value); }
         public string paymentRef { get => Get<string>(); set => Set(value); }
-        public CustomerSummary customer { get => Get<CustomerSummary>(); set => Set(value); }
+        public CustomerSummary supplier { get => Get<CustomerSummary>(); set => Set(value); }
         public LocationSummary location { get => Get<LocationSummary>(); set => Set(value); }
         public PaymentMethod paymentMethod { get => Get<PaymentMethod>(); set => Set(value); }
         public string cashAccount { get => Get<string>(); set => Set(value); }
-        public string currency { get => Get<string>(); set => Set(value); }
+        public CurrencySummary currency { get => Get<CurrencySummary>(); set => Set(value); }
+        public string description { get => Get<string>(); set => Set(value); }
         public decimal paymentAmount { get => Get<decimal>(); set => Set(value); }
-        public decimal paymentAmountInCurrency { get => Get<decimal>(); set => Set(value); }
-        public string invoiceText { get => Get<string>(); set => Set(value); }
         [JsonProperty]
-        public decimal appliedToDocuments { get; private set; }
+        public decimal financeCharges { get => Get<decimal>(); set => Set(value); }
         [JsonProperty]
-        public decimal appliedToOrders { get; private set; }
+        public decimal unappliedBalance { get => Get<decimal>(); set => Set(value); }
         [JsonProperty]
-        public decimal availableBalance { get; private set; }
-        [JsonProperty]
-        public decimal writeOffAmount { get; private set; }
-        [JsonProperty]
-        public decimal financeCharges { get; private set; }
+        public decimal appliedAmount { get => Get<decimal>(); set => Set(value); }
         [JsonProperty]
         public decimal deductedCharges { get; private set; }
-        public string branch { get => Get<string>(); set => Set(value); }
+        [JsonProperty]
+        public bool released { get => Get<bool>(); set => Set(value); }
         [JsonProperty]
         public DateTime lastModifiedDateTime { get; private set; }
+        public string branch { get => Get<string>(); set => Set(value); }
         [JsonProperty]
-        public List<CustomerPaymentLine> paymentLines
+        public List<SupplierPaymentLine> paymentLines
         {
-            get => Get(defaultValue: new List<CustomerPaymentLine>());
-            private set => Set(value);
-        }
-        [JsonProperty]
-        public List<CustomerPaymentOrderToApply> ordersToApply
-        {
-            get => Get(defaultValue: new List<CustomerPaymentOrderToApply>());
+            get => Get(defaultValue: new List<SupplierPaymentLine>());
             private set => Set(value);
         }
         [JsonProperty]
@@ -65,9 +56,6 @@ namespace ONIT.VismaNetApi.Models
         {
             foreach (var line in this.paymentLines)
                 line.operation = ApiOperation.Update;
-
-            foreach (var orderToApply in ordersToApply)
-                orderToApply.operation = ApiOperation.Update;
         }
     }
 }

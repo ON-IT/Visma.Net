@@ -81,6 +81,29 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
+        public static async Task<List<ItemClass>> GetAllItemClasses(VismaNetAuthorization authorization)
+        {
+            var webclient = GetHttpClient(authorization);
+            {
+                var apiUrl = GetApiUrlForController(VismaNetControllers.Inventory);
+                try
+                {
+                    var fullUrl = $"{apiUrl}/itemClass";
+                    return await webclient.Get<List<ItemClass>>(fullUrl);
+                }
+                catch (AggregateException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+                catch (WebException e)
+                {
+                    VismaNetExceptionHandler.HandleException(e);
+                }
+
+                return null;
+            }
+        }
+
         public static async Task<List<CustomerSalesPrice>> FetchCustomerSalesPricesForItem(string itemNo,
             VismaNetAuthorization authorization, PriceType priceType = PriceType.Undefined)
         {
@@ -275,7 +298,7 @@ namespace ONIT.VismaNetApi.Lib
             }
         }
 
-        internal static async Task<List<ExchangeRate>> FetchExchangeRates(string toCurrencyId,DateTime effectiveDate, VismaNetAuthorization auth)
+        internal static async Task<List<ExchangeRate>> FetchExchangeRates(string toCurrencyId, DateTime effectiveDate, VismaNetAuthorization auth)
         {
             var webClient = GetHttpClient(auth);
             {
@@ -289,7 +312,7 @@ namespace ONIT.VismaNetApi.Lib
             var webClient = GetHttpClient(auth);
             {
                 var apiUrl = GetApiUrlForController(VismaNetControllers.CurrencyRate, $"/");
-                return await webClient.Post<List<ExchangeRate>>(apiUrl,exchangeRate.ToDto(), $"{GetApiUrlForController(VismaNetControllers.CurrencyRate)}?toCurrency={exchangeRate.toCurrencyId.TrimStart('/')}&fromDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}&toDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}", true);
+                return await webClient.Post<List<ExchangeRate>>(apiUrl, exchangeRate.ToDto(), $"{GetApiUrlForController(VismaNetControllers.CurrencyRate)}?toCurrency={exchangeRate.toCurrencyId.TrimStart('/')}&fromDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}&toDate={exchangeRate.effectiveDate.ToString("yyyy-MM-dd")}", true);
             }
         }
 
@@ -556,6 +579,31 @@ namespace ONIT.VismaNetApi.Lib
                 return data["token"].Value<string>();
             }
         }
+        internal static async Task<VismaConnectToken> GetTokenFromVismaConnect(string clientId, string secret, string tenant_id, string scope = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
+        {
+            try
+            {
+                var webclient = GetHttpClient(new VismaNetAuthorization());
+                {
+                    var url = VismaNetControllers.VismaConnectToken;
+                    var content = new FormUrlEncodedContent(new[]
+                    {
+                    new KeyValuePair<string, string>("client_id", clientId),
+                    new KeyValuePair<string, string>("client_secret", secret),
+                    new KeyValuePair<string, string>("tenant_id", tenant_id),
+                    new KeyValuePair<string, string>("scope", scope),
+                    new KeyValuePair<string, string>("grant_type", "client_credentials")
+                });
+                    var data = await webclient.PostMessageVismaConnect(url, content);
+
+                    
+                    return new VismaConnectToken { access_token = data["access_token"].Value<string>(), expires_on = DateTimeOffset.UtcNow.AddSeconds(data["expires_in"].Value<int>()) };
+                }
+            } catch (Exception ex) 
+            {
+                throw ex;
+            }
+        }
 
         internal static async Task<VismaActionResult> InvoiceAction(string invoiceNumber, string action,
             VismaNetAuthorization authorization)
@@ -573,6 +621,13 @@ namespace ONIT.VismaNetApi.Lib
             var client = GetHttpClient(authorization);
             var actionUrl = GetApiUrlForController($"{controller}/{entityNumber}/action/{actionName}");
             return await client.Post<VismaActionResult>(actionUrl, dto ?? new object());
+        }
+
+        internal static async Task<BackgroundStatus> BackgroundAction(VismaNetAuthorization authorization, string controller, string entityNumber, string actionName, string erpApiBackground, object dto = null)
+        {
+            var client = GetHttpClient(authorization);
+            var actionUrl = GetApiUrlForController($"{controller}/{entityNumber}/action/{actionName}");
+            return await client.Post<BackgroundStatus>(actionUrl, dto ?? new object(), erpApiBackground: erpApiBackground);
         }
 
         internal static async Task<CreateShipmentActionResult> CreateShipmentAction(VismaNetAuthorization authorization, string controller, string entityNumber, string actionName, object dto = null)

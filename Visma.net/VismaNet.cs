@@ -1,11 +1,14 @@
 ﻿using ONIT.VismaNetApi.Dynamic;
 using ONIT.VismaNetApi.Exceptions;
+using ONIT.VismaNetApi.lib.Data;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Lib.Data;
 using ONIT.VismaNetApi.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -16,6 +19,9 @@ namespace ONIT.VismaNetApi
     public class VismaNet : VismaNetDynamicHandler
     {
         public readonly CashTransactionData CashTransaction;
+
+        public readonly BackgroundData Background;
+
         public readonly CashSaleData CashSale;
         public readonly CustomerDocumentData CustomerDocument;
         public readonly CustomerInvoiceData CustomerInvoice;
@@ -28,6 +34,7 @@ namespace ONIT.VismaNetApi
         public readonly DimensionData Dimension;
         public readonly DiscountData Discount;
         public readonly SupplierInvoiceData SupplierInvoice;
+        public readonly SupplierPaymentData SupplierPayment;
         public readonly SupplierData Supplier;
         public readonly InventoryData Inventory;
         public readonly FinAccountData Account;
@@ -37,6 +44,7 @@ namespace ONIT.VismaNetApi
         public readonly ShipmentData Shipment;
         public readonly ContactData Contact;
         public readonly ProjectData Project;
+        public readonly ProjectTransactionData ProjectTransaction;
 
         public readonly JournalTransactionData JournalTransaction;
         public readonly GeneralLedgerTransactionData GeneralLedgerTransaction;
@@ -53,8 +61,10 @@ namespace ONIT.VismaNetApi
         public readonly PurchaseReceiptData PurchaseReceipt;
         public readonly PurchaseOrderData PurchaseOrder;
 
+        public readonly SalesOrderV3.ClientSalesOrderV3 SalesOrderV3;
+
         // Obsolete
-        [Obsolete("SALES ORDER WILL STOP WORKING 2023-06-01! Replaced by https://salesorder.visma.net.")]
+        [Obsolete("SALES ORDER WILL STOP WORKING 2023-06-01! Replaced by https://salesorder.visma.net. use SalesOrderV3.")]
         public readonly SalesOrderData SalesOrder;
 
         [Obsolete("Deprecated. Start using the new method in endpoint Customer Credit Note.", true)]
@@ -69,16 +79,22 @@ namespace ONIT.VismaNetApi
         /// <param name="companyId">Company context</param>
         /// <param name="token">The predefined token from Visma.net</param>
         /// <param name="branchId">Branch ID to work with in the Visma.net Company (optional)</param>
-        public VismaNet(int companyId, string token, int branchId = 0)
+        /// <param name="httpClient">Bring your own HttpClient</param>
+        public VismaNet(int companyId, string token, int branchId = 0, HttpClient httpClient = null, string VismaConnectClientId = null, string VismaConnectClientSecret = null, string VismaConnectTenantId = null,string VismaConnectScopes = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
         {
-            if (string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token) && VismaConnectClientId == null)
                 throw new InvalidArgumentsException("Token is missing");
 
             Auth = new VismaNetAuthorization
             {
                 Token = token,
                 CompanyId = companyId,
-                BranchId = branchId
+                BranchId = branchId,
+                HttpClient = httpClient,
+                VismaConnectClientId = VismaConnectClientId,
+                VismaConnectClientSecret = VismaConnectClientSecret,
+                VismaConnectTenantId = VismaConnectTenantId,
+                VismaConnectScopes = VismaConnectScopes
             };
             Attribute = new AttributeData(Auth);
             Customer = new CustomerData(Auth);
@@ -86,6 +102,7 @@ namespace ONIT.VismaNetApi
             CustomerInvoice = new CustomerInvoiceData(Auth);
             Supplier = new SupplierData(Auth);
             SupplierInvoice = new SupplierInvoiceData(Auth);
+            SupplierPayment = new SupplierPaymentData(Auth);
             CashSale = new CashSaleData(Auth);
             CustomerDocument = new CustomerDocumentData(Auth);
             Dimension = new DimensionData(Auth);
@@ -100,6 +117,7 @@ namespace ONIT.VismaNetApi
             Shipment = new ShipmentData(Auth);
             Contact = new ContactData(Auth);
             Project = new ProjectData(Auth);
+            ProjectTransaction = new ProjectTransactionData(Auth);
 #pragma warning disable CS0618 // Type or member is obsolete
             SalesOrder = new SalesOrderData(Auth);
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -118,6 +136,8 @@ namespace ONIT.VismaNetApi
             CustomerCreditNote = new CustomerCreditNoteData(Auth);
             PurchaseOrder = new PurchaseOrderData(Auth);
             CashTransaction = new CashTransactionData(Auth);
+            Background = new BackgroundData(Auth);
+            SalesOrderV3 = new SalesOrderV3.ClientSalesOrderV3(Auth);
         }
 
         /// <summary>
@@ -200,6 +220,11 @@ namespace ONIT.VismaNetApi
         {
             return await VismaNetApiHelper.GetTokenOAuth(client_id, client_secret, code, redirect_uri);
         }
+        public static async Task<VismaConnectToken> GetTokenFromVismaConnect(string clientId, string secret, string tenant_id, string scope = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
+        {
+            return await VismaNetApiHelper.GetTokenFromVismaConnect(clientId,secret,tenant_id,scope);
+        }
+
         public static async Task<List<CompanyContext>> GetContextsForToken(string token)
         {
             return await VismaNetApiHelper.GetContextsForToken(token);

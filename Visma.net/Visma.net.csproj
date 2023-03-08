@@ -1,5 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;net461;net45</TargetFrameworks>
+    		<Title>Visma.net</Title>
+        <Copyright>Copyright © ON IT AS 2014 - 2020</Copyright>
+        <Copyright>Copyright © ON IT AS 2014 - 2021</Copyright>
+        <Version>4.2.1.0</Version>
         <TargetFrameworks>netstandard2.0;net462;net6</TargetFrameworks>
     	<Title>Visma.net</Title>
         <Copyright>Copyright © ON IT AS 2014 - 2022</Copyright>
@@ -20,8 +25,8 @@
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <PackageIcon>on_it_logo.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <AssemblyVersion>4.0.0</AssemblyVersion>
-        <FileVersion>4.0.0</FileVersion>
+        <AssemblyVersion>4.0.3.11</AssemblyVersion>
+        <FileVersion>4.0.3.11</FileVersion>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -30,6 +35,8 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
       <PackageReference Include="System.Net.Http" Version="4.3.4" />
     </ItemGroup>
     <ItemGroup>
@@ -45,5 +52,10 @@
         <Pack>True</Pack>
         <PackagePath></PackagePath>
       </None>
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net6'">
+      <PackageReference Include="AutoMapper">
+        <Version>12.0.1</Version>
+      </PackageReference>
     </ItemGroup>
 </Project>

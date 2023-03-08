@@ -50,6 +50,7 @@
   lastModifiedDateTime: DateTime_1,
   lines: [
     {
+      operation: Insert,
       alternateID: string,
       attachments: [
         {
@@ -81,7 +82,7 @@
       poSource: DropShipToOrder,
       reasonCode: string,
       requestedOn: DateTime_1,
-      operation: Issue,
+      salesOrderOperation: Issue,
       salesPerson: {
         description: string,
         id: string
@@ -225,10 +226,13 @@
     description: string
   },
   isRotRutDeductible: true,
-  rotRutDetails: {},
+  rotRutDetails: {
+    distributedAutomaticaly: false
+  },
   paymentMethod: {
     description: string,
     id: string
   },
+  overrideNumberSeries: false,
   metadata: {}
 }
