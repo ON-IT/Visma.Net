@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using ONIT.VismaNetApi.Lib;
 using ONIT.VismaNetApi.Models.CustomDto;
 using ONIT.VismaNetApi.Models.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ONIT.VismaNetApi.Models
 {
@@ -241,6 +241,24 @@ namespace ONIT.VismaNetApi.Models
         {
             get => Get(defaultValue: new VatCode(), key: "vatCodeId");
             set => Set(value, "vatCodeId");
+        }
+
+        public string soShipmentNbr
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string soOrderType
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
+        public string soOrderNbr
+        {
+            get => Get<string>();
+            set => Set(value);
         }
 
         public override Dictionary<string, object> ToDto(bool delta = false)
