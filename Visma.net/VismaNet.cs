@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
+
 namespace ONIT.VismaNetApi
 {
     [ComVisible(true)]
@@ -61,10 +62,11 @@ namespace ONIT.VismaNetApi
         public readonly PurchaseReceiptData PurchaseReceipt;
         public readonly PurchaseOrderData PurchaseOrder;
 
-        public readonly SalesOrderV3.ClientSalesOrderV3 SalesOrderV3;
+        public readonly Visma.Net.SalesOrderNG.ClientSalesOrderV3 SalesOrderV3;
+        
 
         // Obsolete
-        [Obsolete("SALES ORDER WILL STOP WORKING 2023-06-01! Replaced by https://salesorder.visma.net. use SalesOrderV3.")]
+        [Obsolete("SALES ORDER WILL STOP WORKING 2024-12-31! Replaced by https://salesorder.visma.net. use SalesOrderV3.")]
         public readonly SalesOrderData SalesOrder;
 
         [Obsolete("Deprecated. Start using the new method in endpoint Customer Credit Note.", true)]
@@ -96,6 +98,19 @@ namespace ONIT.VismaNetApi
                 VismaConnectTenantId = VismaConnectTenantId,
                 VismaConnectScopes = VismaConnectScopes
             };
+
+            AuthNG = new Visma.Net.SalesOrderNG.Helpers.VismaNetAuthorization
+            {
+                Token = token,
+                CompanyId = companyId,
+                BranchId = branchId,
+                HttpClient = httpClient,
+                VismaConnectClientId = VismaConnectClientId,
+                VismaConnectClientSecret = VismaConnectClientSecret,
+                VismaConnectTenantId = VismaConnectTenantId,
+                VismaConnectScopes = VismaConnectScopes
+            };
+            
             Attribute = new AttributeData(Auth);
             Customer = new CustomerData(Auth);
             Currency = new CurrencyData(Auth);
@@ -137,7 +152,7 @@ namespace ONIT.VismaNetApi
             PurchaseOrder = new PurchaseOrderData(Auth);
             CashTransaction = new CashTransactionData(Auth);
             Background = new BackgroundData(Auth);
-            SalesOrderV3 = new SalesOrderV3.ClientSalesOrderV3(Auth);
+            SalesOrderV3 = new Visma.Net.SalesOrderNG.ClientSalesOrderV3(AuthNG,VismaNet.ApplicationName);
         }
 
         /// <summary>

@@ -57,4 +57,7 @@
         <Version>12.0.1</Version>
       </PackageReference>
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Visma.Net.SalesOrderNG\Visma.Net.SalesOrderNG.csproj" />
+    </ItemGroup>
 </Project>

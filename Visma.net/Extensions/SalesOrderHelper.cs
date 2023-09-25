@@ -1,9 +1,9 @@
-﻿using ONIT.VismaNetApi.SalesOrderV3.Models;
+﻿using Visma.Net.SalesOrderNG.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ONIT.VismaNetApi.SalesOrderV3.Helpers
+namespace ONIT.VismaNetApi.Extensions
 {
     public class SalesOrderHelper
     {

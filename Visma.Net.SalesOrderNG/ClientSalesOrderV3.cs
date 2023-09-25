@@ -4,7 +4,7 @@
 // </auto-generated>
 //----------------------
 
-using ONIT.VismaNetApi.SalesOrderV3.Models;
+using Visma.Net.SalesOrderNG.Models;
 
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
 #pragma warning disable 114 // Disable "CS0114 '{derivedDto}.RaisePropertyChanged(String)' hides inherited member 'dtoBase.RaisePropertyChanged(String)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword."
@@ -15,7 +15,7 @@ using ONIT.VismaNetApi.SalesOrderV3.Models;
 #pragma warning disable 3016 // Disable "CS3016 Arrays as attribute arguments is not CLS-compliant"
 #pragma warning disable 8603 // Disable "CS8603 Possible null reference return"
 
-namespace ONIT.VismaNetApi.SalesOrderV3
+namespace Visma.Net.SalesOrderNG
 {
     using System = global::System;
 

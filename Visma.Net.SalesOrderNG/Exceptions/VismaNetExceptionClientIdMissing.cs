@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ONIT.VismaNetApi.SalesOrderV3.Exceptions
+namespace Visma.Net.SalesOrderNG.Exceptions
 {
     internal class VismaNetExceptionClientIdMissing : System.Exception
     {

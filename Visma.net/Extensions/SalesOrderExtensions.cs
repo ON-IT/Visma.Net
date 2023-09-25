@@ -1,11 +1,11 @@
 ﻿using ONIT.VismaNetApi.Models.Enums;
-using ONIT.VismaNetApi.SalesOrderV3.Models;
+using Visma.Net.SalesOrderNG.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 
-namespace ONIT.VismaNetApi.SalesOrderV3.Extensions
+namespace ONIT.VismaNetApi.Extensions
 {
 
 
@@ -161,11 +161,11 @@ namespace ONIT.VismaNetApi.SalesOrderV3.Extensions
             ONIT.VismaNetApi.Models.SalesOrder v2SalesOrder;
             if (v3SalesOrder.OrderId != null)
             {
-                v2SalesOrder = new VismaNetApi.Models.SalesOrder(v3SalesOrder.OrderId, v3SalesOrder.Type);
+                v2SalesOrder = new ONIT.VismaNetApi.Models.SalesOrder(v3SalesOrder.OrderId, v3SalesOrder.Type);
             }
             else
             {
-                v2SalesOrder = new VismaNetApi.Models.SalesOrder();
+                v2SalesOrder = new ONIT.VismaNetApi.Models.SalesOrder();
             }
 
             v2SalesOrder.customer = v3SalesOrder.Customer.Id;
@@ -174,7 +174,7 @@ namespace ONIT.VismaNetApi.SalesOrderV3.Extensions
             v2SalesOrder.contactId = v2SalesOrder.contactId;
             if (v3SalesOrder.Customer.Location != null)
             {
-                v2SalesOrder.location = new VismaNetApi.Models.CustomDto.LocationSummary();
+                v2SalesOrder.location = new ONIT.VismaNetApi.Models.CustomDto.LocationSummary();
                 v2SalesOrder.location.id = v3SalesOrder.Customer.Location.Id;
             }
             v2SalesOrder.gln = v3SalesOrder.Customer.Location?.Gln;
@@ -273,7 +273,7 @@ namespace ONIT.VismaNetApi.SalesOrderV3.Extensions
 
             foreach (var l in v3salesOrderLines)
             {
-                var newline = new VismaNetApi.Models.SalesOrderLine();
+                var newline = new ONIT.VismaNetApi.Models.SalesOrderLine();
                 newline.lineDescription = l.Description;
                 if (l.DiscountAmount != null)
                     newline.discountAmount = (double)l.DiscountAmount;

@@ -1,8 +1,5 @@
-﻿using ONIT.VismaNetApi.Exceptions;
-using ONIT.VismaNetApi.Lib;
-using ONIT.VismaNetApi.Models;
-using ONIT.VismaNetApi.SalesOrderV3.Exceptions;
-using ONIT.VismaNetApi.SalesOrderV3.Models;
+﻿using Visma.Net.SalesOrderNG.Exceptions;
+using Visma.Net.SalesOrderNG.Models;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections;
@@ -13,16 +10,51 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using Visma.Net.SalesOrderNG.Lib;
+using System.Reflection;
 
-namespace ONIT.VismaNetApi.SalesOrderV3
+namespace Visma.Net.SalesOrderNG
 {
     public partial class ClientSalesOrderV3
     {
-        VismaNetAuthorization _authorization;
+        Helpers.VismaNetAuthorization _authorization;
 
-        public ClientSalesOrderV3(VismaNetAuthorization auth) : this()
+        public static string Version { get; private set; }
+        /// <summary>
+        /// Provide a name for your application. This will make it easier for Visma to identify your integration in their logs.
+        /// </summary>
+        public static string _ApplicationName { get; set; }
+
+        private static int maxConcurrentRequests;
+        /// <summary>
+        /// Gets or sets the maximum number of concurrent requests sent to the API. Min: 1, Max: 8.
+        /// </summary>
+        public static int MaxConcurrentRequests
+        {
+            get
+            {
+                var requestLimit = maxConcurrentRequests > 0 ? maxConcurrentRequests : 8;
+                return requestLimit > 8 ? 8 : requestLimit;
+            }
+
+            set => maxConcurrentRequests = value > 0 ? value : maxConcurrentRequests;
+        }
+
+        private static int maxRetries;
+        /// <summary>
+        /// Gets or sets the maximum number of retries sent to the API. Min: 1, Max: 5, Default: 5.
+        /// </summary>
+        public static int MaxRetries
+        {
+            get { return maxRetries > 0 ? maxRetries : 5; }
+            set => maxRetries = (value > 0 && value < 6) ? value : 5;
+        }
+
+        public ClientSalesOrderV3(Helpers.VismaNetAuthorization auth, string ApplicationName) : this()
         {
             _authorization = auth;
+            _ApplicationName = ApplicationName;
+            Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         }
 
@@ -70,7 +102,7 @@ namespace ONIT.VismaNetApi.SalesOrderV3
                 var totalCount = (int)firstPage.Result.TotalCount;
                 var pageSize = count;
                 var pageCount = totalCount / pageSize;
-                var semaphore = new SemaphoreSlim(VismaNet.MaxConcurrentRequests);
+                var semaphore = new SemaphoreSlim(ClientSalesOrderV3.MaxConcurrentRequests);
                 var taskList = new List<Task<SwaggerResponse<CustomerDtoPagedResult>>>();
                 foreach (var page in Enumerable.Range(1, pageCount))
                 {
@@ -108,7 +140,7 @@ namespace ONIT.VismaNetApi.SalesOrderV3
                 var totalCount = (int)firstPage.Result.TotalCount;
                 var pageSize = count;
                 var pageCount = totalCount / pageSize;
-                var semaphore = new SemaphoreSlim(VismaNet.MaxConcurrentRequests);
+                var semaphore = new SemaphoreSlim(ClientSalesOrderV3.MaxConcurrentRequests);
                 var taskList = new List<Task<SwaggerResponse<SalesOrderListDtoPagedResult>>>();
                 foreach (var page in Enumerable.Range(1, pageCount))
                 {
@@ -146,7 +178,7 @@ namespace ONIT.VismaNetApi.SalesOrderV3
                 var totalCount = (int)firstPage.Result.TotalCount;
                 var pageSize = count;
                 var pageCount = totalCount / pageSize;
-                var semaphore = new SemaphoreSlim(VismaNet.MaxConcurrentRequests);
+                var semaphore = new SemaphoreSlim(ClientSalesOrderV3.MaxConcurrentRequests);
                 var taskList = new List<Task<SwaggerResponse<SalesOrderListDtoPagedResult>>>();
                 foreach (var page in Enumerable.Range(1, pageCount))
                 {
@@ -184,7 +216,7 @@ namespace ONIT.VismaNetApi.SalesOrderV3
                 var totalCount = (int)firstPage.Result.TotalCount;
                 var pageSize = count;
                 var pageCount = totalCount / pageSize;
-                var semaphore = new SemaphoreSlim(VismaNet.MaxConcurrentRequests);
+                var semaphore = new SemaphoreSlim(ClientSalesOrderV3.MaxConcurrentRequests);
                 var taskList = new List<Task<SwaggerResponse<SalesOrderLineDtoPagedResult>>>();
                 foreach (var page in Enumerable.Range(1, pageCount))
                 {

@@ -60,7 +60,6 @@ namespace ONIT.VismaNetApi.Lib
         public const string OAuthAuthorize = "resources/oauth/authorize";
         public const string UserContext = "resources/v1/context";
 
-        // SalesOrderV3
-        public const string SalesOrderV3BaseUrl = "https://salesorder.visma.net/";
+        
     }
 }
