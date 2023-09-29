@@ -12,6 +12,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Visma.Net.SalesOrderNG.Lib;
 using System.Reflection;
+using Newtonsoft.Json.Linq;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Visma.Net.SalesOrderNG
 {
@@ -61,7 +63,8 @@ namespace Visma.Net.SalesOrderNG
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder)
         {
             urlBuilder.Insert(0, VismaNetControllers.SalesOrderV3BaseUrl);
-            if (!_authorization.VismaConnectScopes.Contains("visma.net.erp.salesorder"))
+            var jwtToken = new JwtSecurityToken(_authorization.Token);
+            if (!_authorization.VismaConnectScopes.Contains("visma.net.erp.salesorder") && !jwtToken.Claims.Any(c => c.Value.Contains("visma.net.erp.salesorder")))
             {
                 throw new VismaConnectException("Scope has to contain visma.net.erp.salesorder scopes to use SalesOrderV3");
             }

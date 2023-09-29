@@ -75,6 +75,7 @@ namespace ONIT.VismaNetApi
         [Obsolete("Payment is deprecated, please use CustomerPayment instead.", true)]
         public readonly PaymentData Payment;
 
+        
         /// <summary>
         ///     Creates a connection using token.
         /// </summary>
@@ -99,17 +100,19 @@ namespace ONIT.VismaNetApi
                 VismaConnectScopes = VismaConnectScopes
             };
 
-            AuthNG = new Visma.Net.SalesOrderNG.Helpers.VismaNetAuthorization
-            {
-                Token = token,
-                CompanyId = companyId,
-                BranchId = branchId,
-                HttpClient = httpClient,
-                VismaConnectClientId = VismaConnectClientId,
-                VismaConnectClientSecret = VismaConnectClientSecret,
-                VismaConnectTenantId = VismaConnectTenantId,
-                VismaConnectScopes = VismaConnectScopes
-            };
+           
+                AuthNG = new Visma.Net.SalesOrderNG.Helpers.VismaNetAuthorization
+                {
+                    Token = token,
+                    CompanyId = companyId,
+                    BranchId = branchId,
+                    HttpClient = httpClient,
+                    VismaConnectClientId = VismaConnectClientId,
+                    VismaConnectClientSecret = VismaConnectClientSecret,
+                    VismaConnectTenantId = VismaConnectTenantId,
+                    VismaConnectScopes = VismaConnectScopes
+                };
+           
             
             Attribute = new AttributeData(Auth);
             Customer = new CustomerData(Auth);
@@ -235,7 +238,7 @@ namespace ONIT.VismaNetApi
         {
             return await VismaNetApiHelper.GetTokenOAuth(client_id, client_secret, code, redirect_uri);
         }
-        public static async Task<VismaConnectToken> GetTokenFromVismaConnect(string clientId, string secret, string tenant_id, string scope = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
+        internal static async Task<VismaConnectToken> GetTokenFromVismaConnect(string clientId, string secret, string tenant_id, string scope = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
         {
             return await VismaNetApiHelper.GetTokenFromVismaConnect(clientId,secret,tenant_id,scope);
         }
