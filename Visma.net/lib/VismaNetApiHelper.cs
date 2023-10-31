@@ -579,6 +579,7 @@ namespace ONIT.VismaNetApi.Lib
                 return data["token"].Value<string>();
             }
         }
+
         public static async Task<VismaConnectToken> GetTokenFromVismaConnect(string clientId, string secret, string tenant_id, string scope = "vismanet_erp_service_api:create vismanet_erp_service_api:delete vismanet_erp_service_api:read vismanet_erp_service_api:update")
         {
             try
