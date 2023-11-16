@@ -68,8 +68,8 @@ namespace ONIT.VismaNetApi.Models
 
         public CreditTerms creditTerms
         {
-            get => Get("creditTermsId", new CreditTerms("30"));
-            set => Set(value);
+            get => Get("creditTermsId", new CreditTerms());
+            set => Set(value, "creditTermsId");
         }
 
         public string currencyId
@@ -88,7 +88,8 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty] public JObject extras { get; private set; }
 
-        public SupplierGLAccountDto glAccounts {
+        public SupplierGLAccountDto glAccounts
+        {
             get => Get<SupplierGLAccountDto>();
             set => Set(value);
         }
