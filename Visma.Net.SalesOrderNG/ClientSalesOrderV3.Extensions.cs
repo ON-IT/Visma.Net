@@ -63,7 +63,21 @@ namespace Visma.Net.SalesOrderNG
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder)
         {
             urlBuilder.Insert(0, VismaNetControllers.SalesOrderV3BaseUrl);
-            var jwtToken = new JwtSecurityToken(_authorization.Token);
+            JwtSecurityToken jwtToken = null;
+            if (!string.IsNullOrEmpty(_authorization.Token))
+            {
+                jwtToken = new JwtSecurityToken(_authorization.Token);
+            }
+            else if (!string.IsNullOrEmpty(_authorization.VismaConnectToken))
+            {
+                jwtToken = new JwtSecurityToken(_authorization.VismaConnectToken);
+            }
+            else
+            {
+                throw new VismaConnectException("No token found");
+            }
+            
+
             if (!_authorization.VismaConnectScopes.Contains("visma.net.erp.salesorder") && !jwtToken.Claims.Any(c => c.Value.Contains("visma.net.erp.salesorder")))
             {
                 throw new VismaConnectException("Scope has to contain visma.net.erp.salesorder scopes to use SalesOrderV3");
