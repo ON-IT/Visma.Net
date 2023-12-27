@@ -84,6 +84,10 @@ namespace Visma.Net.SalesOrderNG
                 }
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _authorization.VismaConnectToken);
             }
+            else if (_authorization.Token != null)
+            {
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _authorization.Token);
+            }
             else
             {
                 throw new VismaNetExceptionClientIdMissing();
