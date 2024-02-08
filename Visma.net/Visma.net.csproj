@@ -4,7 +4,7 @@
     		<Title>Visma.net</Title>
         <Copyright>Copyright © ON IT AS 2014 - 2020</Copyright>
         <Copyright>Copyright © ON IT AS 2014 - 2021</Copyright>
-        <Version>4.2.1.11</Version>
+        <Version>4.2.1.15</Version>
         <TargetFrameworks>netstandard2.0;net462;net6</TargetFrameworks>
     	<Title>Visma.net</Title>
         <Copyright>Copyright © ON IT AS 2014 - 2022</Copyright>
@@ -25,8 +25,8 @@
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <PackageIcon>on_it_logo.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <AssemblyVersion>4.2.1.11</AssemblyVersion>
-        <FileVersion>4.2.1.11</FileVersion>
+        <AssemblyVersion>4.2.1.15</AssemblyVersion>
+        <FileVersion>4.2.1.15</FileVersion>
 		<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
 	</PropertyGroup>
     <ItemGroup>

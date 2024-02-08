@@ -792,9 +792,9 @@ namespace Visma.Net.SalesOrderNG
         /// <param name="orderId">The order number to delete</param>
         /// <returns>The order was deleted successfully</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SwaggerResponse> SalesOrders_Delete_typeorderIdAsync(string type, string orderId)
+        public virtual System.Threading.Tasks.Task<SwaggerResponse> SalesOrders_Delete_typeorderIdAsync(string type, string orderId, string EtagVersion)
         {
-            return SalesOrders_Delete_typeorderIdAsync(type, orderId, System.Threading.CancellationToken.None);
+            return SalesOrders_Delete_typeorderIdAsync(type, orderId, EtagVersion, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -809,7 +809,7 @@ namespace Visma.Net.SalesOrderNG
         /// <param name="orderId">The order number to delete</param>
         /// <returns>The order was deleted successfully</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SwaggerResponse> SalesOrders_Delete_typeorderIdAsync(string type, string orderId, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SwaggerResponse> SalesOrders_Delete_typeorderIdAsync(string type, string orderId,string EtagVersion, System.Threading.CancellationToken cancellationToken)
         {
             if (type == null)
                 throw new System.ArgumentNullException("type");
@@ -831,6 +831,7 @@ namespace Visma.Net.SalesOrderNG
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
 
                     PrepareRequest(client_, request_, urlBuilder_);
+                    request_.Headers.Add("If-Match", EtagVersion);
 
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);

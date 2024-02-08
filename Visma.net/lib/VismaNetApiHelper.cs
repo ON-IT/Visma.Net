@@ -199,6 +199,22 @@ namespace ONIT.VismaNetApi.Lib
             return AddAttachmentToController<string>(auth, url, stream, fileName);
         }
 
+        internal static Task<string> AddAttachmentToInventory(VismaNetAuthorization auth, string inventoryNumber,
+            byte[] bytes,
+            string fileName)
+        {
+            var url = GetApiUrlForController(VismaNetControllers.Inventory, $"/{inventoryNumber}/attachment");
+            return AddAttachmentToController<string>(auth, url, bytes, fileName);
+        }
+
+        internal static Task<string> AddAttachmentToInventory(VismaNetAuthorization auth, string inventoryNumber,
+            Stream stream,
+            string fileName)
+        {
+            var url = GetApiUrlForController(VismaNetControllers.Inventory, $"/{inventoryNumber}/attachment");
+            return AddAttachmentToController<string>(auth, url, stream, fileName);
+        }
+
         internal static Task<string> AddAttachmentToCreditNote(VismaNetAuthorization auth, string number,
             byte[] bytes,
             string fileName)
@@ -232,6 +248,7 @@ namespace ONIT.VismaNetApi.Lib
             var url = GetApiUrlForController(VismaNetControllers.JournalTransactionV2, $"/module/{module.ToString().Substring(6)}/{batch}/attachment");
             return AddAttachmentToController<string>(auth, url, bytes, fileName);
         }
+        
 
         internal static string AppendToQuery(string query, string key, object value)
         {

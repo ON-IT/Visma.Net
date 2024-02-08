@@ -3,6 +3,7 @@ using ONIT.VismaNetApi.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace ONIT.VismaNetApi.Lib.Data
@@ -47,6 +48,29 @@ namespace ONIT.VismaNetApi.Lib.Data
         public async Task<List<ItemClass>> GetAllItemClasses()
         {
             return await VismaNetApiHelper.GetAllItemClasses(Authorization);
+        }
+
+        public async Task<string> AddAttachmentToInventory(string inventoryNumber, byte[] byteArray, string fileName)
+        {
+            if (byteArray == default(byte[]))
+                throw new ArgumentNullException(nameof(byteArray), "ByteArray is missing");
+            if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(Path.GetExtension(fileName)))
+                throw new ArgumentNullException(nameof(fileName), "File name must be provided and have an extention");
+            return await VismaNetApiHelper.AddAttachmentToInventory(Authorization, inventoryNumber, byteArray, fileName);
+        }
+
+        public async Task<string> AddAttachmentToInventory(string inventoryNumber, Stream stream, string fileName)
+        {
+            if (stream == default(Stream))
+                throw new ArgumentNullException(nameof(stream), "Stream is missing");
+            if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(Path.GetExtension(fileName)))
+                throw new ArgumentNullException(nameof(fileName), "File name must be provided and have an extention");
+
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                return await VismaNetApiHelper.AddAttachmentToInventory(Authorization, inventoryNumber, stream, fileName);
+            }
         }
     }
 }
