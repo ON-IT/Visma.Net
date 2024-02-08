@@ -23,6 +23,7 @@ namespace ONIT.VismaNetApi.Models
         public string cashAccount { get => Get<string>(); set => Set(value); }
         public string currency { get => Get<string>(); set => Set(value); }
         public decimal paymentAmount { get => Get<decimal>(); set => Set(value); }
+        public decimal paymentAmountInCurrency { get => Get<decimal>(); set => Set(value); }
         public string invoiceText { get => Get<string>(); set => Set(value); }
         [JsonProperty]
         public decimal appliedToDocuments { get; private set; }

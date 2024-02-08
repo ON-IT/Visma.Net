@@ -6,6 +6,8 @@ namespace ONIT.VismaNetApi.Dynamic
     public abstract class VismaNetDynamicHandler : DynamicObject
     {
         protected VismaNetAuthorization Auth;
+        protected static Visma.Net.SalesOrderNG.Helpers.VismaNetAuthorization AuthNG;
+
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {

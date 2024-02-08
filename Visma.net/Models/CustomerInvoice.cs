@@ -305,6 +305,22 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        public string accountingCostRef
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string originatorDocRef
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+        public string contractDocRef
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
         [JsonProperty]
         public DescriptiveDto salesPerson
         {

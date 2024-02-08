@@ -36,6 +36,7 @@ namespace ONIT.VismaNetApi.Models
         public bool released { get => Get<bool>(); set => Set(value); }
         [JsonProperty]
         public DateTime lastModifiedDateTime { get; private set; }
+        public string branch { get => Get<string>(); set => Set(value); }
         [JsonProperty]
         public List<SupplierPaymentLine> paymentLines
         {

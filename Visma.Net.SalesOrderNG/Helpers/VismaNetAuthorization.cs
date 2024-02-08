@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 
-namespace ONIT.VismaNetApi.Models
+namespace Visma.Net.SalesOrderNG.Helpers
 {
     public class VismaNetAuthorization
     {
@@ -9,7 +9,7 @@ namespace ONIT.VismaNetApi.Models
         public int CompanyId { get; set; }
         public bool UseProxy { get; set; }
         public int BranchId { get; set; }
-        public HttpClient HttpClient { get; internal set; }
+        public HttpClient HttpClient { get; set; }
         public string VismaConnectClientId { get; set; } = null;
         public string VismaConnectClientSecret { get;set; } = null;
         public string VismaConnectTenantId { get; set; } = null;

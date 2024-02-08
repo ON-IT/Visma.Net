@@ -73,6 +73,12 @@ namespace ONIT.VismaNetApi.Models
             set => Set(value);
         }
 
+        public bool active
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
         public string GetIdentificator()
         {
             return subaccountId.ToString();

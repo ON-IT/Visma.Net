@@ -225,6 +225,21 @@ namespace ONIT.VismaNetApi.Models
             private set; // { Set(value); }
         }
 
+        [JsonProperty]
+        public string soOrderType
+        {
+            get; 
+            private set;
+        }
+
+        [JsonProperty]
+        public string soOrderNbr
+        {
+            get; 
+            private set; 
+        }
+
+
         public decimal unitPriceInCurrency
         {
             get => Get<decimal>();
