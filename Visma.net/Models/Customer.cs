@@ -111,7 +111,10 @@ namespace ONIT.VismaNetApi.Models
 
         [JsonProperty] public JObject extras { get; private set; }
 
-        [JsonProperty] public CustomerGLAccountDto glAccounts { get; private set; }
+        [JsonProperty] public CustomerGLAccountDto glAccounts {
+            get => Get(defaultValue: new CustomerGLAccountDto());
+            private set => Set(value); 
+        }
 
         [JsonProperty] public int internalId { get; private set; }
 
