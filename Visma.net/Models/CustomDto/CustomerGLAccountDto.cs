@@ -58,6 +58,12 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             get => Get<GLAccountDetailsDto>(defaultValue: new GLAccountDetailsDto());
             private set => Set(value);
         }
+        [JsonProperty]
+        public IdDescription supplierSubaccount
+        {
+            get => Get<IdDescription>();
+            private set => Set(value);
+        }
 
         [JsonProperty] public GLAccountDetailsDto expenseAccount {
             get => Get<GLAccountDetailsDto>(defaultValue: new GLAccountDetailsDto());
@@ -82,6 +88,8 @@ namespace ONIT.VismaNetApi.Models.CustomDto
             get => Get<IdDescription>(); 
             private set => Set(value); 
         }
+
+        
 
         public DtoValue ToDto()
         {

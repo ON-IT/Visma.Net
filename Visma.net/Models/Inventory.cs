@@ -138,6 +138,18 @@ namespace ONIT.VismaNetApi.Models
             get => Get<string>();
             set => Set(value);
         }
+        [JsonProperty]
+        public bool stockItem
+        {
+            get => Get<bool>();
+            private set => Set(value);
+        }
+        public bool kitItem
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
 
         public DescriptiveDto priceClass
         {
