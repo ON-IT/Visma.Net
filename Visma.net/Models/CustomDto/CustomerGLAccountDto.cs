@@ -61,7 +61,7 @@ namespace ONIT.VismaNetApi.Models.CustomDto
         [JsonProperty]
         public IdDescription supplierSubaccount
         {
-            get => Get<IdDescription>();
+            get => Get<IdDescription>(defaultValue: new IdDescription());
             private set => Set(value);
         }
 
