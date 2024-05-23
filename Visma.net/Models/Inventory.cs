@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ONIT.VismaNetApi.Lib;
@@ -193,9 +194,7 @@ namespace ONIT.VismaNetApi.Models
             get => _inventoryUnits ?? (_inventoryUnits = new List<InventoryUnit>());
             private set => _inventoryUnits = value;
         }
-
-        public Packaging packaging
-        {
+        public Packaging packaging {
             get => Get<Packaging>();
             set => Set(value);
         }
