@@ -321,15 +321,17 @@ namespace Visma.Net.SalesOrderNG
         /// <br/>            
         /// <br/>If modifiedSinceCondition is not specified, it defaults to &gt;=.
         /// <br/>If modifiedSince is not specified, it defaults to 1900-01-01.
+        /// <br/>
+        /// <br/>If expand with lotSerial, only the lotSerial numbers that has quantity will be included in the response.
         /// <br/>            
-        /// <br/>GET /inventory?inventoryId=Item1&amp;InventoryId=Item2&amp;expand=location,attribute
+        /// <br/>GET /inventory?inventoryId=Item1&amp;InventoryId=Item2&amp;expand=location,attribute,lotSerial
         /// <br/>            
         /// <br/>GET /inventory?expand=location&amp;attributeFilter=WEBSHOP:1
         /// </remarks>
         /// <param name="inventoryId">A list of zero or more inventory items to get a summary for. If no inventoryId is passed, all inventory items will be included in the response.</param>
         /// <param name="warehouseId">A list of zero or more warehouses to get a summary for. If no warehouse is supplied, all warehouses will be included in the response.</param>
         /// <param name="locationId">A list of zero or more locations to get a summary for. If no location is supplied, all locations will be included in the response.</param>
-        /// <param name="expand">An additional option to include location detail information with the warehouse summary, or attribute details for the inventory item. If this is not supplied, location information or attributes will not be included in the response.</param>
+        /// <param name="expand">An additional option to include location detail information with the warehouse summary, attribute details for the inventory item or lot/serial details. If this is not supplied, location information or attributes will not be included in the response.</param>
         /// <param name="modifiedSinceCondition">Condition used in filtering when an inventory item's warehouse or location availability last changed</param>
         /// <param name="modifiedSince">A date/time value for filtering when an inventory item's warehouse or location availability last changed
         /// <br/>Unless a specific time zone offset is included (e.g. '2012-12-24T12:15:14+02:00'), the date is considered to be in the UTC time zone.</param>
@@ -357,15 +359,17 @@ namespace Visma.Net.SalesOrderNG
         /// <br/>            
         /// <br/>If modifiedSinceCondition is not specified, it defaults to &gt;=.
         /// <br/>If modifiedSince is not specified, it defaults to 1900-01-01.
+        /// <br/>
+        /// <br/>If expand with lotSerial, only the lotSerial numbers that has quantity will be included in the response.
         /// <br/>            
-        /// <br/>GET /inventory?inventoryId=Item1&amp;InventoryId=Item2&amp;expand=location,attribute
+        /// <br/>GET /inventory?inventoryId=Item1&amp;InventoryId=Item2&amp;expand=location,attribute,lotSerial
         /// <br/>            
         /// <br/>GET /inventory?expand=location&amp;attributeFilter=WEBSHOP:1
         /// </remarks>
         /// <param name="inventoryId">A list of zero or more inventory items to get a summary for. If no inventoryId is passed, all inventory items will be included in the response.</param>
         /// <param name="warehouseId">A list of zero or more warehouses to get a summary for. If no warehouse is supplied, all warehouses will be included in the response.</param>
         /// <param name="locationId">A list of zero or more locations to get a summary for. If no location is supplied, all locations will be included in the response.</param>
-        /// <param name="expand">An additional option to include location detail information with the warehouse summary, or attribute details for the inventory item. If this is not supplied, location information or attributes will not be included in the response.</param>
+        /// <param name="expand">An additional option to include location detail information with the warehouse summary, attribute details for the inventory item or lot/serial details. If this is not supplied, location information or attributes will not be included in the response.</param>
         /// <param name="modifiedSinceCondition">Condition used in filtering when an inventory item's warehouse or location availability last changed</param>
         /// <param name="modifiedSince">A date/time value for filtering when an inventory item's warehouse or location availability last changed
         /// <br/>Unless a specific time zone offset is included (e.g. '2012-12-24T12:15:14+02:00'), the date is considered to be in the UTC time zone.</param>
@@ -984,7 +988,7 @@ namespace Visma.Net.SalesOrderNG
         /// <param name="pageSize">The number of customers retrieved per page</param>
         /// <param name="pageIndex">The zero based page index to retrieve</param>
         /// <param name="orderBy">The field to order the list by. Can be one of `created`, `lastModified`, or `orderId` followed by an optional sort direction (`asc` or `desc`), default direction is `asc` (ascending) if not present.</param>
-        /// <param name="filter">A filter for the list, applied to the orderId</param>
+        /// <param name="filter">A filter for the list, applied to the OrderId, CustomerOrderNumber and CustomerName</param>
         /// <returns>Returns a list of Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderListDto found.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<SwaggerResponse<SalesOrderListDtoPagedResult>> SalesOrders_GetList_typeAsync(string type, string customerId, string status, System.DateTimeOffset? modifiedSince, int? pageSize, int? pageIndex, string orderBy, string filter)
@@ -1013,7 +1017,7 @@ namespace Visma.Net.SalesOrderNG
         /// <param name="pageSize">The number of customers retrieved per page</param>
         /// <param name="pageIndex">The zero based page index to retrieve</param>
         /// <param name="orderBy">The field to order the list by. Can be one of `created`, `lastModified`, or `orderId` followed by an optional sort direction (`asc` or `desc`), default direction is `asc` (ascending) if not present.</param>
-        /// <param name="filter">A filter for the list, applied to the orderId</param>
+        /// <param name="filter">A filter for the list, applied to the OrderId, CustomerOrderNumber and CustomerName</param>
         /// <returns>Returns a list of Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderListDto found.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<SwaggerResponse<SalesOrderListDtoPagedResult>> SalesOrders_GetList_typeAsync(string type, string customerId, string status, System.DateTimeOffset? modifiedSince, int? pageSize, int? pageIndex, string orderBy, string filter, System.Threading.CancellationToken cancellationToken)
@@ -1141,7 +1145,7 @@ namespace Visma.Net.SalesOrderNG
         }
 
         /// <summary>
-        /// Gets a paged list with sales orders of any type
+        /// Gets a paged list with sales orders of any type.
         /// </summary>
         /// <remarks>
         /// Sample requests:
@@ -1159,7 +1163,7 @@ namespace Visma.Net.SalesOrderNG
         /// <param name="pageSize">The number of customers retrieved per page</param>
         /// <param name="pageIndex">The zero based page index to retrieve</param>
         /// <param name="orderBy">The field to order the list by. Can be one of `created`, `lastModified`, or `orderId` followed by an optional sort direction (`asc` or `desc`), default direction is `asc` (ascending) if not present.</param>
-        /// <param name="filter">A filter for the list, applied to the orderId</param>
+        /// <param name="filter">A filter for the list, applied to the OrderId, CustomerOrderNumber and CustomerName</param>
         /// <returns>Returns a list of Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderListDto found.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<SwaggerResponse<SalesOrderListDtoPagedResult>> SalesOrders_GetList_Async(string customerId, string status, System.DateTimeOffset? modifiedSince, int? pageSize, int? pageIndex, string orderBy, string filter)
@@ -1169,7 +1173,7 @@ namespace Visma.Net.SalesOrderNG
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
-        /// Gets a paged list with sales orders of any type
+        /// Gets a paged list with sales orders of any type.
         /// </summary>
         /// <remarks>
         /// Sample requests:
@@ -1187,7 +1191,7 @@ namespace Visma.Net.SalesOrderNG
         /// <param name="pageSize">The number of customers retrieved per page</param>
         /// <param name="pageIndex">The zero based page index to retrieve</param>
         /// <param name="orderBy">The field to order the list by. Can be one of `created`, `lastModified`, or `orderId` followed by an optional sort direction (`asc` or `desc`), default direction is `asc` (ascending) if not present.</param>
-        /// <param name="filter">A filter for the list, applied to the orderId</param>
+        /// <param name="filter">A filter for the list, applied to the OrderId, CustomerOrderNumber and CustomerName</param>
         /// <returns>Returns a list of Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderListDto found.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<SwaggerResponse<SalesOrderListDtoPagedResult>> SalesOrders_GetList_Async(string customerId, string status, System.DateTimeOffset? modifiedSince, int? pageSize, int? pageIndex, string orderBy, string filter, System.Threading.CancellationToken cancellationToken)
@@ -2839,6 +2843,136 @@ namespace Visma.Net.SalesOrderNG
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
                             return new SwaggerResponse<System.Collections.Generic.ICollection<SalesOrderDiscountDto>>(status_, headers_, objectResponse_.Object);
+                        }
+                        else
+                        if (status_ == 404)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ProblemDetails>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            throw new ApiException<ProblemDetails>("If an order with type type and orderId is not found, or is not accessible.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == 401)
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Unauthorized", status_, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == 403)
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Forbidden", status_, responseText_, headers_, null);
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Gets payments detail information for a single sales order
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// <br/>            
+        /// <br/>`GET /salesorders/SO/000101/payments`
+        /// </remarks>
+        /// <param name="type">The type of sales order to get</param>
+        /// <param name="orderId">The id of the sales order to get</param>
+        /// <returns>A list of Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderPaymentDto if found and accessible</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<SwaggerResponse<System.Collections.Generic.ICollection<PaymentDto>>> SalesOrders_GetItemPayments_typeorderIdpaymentsAsync(string type, string orderId)
+        {
+            return SalesOrders_GetItemPayments_typeorderIdpaymentsAsync(type, orderId, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Gets payments detail information for a single sales order
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// <br/>            
+        /// <br/>`GET /salesorders/SO/000101/payments`
+        /// </remarks>
+        /// <param name="type">The type of sales order to get</param>
+        /// <param name="orderId">The id of the sales order to get</param>
+        /// <returns>A list of Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderPaymentDto if found and accessible</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<SwaggerResponse<System.Collections.Generic.ICollection<PaymentDto>>> SalesOrders_GetItemPayments_typeorderIdpaymentsAsync(string type, string orderId, System.Threading.CancellationToken cancellationToken)
+        {
+            if (type == null)
+                throw new System.ArgumentNullException("type");
+
+            if (orderId == null)
+                throw new System.ArgumentNullException("orderId");
+
+            var client_ = new System.Net.Http.HttpClient();
+            var disposeClient_ = true;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                
+                    // Operation Path: "api/v3/SalesOrders/{type}/{orderId}/payments"
+                    urlBuilder_.Append("api/v3/SalesOrders/");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(type, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(orderId, System.Globalization.CultureInfo.InvariantCulture)));
+                    urlBuilder_.Append("/payments");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>();
+                        foreach (var item_ in response_.Headers)
+                            headers_[item_.Key] = item_.Value;
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<PaymentDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return new SwaggerResponse<System.Collections.Generic.ICollection<PaymentDto>>(status_, headers_, objectResponse_.Object);
                         }
                         else
                         if (status_ == 404)

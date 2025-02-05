@@ -84,6 +84,51 @@ namespace Visma.Net.SalesOrderNG.Models
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AllocationDto
+    {
+        [Newtonsoft.Json.JsonProperty("inventoryId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string InventoryId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lotSerialNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string LotSerialNumber { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("quantity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Quantity { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expirationDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? ExpirationDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("allocated", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Allocated { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AllocationDtoRead
+    {
+        [Newtonsoft.Json.JsonProperty("inventoryId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string InventoryId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lotSerialNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string LotSerialNumber { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("quantity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Quantity { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("expirationDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? ExpirationDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("allocated", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Allocated { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("unitOfMeasure", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string UnitOfMeasure { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AttachmentDto
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -181,6 +226,71 @@ namespace Visma.Net.SalesOrderNG.Models
         /// </summary>
         [Newtonsoft.Json.JsonProperty("fax", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Fax { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CustomFieldsDto
+    {
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CustomStr1 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CustomStr2 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr3", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CustomStr3 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr4", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CustomStr4 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr5", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CustomStr5 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type decimal with max 4 decimals.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customDec1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? CustomDec1 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type decimal with max 4 decimals.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customDec2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? CustomDec2 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type int
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customInt1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? CustomInt1 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type int
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customInt2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? CustomInt2 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type DateTime - in UTC timezone
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customDateTimeUtc1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? CustomDateTimeUtc1 { get; set; }
 
     }
 
@@ -477,7 +587,9 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// Shipping rule of the customer set default for the order
-        /// <br/>&lt;br&gt;Is one of the following options:&lt;br&gt;&lt;list type="bullet"&gt;&lt;item&gt;&lt;term&gt;CancelRemainder: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;BackOrderAllowed: &lt;/term&gt;&lt;description&gt;The ordered quantity can be delivered in multiple shipments.&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;ShipComplete: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment.&lt;/description&gt;&lt;/item&gt;&lt;/list&gt;
+        /// <br/>
+        /// <br/>Is one of the following options:
+        /// <br/>&lt;list type="bullet"&gt;&lt;item&gt;&lt;term&gt;CancelRemainder: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;BackOrderAllowed: &lt;/term&gt;&lt;description&gt;The ordered quantity can be delivered in multiple shipments.&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;ShipComplete: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment.&lt;/description&gt;&lt;/item&gt;&lt;/list&gt;
         /// </summary>
         [Newtonsoft.Json.JsonProperty("shippingRule", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ShippingRule { get; set; }
@@ -591,8 +703,11 @@ namespace Visma.Net.SalesOrderNG.Models
         [System.Runtime.Serialization.EnumMember(Value = @"Attribute")]
         Attribute = 2,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"LotSerial")]
+        LotSerial = 3,
+
         [System.Runtime.Serialization.EnumMember(Value = @"All")]
-        All = 3,
+        All = 4,
 
     }
 
@@ -660,6 +775,14 @@ namespace Visma.Net.SalesOrderNG.Models
         /// </summary>
         [Newtonsoft.Json.JsonProperty("totalCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? TotalCount { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class KitAssemblyDto
+    {
+        [Newtonsoft.Json.JsonProperty("referenceNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ReferenceNumber { get; set; }
 
     }
 
@@ -736,6 +859,12 @@ namespace Visma.Net.SalesOrderNG.Models
         [Newtonsoft.Json.JsonProperty("lastModified", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset LastModified { get; set; }
 
+        /// <summary>
+        /// LOT/Serial information
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("lotSerials", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<LotSerialAvailabilityDto> LotSerials { get; set; }
+
     }
 
     /// <summary>
@@ -755,6 +884,50 @@ namespace Visma.Net.SalesOrderNG.Models
         /// </summary>
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Description { get; set; }
+
+    }
+
+    /// <summary>
+    /// Inventory summary for a specific lot/serial number
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class LotSerialAvailabilityDto
+    {
+        /// <summary>
+        /// Id/number of the LOT/Serial
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("lotSerialNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string LotSerialNumber { get; set; }
+
+        /// <summary>
+        /// Expiration date of the LOT/Serial
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("expirationDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? ExpirationDate { get; set; }
+
+        /// <summary>
+        /// Physical quantity on-hand of item LOT/Serial id
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("quantityOnHand", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double QuantityOnHand { get; set; }
+
+        /// <summary>
+        /// Quantity available of item LOT/Serial id according to set availability calculation rules
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("quantityAvailable", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double QuantityAvailable { get; set; }
+
+        /// <summary>
+        /// Quantity of item LOT/Serial id available for shipping
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("quantityAvailableForShipment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double QuantityAvailableForShipment { get; set; }
+
+        /// <summary>
+        /// Quantity of item LOT/Serial id not included in the availability calculation
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("quantityNotAvailable", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double QuantityNotAvailable { get; set; }
 
     }
 
@@ -840,7 +1013,8 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// Sets the new id that should be assigned to the new sales order.
-        /// <br/>This is required if the specified Visma.net.ERP.SalesOrders.Api.Application.Commands.NewSalesOrder.NewSalesOrderCommand.Type has manual numbering set up. If not it should be null or empty.
+        /// <br/>This is required if the specified Visma.net.ERP.SalesOrders.Api.Application.Commands.NewSalesOrder.NewSalesOrderCommand.Type has manual numbering set up or Visma.net.ERP.SalesOrders.Api.Application.Commands.NewSalesOrder.NewSalesOrderCommand.OverrideNumberSeries from the request is true.
+        /// <br/>If not, it should be null or empty.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("orderId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(15)]
@@ -876,7 +1050,8 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// Sets the description for the order to create
-        /// <br/>&lt;br&gt;Note that text fields should not contain any personally identifiable or otherwise sensitive data
+        /// <br/>
+        /// <br/>Note that text fields should not contain any personally identifiable or otherwise sensitive data
         /// </summary>
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255)]
@@ -951,7 +1126,8 @@ namespace Visma.Net.SalesOrderNG.Models
         public string BranchId { get; set; }
 
         /// <summary>
-        /// Sets the type code for the original sales order
+        /// Sets the type code for the original sales order.
+        /// <br/>If order is deleted and the field contains a order type/order number used as quote and is in status Complete, the original quote order will be reset to Open status
         /// </summary>
         [Newtonsoft.Json.JsonProperty("originalOrderType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(2)]
@@ -959,6 +1135,7 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// Sets the unique identifier of the original order
+        /// <br/>If order is deleted and the field contains a order type/order number used as quote and is in status Complete, the original quote order will be reset to Open status
         /// </summary>
         [Newtonsoft.Json.JsonProperty("originalOrderId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(15)]
@@ -986,6 +1163,15 @@ namespace Visma.Net.SalesOrderNG.Models
 
         [Newtonsoft.Json.JsonProperty("rotRutDetails", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public NewSalesOrderRotRutDetailsDto RotRutDetails { get; set; }
+
+        /// <summary>
+        /// Used to override the orderId that would else be set automatically by the system. When set true, also orderId should be provided
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("overrideNumberSeries", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool OverrideNumberSeries { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customFields", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public NewSalesOrderCustomFieldsDto CustomFields { get; set; }
 
     }
 
@@ -1019,11 +1205,79 @@ namespace Visma.Net.SalesOrderNG.Models
         public string Phone1 { get; set; }
 
         /// <summary>
-        /// Sets the e-mail address of the contact
+        /// Sets the e-mail address of the contact, multiple e-mails can be separated by semicolon
         /// </summary>
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255)]
         public string Email { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("emails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<string> Emails { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class NewSalesOrderCustomFieldsDto
+    {
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CustomStr1 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CustomStr2 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr3", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CustomStr3 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr4", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CustomStr4 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr5", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CustomStr5 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type decimal with max 4 decimals.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customDec1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? CustomDec1 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type decimal with max 4 decimals.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customDec2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? CustomDec2 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type int
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customInt1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? CustomInt1 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type int
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customInt2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? CustomInt2 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type DateTime - in UTC timezone
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customDateTimeUtc1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? CustomDateTimeUtc1 { get; set; }
 
     }
 
@@ -1162,7 +1416,8 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// Sets the description of the order line item. This will override the default description from the inventory item
-        /// <br/>&lt;br&gt;Note that text fields should not contain any personally identifiable or otherwise sensitive data
+        /// <br/>
+        /// <br/>Note that text fields should not contain any personally identifiable or otherwise sensitive data
         /// </summary>
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(256)]
@@ -1177,7 +1432,9 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// The way the line item should be shipped. This will override the default or the one set on the order head.
-        /// <br/>&lt;br&gt;One of the following options can be set:&lt;br&gt;&lt;list type="bullet"&gt;&lt;item&gt;&lt;term&gt;CancelRemainder: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;BackOrderAllowed: &lt;/term&gt;&lt;description&gt;The ordered quantity can be delivered in multiple shipments.&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;ShipComplete: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment.&lt;/description&gt;&lt;/item&gt;&lt;/list&gt;
+        /// <br/>
+        /// <br/>One of the following options can be set:
+        /// <br/>&lt;list type="bullet"&gt;&lt;item&gt;&lt;term&gt;CancelRemainder: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;BackOrderAllowed: &lt;/term&gt;&lt;description&gt;The ordered quantity can be delivered in multiple shipments.&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;ShipComplete: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment.&lt;/description&gt;&lt;/item&gt;&lt;/list&gt;
         /// </summary>
         [Newtonsoft.Json.JsonProperty("shippingRule", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ShippingRule { get; set; }
@@ -1375,8 +1632,7 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// &lt;remarks&gt;
-        /// <br/>            If the actual value was provided as (null), the value will be set from the inventory item preferred supplier,
-        /// <br/>            can be set only if the Purchase Order Source is set to `dropShip` or `purchaseToOrder`
+        /// <br/>            If the actual value was provided as (null), the value will be set from the inventory item preferred supplier.
         /// <br/>            &lt;/remarks&gt;
         /// </summary>
         [Newtonsoft.Json.JsonProperty("supplierId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1401,6 +1657,46 @@ namespace Visma.Net.SalesOrderNG.Models
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isRotRutDeductible", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? IsRotRutDeductible { get; set; }
+
+        /// <summary>
+        /// Sort order for line. Lines with provided sort order will be prioritized over lines without sort order.
+        /// <br/>Lines without sort order will be placed after lines with sort order.
+        /// <br/>Sort order will be automatically changed to consecutive numbers starting from 1.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("sortOrder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? SortOrder { get; set; }
+
+        /// <summary>
+        /// The line number of the original invoice to be returned
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("invoiceLineNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? InvoiceLineNumber { get; set; }
+
+        /// <summary>
+        /// The reference number of the original invoice to be returned
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("invoiceNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(15)]
+        public string InvoiceNumber { get; set; }
+
+        /// <summary>
+        /// The invoice type of the original invoice to be returned
+        /// <br/>
+        /// <br/>One of the following options can be set:
+        /// <br/>&lt;list type="bullet"&gt;&lt;item&gt;&lt;term&gt;Invoice&lt;/term&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;CreditNote&lt;/term&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;CashSales&lt;/term&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;CashReturn&lt;/term&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;DebitNote&lt;/term&gt;&lt;/item&gt;&lt;/list&gt;
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("invoiceType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string InvoiceType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customFields", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public NewSalesOrderCustomFieldsDto CustomFields { get; set; }
+
+        /// <summary>
+        /// Sets the alternate id for the inventory item on the line.
+        /// <br/>If the actual value was provided as (null), the value will be set from the inventory item alternate id predicates.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("inventoryAlternateId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string InventoryAlternateId { get; set; }
 
     }
 
@@ -1666,14 +1962,15 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// Description for the order
-        /// <br/>&lt;br&gt;Note that text fields should not contain any personally identifiable or otherwise sensitive data
+        /// <br/>
+        /// <br/>Note that text fields should not contain any personally identifiable or otherwise sensitive data
         /// </summary>
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255)]
         public string Description { get; set; }
 
         /// <summary>
-        /// Sets the status for the order. Must be "Open", "Hold", "BackOrder", "Cancelled". When status is set, no other fields may be patched in the same call
+        /// Sets the status for the order. Must be "Open", "Hold", "BackOrder", "Cancelled", "Completed". When status is set, no other fields may be patched in the same call
         /// </summary>
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Status { get; set; }
@@ -1752,6 +2049,7 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// Sets the type code for the original sales order
+        /// <br/>If order is deleted and the field contains a order type/order number used as quote and is in status Complete, the original quote order will be reset to Open status
         /// </summary>
         [Newtonsoft.Json.JsonProperty("originalOrderType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(2)]
@@ -1759,6 +2057,7 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// Sets the unique identifier of the original order
+        /// <br/>If order is deleted and the field contains a order type/order number used as quote and is in status Complete, the original quote order will be reset to Open status
         /// </summary>
         [Newtonsoft.Json.JsonProperty("originalOrderId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(15)]
@@ -1779,6 +2078,9 @@ namespace Visma.Net.SalesOrderNG.Models
 
         [Newtonsoft.Json.JsonProperty("rotRutDetails", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PatchSalesOrderRotRutDetailsDto RotRutDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customFields", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public PatchSalesOrderCustomFieldsDto CustomFields { get; set; }
 
     }
 
@@ -1811,17 +2113,90 @@ namespace Visma.Net.SalesOrderNG.Models
         public string Phone1 { get; set; }
 
         /// <summary>
-        /// Sets the e-mail address of the contact
+        /// Sets the e-mail address of the contact, multiple e-mails can be separated by semicolon
         /// </summary>
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255)]
         public string Email { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("emails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<string> Emails { get; set; }
 
         /// <summary>
         /// Whether this contact overrides the default contact
         /// </summary>
         [Newtonsoft.Json.JsonProperty("overridesDefault", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? OverridesDefault { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PatchSalesOrderCustomFieldsDto
+    {
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string CustomStr1 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string CustomStr2 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr3", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string CustomStr3 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr4", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string CustomStr4 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type string with max length 100.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customStr5", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string CustomStr5 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type decimal with max 4 decimals.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customDec1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? CustomDec1 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type decimal with max 4 decimals.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customDec2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? CustomDec2 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type int
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customInt1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? CustomInt1 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type int
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customInt2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? CustomInt2 { get; set; }
+
+        /// <summary>
+        /// A free custom colum of type DateTime - in UTC timezone
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("customDateTimeUtc1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? CustomDateTimeUtc1 { get; set; }
 
     }
 
@@ -1962,7 +2337,8 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// Sets the description of the order line item. This will override the default description from the inventory item
-        /// <br/>&lt;br&gt;Note that text fields should not contain any personally identifiable or otherwise sensitive data
+        /// <br/>
+        /// <br/>Note that text fields should not contain any personally identifiable or otherwise sensitive data
         /// </summary>
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(256)]
@@ -1970,7 +2346,9 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// The way the line item should be shipped.
-        /// <br/>&lt;br&gt;One of the following options can be set:&lt;br&gt;&lt;list type="bullet"&gt;&lt;item&gt;&lt;term&gt;CancelRemainder: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;BackOrderAllowed: &lt;/term&gt;&lt;description&gt;The ordered quantity can be delivered in multiple shipments.&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;ShipComplete: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment.&lt;/description&gt;&lt;/item&gt;&lt;/list&gt;
+        /// <br/>
+        /// <br/>One of the following options can be set:
+        /// <br/>&lt;list type="bullet"&gt;&lt;item&gt;&lt;term&gt;CancelRemainder: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;BackOrderAllowed: &lt;/term&gt;&lt;description&gt;The ordered quantity can be delivered in multiple shipments.&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;ShipComplete: &lt;/term&gt;&lt;description&gt;The ordered quantity should be delivered in one shipment.&lt;/description&gt;&lt;/item&gt;&lt;/list&gt;
         /// </summary>
         [Newtonsoft.Json.JsonProperty("shippingRule", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ShippingRule { get; set; }
@@ -2176,7 +2554,7 @@ namespace Visma.Net.SalesOrderNG.Models
         public string PurchaseOrderSource { get; set; }
 
         /// <summary>
-        /// Sets the Purchase Order Vendor for the line, can be set if the purchase order source is `purchaseToOrder` or `dropShip`.
+        /// Sets the Purchase Order Vendor for the line.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("supplierId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SupplierId { get; set; }
@@ -2199,6 +2577,37 @@ namespace Visma.Net.SalesOrderNG.Models
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isRotRutDeductible", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? IsRotRutDeductible { get; set; }
+
+        /// <summary>
+        /// The line number of the original invoice to be returned
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("invoiceLineNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? InvoiceLineNumber { get; set; }
+
+        /// <summary>
+        /// The reference number of the original invoice to be returned
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("invoiceNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(15)]
+        public string InvoiceNumber { get; set; }
+
+        /// <summary>
+        /// The invoice type of the original invoice to be returned
+        /// <br/>
+        /// <br/>One of the following options can be set:
+        /// <br/>&lt;list type="bullet"&gt;&lt;item&gt;&lt;term&gt;Invoice&lt;/term&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;CreditNote&lt;/term&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;CashSales&lt;/term&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;CashReturn&lt;/term&gt;&lt;/item&gt;&lt;item&gt;&lt;term&gt;DebitNote&lt;/term&gt;&lt;/item&gt;&lt;/list&gt;
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("invoiceType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string InvoiceType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customFields", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public PatchSalesOrderCustomFieldsDto CustomFields { get; set; }
+
+        /// <summary>
+        /// Sets the alternate id for the inventory item on the line.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("inventoryAlternateId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string InventoryAlternateId { get; set; }
 
     }
 
@@ -2377,6 +2786,77 @@ namespace Visma.Net.SalesOrderNG.Models
         [Newtonsoft.Json.JsonProperty("termsId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(15)]
         public string TermsId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PaymentDto
+    {
+        /// <summary>
+        /// The type of payment document that is applied to the sales order
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("documentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string DocumentType { get; set; }
+
+        /// <summary>
+        /// The reference number of the payment document
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("referenceNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ReferenceNumber { get; set; }
+
+        /// <summary>
+        /// The amount of the payment applied to the order
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("amountAppliedToOrder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double AmountAppliedToOrder { get; set; }
+
+        /// <summary>
+        /// The amount of the payment that is applied to the order and transferred to related invoice(s)
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("billedAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double BilledAmount { get; set; }
+
+        /// <summary>
+        /// The total amount of the payment
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("totalAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double TotalAmount { get; set; }
+
+        /// <summary>
+        /// The balance of the payment
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Balance { get; set; }
+
+        /// <summary>
+        /// The status of the payment
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Status { get; set; }
+
+        /// <summary>
+        /// The external reference number of the payment
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("reference", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Reference { get; set; }
+
+        /// <summary>
+        /// The payment method of the payment
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("paymentMethod", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PaymentMethod { get; set; }
+
+        /// <summary>
+        /// The cash account of the payment
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("cashAccount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CashAccount { get; set; }
+
+        /// <summary>
+        /// The currency for the payment
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("currencyId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CurrencyId { get; set; }
 
     }
 
@@ -2674,14 +3154,6 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// Whether the order is ROT/RUT deductible
-        /// <br/>&lt;remarks&gt;This will be removed in the future ! Use IsRotRutDeductible instead.&lt;/remarks&gt;
-        /// </summary>
-        [Newtonsoft.Json.JsonProperty("isRotRutDeductable", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.Obsolete]
-        public bool IsRotRutDeductable { get; set; }
-
-        /// <summary>
-        /// Whether the order is ROT/RUT deductible
         /// </summary>
         [Newtonsoft.Json.JsonProperty("isRotRutDeductible", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsRotRutDeductible { get; set; }
@@ -2786,6 +3258,9 @@ namespace Visma.Net.SalesOrderNG.Models
         [Newtonsoft.Json.JsonProperty("emailed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Emailed { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("customFields", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CustomFieldsDto CustomFields { get; set; }
+
     }
 
     /// <summary>
@@ -2828,8 +3303,11 @@ namespace Visma.Net.SalesOrderNG.Models
         [System.Runtime.Serialization.EnumMember(Value = @"Attachments")]
         Attachments = 10,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"CustomFields")]
+        CustomFields = 11,
+
         [System.Runtime.Serialization.EnumMember(Value = @"All")]
-        All = 11,
+        All = 12,
 
     }
 
@@ -3036,6 +3514,12 @@ namespace Visma.Net.SalesOrderNG.Models
         public double? LineTotalBeforeDiscount { get; set; }
 
         /// <summary>
+        /// The excise duty amount for this line
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("exciseDuty", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? ExciseDuty { get; set; }
+
+        /// <summary>
         /// The discount amount for this line
         /// </summary>
         [Newtonsoft.Json.JsonProperty("discountAmount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3202,6 +3686,7 @@ namespace Visma.Net.SalesOrderNG.Models
         public SupplierDto Supplier { get; set; }
 
         [Newtonsoft.Json.JsonProperty("supplierPrice", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Obsolete]
         public double SupplierPrice { get; set; }
 
         /// <summary>
@@ -3233,6 +3718,36 @@ namespace Visma.Net.SalesOrderNG.Models
 
         [Newtonsoft.Json.JsonProperty("rotRutItemType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CdDescriptionPairDto RotRutItemType { get; set; }
+
+        /// <summary>
+        /// Indicates if an order line of issue type will automatically be created after the order line of receipt type has been processed.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("autoCreateIssue", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool AutoCreateIssue { get; set; }
+
+        /// <summary>
+        /// The line number of the original invoice to be returned
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("invoiceLineNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? InvoiceLineNumber { get; set; }
+
+        /// <summary>
+        /// The reference number of the original invoice to be returned
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("invoiceNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string InvoiceNumber { get; set; }
+
+        /// <summary>
+        /// The invoice type of the original invoice to be returned
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("invoiceType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string InvoiceType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("kitAssembly", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public KitAssemblyDto KitAssembly { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customFields", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CustomFieldsDto CustomFields { get; set; }
 
     }
 
@@ -3530,14 +4045,6 @@ namespace Visma.Net.SalesOrderNG.Models
 
         /// <summary>
         /// The apartment reference
-        /// <br/>&lt;remarks&gt;This will be removed in the future ! Use Apartment instead.&lt;/remarks&gt;
-        /// </summary>
-        [Newtonsoft.Json.JsonProperty("appartment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.Obsolete]
-        public string Appartment { get; set; }
-
-        /// <summary>
-        /// The apartment reference
         /// </summary>
         [Newtonsoft.Json.JsonProperty("apartment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Apartment { get; set; }
@@ -3657,6 +4164,12 @@ namespace Visma.Net.SalesOrderNG.Models
         /// </summary>
         [Newtonsoft.Json.JsonProperty("inventoryReferenceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string InventoryReferenceId { get; set; }
+
+        /// <summary>
+        /// The status of the shipment
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Status { get; set; }
 
     }
 
@@ -3948,6 +4461,18 @@ namespace Visma.Net.SalesOrderNG.Models
         [Newtonsoft.Json.JsonProperty("unshippedAmountInBaseCurrency", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double UnshippedAmountInBaseCurrency { get; set; }
 
+        /// <summary>
+        /// The total amount of payments connected to the order in the order currency
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("paymentTotal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? PaymentTotal { get; set; }
+
+        /// <summary>
+        /// The total amount of payments connected to the order in the base currency
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("paymentTotalInBaseCurrency", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? PaymentTotalInBaseCurrency { get; set; }
+
     }
 
     /// <summary>
@@ -4011,11 +4536,29 @@ namespace Visma.Net.SalesOrderNG.Models
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class SupplierDto
     {
+        /// <summary>
+        /// The id of the supplier selected for the order line
+        /// </summary>
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Id { get; set; }
 
+        /// <summary>
+        /// The name of the supplier selected for the order line
+        /// </summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// The currency of the supplier selected for the order line
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("currencyId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CurrencyId { get; set; }
+
+        /// <summary>
+        /// The supplier price of the supplier selected for the order line
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("price", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Price { get; set; }
 
     }
 
@@ -4137,6 +4680,12 @@ namespace Visma.Net.SalesOrderNG.Models
         /// </summary>
         [Newtonsoft.Json.JsonProperty("locations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<LocationAvailabilityDto> Locations { get; set; }
+
+        /// <summary>
+        /// LOT/Serial information
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("lotSerials", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<LotSerialAvailabilityDto> LotSerials { get; set; }
 
     }
 
