@@ -94,9 +94,9 @@ namespace ONIT.VismaNetApi.Models
         public string errorInfo { get; private set; }
 
         [JsonProperty]
-        public decimal exchangeRate
+        public decimal? exchangeRate
         {
-            get => Get<decimal>();
+            get => Get<decimal?>();
             set => Set(value);
         }
 
