@@ -1,5 +1,7 @@
 # Visma.net Integrations API Client for .Net
 
+This project is now archived. Use the swagger from https://finance.visma.net/swaggerui/index.html instead.
+
 [![Build status](https://github.com/ON-IT/Visma.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/ON-IT/Visma.Net/actions/workflows/dotnet.yml) [![NuGet version](https://buildstats.info/nuget/visma.net)](https://www.nuget.org/packages/Visma.net)
 
 This is an open source Visma.net Integrations API Client for .Net.
